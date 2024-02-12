@@ -102,7 +102,7 @@ class QRCodeInvoice(models.Model):
 		seller_hex = self._get_hex("01", "0c", sellername) or ''
 		vat_hex = self._get_hex("02", "0f", seller_vat_no) or ''
 
-		# create_date =  self.invoice_date or ''
+		create_date =  self.invoice_date or ''
 		# time_stamp = str(create_date)
 		# # time_stamp = self.invoice_date.strftime("%Y-%m-%d") if self.invoice_date else ''		
 		# date_hex = self._get_hex("03", "14", time_stamp) or ''
