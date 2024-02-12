@@ -101,13 +101,6 @@ class QRCodeInvoice(models.Model):
 			seller_vat_no = self.partner_id.vat
 		seller_hex = self._get_hex("01", "0c", sellername) or ''
 		vat_hex = self._get_hex("02", "0f", seller_vat_no) or ''
-
-		# create_date =  self.invoice_date or ''
-		# time_stamp = str(create_date)
-		# # time_stamp = self.invoice_date.strftime("%Y-%m-%d") if self.invoice_date else ''		
-		# date_hex = self._get_hex("03", "14", time_stamp) or ''
-
-
 		time_stamp = str(self.create_date)
 		date_hex = self._get_hex("03", "14", time_stamp) or ''
 		total_with_vat_hex = self._get_hex("04", "0a", str(round(self.amount_total, 2))) or ''
@@ -119,4 +112,3 @@ class QRCodeInvoice(models.Model):
 	def action_invoice_print(self):
 		res = super().action_invoice_print()
 		return self.env.ref('electronic_invoice_qr_saudi_invoice_app.report_ksa_invoice').report_action(self)
-#--
