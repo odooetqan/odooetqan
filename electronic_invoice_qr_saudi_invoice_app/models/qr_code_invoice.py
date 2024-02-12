@@ -119,4 +119,3 @@ class QRCodeInvoice(models.Model):
 	def action_invoice_print(self):
 		res = super().action_invoice_print()
 		return self.env.ref('electronic_invoice_qr_saudi_invoice_app.report_ksa_invoice').report_action(self)
-#--
