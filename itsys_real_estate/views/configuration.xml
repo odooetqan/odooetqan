@@ -87,9 +87,9 @@
             </field>
         </record>
 
-        <record id="action_real_estate_config"I apologize for the incomplete response. Here's the continuation of the updated XML code:
+        <record id="action_real_estate_config"><!--I apologize for the incomplete response. Here's the continuation of the updated XML code:
 
-```xml
+```xml-->
             <model="ir.actions.act_window">
             <field name="name">Settings</field>
             <field name="type">ir.actions.act_window</field>
