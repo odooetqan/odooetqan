@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<odoo>
+<data noupdate="0">
+        <record id="report_reservation_rs" model="ir.actions.report">
+            <field name="name">Reservation</field>
+            <field name="model">unit.reservation</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">itsys_real_estate.report_reservation</field>
+            <field name="report_file">itsys_real_estate.report_reservation</field>
+            <field name="binding_model_id" ref="model_unit_reservation"/>
+        </record>
+
+        <record id="report_ownership_contract_rs" model="ir.actions.report">
+            <field name="name">Ownership Contract</field>
+            <field name="model">ownership.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">itsys_real_estate.report_ownership_contract</field>
+            <field name="report_file">itsys_real_estate.report_ownership_contract</field>
+            <field name="binding_model_id" ref="model_ownership_contract"/>
+        </record>
+
+        <record id="report_quittance_letter_rs" model="ir.actions.report">
+            <field name="name">Quittance Letter</field>
+            <field name="model">ownership.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">itsys_real_estate.report_quittance_letter</field>
+            <field name="report_file">itsys_real_estate.report_quittance_letter</field>
+            <field name="binding_model_id" ref="model_ownership_contract"/>
+        </record>
+
+        <record id="report_rental_contract_rs" model="ir.actions.report">
+            <field name="name">إستلام وحدة عقارية</field>
+            <field name="model">rental.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">itsys_real_estate.report_rental_contract</field>
+            <field name="report_file">itsys_real_estate.report_rental_contract</field>
+            <field name="binding_model_id" ref="model_rental_contract"/>
+        </record>
+
+        <record id="report_rental_contract_rs2" model="ir.actions.report">
+            <field name="name">تسليم وحدة عقارية</field>
+            <field name="model">rental.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">itsys_real_estate.report_rental_contract2</field>
+            <field name="report_file">itsys_real_estate.report_rental_contract2</field>
+            <field name="binding_model_id" ref="model_rental_contract"/>
+        </record>
+
+
+        <record id="report_rental_contract_rs3" model="ir.actions.report">
+            <field name="name">Rental Contract</field>
+            <field name="model">rental.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">itsys_real_estate.report_rental_contract3</field>
+            <field name="report_file">itsys_real_estate.report_rental_contract3</field>
+            <field name="binding_model_id" ref="model_rental_contract"/>
+        </record>
+
+        <record id="report_unit_occupancy" model="ir.actions.report">
+            <field name="name">Occupancy Rates</field>
+            <field name="model">product.template</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">itsys_real_estate.report_occupancy</field>
+            <field name="report_file">itsys_real_estate.report_occupancy</field>
+        </record>
+
+        <record id="due_payments_customers" model="ir.actions.report">
+            <field name="name">Due Payments / Customers</field>
+            <field name="model">ownership.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">itsys_real_estate.report_due_payments_customers</field>
+            <field name="report_file">itsys_real_estate.report_due_payments_customers</field>
+        </record>
+
+        <record id="due_payments_customers_rent" model="ir.actions.report">
+            <field name="name">Due Payments / Customers</field>
+            <field name="model">rental.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">itsys_real_estate.report_due_payments_customers_rent</field>
+            <field name="report_file">itsys_real_estate.report_due_payments_customers_rent</field>
+        </record>
+
+          <record id="due_payments_units" model="ir.actions.report">
+            <field name="name">Due Payments / Units</field>
+            <field name="model">ownership.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">itsys_real_estate.report_due_payments_units</field>
+            <field name="report_file">itsys_real_estate.report_due_payments_units</field>
+        </record>
+
+          <record id="due_payments_units_rent" model="ir.actions.report">
+            <field name="name">Due Payments / Units</field>
+            <field name="model">rental.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">itsys_real_estate.report_due_payments_units_rent</field>
+            <field name="report_file">itsys_real_estate.report_due_payments_units_rent</field>
+        </record>
+
+        <record id="late_payments_customers" model="ir.actions.report">
+            <field name="name">Late Payments / Customers</field>
+            <field name="model">ownership.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">itsys_real_estate.report_late_payments_customers</field>
+            <field name="report_file">itsys_real_estate.report_late_payments_customers</field>
+        </record>
+
+        <record id="late_payments_customers_rent" model="ir.actions.report">
+            <field name="name">Late Payments / Customers</field>
+            <field name="model">rental.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">itsys_real_estate.report_late_payments_customers_rent</field>
+            <field name="report_file">itsys_real_estate.report_late_payments_customers_rent</field>
+        </record>
+
+        <record id="late_payments_units" model="ir.actions.report">
+            <field name="name">Late Payments / Units</field>
+            <field name="model">ownership.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">itsys_real_estate.report_late_payments_units</field>
+            <field name="report_file">itsys_real_estate.report_late_payments_units</field>
+        </record>
+
+        <record id="late_payments_units_rent" model="ir.actions.report">
+            <field name="name">Late Payments / Units</field>
+            <field name="model">rental.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">itsys_real_estate.report_late_payments_units_rent</field>
+            <field name="report_file">itsys_real_estate.report_late_payments_units_rent</field>
+        </record>
+</data>
+</odoo>
+
