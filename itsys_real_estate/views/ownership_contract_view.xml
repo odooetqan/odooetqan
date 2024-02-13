@@ -63,8 +63,8 @@
             <field name="arch" type="xml">
                 <form string="Ownership Contract">
                     <header>
-                        <button name="action_confirm" type="object" attrs="{'invisible':['|',('state','=','cancel'),('state','=','confirmed')]}" string="Confirm" class="oe_highlight"/>
-                        <button name="action_cancel" type="object" attrs="{'invisible':['|',('state','=','cancel'),('state','=','draft')]}" string="Cancel" class="oe_highlight"/>
+                        <button name="action_confirm" type="object"  string="Confirm" class="oe_highlight"/>
+                        <button name="action_cancel" type="object"   string="Cancel" class="oe_highlight"/>
                         <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,cancel" />
                     </header>
                     <sheet>
@@ -77,42 +77,42 @@
                                 <field name="user_id" />
                                 <field name="partner_id"
                                  context="{'res_partner_search_mode': 'is_owner', 'default_is_owner':True,}"
-                                 domain="[('is_owner','=',True)]" attrs="{'readonly': [('state','!=','draft')]}"/>
-                                <field name="date" attrs="{'readonly': [('state','!=','draft')]}"/>
-                                <field name="date_payment" attrs="{'readonly': [('state','!=','draft')]}" required="1"/>
+                                 domain="[('is_owner','=',True)]" />
+                                <field name="date"   />
+                                <field name="date_payment"    required="1"/>
                             </group>
                             <group>
-                                <field name="account_analytic_id" attrs="{'readonly': [('state','!=','draft')]}" />
-                                <field name="account_income" attrs="{'readonly': [('state','!=','draft')]}" />
-                                <field name="origin" attrs="{'readonly': [('state','!=','draft')]}"/>
-                                <field name="reservation_id" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="account_analytic_id"    />
+                                <field name="account_income"    />
+                                <field name="origin"   />
+                                <field name="reservation_id"   />
                                 <field name="company_id" groups="base.group_multi_company"/>
                             </group>
                         </group>
                         <group string="Location">
                             <group>
-                                <field name="building" attrs="{'readonly': [('state','!=','draft')]}" />
-                                <field name="building_code" attrs="{'readonly': [('state','!=','draft')]}"/>
-                                <field name="no_of_floors" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="building"    />
+                                <field name="building_code"   />
+                                <field name="no_of_floors"   />
                             </group>
                             <group>
-                                <field name="region" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="region"   />
                             </group>
                         </group>
                         <separator string="Building Unit" colspan="4"/>
                         <group name="building_unit">
                             <group>
-                                <field name="building_unit" options="{'no_create': True, 'no_open': True}"  attrs="{'readonly': [('state','!=','draft')]}"/>
-                                <field name="unit_code" attrs="{'readonly': [('state','!=','draft')]}"/>
-                                <field name="floor" attrs="{'readonly': [('state','!=','draft')]}"/>
-                                <field name="address" attrs="{'readonly': [('state','!=','draft')]}"/>
-                                <field name="pricing" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="building_unit" options="{'no_create': True, 'no_open': True}"    />
+                                <field name="unit_code"   />
+                                <field name="floor"   />
+                                <field name="address"   />
+                                <field name="pricing"   />
                             </group>
                             <group>
-                                <field name="type" attrs="{'readonly': [('state','!=','draft')]}"/>
-                                <field name="status" attrs="{'readonly': [('state','!=','draft')]}"/>
-                                <field name="building_area" attrs="{'readonly': [('state','!=','draft')]}"/>
-                                <field name="template_id" attrs="{'readonly': [('state','!=','draft')]}" required="1"/>
+                                <field name="type"   />
+                                <field name="status"   />
+                                <field name="building_area"   />
+                                <field name="template_id"    required="1"/>
                             </group>
                         </group>
                         <separator string="Other Payments" colspan="4"/>
@@ -120,36 +120,36 @@
                             <group>
                                 <label for="maintenance"/>
                                 <div class="o_row">
-                                    <field name="maintenance" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
-                                    <field name="date_maintenance" class="field_rule_type" attrs="{'readonly': [('state','!=','draft')],'required': [('maintenance','>', '0')]}"/>
+                                    <field name="maintenance" required="1"   />
+                                    <field name="date_maintenance" class="field_rule_type"  />
                                 </div>
                                 <label for="club"/>
                                 <div class="o_row">
-                                    <field name="club" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
-                                    <field name="date_club" class="field_rule_type" attrs="{'readonly': [('state','!=','draft')],'required': [('club','>', '0')]}"/>
+                                    <field name="club" required="1"   />
+                                    <field name="date_club" class="field_rule_type"  />
                                 </div>
                                 <label for="garage"/>
                                 <div class="o_row">
-                                    <field name="garage" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
-                                    <field name="date_garage" class="field_rule_type" attrs="{'readonly': [('state','!=','draft')],'required': [('garage','>', '0')]}"/>
+                                    <field name="garage" required="1"   />
+                                    <field name="date_garage" class="field_rule_type"  />
                                 </div>
                             </group>
                             <group>
                                 <label for="elevator"/>
                                 <div class="o_row">
-                                    <field name="elevator" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
-                                    <field name="date_elevator" class="field_rule_type" attrs="{'readonly': [('state','!=','draft')],'required': [('elevator','>', '0')]}"/>
+                                    <field name="elevator" required="1"   />
+                                    <field name="date_elevator" class="field_rule_type"  />
                                 </div>
                                 <label for="other"/>
                                 <div class="o_row">
-                                    <field name="other" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
-                                    <field name="date_other" class="field_rule_type" attrs="{'readonly': [('state','!=','draft')],'required': [('other','>', '0')]}"/>
+                                    <field name="other" required="1"   />
+                                    <field name="date_other" class="field_rule_type"  />
                                 </div>
                             </group>
                         </group>
                         <notebook colspan="2">
                             <page string="Installments">
-                                <field name="loan_line" attrs="{'readonly': [('state','!=','draft')]}">
+                                <field name="loan_line"   >
                                     <tree string="Installments" editable="bottom">
                                         <field name="number"/>
                                         <field name="date" required="1"/>
@@ -162,9 +162,9 @@
                                         <field name="payment_state" widget="badge"
                                                decoration-danger="payment_state == 'not_paid'" decoration-warning="payment_state in ('partial', 'in_payment')"
                                                decoration-success="payment_state in ('paid', 'reversed')"
-                                               attrs="{'invisible': [('payment_state', 'in', ('invoicing_legacy'))]}"/>
+                                                />
                                         <button string="View Invoice" name="view_invoice" type="object" style="background-color:rgba(0, 160, 74, 0.5);color: #333;"
-                                                attrs="{'invisible': [('invoice_id','=',False)]}" groups="itsys_real_estate.group_payments"/>
+                                                groups="itsys_real_estate.group_payments"/>
                                     </tree>
                                 </field>
                                 <group>
