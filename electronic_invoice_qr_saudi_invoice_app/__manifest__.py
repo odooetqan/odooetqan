@@ -7,6 +7,7 @@
         QR Code Invoice
     """,
     "license" : "OPL-1",
+    "sequence":-100,	
     'depends': ['base','account','portal','web'],
     "summary" : 'KSA electronic invoice for KSA saudi electronic invoice for saudi invoice saudi QR code invoice QR code invoice for KSA saudi electronic invoice electronic QR invoice QR code on invoice saudi einvoice KSA e-invoice saudi e-invoice KSA invoicing for KSA',
     'live_test_url': "https://youtu.be/MYUkIY2PRmg",
