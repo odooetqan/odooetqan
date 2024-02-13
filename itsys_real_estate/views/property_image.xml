@@ -20,7 +20,7 @@
                             <div class="col">
                                 <field name="image_1920" widget="image"/>
                             </div>
-                            <div class="col"/><!-- attrs="{'invisible': [('video_url', 'in', ['', False])]}">-->
+                            <div class="col"><!-- attrs="{'invisible': [('video_url', 'in', ['', False])]}">-->
                                 <div class="o_video_container p-2">
                                     <span>Video Preview</span>
                                     <field name="embed_code" class="mt-2" widget="video_preview"/>
