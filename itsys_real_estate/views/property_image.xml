@@ -6,7 +6,7 @@
         <field name="name">property.image.view.form</field>
         <field name="model">property.image</field>
         <field name="arch" type="xml">
-            <form string="Property Images">
+            <form string="Property Images"><!--
                 <field name="sequence" invisible="1"/>
                 <div class="row o_website_sale_image_modal">
                     <div class="col-md-6 col-xl-5">
@@ -20,8 +20,8 @@
                             <div class="col">
                                 <field name="image_1920" widget="image"/>
                             </div>
-                            <div class="col"><!-- attrs="{'invisible': [('video_url', 'in', ['', False])]}">
-                                <div class="o_video_container p-2">
+                            <div class="col">
+                                 <div class="o_video_container p-2">
                                     <span>Video Preview</span>
                                     <field name="embed_code" class="mt-2" widget="video_preview"/>
                                     <h4 class="o_invalid_warning text-muted text-center"/>attrs="{'invisible': [('embed_code', '!=', False)]}">
@@ -31,7 +31,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </form>
         </field>
     </record>
@@ -44,7 +44,7 @@
                 <field name="name"/>
                 <field name="image_1920"/>
                 <field name="sequence" widget="handle"/>
-                <templates><!- -
+                <templates><!--
                     <t t-name="kanban-box">
                         <div class="card oe_kanban_global_click p-0">
                             <div class="o_squared_image">
