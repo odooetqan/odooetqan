@@ -103,7 +103,8 @@ class AccountMove(models.Model):
         seller_hex = self.hexa("01", "0c", seller_name)
         vat_hex = self.hexa("02", "0f", seller_vat_no) or ""
         create_date = self.invoice_date
-        time_stamp = self.timezone(create_date)#self.
+        # time_stamp = self.timezone(self.create_date)#
+        time_stamp = create_date
         date_hex = self.hexa("03", "14", time_stamp)
         amount_total = self.currency_id._convert(
             self.amount_total,
