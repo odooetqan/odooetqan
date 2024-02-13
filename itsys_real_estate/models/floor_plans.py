@@ -3,7 +3,7 @@
 #
 from odoo import api, fields, models, tools, _
 from odoo.exceptions import ValidationError
-from odoo.addons.website.tools import get_video_embed_code
+# from odoo.addons.website.tools import get_video_embed_code
 
 class FloorPlans(models.Model):
     _name = 'floor.plans'
