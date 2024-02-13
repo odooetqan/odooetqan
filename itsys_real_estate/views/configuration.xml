@@ -87,17 +87,14 @@
             </field>
         </record>
 
-        <record id="action_real_estate_config"><!--I apologize for the incomplete response. Here's the continuation of the updated XML code:
-
-```xml-->
-            <model="ir.actions.act_window">
-            <field name="name">Settings</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">res.config.settings</field>
-            <field name="view_mode">form</field>
-            <field name="target">inline</field>
-            <field name="context">{'module' : 'itsys_real_estate'}</field>
-        </record>
+  <record id="action_real_estate_config" model="ir.actions.act_window">
+    <field name="name">Settings</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">res.config.settings</field>
+    <field name="view_mode">form</field>
+    <field name="target">inline</field>
+    <field name="context">{'module': 'itsys_real_estate'}</field>
+</record>
 
         <menuitem id="menu_real_estate_config"
                   name="Settings" parent="itsys_real_estate.menu_settings"
