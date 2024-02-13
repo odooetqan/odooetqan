@@ -26,8 +26,8 @@
                             <field name="name" default_focus="1" placeholder="Name"/>
                         </h1>
                         <group>                        
-                            <field name="duration_month" attrs="{'readonly': [('duration_year','>', '0')]}"/>                           
-                            <field name="duration_year" attrs="{'readonly': [('duration_month','>', '0')]}"/>                           
+                            <field name="duration_month" />  <!--attrs="{'readonly': [('duration_year','>', '0')]}"-->                         
+                            <field name="duration_year"/>  <!-- attrs="{'readonly': [('duration_month','>', '0')]}"-->                         
                             <field name="annual_raise" invisible="1"/>
                             <field name="repetition_rate"/>
                         </group>
