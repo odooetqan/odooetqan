@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!- - This view should only be used from the product o2m because the required field product_tmpl_id has to be automatically set. - ->
+    <!-- This view should only be used from the product o2m because the required field product_tmpl_id has to be automatically set. -->
     <record id="view_building_images_form" model="ir.ui.view">
         <field name="name">building.images.view.form</field>
         <field name="model">building.images</field>
