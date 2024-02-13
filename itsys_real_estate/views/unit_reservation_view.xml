@@ -30,22 +30,28 @@
                 <form string="Building Unit Reservation">
                     <header>
                         <button name="action_confirm" type="object"
-                                attrs="{'invisible':[('state','!=','draft')]}"
                                 string="Confirm" class="oe_highlight"/>
-                        <button name="action_contract_ownership" type="object"
+                        <!-- attrs="{'invisible':[('state','!=','draft')]}"
+                                                        attrs="{'invisible':['|','|',('state','=','canceled'),('state','=','draft'),('state','=','contracted')]}"
                                 attrs="{'invisible':['|','|',('state','=','canceled'),('state','=','draft'),('state','=','contracted')]}"
+                                attrs="{'invisible':['|','|',('state','=','canceled'),('state','=','draft'),('state','=','contracted')]}"
+                                attrs="{'invisible': ['|', '|', ('state', '=', 'draft'), ('state', '=', 'contracted'), ('state', '=', 'confirmed')]}"
+                                attrs="{'invisible':[('state','!=','confirmed')]}"
+
+
+
+
+ -->
+                        <button name="action_contract_ownership" type="object"
                                 string="Sell" class="oe_highlight"/>
                         <button name="action_contract_rental" type="object"
-                                attrs="{'invisible':['|','|',('state','=','canceled'),('state','=','draft'),('state','=','contracted')]}"
                                 string="Rent" class="oe_highlight"/>
                         <button name="action_cancel" type="object"
-                                attrs="{'invisible':['|','|',('state','=','canceled'),('state','=','draft'),('state','=','contracted')]}"
                                 string="Cancel" class="oe_highlight"/>
                         <button name="action_draft" type="object"
                                 string="Reset To Draft"
-                                attrs="{'invisible': ['|', '|', ('state', '=', 'draft'), ('state', '=', 'contracted'), ('state', '=', 'confirmed')]}"/>
+                                />
                         <button name="action_receive_deposit" type="object"
-                                attrs="{'invisible':[('state','!=','confirmed')]}"
                                 string="Receive Deposit" class="oe_highlight"/>
 
                         <field name="state"
@@ -58,21 +64,26 @@
                                     name="view_contract_own"
                                     class="oe_stat_button"
                                     icon="fa-book"
-                                    attrs="{'invisible': [('contract_count_own', '=', 0)]}">
+                                    >
+                                    <!-- attrs="{'invisible': [('contract_count_own', '=', 0)]}" 
+                                    attrs="{'invisible': [('contract_count_rent', '=', 0)]}"
+                                    attrs="{'invisible': [('deposit_count', '=', 0)]}"
+
+                                    -->
                                 <field name="contract_count_own" widget="statinfo"/>
                             </button>
                             <button type="object"
                                     name="view_contract_rent"
                                     class="oe_stat_button"
                                     icon="fa-book"
-                                    attrs="{'invisible': [('contract_count_rent', '=', 0)]}">
+                                    >
                                 <field name="contract_count_rent" widget="statinfo"/>
                             </button>
                             <button type="object"
                                     name="view_deposits"
                                     class="oe_stat_button"
                                     icon="fa-book"
-                                    attrs="{'invisible': [('deposit_count', '=', 0)]}">
+                                    >
                                 <field name="deposit_count" widget="statinfo"/>
                             </button>
                         </div>
@@ -81,13 +92,13 @@
                             <group>
                                 <field name="name"/>
                                 <field name="user_id"/>
-                                <field name="partner_id" attrs="{'readonly': [('state','!=','draft')]}" required="1"/>
-                                <field name="date" attrs="{'readonly': [('state','!=','draft')]}" required="1"/>
+                                <field name="partner_id" required="1"/>
+                                <field name="date" required="1"/>
                             </group>
                             <group>
-                                <field name="date_payment" attrs="{'readonly': [('state','!=','draft')]}" />
-                                <field name="account_analytic_id" attrs="{'readonly': [('state','!=','draft')]}" />
-                                <field name="account_income" attrs="{'readonly': [('state','!=','draft')]}" />
+                                <field name="date_payment" />
+                                <field name="account_analytic_id" />
+                                <field name="account_income" />
                                 <field name="company_id" groups="base.group_multi_company"/>
                                 <field name="deposit"/>
                             </group>
@@ -95,25 +106,25 @@
                         <separator string="Building" colspan="4"/>
                         <group>
                             <group>
-                                <field name="building" attrs="{'readonly': [('state','!=','draft')]}"/>
-                                <field name="building_code" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="building"/>
+                                <field name="building_code" />
                             </group>
                             <group>
-                                <field name="region" attrs="{'readonly': [('state','!=','draft')]}" />
+                                <field name="region" />
                             </group>
                         </group>
                         <separator string="Building Unit" colspan="4"/>
                         <group>
                             <group>
-                                <field name="building_unit" options="{'no_create': True, 'no_open': True}"  attrs="{'readonly': [('state','!=','draft')]}"/>
-                                <field name="unit_code" attrs="{'readonly': [('state','!=','draft')]}"/>
-                                <field name="floor" attrs="{'readonly': [('state','!=','draft')]}"/>
-                                <field name="address" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="building_unit" options="{'no_create': True, 'no_open': True}"  />
+                                <field name="unit_code" />
+                                <field name="floor" />
+                                <field name="address" />
                             </group>
                             <group>
-                                <field name="type" attrs="{'readonly': [('state','!=','draft')]}"/>
-                                <field name="status" attrs="{'readonly': [('state','!=','draft')]}"/>
-                                <field name="building_area" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="type" />
+                                <field name="status" />
+                                <field name="building_area" />
                             </group>
                         </group>
                     </sheet>
