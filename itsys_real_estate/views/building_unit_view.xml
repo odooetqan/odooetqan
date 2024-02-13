@@ -9,8 +9,8 @@
                 <form string="Real Estate">
                     <header>
                         <button name="make_reservation"
-                                attrs="{'invisible': [('state', '!=', 'free')]}"
-                                string="Reservation" type="object"/>
+                             
+                                string="Reservation" type="object"/>   <!--attrs="{'invisible': [('state', '!=', 'free')]}"-->
                         <field name="state"
                                widget="statusbar"
                                clickable="true"
@@ -22,9 +22,9 @@
                                     name="view_reservations"
                                     class="oe_stat_button"
                                     icon="fa-book"
-                                    attrs="{'invisible': [('reservation_count', '=', 0)]}">
                                 <field name="reservation_count" widget="statinfo" string="Reservations"/>
-                            </button>
+                            </button>                                    <!--attrs="{'invisible': [('reservation_count', '=', 0)]}">-->
+
                         </div>
                         <field name="image_1920" widget="image" class="oe_avatar" options="{'preview_image': 'image_128'}"/>
                         <div class="oe_title">
@@ -75,18 +75,19 @@
                                         <field name="desc"/>
                                         <field name="electricity_meter" string="عداد الكهرباء" />
                                         <field name="is_electricity_sub_1"  />
-                                        <field name="electricity_meter_sub_1"  attrs="{'invisible': [('is_electricity_sub_1', '=', False)]}"/>
+                                        <field name="electricity_meter_sub_1"/><!--
+                                            attrs="{'invisible': [('is_electricity_sub_1', '=', False)]}"/>-->
                                         <field name="is_electricity_main_2"  />
-                                        <field name="electricity_meter_main_2"   attrs="{'invisible': [('is_electricity_main_2', '=', False)]}"/>
+                                        <field name="electricity_meter_main_2"  /><!-- attrs="{'invisible': [('is_electricity_main_2', '=', False)]}"/>-->
                                         <field name="is_electricity_sub_2"  />
-                                        <field name="electricity_meter_sub_2"  attrs="{'invisible': [('is_electricity_sub_2', '=', False)]}"/>
+                                        <field name="electricity_meter_sub_2"/><!--  attrs="{'invisible': [('is_electricity_sub_2', '=', False)]}"/>-->
                                         <field name="water_meter"/>
                                         <field name="is_water_meter_sub_1"/>
-                                        <field name="water_meter_sub_1" attrs="{'invisible': [('is_water_meter_sub_1', '=', False)]}"/>
+                                        <field name="water_meter_sub_1" /><!--attrs="{'invisible': [('is_water_meter_sub_1', '=', False)]}"/>-->
                                         <field name="is_water_meter_main_2"/>
-                                        <field name="water_meter_main_2" attrs="{'invisible': [('is_water_meter_main_2', '=', False)]}"/>
+                                        <field name="water_meter_main_2" /><!--attrs="{'invisible': [('is_water_meter_main_2', '=', False)]}"/>-->
                                         <field name="is_water_meter_sub_2"/>
-                                        <field name="water_meter_sub_2" attrs="{'invisible': [('is_water_meter_sub_2', '=', False)]}"/>
+                                        <field name="water_meter_sub_2" /><!--attrs="{'invisible': [('is_water_meter_sub_2', '=', False)]}"/>-->
 
                                         
                                         <field name="template_id"/>
