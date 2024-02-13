@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Building Unit Reservation -->
+        <record id="unit_reservation_tree_view" model="ir.ui.view">
+            <field name="name">unit.reservation.tree</field>
+            <field name="model">unit.reservation</field>
+            <field name="arch" type="xml">
+                <tree >
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="building" />
+                    <field name="building_unit"/>
+                    <field name="user_id"/>
+                    <field name="pricing"/>
+                    <field name="building" />
+                    <field name="building_code"/>
+                    <field name="building_unit"/>
+                    <field name="unit_code"/>
+                    <field name="floor"/>
+                    <field name="address"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <record id="unit_reservation_form_view" model="ir.ui.view">
+            <field name="name">unit.reservation.form</field>
+            <field name="model">unit.reservation</field>
+            <field name="arch" type="xml">
+                <form string="Building Unit Reservation">
+                    <header>
+                        <button name="action_confirm" type="object"
+                                attrs="{'invisible':[('state','!=','draft')]}"
+                                string="Confirm" class="oe_highlight"/>
+                        <button name="action_contract_ownership" type="object"
+                                attrs="{'invisible':['|','|',('state','=','canceled'),('state','=','draft'),('state','=','contracted')]}"
+                                string="Sell" class="oe_highlight"/>
+                        <button name="action_contract_rental" type="object"
+                                attrs="{'invisible':['|','|',('state','=','canceled'),('state','=','draft'),('state','=','contracted')]}"
+                                string="Rent" class="oe_highlight"/>
+                        <button name="action_cancel" type="object"
+                                attrs="{'invisible':['|','|',('state','=','canceled'),('state','=','draft'),('state','=','contracted')]}"
+                                string="Cancel" class="oe_highlight"/>
+                        <button name="action_draft" type="object"
+                                string="Reset To Draft"
+                                attrs="{'invisible': ['|', '|', ('state', '=', 'draft'), ('state', '=', 'contracted'), ('state', '=', 'confirmed')]}"/>
+                        <button name="action_receive_deposit" type="object"
+                                attrs="{'invisible':[('state','!=','confirmed')]}"
+                                string="Receive Deposit" class="oe_highlight"/>
+
+                        <field name="state"
+                               widget="statusbar"
+                               statusbar_visible="draft,confirmed" />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object"
+                                    name="view_contract_own"
+                                    class="oe_stat_button"
+                                    icon="fa-book"
+                                    attrs="{'invisible': [('contract_count_own', '=', 0)]}">
+                                <field name="contract_count_own" widget="statinfo"/>
+                            </button>
+                            <button type="object"
+                                    name="view_contract_rent"
+                                    class="oe_stat_button"
+                                    icon="fa-book"
+                                    attrs="{'invisible': [('contract_count_rent', '=', 0)]}">
+                                <field name="contract_count_rent" widget="statinfo"/>
+                            </button>
+                            <button type="object"
+                                    name="view_deposits"
+                                    class="oe_stat_button"
+                                    icon="fa-book"
+                                    attrs="{'invisible': [('deposit_count', '=', 0)]}">
+                                <field name="deposit_count" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <separator string="Booking Data" colspan="4"/>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="user_id"/>
+                                <field name="partner_id" attrs="{'readonly': [('state','!=','draft')]}" required="1"/>
+                                <field name="date" attrs="{'readonly': [('state','!=','draft')]}" required="1"/>
+                            </group>
+                            <group>
+                                <field name="date_payment" attrs="{'readonly': [('state','!=','draft')]}" />
+                                <field name="account_analytic_id" attrs="{'readonly': [('state','!=','draft')]}" />
+                                <field name="account_income" attrs="{'readonly': [('state','!=','draft')]}" />
+                                <field name="company_id" groups="base.group_multi_company"/>
+                                <field name="deposit"/>
+                            </group>
+                        </group>
+                        <separator string="Building" colspan="4"/>
+                        <group>
+                            <group>
+                                <field name="building" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="building_code" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            </group>
+                            <group>
+                                <field name="region" attrs="{'readonly': [('state','!=','draft')]}" />
+                            </group>
+                        </group>
+                        <separator string="Building Unit" colspan="4"/>
+                        <group>
+                            <group>
+                                <field name="building_unit" options="{'no_create': True, 'no_open': True}"  attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="unit_code" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="floor" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="address" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            </group>
+                            <group>
+                                <field name="type" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="status" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="building_area" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="unit_reservation_form_action" model="ir.actions.act_window">
+            <field name="name">Booking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">unit.reservation</field>
+            <field name="view_id" ref="unit_reservation_tree_view"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a new Unit Reservation
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.cron" id="auto_cancel_reservation_sync">
+            <field name="name">Auto Cancel Unit Reservation</field>
+            <field name="model_id" ref="model_unit_reservation"/>
+            <field name="state">code</field>
+            <field name="code">model.auto_cancel_reservation()</field>
+            <field name="active" eval="False"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+
+        <menuitem
+                id="menu_reservation_main"
+                name="Property Booking"
+                parent="itsys_real_estate.menu_itsys_real_estate"
+                action="unit_reservation_form_action"
+                sequence="23"/>
+
+    </data>
+</odoo>

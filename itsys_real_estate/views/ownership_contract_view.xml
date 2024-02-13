@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ownership_contract_tree_view" model="ir.ui.view">
+            <field name="name">ownership.contract.tree</field>
+            <field name="model">ownership.contract</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="partner_id"/>
+                    <field name="user_id"/>
+                    <field name="pricing"/>
+                    <field name="building"/>
+                    <field name="building_code"/>
+                    <field name="building_unit"/>
+                    <field name="unit_code"/>
+                    <field name="floor"/>
+                    <field name="address"/>
+                    <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state =='cancel'" decoration-success="state == 'confirmed'"/>                </tree>
+            </field>
+        </record>
+
+        <record id="ownership_contract_filter" model="ir.ui.view">
+            <field name="name">ownership.contract.tree.filter</field>
+            <field name="model">ownership.contract</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Top Search">
+                    <group>
+                        <field name="name"/>
+                        <field name="partner_id"/>
+                        <field name="user_id"/>
+                        <field name="building"/>
+                        <field name="building_code"/>
+                        <field name="building_unit" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="unit_code"/>
+                    </group>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter name="user_id" string="Responsible" domain="[]"  context="{'group_by':'user_id'}"/>
+                        <filter name="partner_id" string="Partner" domain="[]"  context="{'group_by':'partner_id'}"/>
+                        <filter name="building" string="Building" domain="[]"  context="{'group_by':'building'}"/>
+                        <filter name="state" string="State" domain="[]"  context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_own_contract_graph">
+            <field name="name">ownership.contract.graph</field>
+            <field name="model">ownership.contract</field>
+            <field name="arch" type="xml">
+                <graph string="Contracts" type="bar">
+                    <field name="user_id" type="row"/>
+                    <field name="amount_total" type="measure"/>
+                </graph>
+            </field>
+        </record>
+        <record id="ownership_contract_form_view" model="ir.ui.view">
+            <field name="name">ownership.contract.form</field>
+            <field name="model">ownership.contract</field>
+            <field name="arch" type="xml">
+                <form string="Ownership Contract">
+                    <header>
+                        <button name="action_confirm" type="object" attrs="{'invisible':['|',('state','=','cancel'),('state','=','confirmed')]}" string="Confirm" class="oe_highlight"/>
+                        <button name="action_cancel" type="object" attrs="{'invisible':['|',('state','=','cancel'),('state','=','draft')]}" string="Cancel" class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,cancel" />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+
+                        </div>
+                        <group string="Ownership Contract Data">
+                            <group >
+                                <field name="name"/>
+                                <field name="user_id" />
+                                <field name="partner_id"
+                                 context="{'res_partner_search_mode': 'is_owner', 'default_is_owner':True,}"
+                                 domain="[('is_owner','=',True)]" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="date" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="date_payment" attrs="{'readonly': [('state','!=','draft')]}" required="1"/>
+                            </group>
+                            <group>
+                                <field name="account_analytic_id" attrs="{'readonly': [('state','!=','draft')]}" />
+                                <field name="account_income" attrs="{'readonly': [('state','!=','draft')]}" />
+                                <field name="origin" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="reservation_id" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                        </group>
+                        <group string="Location">
+                            <group>
+                                <field name="building" attrs="{'readonly': [('state','!=','draft')]}" />
+                                <field name="building_code" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="no_of_floors" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            </group>
+                            <group>
+                                <field name="region" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            </group>
+                        </group>
+                        <separator string="Building Unit" colspan="4"/>
+                        <group name="building_unit">
+                            <group>
+                                <field name="building_unit" options="{'no_create': True, 'no_open': True}"  attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="unit_code" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="floor" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="address" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="pricing" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            </group>
+                            <group>
+                                <field name="type" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="status" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="building_area" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="template_id" attrs="{'readonly': [('state','!=','draft')]}" required="1"/>
+                            </group>
+                        </group>
+                        <separator string="Other Payments" colspan="4"/>
+                        <group>
+                            <group>
+                                <label for="maintenance"/>
+                                <div class="o_row">
+                                    <field name="maintenance" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                    <field name="date_maintenance" class="field_rule_type" attrs="{'readonly': [('state','!=','draft')],'required': [('maintenance','>', '0')]}"/>
+                                </div>
+                                <label for="club"/>
+                                <div class="o_row">
+                                    <field name="club" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                    <field name="date_club" class="field_rule_type" attrs="{'readonly': [('state','!=','draft')],'required': [('club','>', '0')]}"/>
+                                </div>
+                                <label for="garage"/>
+                                <div class="o_row">
+                                    <field name="garage" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                    <field name="date_garage" class="field_rule_type" attrs="{'readonly': [('state','!=','draft')],'required': [('garage','>', '0')]}"/>
+                                </div>
+                            </group>
+                            <group>
+                                <label for="elevator"/>
+                                <div class="o_row">
+                                    <field name="elevator" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                    <field name="date_elevator" class="field_rule_type" attrs="{'readonly': [('state','!=','draft')],'required': [('elevator','>', '0')]}"/>
+                                </div>
+                                <label for="other"/>
+                                <div class="o_row">
+                                    <field name="other" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                    <field name="date_other" class="field_rule_type" attrs="{'readonly': [('state','!=','draft')],'required': [('other','>', '0')]}"/>
+                                </div>
+                            </group>
+                        </group>
+                        <notebook colspan="2">
+                            <page string="Installments">
+                                <field name="loan_line" attrs="{'readonly': [('state','!=','draft')]}">
+                                    <tree string="Installments" editable="bottom">
+                                        <field name="number"/>
+                                        <field name="date" required="1"/>
+                                        <field name="name" required="1" style="font-weight: bold;"/>
+                                        <field name="amount" required="1" />
+                                        <field name="amount_residual"/>
+                                        <field name="invoice_id" readonly="1"/>
+                                        <field name="invoice_state" widget="badge" decoration-success="invoice_state == 'posted'"
+                                               decoration-info="invoice_state == 'draft'" optional="show"/>
+                                        <field name="payment_state" widget="badge"
+                                               decoration-danger="payment_state == 'not_paid'" decoration-warning="payment_state in ('partial', 'in_payment')"
+                                               decoration-success="payment_state in ('paid', 'reversed')"
+                                               attrs="{'invisible': [('payment_state', 'in', ('invoicing_legacy'))]}"/>
+                                        <button string="View Invoice" name="view_invoice" type="object" style="background-color:rgba(0, 160, 74, 0.5);color: #333;"
+                                                attrs="{'invisible': [('invoice_id','=',False)]}" groups="itsys_real_estate.group_payments"/>
+                                    </tree>
+                                </field>
+                                <group>
+                                    <field name="amount_total"/>
+                                    <field name="paid"/>
+                                    <field name="balance"/>
+                                </group>
+                            </page>
+                            <page string="Documents">
+                                <field name="attach_line">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="file"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="ownership_contract_form_action" model="ir.actions.act_window">
+            <field name="name">Ownership Contract</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ownership.contract</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="view_id" ref="ownership_contract_tree_view"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a new Ownership Contract
+                </p>
+            </field>
+        </record>
+
+        <menuitem action="ownership_contract_form_action"
+                  id="menu_ownership_contract_form_action"
+                  parent="itsys_real_estate.menu_contracts_main" sequence="30" />
+    </data>
+</odoo>
