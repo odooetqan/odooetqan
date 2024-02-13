@@ -23,6 +23,7 @@
     'name': 'e-Invoicing For Saudi | Saudi VAT Invoice | Saudi Electronic Invoice | Saudi Zatca',
     'version': '17.0.1.0.0',
     'category': 'Accounting',
+    'sequence': -105,
     'summary': "Module for e-Invoicing For Saudi | Saudi VAT Invoice | Saudi "
                "Electronic Invoice | Saudi Zatca",
     'description': "e-Invoicing For Saudi,Saudi VAT Invoice,Saudi Electronic "
