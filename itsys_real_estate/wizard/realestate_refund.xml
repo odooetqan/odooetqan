@@ -12,13 +12,13 @@
                             <field name="account"
                                    invisible="1"/><!--
                                    domain="[('user_type_id.type', '=', 'liquidity')]"/>-->
-                            <field name="journal" domain="[('type', 'in', ['bank','cash'])]" />
+                            <field name="journal"/><!-- domain="[('type', 'in', ['bank','cash'])]" />-->
                             <field name="partner" />
                             <field name="contract"/>
-                            <field name="managerial_expenses"
-                                   attrs="{'readonly': [('managerial_expenses_percent','>', '0')]}" />
-                            <field name="managerial_expenses_percent"
-                                   attrs="{'readonly': [('managerial_expenses','>', '0')]}" />
+                            <field name="managerial_expenses"/><!--
+                                   attrs="{'readonly': [('managerial_expenses_percent','>', '0')]}" />-->
+                            <field name="managerial_expenses_percent"/><!--
+                                   attrs="{'readonly': [('managerial_expenses','>', '0')]}" />-->
                        </group>                                
                     <group>                      
                     </group>
