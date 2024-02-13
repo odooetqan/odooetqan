@@ -1,5 +1,5 @@
 from odoo import api, fields, models, tools, _
-from odoo.addons.website.tools import get_video_embed_code
+#from odoo.addons.website.tools import get_video_embed_code
 from odoo.exceptions import ValidationError
 
 class PropertyImage(models.Model):
