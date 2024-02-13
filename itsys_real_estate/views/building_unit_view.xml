@@ -21,7 +21,7 @@
                             <button type="object"
                                     name="view_reservations"
                                     class="oe_stat_button"
-                                    icon="fa-book"
+                                    icon="fa-book">
                                 <field name="reservation_count" widget="statinfo" string="Reservations"/>
                             </button>                                    <!--attrs="{'invisible': [('reservation_count', '=', 0)]}">-->
 
