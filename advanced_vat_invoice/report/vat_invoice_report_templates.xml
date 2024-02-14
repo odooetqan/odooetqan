@@ -366,7 +366,7 @@
                                     <sapn t-esc="line_tax_total"/>
                                 </td>
                                 <td style="border-right:2pt solid grey;text-align:right;padding:3pt">
-                                    <span t-field="line.price_subtotal"/>
+                                    <span t-field="line.price_total"/>
                                 </td>
                             </tr>
                         </tbody>
