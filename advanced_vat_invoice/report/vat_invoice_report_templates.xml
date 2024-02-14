@@ -359,17 +359,17 @@
                                 </td>
 
                                 
-                                <td style="border-right:2pt solid grey;padding:2pt;text-align:center;">
+                                <!-- <td style="border-right:2pt solid grey;padding:2pt;text-align:center;">
                                     <t t-foreach="line.tax_ids" t-as="tax">
                                         <span t-esc="'%.2f' % tax.amount"/>%
 
                                         
                                     </t>
                                     <span t-if="not line.tax_ids">0.00%</span>
-                                </td>
+                                </td> -->
                                 <td style="padding:2pt;border-right:2pt solid grey;text-align:right;">
                                     <t t-set="line_tax_total" t-value="line.price_subtotal * line_tax_total / 100"/>
-                                    <span t-esc="line_tax_total"/>
+                                    <span t-esc="line_tax_total"/>%
                                     
                                 </td>
                                 <td style="border-right:2pt solid grey;text-align:right;padding:3pt">
