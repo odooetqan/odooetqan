@@ -8,7 +8,7 @@
                     <div class="page">
                         <h4>
                             <center>
-                                <span class="text-right">فاتورة ضريبية مبسطة
+                                <span class="text-right">فاتورة ضريبية 
                                 </span>
                                 <br/>
                                 <span>VAT Invoice</span>
@@ -42,7 +42,7 @@
                                     </td>
                                     <td class="issue"
                                         style="width:25%; text-align:right;">
-                                        رقم الفاتورة
+                                        تاريخ الفاتورة
                                     </td>
                                     <td style="width:30%; text-align:center;">
                                         <t t-esc="doc.invoice_date"/>
@@ -74,10 +74,6 @@
                         <thead>
                             <tr style="background-color:#DCDCDC">
                                 <td width="15%"
-                                    style="border:2pt solid grey;text-align:center;padding:2pt; ">
-                                    seller
-                                </td>
-                                <td width="15%"
                                     style="border:2pt solid grey;text-align:center;padding:2pt;">
                                     البائع
                                 </td>
@@ -86,7 +82,7 @@
                                 </td>
                                 <td width="15%"
                                     style="border:2pt solid grey;text-align:center;padding:2pt; ">
-                                    Buyer
+                                    seller
                                 </td>
                                 <td width="15%"
                                     style="border:2pt solid grey;text-align:center;padding:2pt; ">
@@ -95,12 +91,13 @@
                                 <td width="20%"
                                     style="border:2pt solid grey;text-align:center;padding:2pt;">
                                 </td>
+                                <td width="15%"
+                                    style="border:2pt solid grey;text-align:center;padding:2pt; ">
+                                    Buyer
+                                </td>
                             </tr>
                         </thead>
                         <tr>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                Name:
-                            </td>
                             <td width="15%"
                                 style="border:2pt solid grey;text-align:center;padding:2pt;">
                                 الاسم
@@ -109,7 +106,7 @@
                                 <t t-esc="doc.company_id.name"/>
                             </td>
                             <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                <span>Name:</span>
+                                Name:
                             </td>
                             <td width="15%"
                                 style="border:2pt solid grey;text-align:center;padding:2pt;">
@@ -118,11 +115,11 @@
                             <td style="border:2pt solid grey;text-align:center;padding:2pt;">
                                 <t t-esc="doc.partner_id.name"/>
                             </td>
+                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
+                                <span>Name:</span>
+                            </td>
                         </tr>
                         <tr>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                Street Name:
-                            </td>
                             <td style="border:2pt solid grey;text-align:center;padding:2pt;">
                                 اسم الشارع
                             </td>
@@ -138,18 +135,18 @@
                             <td style="border:2pt solid grey;text-align:center;padding:2pt;">
                                 <t t-esc="doc.partner_id.street"/>
                             </td>
+                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
+                                Street Name:
+                            </td>
                         </tr>
                         <tr>
-                            <td style="border:2pt solid grey;text-align:center; width:10%;padding:2pt">
-                                District:
-                            </td>
                             <td style="border:2pt solid grey;text-align:center;padding:2pt;">
                                 المنطقة
                             </td>
                             <td style="border:2pt solid grey;text-align:center;padding:2pt;">
                                 <t t-esc="doc.company_id.city"/>
                             </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
+                            <td style="border:2pt solid grey;text-align:center; width:10%;padding:2pt">
                                 District:
                             </td>
                             <td style="border:2pt solid grey;text-align:center;padding:2pt;">
@@ -158,18 +155,18 @@
                             <td style="border:2pt solid grey;text-align:center;padding:2pt;">
                                 <t t-esc="doc.partner_id.city"/>
                             </td>
+                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
+                                District:
+                            </td>
                         </tr>
                         <tr>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;width:8%">
-                                State:
-                            </td>
                             <td style="border:2pt solid grey;text-align:center;padding:2pt;">
                                 الحالة
                             </td>
                             <td style="border:2pt solid grey;text-align:center;padding:2pt;">
                                 <t t-esc="doc.company_id.state_id.name"/>
                             </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
+                            <td style="border:2pt solid grey;text-align:center;padding:2pt;width:8%">
                                 State:
                             </td>
                             <td style="border:2pt solid grey;text-align:center;padding:2pt;">
@@ -178,18 +175,18 @@
                             <td style="border:2pt solid grey;text-align:center;padding:2pt;">
                                 <t t-esc="doc.partner_id.state_id.name"/>
                             </td>
+                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
+                                State:
+                            </td>
                         </tr>
                         <tr>
-                            <td style="border:2pt solid grey;text-align:center; width:10%;padding:2pt">
-                                Country:
-                            </td>
                             <td style="border:2pt solid grey;text-align:center;padding:2pt;">
                                 البلد
                             </td>
                             <td style="border:2pt solid grey;text-align:center;padding:2pt;">
                                 <t t-esc="doc.company_id.country_id.name"/>
                             </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
+                            <td style="border:2pt solid grey;text-align:center; width:10%;padding:2pt">
                                 Country:
                             </td>
                             <td style="border:2pt solid grey;text-align:center;padding:2pt;">
@@ -198,11 +195,11 @@
                             <td style="border:2pt solid grey;text-align:center;padding:2pt;">
                                 <t t-esc="doc.partner_id.country_id.name"/>
                             </td>
+                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
+                                Country:
+                            </td>
                         </tr>
                         <tr>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                PIN Code:
-                            </td>
                             <td style="border:2pt solid grey;text-align:center;padding:2pt;">
                                 الرمز البريدي
                             </td>
@@ -218,11 +215,11 @@
                             <td style="border:2pt solid grey;text-align:center;padding:2pt;">
                                 <t t-esc="doc.partner_id.zip"/>
                             </td>
+                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
+                                PIN Code:
+                            </td>
                         </tr>
                         <tr>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                Phone Number:
-                            </td>
                             <td style="border:2pt solid grey;text-align:center;padding:2pt;">
                                 رقم الهاتف
                             </td>
@@ -238,13 +235,13 @@
                             <td style="border:2pt solid grey;text-align:center;padding:2pt;">
                                 <t t-esc="doc.partner_id.phone"/>
                             </td>
+                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
+                                Phone Number:
+                            </td>
                         </tr>
                         <tr>
                             <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                VAT Number:
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                ضريبة الشراء
+                                رقم التسجيل الضريبي 
                             </td>
                             <td style="border:2pt solid grey;text-align:center;padding:2pt;">
                                 <t t-esc="doc.company_id.vat"/>
@@ -253,10 +250,13 @@
                                 VAT Number:
                             </td>
                             <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                ضريبة الشراء
+                                رقم التسجيل الضريبي
                             </td>
                             <td style="border:2pt solid grey;text-align:center;padding:2pt;">
                                 <t t-esc="doc.partner_id.vat"/>
+                            </td>
+                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
+                                VAT Number:
                             </td>
                         </tr>
                     </table>
