@@ -355,7 +355,9 @@
                                     <span t-field="line.discount"/>%
                                 </td><td style="border-right:2pt solid grey;padding:2pt;text-align:center;">
                                     <t t-foreach="line.tax_ids" t-as="tax">
-                                        <span t-esc="'%.2f' % tax.amount"/>%
+                                        <span t-esc=" tax.amount"/>%
+                                        
+            <span t-esc=" tax.amount" t-options='{"widget": "monetary", "display_currency": "your_currency_code"}'/>
                                     </t>
                                     <span t-if="not line.tax_ids">0.00%</span>
                                 </td>
