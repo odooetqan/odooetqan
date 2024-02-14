@@ -331,13 +331,10 @@
                             <tr t-foreach="doc.invoice_line_ids" t-as="line">
                                 <t t-set="line_tax_total" t-value="0"/>
                                 <t t-foreach="line.tax_ids" t-as="tax">
-                                    <t t-set="tax_total"
-                                       t-value="tax_total + line.price_subtotal* tax.amount/100"/>
-                                    <t t-set="line_tax_total"
-                                       t-value="line_tax_total + tax.amount"/>
+                                    <t t-set="tax_total" t-value="tax_total + line.price_subtotal * tax.amount / 100"/>
+                                    <t t-set="line_tax_total" t-value="line_tax_total + tax.amount"/>
                                 </t>
-                                <t t-set="discount_total"
-                                   t-value="discount_total + ((line.price_unit * line.quantity) - line.price_subtotal)"/>
+                                <t t-set="discount_total" t-value="discount_total + ((line.price_unit * line.quantity) - line.price_subtotal)"/>
                                 <td style="border-right:2pt solid grey;padding:3pt">
                                     <span t-field="line.name"/>
                                     <br/>
@@ -346,30 +343,28 @@
                                     <span t-field="line.price_unit"/>
                                 </td>
                                 <td style="border-right:2pt solid grey;text-align:center;padding:3pt">
-                                    <span t-esc="'%.2f %s '%(line.quantity,line.product_uom_id.name)"/>
+                                    <span t-esc="'%.2f %s' % (line.quantity, line.product_uom_id.name)"/>
                                 </td>
                                 <td style="padding:2pt;border-right:2pt solid grey;text-align:right;">
-                                    <sapn t-esc="line.price_unit * line.quantity"/>
+                                    <span t-esc="line.price_unit * line.quantity"/>
                                 </td>
                                 <td style="border-right:2pt solid grey;text-align:right;padding:3pt;">
                                     <span t-field="line.discount"/>%
-                                </td><td style="border-right:2pt solid grey;padding:2pt;text-align:center;">
+                                </td>
+                                <td style="border-right:2pt solid grey;padding:2pt;text-align:center;">
                                     <t t-foreach="line.tax_ids" t-as="tax">
-                                        <span t-esc=" tax.amount"/>%
-                                        
-            <span t-esc=" tax.amount" t-options='{"widget": "monetary", "display_currency": "your_currency_code"}'/>
+                                        <span t-esc="'%.2f' % tax.amount"/>%
                                     </t>
                                     <span t-if="not line.tax_ids">0.00%</span>
                                 </td>
                                 <td style="padding:2pt;border-right:2pt solid grey;text-align:right;">
-                                    <t t-set="line_tax_total"
-                                       t-value="line.price_subtotal*line_tax_total/100"/>
-                                    <sapn t-esc="line_tax_total"/>
+                                    <t t-set="line_tax_total" t-value="line.price_subtotal * line_tax_total / 100"/>
+                                    <span t-esc="line_tax_total"/>
                                 </td>
                                 <td style="border-right:2pt solid grey;text-align:right;padding:3pt">
                                     <span t-field="line.price_total"/>
                                 </td>
-                            </tr>
+                            </tr>    
                         </tbody>
                     </table>
                 </t>
