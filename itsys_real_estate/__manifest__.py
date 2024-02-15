@@ -57,7 +57,7 @@
         # 'views/ownership_contract_view.xml',
         # 'views/ownership2_contract_view.xml',
         # 'views/real_estate_reports_view.xml',
-        'views/configuration.xml',
+        # 'views/configuration.xml',
         # 'views/template.xml',
         # 'views/installments_view.xml',
         # 'views/partner_invoice_summary.xml',
