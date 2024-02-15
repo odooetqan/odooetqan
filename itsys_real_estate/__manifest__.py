@@ -74,7 +74,7 @@
         'report/templates/report_ownership2_contract.xml',
         'report/templates/rental_contract.xml',
 	    'report/templates/report_quittance_letter.xml',
-        'report/ownership_contract_bi_report.xml',
+        # 'report/ownership_contract_bi_report.xml',
         'report/ownership2_contract_bi_report.xml',
         'report/templates/occupany.xml',
         'report/templates/due_payments_customers.xml',
