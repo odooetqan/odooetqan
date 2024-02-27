@@ -106,6 +106,14 @@ class AccountMove(models.Model):
         # time_stamp = self.timezone(self.create_date)#
         time_stamp = create_date
         date_hex = self.hexa("03", "14", time_stamp)
+        ##########
+        # seller_hex = seller_hex or ''  # Replace None with an empty string if seller_hex is None
+        # vat_hex = vat_hex or ''
+        # date_hex = date_hex or ''
+        # total_with_vat_hex = total_with_vat_hex or ''
+        
+        # qr_hex = (seller_hex + vat_hex + date_hex + total_with_vat_hex + ...)
+        ###
         amount_total = self.currency_id._convert(
             self.amount_total,
             self.env.ref('base.SAR'),
@@ -118,6 +126,13 @@ class AccountMove(models.Model):
             self.env.company, self.invoice_date or fields.Date.today())
         total_vat_hex = self.hexa("05", "09",
                                   str(round(amount_tax, 2)))
+        
+        seller_hex = seller_hex or ''  # Replace None with an empty string if seller_hex is None
+        vat_hex = vat_hex or ''
+        date_hex = date_hex or ''
+        total_with_vat_hex = total_with_vat_hex or ''
+
+        
         qr_hex = (seller_hex + vat_hex + date_hex + total_with_vat_hex +
                   total_vat_hex)
         encoded_base64_bytes = base64.b64encode(bytes.fromhex(qr_hex)).decode()
