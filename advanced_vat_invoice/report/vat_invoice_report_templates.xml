@@ -8,86 +8,6 @@
                     <div class="page">
 
 
-                        
-            <div class="row p-1 mt-1  bg-light">
-                <div class="col-6"><Strong>Buyer</Strong></div>
-                <div class="col-6 text-right"><Strong>العميل</Strong></div>
-            </div>
-            <div class="px-2">
-                <div class="row">
-                    <div class="col-3"><Strong>Name</Strong></div>
-                    <div class="col-5 text-center"><span t-field="doc.partner_id.name"></span></div>
-                    <div class="col-4 text-right"><Strong>الاسم</Strong></div>
-                </div>
-                <div class="row">
-                    <div class="col-3"><Strong>Building No</Strong></div>
-                    <div class="col-5 text-center"><span t-field="doc.partner_id.id"></span></div>
-                    <div class="col-4 text-right"><Strong>رقم المبني</Strong></div>
-                </div>
-                <div class="row">
-                    <div class="col-3"><Strong>Street</Strong></div>
-                    <div class="col-5 text-center"><span t-field="doc.partner_id.street"></span></div>
-                    <div class="col-4 text-right"><Strong>اسم الشارع</Strong></div>
-                </div>
-                <div class="row">
-                    <div class="col-3"><Strong>District</Strong></div>
-                    <div class="col-5 text-center"><span t-field="doc.partner_id.id"></span></div>
-                    <div class="col-4 text-right"><Strong>الحي</Strong></div>
-                </div>
-                <div class="row">
-                    <div class="col-3"><Strong>City</Strong></div>
-                    <div class="col-5 text-center"><span t-field="doc.partner_id.city"></span></div>
-                    <div class="col-4 text-right"><Strong>المدينة</Strong></div>
-                </div>
-                <div class="row">
-                    <div class="col-3"><Strong>Country</Strong></div>
-                    <div class="col-5 text-center"><span t-field="doc.partner_id.country_id.name"></span>
-                    </div>
-                    <div class="col-4 text-right"><Strong>البلد</Strong></div>
-                </div>
-                <div class="row">
-                    <div class="col-3"><Strong>Postal Code</Strong></div>
-                    <div class="col-5 text-center"><span t-field="doc.partner_id.zip"></span></div>
-                    <div class="col-4 text-right"><Strong>الرمز البريدي</Strong></div>
-                </div>
-<!--                 <div class="row">
-                    <div class="col-3"><Strong>Additional No</Strong></div>
-                    <div class="col-5 text-center"><span t-field="doc.partner_id.additional_no"></span></div>
-                    <div class="col-4 text-right"><Strong>الرقم الاضافي للعنوان</Strong></div>
-                </div> -->
-                <div class="row">
-                    <div class="col-3"><Strong>Vat Number</Strong></div>
-                    <div class="col-5 text-center"><span t-field="doc.partner_id.vat"></span></div>
-                    <div class="col-4 text-right"><Strong>رقم تسجيل ضريبة القيمة المضافة</Strong></div>
-
-                </div>
-<!--                 <div class="row">
-                    <div class="col-3"><Strong>Other ID</Strong></div>
-                    <div class="col-5 text-center"><span t-field="doc.partner_id.other_id"></span></div>
-                    <div class="col-4 text-right"><Strong>معرف آخر</Strong></div>
-                </div> -->
-                <div class="oe_structure"/>
-            </div>
-            <div class="oe_structure"/>
-
-
-
-
-
-
-
-
-
-                        
-                        <h4>
-                            <center>
-                                <span class="text-right">فاتورة ضريبية 
-                                </span>
-                                <!-- <br/> -->
-                                <span>VAT Invoice</span>
-                            </center>
-                        </h4>
-                    </div>
                     <div>
                         <table>
                             <tr style="border:2pt solid grey;">
@@ -103,6 +23,66 @@
                             </tr>
                             <br/>
                         </table>
+                    </div>
+                        
+            <div class="row p-1 mt-1  bg-light">
+                <div class="col-6 text-right"><Strong>العميل</Strong></div>
+                <div class="col-6"><Strong>Buyer</Strong></div> </div>
+            <div class="px-2">
+                <div class="row">
+                    <div class="col-4 text-right"><Strong>الاسم</Strong></div>
+                    <div class="col-5 text-center"><span t-field="doc.partner_id.name"></span></div>
+                    <div class="col-3"><Strong>Name</Strong></div>
+                </div>
+                <div class="row">
+                    <div class="col-4 text-right"><Strong>رقم المبني</Strong></div>
+                    <div class="col-5 text-center"><span t-field="doc.partner_id.id"></span></div>
+                    <div class="col-3"><Strong>Building No</Strong></div>
+                </div>
+                <div class="row">
+                    <div class="col-4 text-right"><Strong>اسم الشارع</Strong></div>
+                    <div class="col-5 text-center"><span t-field="doc.partner_id.street"></span></div>
+                    <div class="col-3"><Strong>Street</Strong></div>
+                </div>
+                <div class="row">
+                    <div class="col-4 text-right"><Strong>الحي</Strong></div>
+                    <div class="col-5 text-center"><span t-field="doc.partner_id.id"></span></div> 
+                    <div class="col-3"><Strong>District</Strong></div>
+                </div>
+                <div class="row">
+                    <div class="col-4 text-right"><Strong>المدينة</Strong></div>
+                    <div class="col-5 text-center"><span t-field="doc.partner_id.city"></span></div>
+                    <div class="col-3"><Strong>City</Strong></div>
+                </div>
+                <div class="row">
+                    <div class="col-4 text-right"><Strong>البلد</Strong></div>
+                    <div class="col-5 text-center"><span t-field="doc.partner_id.country_id.name"></span>
+                    </div>
+                    <div class="col-3"><Strong>Country</Strong></div>
+                </div>
+                <div class="row">
+                    <div class="col-4 text-right"><Strong>الرمز البريدي</Strong></div>
+                    <div class="col-5 text-center"><span t-field="doc.partner_id.zip"></span></div>
+                    <div class="col-3"><Strong>Postal Code</Strong></div>
+                </div> 
+                <div class="row">
+                    <div class="col-4 text-right"><Strong>رقم تسجيل ضريبة القيمة المضافة</Strong></div>
+                    <div class="col-5 text-center"><span t-field="doc.partner_id.vat"></span></div>
+                    <div class="col-3"><Strong>Vat Number</Strong></div>
+                </div> 
+                <div class="oe_structure"/>
+            </div>
+            <div class="oe_structure"/>
+
+
+                        
+                        <!-- <h4>
+                            <center>
+                                <span class="text-right">فاتورة ضريبية 
+                                </span>
+                                <span>VAT Invoice</span>
+                            </center>
+                        </h4> -->
                     </div>
                     <!-- <br/> -->
                     <div class="row mt32 mb32">
