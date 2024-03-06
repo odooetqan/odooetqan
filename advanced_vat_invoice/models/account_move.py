@@ -95,40 +95,36 @@ class AccountMove(models.Model):
             if len(hexadecimal) == 1:
                 hexadecimal = "0" + hexadecimal
             return tag + hexadecimal + hex_string
-
     def qr_code_data(self):
         """Generate QR code data for the current record."""
         seller_name = str(self.company_id.name)
         seller_vat_no = self.company_id.vat or ''
         seller_hex = self.hexa("01", "0c", seller_name)
         vat_hex = self.hexa("02", "0f", seller_vat_no) or ""
-        create_date = self.invoice_date
-        # time_stamp = self.timezone(self.create_date)#
-        time_stamp = create_date
-        date_hex = self.hexa("03", "14", time_stamp)
+        date_hex = self.invoice_date and self.invoice_date.strftime('%Y%m%d').encode().hex() or ''
+        
+        # Convert total amount and tax amount to SAR if needed and round them to 2 decimal places
         amount_total = self.currency_id._convert(
             self.amount_total,
             self.env.ref('base.SAR'),
-            self.env.company, self.invoice_date or fields.Date.today())
-        total_with_vat_hex = self.hexa("04", "0a",
-                                       str(round(amount_total, 2)))
-        amount_tax = self.currency_id._convert(
-            self.amount_tax,
-            self.env.ref('base.SAR'),
-            self.env.company, self.invoice_date or fields.Date.today())
-        # total_vat_hex = self.hexa("05", "09", str(round(amount_tax, 2)))
-        # qr_hex = (seller_hex + vat_hex + date_hex + total_with_vat_hex + total_vat_hex)
-#---------------------------------------------------------------------------------------------            
-        # seller_hex = self.seller_id and self.seller_id.hex_value or ''
-        seller_hex = seller_name and seller_name.hex_value or ''
-        vat_hex = self.vat and self.vat.hex_value or ''
-        date_hex = self.invoice_date and self.invoice_date.strftime('%Y%m%d').encode().hex() or ''
-        total_with_vat_hex = self.amount_total and '{:.2f}'.format(self.amount_total).encode().hex() or ''
+            self.env.company, 
+            self.invoice_date or fields.Date.today()
+        )
+        total_with_vat_hex = self.hexa("04", "0a", str(round(amount_total, 2)))
+        
+        # Concatenate the hexadecimal values to form the QR code data
         qr_hex = seller_hex + vat_hex + date_hex + total_with_vat_hex
-        # ... rest of your code ...   
-#---------------------------------------------------------------------------------------------
+        
+        # Encode the hexadecimal string into base64
         encoded_base64_bytes = base64.b64encode(bytes.fromhex(qr_hex)).decode()
+        
         return encoded_base64_bytes
+
+    # Don't forget to implement the timezone method if you need it
+    # def timezone(self, date):
+    #     # Convert the date to the appropriate timezone here
+    #     pass
+
 
     @api.depends('state')
     def generate_qrcode(self):
