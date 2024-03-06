@@ -21,7 +21,7 @@
                 </div>
                 <div class="row">
                     <div class="col-3"><Strong>Building No</Strong></div>
-                    <div class="col-5 text-center"><span t-field="doc.partner_id.building_no"></span></div>
+                    <div class="col-5 text-center"><span t-field="doc.partner_id.id"></span></div>
                     <div class="col-4 text-right"><Strong>رقم المبني</Strong></div>
                 </div>
                 <div class="row">
