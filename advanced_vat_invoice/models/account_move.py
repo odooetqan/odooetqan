@@ -116,10 +116,16 @@ class AccountMove(models.Model):
             self.amount_tax,
             self.env.ref('base.SAR'),
             self.env.company, self.invoice_date or fields.Date.today())
-        total_vat_hex = self.hexa("05", "09",
-                                  str(round(amount_tax, 2)))
-        qr_hex = (seller_hex + vat_hex + date_hex + total_with_vat_hex +
-                  total_vat_hex)
+        # total_vat_hex = self.hexa("05", "09", str(round(amount_tax, 2)))
+        # qr_hex = (seller_hex + vat_hex + date_hex + total_with_vat_hex + total_vat_hex)
+#---------------------------------------------------------------------------------------------            
+        seller_hex = self.seller_id and self.seller_id.hex_value or ''
+        vat_hex = self.vat and self.vat.hex_value or ''
+        date_hex = self.invoice_date and self.invoice_date.strftime('%Y%m%d').encode().hex() or ''
+        total_with_vat_hex = self.amount_total and '{:.2f}'.format(self.amount_total).encode().hex() or ''
+        qr_hex = seller_hex + vat_hex + date_hex + total_with_vat_hex
+        # ... rest of your code ...   
+#---------------------------------------------------------------------------------------------
         encoded_base64_bytes = base64.b64encode(bytes.fromhex(qr_hex)).decode()
         return encoded_base64_bytes
 
