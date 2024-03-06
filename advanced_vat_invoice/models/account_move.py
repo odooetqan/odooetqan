@@ -120,7 +120,7 @@ class AccountMove(models.Model):
         # qr_hex = (seller_hex + vat_hex + date_hex + total_with_vat_hex + total_vat_hex)
 #---------------------------------------------------------------------------------------------            
         # seller_hex = self.seller_id and self.seller_id.hex_value or ''
-        seller_hex = self.seller_name and self.seller_name.hex_value or ''
+        seller_hex = seller_name and seller_name.hex_value or ''
         vat_hex = self.vat and self.vat.hex_value or ''
         date_hex = self.invoice_date and self.invoice_date.strftime('%Y%m%d').encode().hex() or ''
         total_with_vat_hex = self.amount_total and '{:.2f}'.format(self.amount_total).encode().hex() or ''
