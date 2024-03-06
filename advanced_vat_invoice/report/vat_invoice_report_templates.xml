@@ -31,7 +31,7 @@
                 </div>
                 <div class="row">
                     <div class="col-3"><Strong>District</Strong></div>
-                    <div class="col-5 text-center"><span t-field="doc.partner_id.district"></span></div>
+                    <div class="col-5 text-center"><span t-field="doc.partner_id.id"></span></div>
                     <div class="col-4 text-right"><Strong>الحي</Strong></div>
                 </div>
                 <div class="row">
@@ -50,22 +50,22 @@
                     <div class="col-5 text-center"><span t-field="doc.partner_id.zip"></span></div>
                     <div class="col-4 text-right"><Strong>الرمز البريدي</Strong></div>
                 </div>
-                <div class="row">
+<!--                 <div class="row">
                     <div class="col-3"><Strong>Additional No</Strong></div>
                     <div class="col-5 text-center"><span t-field="doc.partner_id.additional_no"></span></div>
                     <div class="col-4 text-right"><Strong>الرقم الاضافي للعنوان</Strong></div>
-                </div>
+                </div> -->
                 <div class="row">
                     <div class="col-3"><Strong>Vat Number</Strong></div>
                     <div class="col-5 text-center"><span t-field="doc.partner_id.vat"></span></div>
                     <div class="col-4 text-right"><Strong>رقم تسجيل ضريبة القيمة المضافة</Strong></div>
 
                 </div>
-                <div class="row">
+<!--                 <div class="row">
                     <div class="col-3"><Strong>Other ID</Strong></div>
                     <div class="col-5 text-center"><span t-field="doc.partner_id.other_id"></span></div>
                     <div class="col-4 text-right"><Strong>معرف آخر</Strong></div>
-                </div>
+                </div> -->
                 <div class="oe_structure"/>
             </div>
             <div class="oe_structure"/>
