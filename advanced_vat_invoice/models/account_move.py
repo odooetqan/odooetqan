@@ -37,9 +37,21 @@ except ImportError:
     base64 = None
 
 class AccountMoveLine(models.Model):
-    _inherit = 'account.move.line'
-    
-    einv_amount_discount = fields.Monetary(string='Discount Amount')
+    _name = "account.move.line"
+    _inherit = "account.move.line"
+    einv_amount_discount = fields.Monetary(string="Amount discount", compute="_compute_amount_discount", store='True',
+                                           help="")
+    einv_amount_tax = fields.Monetary(string="Amount tax", compute="_compute_amount_tax", store='True', help="")
+
+    @api.depends('discount', 'quantity', 'price_unit')
+    def _compute_amount_discount(self):
+        for r in self:
+            r.einv_amount_discount = r.quantity * r.price_unit * (r.discount / 100)
+
+    @api.depends('tax_ids', 'discount', 'quantity', 'price_unit')
+    def _compute_amount_tax(self):
+        for r in self:
+            r.einv_amount_tax = sum(r.price_subtotal * (tax.amount / 100) for tax in r.tax_ids)
 
 class AccountMove(models.Model):
     """Class for adding new button and a page in account move"""
