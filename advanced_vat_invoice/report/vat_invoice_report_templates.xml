@@ -235,8 +235,7 @@
                     <div class="col-6 text-right"><Strong>:الاجمالي</Strong></div>
                 </div>
                 <div class="row">
-                    <div class="col-2"></div>
-                    <div class="col-10">
+                    <div class="col-12">
                         <div class="row border border-top-0">
                             <div class="col-4">Total (Excluding VAT)</div>
                             <div class="col-6 text-right">الاجمالي غير شامل ضريبة القيمة المضافة</div>
@@ -269,7 +268,7 @@
                 </div>
             </div>
             <div class="oe_structure"/>
-            
+
                 </t>
             </t>
         </t>
