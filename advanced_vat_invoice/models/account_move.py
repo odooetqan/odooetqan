@@ -22,7 +22,7 @@
 from io import BytesIO
 import binascii
 import pytz
-
+import base64
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
@@ -154,7 +154,6 @@ class AccountMove(models.Model):
     #               total_vat_hex)
     #     encoded_base64_bytes = base64.b64encode(bytes.fromhex(qr_hex)).decode()
     #     return encoded_base64_bytes
-import base64
 
     def qr_code_data(self):
         seller_name = str(self.company_id.name)
