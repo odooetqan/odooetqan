@@ -112,6 +112,18 @@
                                         <t t-esc="doc.invoice_payment_term_id.name"/>
                                     </td>
                                 </tr>
+                                
+                                <tr>
+                                    <td style="font-weight:bold; width:25%;">
+                                    </td>
+<!--                                     <td class="due"
+                                        style="width:25%; text-align:right;">
+                                        تاريخ الاستحقاق
+                                    </td> -->
+                                    <td style="width:30%; text-align:center;" colspan="2">
+                                    </td>
+                                </tr>
+                                
                             </table>
                             <br/>
                         </div>
