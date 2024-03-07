@@ -129,32 +129,53 @@ class AccountMove(models.Model):
             return tag + hexadecimal + hex_string
 
     
+    # def qr_code_data(self):
+    #     """Generate QR code data for the current record."""
+    #     seller_name = str(self.company_id.name)
+    #     seller_vat_no = self.company_id.vat or ''
+    #     seller_hex = self.hexa("01", "0c", seller_name)
+    #     vat_hex = self.hexa("02", "0f", seller_vat_no) or ""
+    #     create_date = self.invoice_date
+    #     time_stamp = self.timezone(create_date)#self.
+    #     date_hex = self.hexa("03", "14", time_stamp)
+    #     amount_total = self.currency_id._convert(
+    #         self.amount_total,
+    #         self.env.ref('base.SAR'),
+    #         self.env.company, self.invoice_date or fields.Date.today())
+    #     total_with_vat_hex = self.hexa("04", "0a",
+    #                                    str(round(amount_total, 2)))
+    #     amount_tax = self.currency_id._convert(
+    #         self.amount_tax,
+    #         self.env.ref('base.SAR'),
+    #         self.env.company, self.invoice_date or fields.Date.today())
+    #     total_vat_hex = self.hexa("05", "09",
+    #                               str(round(amount_tax, 2)))
+    #     qr_hex = (seller_hex + vat_hex + date_hex + total_with_vat_hex +
+    #               total_vat_hex)
+    #     encoded_base64_bytes = base64.b64encode(bytes.fromhex(qr_hex)).decode()
+    #     return encoded_base64_bytes
+import base64
+
     def qr_code_data(self):
-        """Generate QR code data for the current record."""
         seller_name = str(self.company_id.name)
         seller_vat_no = self.company_id.vat or ''
         seller_hex = self.hexa("01", "0c", seller_name)
         vat_hex = self.hexa("02", "0f", seller_vat_no) or ""
         create_date = self.invoice_date
-        time_stamp = self.timezone(create_date)#self.
+        time_stamp = self.timezone(create_date)  # Call to your custom timezone method
         date_hex = self.hexa("03", "14", time_stamp)
-        amount_total = self.currency_id._convert(
-            self.amount_total,
-            self.env.ref('base.SAR'),
-            self.env.company, self.invoice_date or fields.Date.today())
-        total_with_vat_hex = self.hexa("04", "0a",
-                                       str(round(amount_total, 2)))
-        amount_tax = self.currency_id._convert(
-            self.amount_tax,
-            self.env.ref('base.SAR'),
-            self.env.company, self.invoice_date or fields.Date.today())
-        total_vat_hex = self.hexa("05", "09",
-                                  str(round(amount_tax, 2)))
-        qr_hex = (seller_hex + vat_hex + date_hex + total_with_vat_hex +
-                  total_vat_hex)
+        # Currency conversions and rounding
+        amount_total = round(self.amount_total_converted_to_SAR(), 2)
+        total_with_vat_hex = self.hexa("04", "0a", str(amount_total))
+        amount_tax = round(self.amount_tax_converted_to_SAR(), 2)
+        total_vat_hex = self.hexa("05", "09", str(amount_tax))
+        # Concatenate all hex-encoded strings
+        qr_hex = (seller_hex + vat_hex + date_hex + total_with_vat_hex + total_vat_hex)
+        # Base64 encode the combined hex string
         encoded_base64_bytes = base64.b64encode(bytes.fromhex(qr_hex)).decode()
         return encoded_base64_bytes
 
+    # ... other methods, including hexa and timezone ...
     einv_amount_sale_total = fields.Monetary(string="Amount sale total", compute="_compute_total", store='True',
                                              help="")
     einv_amount_discount_total = fields.Monetary(string="Amount discount total", compute="_compute_total", store='True',
