@@ -36,6 +36,10 @@ try:
 except ImportError:
     base64 = None
 
+class AccountMoveLine(models.Model):
+    _inherit = 'account.move.line'
+    
+    einv_amount_discount = fields.Monetary(string='Discount Amount')
 
 class AccountMove(models.Model):
     """Class for adding new button and a page in account move"""
