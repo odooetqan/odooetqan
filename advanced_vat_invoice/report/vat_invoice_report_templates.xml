@@ -6,24 +6,7 @@
             <t t-call="web.external_layout">
                 <t t-foreach="docs" t-as="doc">
                     <div class="page">
-
-
-                    <div>
-                        <table>
-                            <tr style="border:2pt solid grey;">
-                                <td width="16%">
-                                    <span/>Invoice Number
-                                </td>
-                                <td width="16%">
-                                    <span>رقم الفاتورة</span>
-                                </td>
-                                <td width="16%">
-                                    <t t-esc="doc.name"/>
-                                </td>
-                            </tr>
-                            <br/>
-                        </table>
-                    </div>
+ 
                         
                     <div class="row p-1 mt-1  bg-light">
                         <div class="col-6 text-right"><Strong>العميل</Strong></div>
@@ -80,6 +63,19 @@
                         <div class="col-9" style="color:black; ">
                             <table style="border:2pt solid grey;width:100%;padding:10pt;color:black;"
                                    class="table table-bordered table-sm">
+                                   
+                            <tr style="border:2pt solid grey;">
+                                <td width="25%">
+                                    <span/>Invoice Number
+                                </td>
+                                <td width="25%">
+                                    <span>رقم الفاتورة</span>
+                                </td>
+                                <td width="30%">
+                                    <t t-esc="doc.name"/>
+                                </td>
+                            </tr>
+
                                 <tr>
                                     <td style="font-weight:bold; width:25%;">
                                         Invoice Issue Date:
