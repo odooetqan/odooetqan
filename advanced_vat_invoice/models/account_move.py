@@ -123,6 +123,25 @@ class AccountMove(models.Model):
         encoded_base64_bytes = base64.b64encode(bytes.fromhex(qr_hex)).decode()
         return encoded_base64_bytes
 
+    einv_amount_sale_total = fields.Monetary(string="Amount sale total", compute="_compute_total", store='True',
+                                             help="")
+    einv_amount_discount_total = fields.Monetary(string="Amount discount total", compute="_compute_total", store='True',
+                                                 help="")
+    einv_amount_tax_total = fields.Monetary(string="Amount tax total", compute="_compute_total", store='True', help="")
+    
+    @api.depends('invoice_line_ids', 'amount_total')
+    def _compute_total(self):
+        for r in self:
+            r.einv_amount_sale_total = r.amount_untaxed + sum(line.einv_amount_discount for line in r.invoice_line_ids)
+            r.einv_amount_discount_total = sum(line.einv_amount_discount for line in r.invoice_line_ids)
+            r.einv_amount_tax_total = sum(line.einv_amount_tax for line in r.invoice_line_ids)
+
+            # tags = seller_name, vat_no, inv_date, total, vat
+            # r.einv_qr = generate_tlv_base64(r.company_id.name, r.company_id.vat, r.invoice_date, r.amount_total, )
+
+
+
+    
     # def qr_code_data(self):
     #     """Generate QR code data for the current record."""
     #     seller_name = str(self.company_id.name)
