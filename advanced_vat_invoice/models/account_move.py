@@ -39,19 +39,6 @@ except ImportError:
 
 
 
-def timezone(self, userdate):
-    # Ensure that userdate is a datetime object
-    if isinstance(userdate, datetime):
-        contex_tz = pytz.timezone(self.env.context.get('tz') or 'UTC')
-        date_time = pytz.utc.localize(userdate).astimezone(contex_tz)
-    else:
-        # If userdate is a date object, make it a datetime object at midnight
-        userdatetime = datetime.combine(userdate, datetime.min.time())
-        contex_tz = pytz.timezone(self.env.context.get('tz') or 'UTC')
-        date_time = pytz.utc.localize(userdatetime).astimezone(contex_tz)
-    return date_time
-
-
 class AccountMoveLine(models.Model):
     _name = "account.move.line"
     _inherit = "account.move.line"
@@ -96,12 +83,27 @@ class AccountMove(models.Model):
                                       or qr_code_generate_method == 'automatically') \
                 else False
 
+
+
+    def timezone(self, userdate):
+        # Ensure that userdate is a datetime object
+        if isinstance(userdate, datetime):
+            contex_tz = pytz.timezone(self.env.context.get('tz') or 'UTC')
+            date_time = pytz.utc.localize(userdate).astimezone(contex_tz)
+        else:
+            # If userdate is a date object, make it a datetime object at midnight
+            userdatetime = datetime.combine(userdate, datetime.min.time())
+            contex_tz = pytz.timezone(self.env.context.get('tz') or 'UTC')
+            date_time = pytz.utc.localize(userdatetime).astimezone(contex_tz)
+        return date_time
+        
     def timezone(self, userdate):
         """Function to convert a user's date to their timezone."""
         tz_name = self.env.context.get('tz') or self.env.user.tz
         contex_tz = pytz.timezone(tz_name)
         date_time = pytz.utc.localize(userdate).astimezone(contex_tz)
         return date_time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
+        
 
     def string_hexa(self, value):
         """Convert a string to a hexadecimal representation."""
