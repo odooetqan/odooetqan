@@ -8,92 +8,78 @@
                     <div class="page">
 
 
-                        
-            <div class="row p-1 mt-1  bg-light">
-                <div class="col-6 text-right"><Strong>العميل</Strong></div>
-                <div class="col-6"><Strong>Buyer</Strong></div> </div>
-            <div class="px-2">
-                <div class="row">
-                    <div class="col-4 text-right"><Strong>الاسم</Strong></div>
-                    <div class="col-5 text-center"><span t-field="doc.partner_id.name"></span></div>
-                    <div class="col-3"><Strong>Name</Strong></div>
-                </div>
-                <div class="row">
-                    <div class="col-4 text-right"><Strong>رقم المبني</Strong></div>
-                    <div class="col-5 text-center"><span t-field="doc.partner_id.id"></span></div>
-                    <div class="col-3"><Strong>Building No</Strong></div>
-                </div>
-                <div class="row">
-                    <div class="col-4 text-right"><Strong>اسم الشارع</Strong></div>
-                    <div class="col-5 text-center"><span t-field="doc.partner_id.street"></span></div>
-                    <div class="col-3"><Strong>Street</Strong></div>
-                </div>
-                <div class="row">
-                    <div class="col-4 text-right"><Strong>الحي</Strong></div>
-                    <div class="col-5 text-center"><span t-field="doc.partner_id.id"></span></div> 
-                    <div class="col-3"><Strong>District</Strong></div>
-                </div>
-                <div class="row">
-                    <div class="col-4 text-right"><Strong>المدينة</Strong></div>
-                    <div class="col-5 text-center"><span t-field="doc.partner_id.city"></span></div>
-                    <div class="col-3"><Strong>City</Strong></div>
-                </div>
-                <div class="row">
-                    <div class="col-4 text-right"><Strong>البلد</Strong></div>
-                    <div class="col-5 text-center"><span t-field="doc.partner_id.country_id.name"></span>
-                    </div>
-                    <div class="col-3"><Strong>Country</Strong></div>
-                </div>
-                <div class="row">
-                    <div class="col-4 text-right"><Strong>الرمز البريدي</Strong></div>
-                    <div class="col-5 text-center"><span t-field="doc.partner_id.zip"></span></div>
-                    <div class="col-3"><Strong>Postal Code</Strong></div>
-                </div> 
-                <div class="row">
-                    <div class="col-4 text-right"><Strong>رقم تسجيل ضريبة القيمة المضافة</Strong></div>
-                    <div class="col-5 text-center"><span t-field="doc.partner_id.vat"></span></div>
-                    <div class="col-3"><Strong>Vat Number</Strong></div>
-                </div> 
-                <div class="oe_structure"/>
-            </div>
-            <div class="oe_structure"/>
-
-
-                        
-                        <!-- <h4>
-                            <center>
-                                <span class="text-right">فاتورة ضريبية 
-                                </span>
-                                <span>VAT Invoice</span>
-                            </center>
-                        </h4> -->
-                    </div>
-                    <!-- <br/> -->
-
-<!--                     
                     <div>
                         <table>
+                            <tr style="border:2pt solid grey;">
+                                <td width="16%">
+                                    <span/>Invoice Number
+                                </td>
+                                <td width="16%">
+                                    <span>رقم الفاتورة</span>
+                                </td>
+                                <td width="16%">
+                                    <t t-esc="doc.name"/>
+                                </td>
+                            </tr>
+                            <br/>
                         </table>
-                    </div> -->
+                    </div>
+                        
+                    <div class="row p-1 mt-1  bg-light">
+                        <div class="col-6 text-right"><Strong>العميل</Strong></div>
+                        <div class="col-6"><Strong>Buyer</Strong></div> </div>
+                    <div class="px-2">
+                        <div class="row">
+                            <div class="col-4 text-right"><Strong>الاسم</Strong></div>
+                            <div class="col-5 text-center"><span t-field="doc.partner_id.name"></span></div>
+                            <div class="col-3"><Strong>Name</Strong></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 text-right"><Strong>رقم المبني</Strong></div>
+                            <div class="col-5 text-center"><span t-field="doc.partner_id.id"></span></div>
+                            <div class="col-3"><Strong>Building No</Strong></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 text-right"><Strong>اسم الشارع</Strong></div>
+                            <div class="col-5 text-center"><span t-field="doc.partner_id.street"></span></div>
+                            <div class="col-3"><Strong>Street</Strong></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 text-right"><Strong>الحي</Strong></div>
+                            <div class="col-5 text-center"><span t-field="doc.partner_id.id"></span></div> 
+                            <div class="col-3"><Strong>District</Strong></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 text-right"><Strong>المدينة</Strong></div>
+                            <div class="col-5 text-center"><span t-field="doc.partner_id.city"></span></div>
+                            <div class="col-3"><Strong>City</Strong></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 text-right"><Strong>البلد</Strong></div>
+                            <div class="col-5 text-center"><span t-field="doc.partner_id.country_id.name"></span>
+                            </div>
+                            <div class="col-3"><Strong>Country</Strong></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 text-right"><Strong>الرمز البريدي</Strong></div>
+                            <div class="col-5 text-center"><span t-field="doc.partner_id.zip"></span></div>
+                            <div class="col-3"><Strong>Postal Code</Strong></div>
+                        </div> 
+                        <div class="row">
+                            <div class="col-4 text-right"><Strong>رقم تسجيل ضريبة القيمة المضافة</Strong></div>
+                            <div class="col-5 text-center"><span t-field="doc.partner_id.vat"></span></div>
+                            <div class="col-3"><Strong>Vat Number</Strong></div>
+                        </div> 
+                        <div class="oe_structure"/>
+                    </div>
+                    <div class  ="oe_structure"/>
 
-                    
+
+                    </div>
                     <div class="row mt32 mb32">
                         <div class="col-9" style="color:black; ">
                             <table style="border:2pt solid grey;width:100%;padding:10pt;color:black;"
                                    class="table table-bordered table-sm">
-                                
-                                <tr style="border:2pt solid grey;">
-                                    <td width="25%">
-                                        <span/>Invoice Number
-                                    </td>
-                                    <td width="25%">
-                                        <span>رقم الفاتورة</span>
-                                    </td>
-                                    <td width="30%">
-                                        <t t-esc="doc.name"/>
-                                    </td>
-                                </tr>
-                              
                                 <tr>
                                     <td style="font-weight:bold; width:25%;">
                                         Invoice Issue Date:
@@ -126,209 +112,7 @@
                             <img t-attf-src="data:image/png;base64, {{doc.qr}}"/>
                         </div>
                     </div>
-                    <!-- <br/> -->
-                    <!-- <table style="border:2pt solid grey;width:100%;color:black; margin-top:0pt; color:black;"
-                           class="table-condensed">
-                        <thead>
-                            <tr style="background-color:#DCDCDC">
-                                <td width="15%"
-                                    style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                    البائع
-                                </td>
-                                <td width="20%"
-                                    style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                </td>
-                                <td width="15%"
-                                    style="border:2pt solid grey;text-align:center;padding:2pt; ">
-                                    seller
-                                </td>
-                                <td width="15%"
-                                    style="border:2pt solid grey;text-align:center;padding:2pt; ">
-                                    المشتري
-                                </td>
-                                <td width="20%"
-                                    style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                </td>
-                                <td width="15%"
-                                    style="border:2pt solid grey;text-align:center;padding:2pt; ">
-                                    Buyer
-                                </td>
-                            </tr>
-                        </thead>
-                        <tr>
-                            <td width="15%"
-                                style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                الاسم
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                <t t-esc="doc.company_id.name"/>
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                Name:
-                            </td>
-                            <td width="15%"
-                                style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                الاسم
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                <t t-esc="doc.partner_id.name"/>
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                <span>Name:</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                اسم الشارع
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                <t t-esc="doc.company_id.street"/>
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                Street Name:
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                اسم الشارع
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                <t t-esc="doc.partner_id.street"/>
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                Street Name:
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                المنطقة
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                <t t-esc="doc.company_id.city"/>
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center; width:10%;padding:2pt">
-                                District:
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                المنطقة
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                <t t-esc="doc.partner_id.city"/>
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                District:
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                الحالة
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                <t t-esc="doc.company_id.state_id.name"/>
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;width:8%">
-                                State:
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                الحالة
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                <t t-esc="doc.partner_id.state_id.name"/>
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                State:
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                البلد
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                <t t-esc="doc.company_id.country_id.name"/>
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center; width:10%;padding:2pt">
-                                Country:
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                البلد
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                <t t-esc="doc.partner_id.country_id.name"/>
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                Country:
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                الرمز البريدي
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                <t t-esc="doc.company_id.zip"/>
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                PIN Code:
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                الرمز البريدي
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                <t t-esc="doc.partner_id.zip"/>
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                PIN Code:
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                رقم الهاتف
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                <t t-esc="doc.company_id.phone"/>
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                Phone Number:
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                رقم الهاتف
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                <t t-esc="doc.partner_id.phone"/>
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                Phone Number:
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                رقم التسجيل الضريبي 
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                <t t-esc="doc.company_id.vat"/>
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                VAT Number:
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                رقم التسجيل الضريبي
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                <t t-esc="doc.partner_id.vat"/>
-                            </td>
-                            <td style="border:2pt solid grey;text-align:center;padding:2pt;">
-                                VAT Number:
-                            </td>
-                        </tr>
-                    </table>
-                    <br/> -->
-                    <!-- <table style="border:2pt solid grey;width:100%; height: 23px;color:black; margin-top:10pt;"
-                           class="table-condensed table-sm">
-                        <tr>
-                            <td style="padding:2pt;margin:0pt;font-weight: bold;text-align:center;">
-                                <span class="text-right arabic">Order Line
-                                    Items/البنود
-                                </span>
-                            </td>
-                        </tr>
-                    </table> -->
+
                     <table style="border:2pt solid grey;width:100%;color:black; margin-top:0pt; color:black;"
                            class="table-condensed">
                         <thead>
@@ -425,8 +209,8 @@
                                     </t>
                                     <span t-if="not line.tax_ids">0.00%</span>
                                 </td> -->
-                                
-<!--                                 <td style="padding:2pt;border-right:2pt solid grey;text-align:right;">
+                                <!--   
+                              <td style="padding:2pt;border-right:2pt solid grey;text-align:right;">
                                     <t t-set="line_tax_total" t-value="line.price_subtotal * line_tax_total / 100"/>
                                     <span t-esc="line_tax_total"/>%
                                     
@@ -451,8 +235,8 @@
                     <div class="col-6 text-right"><Strong>:الاجمالي</Strong></div>
                 </div>
                 <div class="row">
-<!--                     <div class="col-2"></div>
-                    <div class="col-12"> -->
+                    <div class="col-2"></div>
+                    <div class="col-10">
                         <div class="row border border-top-0">
                             <div class="col-4">Total (Excluding VAT)</div>
                             <div class="col-6 text-right">الاجمالي غير شامل ضريبة القيمة المضافة</div>
@@ -485,6 +269,7 @@
                 </div>
             </div>
             <div class="oe_structure"/>
+            
                 </t>
             </t>
         </t>
