@@ -36,6 +36,22 @@ try:
 except ImportError:
     base64 = None
 
+
+from datetime import datetime
+
+def timezone(self, userdate):
+    # Ensure that userdate is a datetime object
+    if isinstance(userdate, datetime):
+        contex_tz = pytz.timezone(self.env.context.get('tz') or 'UTC')
+        date_time = pytz.utc.localize(userdate).astimezone(contex_tz)
+    else:
+        # If userdate is a date object, make it a datetime object at midnight
+        userdatetime = datetime.combine(userdate, datetime.min.time())
+        contex_tz = pytz.timezone(self.env.context.get('tz') or 'UTC')
+        date_time = pytz.utc.localize(userdatetime).astimezone(contex_tz)
+    return date_time
+
+
 class AccountMoveLine(models.Model):
     _name = "account.move.line"
     _inherit = "account.move.line"
