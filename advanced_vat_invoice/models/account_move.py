@@ -133,6 +133,10 @@ class AccountMove(models.Model):
 
     def qr_code_data(self):
         """Generate QR code data for the current record."""
+        # Now that we ensure all variables are strings, concatenation should not raise a TypeError
+        qr_hex = seller_hex + vat_hex + date_hex + total_with_vat_hex
+
+
         seller_name = str(self.company_id.name)
         seller_vat_no = self.company_id.vat or ''
         seller_hex = self.hexa("01", "0c", seller_name)
@@ -153,6 +157,12 @@ class AccountMove(models.Model):
             self.env.company, self.invoice_date or fields.Date.today())
         total_vat_hex = self.hexa("05", "09",
                                   str(round(amount_tax, 2)))
+
+        seller_hex = seller_hex or ''
+        vat_hex = vat_hex or ''
+        date_hex = date_hex or ''
+        total_with_vat_hex = total_with_vat_hex or ''
+        
         qr_hex = (seller_hex + vat_hex + date_hex + total_with_vat_hex +
                   total_vat_hex)
         encoded_base64_bytes = base64.b64encode(bytes.fromhex(qr_hex)).decode()
