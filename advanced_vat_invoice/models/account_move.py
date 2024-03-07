@@ -134,7 +134,7 @@ class AccountMove(models.Model):
     def qr_code_data(self):
         """Generate QR code data for the current record."""
         # Now that we ensure all variables are strings, concatenation should not raise a TypeError
-        qr_hex = seller_hex + vat_hex + date_hex + total_with_vat_hex
+        # qr_hex = seller_hex + vat_hex + date_hex + total_with_vat_hex
 
 
         seller_name = str(self.company_id.name)
