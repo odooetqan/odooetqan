@@ -122,7 +122,7 @@
                         </div>
                     </div>
                     <!-- <br/> -->
-                    <table style="border:2pt solid grey;width:100%;color:black; margin-top:0pt; color:black;"
+                    <!-- <table style="border:2pt solid grey;width:100%;color:black; margin-top:0pt; color:black;"
                            class="table-condensed">
                         <thead>
                             <tr style="background-color:#DCDCDC">
@@ -313,7 +313,7 @@
                             </td>
                         </tr>
                     </table>
-                    <br/>
+                    <br/> -->
                     <!-- <table style="border:2pt solid grey;width:100%; height: 23px;color:black; margin-top:10pt;"
                            class="table-condensed table-sm">
                         <tr>
@@ -432,14 +432,54 @@
                                     <span t-esc="'%.2f' % line_tax_total"/>
                                 </td>
 
-
-                                
+                               
                                 <td style="border-right:2pt solid grey;text-align:right;padding:3pt">
                                     <span t-field="line.price_total"/>
                                 </td>
                             </tr>    
                         </tbody>
                     </table>
+                    
+            <div style="page-break-inside: avoid;">
+                <div class="row p-1 mt-1 bg-light">
+                    <div class="col-6"><Strong>Total Amount: </Strong></div>
+                    <div class="col-6 text-right"><Strong>:الاجمالي</Strong></div>
+                </div>
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-10">
+                        <div class="row border border-top-0">
+                            <div class="col-4">Total (Excluding VAT)</div>
+                            <div class="col-6 text-right">الاجمالي غير شامل ضريبة القيمة المضافة</div>
+                            <div class="col-2 text-center"><span t-field="doc.einv_amount_sale_total"></span></div>
+                        </div>
+                        <div class="row border border-top-0">
+                            <div class="col-4">Discount</div>
+                            <div class="col-6 text-right">إجمالي الخصومات</div>
+                            <div class="col-2 text-center"><span
+                                    t-field="doc.einv_amount_discount_total"></span></div>
+                        </div>
+                        <div class="row border border-top-0">
+                            <div class="col-4">Total Taxable Amount (Excluding VAT)</div>
+                            <div class="col-6 text-right">الإجمالي الخاضع للضريبة غير شامل ضريبة القيمة
+                                المضافة</div>
+                            <div class="col-2 text-center"><span t-field="doc.amount_untaxed"></span></div>
+                        </div>
+                        <div class="row border border-top-0">
+                            <div class="col-4">Total VAT</div>
+                            <div class="col-6 text-right">إجمالي الضريبة المضافة</div>
+                            <div class="col-2 text-center"><span t-field="doc.amount_tax_signed"></span></div>
+                        </div>
+                        <div class="row border border-top-0">
+                            <div class="col-4">Total Amount Due</div>
+                            <div class="col-6 text-right"> الإجمالي المستحق </div>
+                            <div class="col-2 text-center"><span t-field="doc.amount_total"></span></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="oe_structure"/>
                 </t>
             </t>
         </t>
