@@ -26,6 +26,7 @@ import base64
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from datetime import datetime
 
 try:
     import qrcode
@@ -37,7 +38,6 @@ except ImportError:
     base64 = None
 
 
-from datetime import datetime
 
 def timezone(self, userdate):
     # Ensure that userdate is a datetime object
