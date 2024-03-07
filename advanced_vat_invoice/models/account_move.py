@@ -163,8 +163,10 @@ class AccountMove(models.Model):
         seller_hex = self.hexa("01", "0c", seller_name)
         vat_hex = self.hexa("02", "0f", seller_vat_no) or ""
         create_date = self.invoice_date
-        time_stamp = self.timezone(create_date)  # Call to your custom timezone method
-        date_hex = self.hexa("03", "14", time_stamp)
+ #       time_stamp = self.timezone(create_date)  # Call to your custom timezone method
+#        date_hex = self.hexa("03", "14", time_stamp)
+        date_hex = self.invoice_date and self.invoice_date.strftime('%Y%m%d').encode().hex() or ''
+        
         # Currency conversions and rounding
         amount_total = round(self.amount_total_converted_to_SAR(), 2)
         total_with_vat_hex = self.hexa("04", "0a", str(amount_total))
