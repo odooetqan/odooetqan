@@ -37,6 +37,26 @@ except ImportError:
     base64 = None
 
 
+
+class AccountMoveLine(models.Model):
+    _name = "account.move.line"
+    _inherit = "account.move.line"
+    einv_amount_discount = fields.Monetary(string="Amount discount", compute="_compute_amount_discount", store='True',
+                                           help="")
+    einv_amount_tax = fields.Monetary(string="Amount tax", compute="_compute_amount_tax", store='True', help="")
+
+    @api.depends('discount', 'quantity', 'price_unit')
+    def _compute_amount_discount(self):
+        for r in self:
+            r.einv_amount_discount = r.quantity * r.price_unit * (r.discount / 100)
+
+    @api.depends('tax_ids', 'discount', 'quantity', 'price_unit')
+    def _compute_amount_tax(self):
+        for r in self:
+            r.einv_amount_tax = sum(r.price_subtotal * (tax.amount / 100) for tax in r.tax_ids)
+
+
+
 class AccountMove(models.Model):
     """Class for adding new button and a page in account move"""
     _inherit = 'account.move'
@@ -48,6 +68,21 @@ class AccountMove(models.Model):
     qr_page = fields.Boolean(string="Qr Page", compute="_compute_qr",
                              help="Is QR page is enable or not")
 
+    # ... other methods, including hexa and timezone ...
+    einv_amount_sale_total = fields.Monetary(string="Amount sale total", compute="_compute_total", store='True',
+                                             help="")
+    einv_amount_discount_total = fields.Monetary(string="Amount discount total", compute="_compute_total", store='True',
+                                                 help="")
+    einv_amount_tax_total = fields.Monetary(string="Amount tax total", compute="_compute_total", store='True', help="")
+    
+    @api.depends('invoice_line_ids', 'amount_total')
+    def _compute_total(self):
+        for r in self:
+            r.einv_amount_sale_total = r.amount_untaxed + sum(line.einv_amount_discount for line in r.invoice_line_ids)
+            r.einv_amount_discount_total = sum(line.einv_amount_discount for line in r.invoice_line_ids)
+            r.einv_amount_tax_total = sum(line.einv_amount_tax for line in r.invoice_line_ids)
+
+    
     @api.depends('qr_button')
     def _compute_qr(self):
         """Compute function for checking the value of a field in settings"""
