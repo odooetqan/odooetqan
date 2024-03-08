@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<!-- ......................................Start Student Student .................................................... . -->
+		<!-- Start Student Student -->
+		<record id="student_student_form_view" model="ir.ui.view">
+			<field name="name">student.student.form.view</field>
+			<field name="model">student.student</field>
+			<field name="arch" type="xml">
+				<form>
+
+					<header>
+						<field name="state" widget="statusbar" string="Status" statusbar_visible="draft,active,blocked,in_active"/>
+						<button name="student_confirm" type="object" string="Confirm" class="btn-success"/>
+						<button name="student_blocked" type="object" string="Blocked" class="btn-danger"/>
+						<button name="student_in_active" type="object" string="In Active" class="btn-parimary"/>
+						
+						<button name="reset_draft" type="object" string="Reset to Draft" class="btn-warning"/>
+					</header>
+				
+					<sheet>
+						<div name="button_box" position="inside">
+							<button name="action_order_students" type="object" class="oe_stat_button" icon="fa-shopping-cart">
+								<div class="o_state_info">
+									<div class="o_form_field o_stat_info">
+										<span class="o_stat_value">
+											<field name="order_count" />
+										</span>
+										<span class="o_stat_text">Qutations</span>
+									</div>
+								</div>
+							</button>
+							<button name="action_order_students" type="object" class="oe_stat_button" icon="fa-usd">
+								<div class="o_state_info">
+									<div class="o_form_field o_stat_info">
+										<span class="o_stat_value">
+											<field name="order_count" />
+										</span>
+										<span class="o_stat_text">Sale Orders</span>
+									</div>
+								</div>
+							</button>
+							<button name="action_student_invoice_count" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+								<div class="o_state_info">
+									<div class="o_form_field o_stat_info">
+										<span class="o_stat_value">
+											<field name="invoice_count" />
+										</span>
+										<span class="o_stat_text">Invoices</span>
+									</div>
+								</div>
+							</button>
+<!-- 							<button name="action_student_invoice_count" type="object" class="oe_stat_button" icon="fa-list">
+								<div class="o_state_info">
+									<div class="o_form_field o_stat_info">
+										<span class="o_stat_value">
+											<field name="currency_id" invisible="1"/>
+											<field name="total_remaining_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+										</span>
+										<span class="o_stat_text">Due</span>
+									</div>
+								</div>
+							</button> -->
+						</div>
+						<div class="oe_title">
+							<h3>Student</h3>
+							<h3>
+								<label for="name">Name</label>
+								<field name="name" placeholder="Example: Ahmed Omar"/>
+								<label for="family_name">Family Name</label>
+								<field name="family_name"/>
+								<label for="family_number">Family Number</label>
+								<field name="family_number"/>
+								<label for="student_seq">Student Number</label>
+								<field name="student_seq"/>
+							</h3>
+						</div>
+						<group>
+							<group>
+								<field name="guardian_id"/>
+								<field name="gender"/>
+								<field name="nationality"/>
+								<field name="id_type"/>
+								<field name="id_number"/>
+								<field name="tage"/>
+								<field name="reason"/>
+								<field name="know_us"/>
+							</group>
+							<group>
+								<field name="birth_date"/>
+								<field name="hijri_date"/>
+								<field name="mobile"/>
+								<field name="mobile2"/>
+								<field name="email"/>
+								<field name="partner_id" required="0" readonly="0"/>
+							</group>
+						</group>
+						<notebook>
+							<page name="class" string="Class">
+								<group>
+									<field name="class_id"/>
+									<field name="stage_id"/>
+									<field name="section_id"/>
+									<field name="track_id"/>
+									<field name="secondary_major"/>
+									<field name="ex_school"/>
+									<field name="current_year"/>
+									<field name="previous_year"/>
+									<field name="class_id"/>
+								</group>
+							</page>
+							<page name="discount" string="Discount">
+								<group>
+									<field name="sibling_discount" />
+									<field name="student_discount" />
+								</group>
+							</page>
+							<page name="qutetions_ids" string="Qutetions">
+								<group>
+									<field name="qutetions_ids" />
+								</group>
+							</page>
+							<page name="sale_orders" string="Sale Orders">
+								<group>
+									<field name="qutetions_ids" />
+								</group>
+							</page>
+							<page name="invoice_ids" string="Invoices">
+								<group>
+									<field name="invoice_ids" />
+								</group>
+							</page>
+							<page name="other_information" string="Other Informations">
+								<group>
+									<group>
+										<field name="street"/>
+										<field name="street2"/>
+										<field name="city"/>
+										<field name="country_id"/>
+									</group>
+									<group>
+										<field name="student_date"/>
+										<field name="date_end"/>
+										<field name="date_done"/>
+										<field name="confirm_date"/>
+										<field name="userblocked_date"/>
+									</group>
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<!-- ......................................End Student Student   .................................................... . -->
+	</data>
+</odoo>
