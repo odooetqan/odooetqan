@@ -120,7 +120,7 @@
 							</page>
 												
 							<page name="Qutataions">
-								<field name="sale_orders" domain="['|',('state', '=', 'cancle'),('state', '=', 'draft')]">
+								<field name="qutetions_ids" domain="['|',('state', '=', 'cancle'),('state', '=', 'draft')]">
 				                                    <tree>
 				                                        <field name="name"/>
 				                                        <field name="date_order"/>
@@ -134,7 +134,7 @@
 				                                </field>
 							</page>
 							<page name="Sale Orders">
-								<field name="sale_orders"  domain="['|',('state', '!=', 'cancle'),('state', '!=', 'draft')]">
+								<field name="qutetions_ids"  domain="['|',('state', '!=', 'cancle'),('state', '!=', 'draft')]">
 				                                    <tree>
 				                                        <field name="name"/>
 				                                        <field name="date_order"/>
