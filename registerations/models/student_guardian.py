@@ -44,7 +44,7 @@ class Studentguardian(models.Model):
     nationality = fields.Many2one('res.country', required=True, copy=True,  tracking=True,)
     id_type = fields.Many2one('id.type', required=True, copy=True,  tracking=True,)
     id_number = fields.Char('Id Number', required=True, copy=True,  tracking=True,)
-    tage = fields.Many2one('res.partner.category', required=True, copy=True,  tracking=True,)
+    tage = fields.Many2many('res.partner.category', 'guardian_id', index=True, required=True, copy=True,  tracking=True,)
     know_us = fields.Many2one('know.us', required=True, copy=True,  tracking=True,)
     work_type = fields.Many2one('work.type', required=True, copy=True,  tracking=True,)
     work_type_name = fields.Char(related='work_type.name')
