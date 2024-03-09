@@ -215,18 +215,25 @@ class StudentStudent(models.Model):
 
 
     sale_order_ids = fields.Many2many("sale.order", compute="compute_order")
-    qutetions_ids = fields.Many2many("sale.order", compute="compute_order")
+    qutetions_ids = fields.Many2many("sale.order", compute="compute_qutations")
 
 
     def compute_order(self):
         for student in self:            
             orders = self.env['sale.order'].search([
-                ('partner_id', '=', student.partner_id.id),
+                ('partner_id', '=', student.partner_id.id),('state', '=', 'sale')
             ])
-            student.qutetions_ids = orders
             student.sale_order_ids = orders
 
 
+    def compute_qutations(self):
+        for student in self:            
+            orders = self.env['sale.order'].search([
+                ('partner_id', '=', student.partner_id.id),('state', '!=', 'sale')
+            ])
+            student.qutetions_ids = orders
+
+    
     def unlink(self):
         for rec in self:
             if rec.state not in ("draft", "cancel", "blocked"):
