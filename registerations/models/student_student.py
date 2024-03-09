@@ -28,7 +28,8 @@ class Partners(models.Model):
             if student:
                 rec.guardian_id = student.guardian_id
             else:
-                guardian = self.env['student.guardian'].search([('partner_id', '=', rec.id)], limit=1)                    rec.guardian_id = guardian
+                guardian = self.env['student.guardian'].search([('partner_id', '=', rec.id)], limit=1)                    
+                rec.guardian_id = guardian
 class resPartnerCategory(models.Model):
     _inherit = 'res.partner.category'
 
