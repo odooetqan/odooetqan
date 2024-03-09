@@ -82,7 +82,7 @@
 								<field name="nationality"/>
 								<field name="id_type"/>
 								<field name="id_number"/>
-								<field name="tage"/>
+								<field name="tage" options="{'no_create': True}"  widget="many2many_tags"/>
 								<field name="reason"/>
 								<field name="know_us"/>
 							</group>
