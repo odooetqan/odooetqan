@@ -93,7 +93,7 @@ class Studentguardian(models.Model):
                 ('partner_id', 'in', guardian.student_ids.mapped('partner_id').ids), ('state', '!=', 'sale')
             ])
             guardian.sale_orders = sale_orders
-            guardian.qutetions_ids = sale_orders
+            guardian.qutetions_ids = sale_qutetions 
     
     order_count = fields.Integer(string='Order Count', compute='_compute_order_count')
 
