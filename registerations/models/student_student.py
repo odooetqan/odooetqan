@@ -23,13 +23,13 @@ class Partners(models.Model):
     @api.depends('is_company', 'child_ids', 'child_ids.guardian_id')
     def _compute_guardian(self):
         for rec in self:
-            
             student = self.env['student.student'].search([('partner_id', '=', rec.id)], limit=1)
             rec.student_id = student
-            rec.guardian_id = rec.student_id.guardian_id
-            if guardian_id = False:
-                guardian = self.env['student.guardian'].search([('partner_id', '=', rec.id)], limit=1)
-                rec.guardian_id = guardian
+            if student:
+                rec.guardian_id = student.guardian_id
+                if guardian_id = False:
+                    guardian = self.env['student.guardian'].search([('partner_id', '=', rec.id)], limit=1)
+                    rec.guardian_id = guardian
 class resPartnerCategory(models.Model):
     _inherit = 'res.partner.category'
 
