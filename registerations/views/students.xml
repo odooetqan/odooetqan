@@ -118,21 +118,52 @@
 									<field name="student_discount" />
 								</group>
 							</page>
-							<page name="qutetions_ids" string="Qutetions">
-								<group>
-									<field name="qutetions_ids" />
-								</group>
+												
+							<page name="Qutataions">
+								<field name="sale_orders" domain="['|',('state', '=', 'cancle'),('state', '=', 'draft')]">
+				                                    <tree>
+				                                        <field name="name"/>
+				                                        <field name="date_order"/>
+				                                        <field name="partner_id"/>
+				                                        <field name="user_id"/>
+				                                        <field name="amount_untaxed"/>
+				                                        <field name="amount_tax"/>
+				                                        <field name="amount_total"/>
+				                                        <field name="state"/>
+				                                    </tree>
+				                                </field>
 							</page>
-							<page name="sale_orders" string="Sale Orders">
-								<group>
-									<field name="qutetions_ids" />
-								</group>
+							<page name="Sale Orders">
+								<field name="sale_orders"  domain="['|',('state', '!=', 'cancle'),('state', '!=', 'draft')]">
+				                                    <tree>
+				                                        <field name="name"/>
+				                                        <field name="date_order"/>
+				                                        <field name="partner_id"/>
+				                                        <field name="user_id"/>
+				                                        <field name="amount_untaxed"/>
+				                                        <field name="amount_tax"/>
+				                                        <field name="amount_total"/>
+				                                        <field name="state"/>
+				                                        <field name="invoice_status"/>
+				                                    </tree>
+				                                </field>
 							</page>
-							<page name="invoice_ids" string="Invoices">
-								<group>
-									<field name="invoice_ids" />
-								</group>
-							</page>
+							<page  name="invoices">
+								<field name="invoices">				                                        
+									<tree>
+									    <field name="name"/>
+									    <field name="date"/>
+									    <field name="partner_id"/>
+									    <field name="amount_untaxed_signed"/>
+									    <field name="amount_tax_signed"/>
+									    <field name="amount_total_signed"/>
+									    <field name="amount_residual_signed"/>
+									    <field name="payment_state"/>
+									    <field name="state"/>
+									</tree>
+							    </field>
+ 							</page>
+							
 							<page name="other_information" string="Other Informations">
 								<group>
 									<group>
