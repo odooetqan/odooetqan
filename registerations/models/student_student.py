@@ -125,7 +125,7 @@ class StudentStudent(models.Model):
         "id.type", string="ID Type", required=True, copy=True, tracking=True
     )
     id_number = fields.Char(string="ID Number", required=True, copy=True, tracking=True)
-    tage = fields.Many2one(
+    tage = fields.Many2many(
         "res.partner.category", string="Tage", copy=True, tracking=True
     )
     birth_date = fields.Date(string="Birth Date")
