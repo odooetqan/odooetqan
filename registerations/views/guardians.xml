@@ -9,12 +9,15 @@
 				<form>
 					<header>
 					    <field name="state" widget="statusbar" string="Status" statusbar_visible="draft,active,blocked,in_active"/>
-					    <button name="family_confirm" type="object" string="Confirm" class="btn-success"
-					            attrs="{'invisible': [('state', '!=', 'draft')]}"/>
-					    <button name="family_blocked" type="object" string="Blocked" class="btn-danger"
-					            attrs="{'invisible': [('state', 'not in', ['draft', 'active'])]}"/>
+					
 					    <button name="reset_draft" type="object" string="Reset to Draft" class="btn-warning"
-					            attrs="{'invisible': [('state', '=', 'draft')]}"/>
+					            invisible = "state = 'draft'"/>
+
+
+						<button name="student_confirm" type="object" string="Confirm" class="btn-success" invisible="state != 'draft'" />
+						<button name="student_blocked" type="object" string="Blocked" class="btn-danger"  invisible="state != 'draft'" />
+						<button name="student_in_active" type="object" string="In Active" class="btn-parimary" invisible="state != 'draft'" />
+						
 					</header>
 
 					
