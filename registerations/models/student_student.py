@@ -11,7 +11,6 @@ class Partners(models.Model):
 
     student_id = fields.Many2one("student.student", compute="_compute_students")
     guardian_id = fields.Many2one("student.guardian", compute="_compute_guardian")
-
     
     @api.depends('is_company', 'child_ids', 'child_ids.student_id')
     def _compute_student(self):
