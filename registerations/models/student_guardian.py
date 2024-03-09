@@ -172,6 +172,21 @@ class Studentguardian(models.Model):
     def create(self, vals):
         if vals.get('number', _('New')) == _('New'):
             vals['number'] = self.env['ir.sequence'].next_by_code('student.guardian.seq') or _('New')
+######################### guardian_id = vals.get("guardian_id")###############
+        partner_vals = {
+            # "guardian_id": vals.get("id"),
+            "name": vals.get("name"),
+            "mobile": vals.get("mobile"),
+            "email": vals.get("email"),
+        }
+
+
+        # Create the partner with the provided values
+        partner = self.env["res.partner"].create(partner_vals)
+        partner.write({"guardian_id": self.id})
+        # Set the partner on the student
+        vals["partner_id"] = partner.id
+  ########################################################################      
         res = super(Studentguardian, self).create(vals)
         return res
     
@@ -202,26 +217,26 @@ class Studentguardian(models.Model):
         for rec in self:
             rec.active= False
 
-    @api.model
-    def create(self, vals):
-        # guardian_id = vals.get("guardian_id")
-        partner_vals = {
-            # "guardian_id": vals.get("id"),
-            "name": vals.get("name"),
-            "mobile": vals.get("mobile"),
-            "email": vals.get("email"),
-        }
+    # @api.model
+    # def create(self, vals):
+    #     # guardian_id = vals.get("guardian_id")
+    #     partner_vals = {
+    #         # "guardian_id": vals.get("id"),
+    #         "name": vals.get("name"),
+    #         "mobile": vals.get("mobile"),
+    #         "email": vals.get("email"),
+    #     }
 
 
-        # Create the partner with the provided values
-        partner = self.env["res.partner"].create(partner_vals)
-        partner.write({"guardian_id": self.id})
-        # Set the partner on the student
-        vals["partner_id"] = partner.id
+    #     # Create the partner with the provided values
+    #     partner = self.env["res.partner"].create(partner_vals)
+    #     partner.write({"guardian_id": self.id})
+    #     # Set the partner on the student
+    #     vals["partner_id"] = partner.id
 
 
-        guardian = super(Studentguardian, self).create(vals)
-        return guardian
+    #     guardian = super(Studentguardian, self).create(vals)
+    #     return guardian
     # Add a field to store the last sequence number for this guardian's students
     last_student_seq = fields.Integer(string='Last Student Sequence', default=0)
 
