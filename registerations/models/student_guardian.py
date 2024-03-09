@@ -69,21 +69,31 @@ class Studentguardian(models.Model):
     is_family = fields.Boolean('IS Familly')
     is_main = fields.Boolean('IS Main Guardian ')
 
-# - ----------------------------------------------------------------------------------               
     sale_orders = fields.Many2many(
+        comodel_name='sale.order',
+        compute='_compute_sale_orders',
+        string='Sale Orders',
+        readonly=True
+    )    
+    qutetions_ids  = fields.Many2many(
         comodel_name='sale.order',
         compute='_compute_sale_orders',
         string='Sale Orders',
         readonly=True
     )
 
+
     def _compute_sale_orders(self):
         for guardian in self:
             students = guardian.student_ids
             sale_orders = self.env['sale.order'].search([
-                ('partner_id', 'in', guardian.student_ids.mapped('partner_id').ids)
+                ('partner_id', 'in', guardian.student_ids.mapped('partner_id').ids), ('state', '=', 'sale')
+            ])
+            sale_qutetions = self.env['sale.order'].search([
+                ('partner_id', 'in', guardian.student_ids.mapped('partner_id').ids), ('state', '!=', 'sale')
             ])
             guardian.sale_orders = sale_orders
+            guardian.qutetions_ids = sale_orders
     
     order_count = fields.Integer(string='Order Count', compute='_compute_order_count')
 
@@ -98,7 +108,7 @@ class Studentguardian(models.Model):
             'type': 'ir.actions.act_window',
             'name': 'Order Count',
             'res_model': 'sale.order',
-            'domain': [('partner_id', 'in', self.student_ids.mapped('partner_id').ids)],
+            'domain': [('partner_id', 'in', guardian.student_ids.mapped('partner_id').ids)],
             'view_mode':'tree,form',
             'target': 'current',
     
@@ -124,7 +134,7 @@ class Studentguardian(models.Model):
             'type': 'ir.actions.act_window',
             'name': 'Invoices Count',
             'res_model': 'account.move',
-            'domain': [('partner_id', 'in', self.student_ids.mapped('partner_id').ids),('move_type', '=', 'out_invoice')],
+            'domain': [('partner_id', 'in', guardian.student_ids.mapped('partner_id').ids),('move_type', '=', 'out_invoice')],
             'view_mode':'tree,form',
             'target': 'current',
     
