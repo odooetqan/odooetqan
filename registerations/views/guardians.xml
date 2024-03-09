@@ -53,11 +53,14 @@
 								<field name="proof_of_kinship"/>
 								<field name="is_family"/>
 								<field name="is_main"/>
-								<field name="gender"/>
-								<field name="nationality"/>
-								<field name="id_type"/>
+
+								
+								<field name="gender" options="{'no_create_edit': True}"/>
+								<field name="nationality" options="{'no_create_edit': True}"/>
+								<field name="id_type" options="{'no_create_edit': True}"/>
 								<field name="id_number"/>
-								<field name="tage"/>
+								<field name="tage" options="{'no_create_edit': True}"  widget="many2many_tags"/>
+								
 							</group>
 							<group>
 								<field name="work_type"/>
