@@ -14,9 +14,9 @@
 					            invisible = "state == 'draft'"/>
 
 
-						<button name="guardian_confirm" type="object" string="Confirm" class="btn-success" invisible="state != 'draft'" />
-						<button name="guardian_blocked" type="object" string="Blocked" class="btn-danger"  invisible="state != 'draft'" />
-						<button name="guardian_in_active" type="object" string="In Active" class="btn-parimary" invisible="state != 'draft'" />
+						<button name="family_confirm" type="object" string="Confirm" class="btn-success" invisible="state != 'draft'" />
+						<button name="family_blocked" type="object" string="Blocked" class="btn-danger"  invisible="state != 'draft'" />
+						<button name="family_in_active" type="object" string="In Active" class="btn-parimary" invisible="state != 'draft'" />
 						
 					</header>
 
