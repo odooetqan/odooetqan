@@ -405,46 +405,48 @@ class StudentStudent(models.Model):
     student_seq = fields.Char(string="Student Sequence", readonly=True)
     student_number = fields.Char(string="Student Number", readonly=True)
 
-    # @api.model
-    # def create(self, vals):
 
-    #     student = super(StudentStudent, self).create(vals)
-    #     return student
  
-    # @api.constrains("name")
-    # def _check_name(self):
-    #     partner_rec = self.env["student.student"].search(
-    #         [("name", "=", self.name), ("id", "!=", self.id)]
-    #     )
-    #     if partner_rec:
-    #         raise ValueError(_("مكرر! الاسم موجود من قبل ."))
+    @api.constrains("name")
+    def _check_name(self):
+        partner_rec = self.env["student.student"].search(
+            [("name", "=", self.name), ("id", "!=", self.id)]
+        )
+        if partner_rec:
+            raise UserError(_("مكرر! الاسم موجود من قبل ."))
 
-    # @api.constrains("mobile")
-    # def _check_mobile(self):
-    #     partner_rec = self.env["student.student"].search(
-    #         [("mobile", "=", self.mobile), ("id", "!=", self.id)]
-    #     )
-    #     if partner_rec:
-    #         raise ValueError(_("مكرر! هذا الرقم موجود "))
+    @api.constrains("mobile")
+    def _check_mobile(self):
+        partner_rec = self.env["student.student"].search(
+            [("mobile", "=", self.mobile), ("id", "!=", self.id)]
+        )
+        if partner_rec:
+            raise UserError(_("مكرر! رقم الموبايل موجود من قبل "))
 
-    # @api.constrains("id_number")
-    # def _check_id_number(self):
-    #     partner_rec = self.env["student.student"].search(
-    #         [("id_number", "=", self.id_number), ("id", "!=", self.id)]
-    #     )
-    #     if partner_rec:
-    #         raise ValueError(_("مكرر! هذا الرقم موجود "))
+    @api.constrains("id_number")
+    def _check_id_number(self):
+        partner_rec = self.env["student.student"].search(
+            [("id_number", "=", self.id_number), ("id", "!=", self.id)]
+        )
+        if partner_rec:
+            raise UserError(_("مكرر! هذه الهوية موجودة من قبل   "))
 
-    @api.constrains('name', 'mobile', 'id_number')
-    def _check_unique(self):
-    
-    for field in ['name', 'mobile', 'id_number']:
-        if self[field]:
-            domain = [('id', '!=', self.id)]
-            domain.append((field, '=', self[field]))
+    # @api.constrains('name', 'mobile', 'id_number')
+    # def _check_unique(self):
+    #     for field in ['name', 'mobile', 'id_number']:
+    #         if self[field]:
+    #             domain = [('id', '!=', self.id)]
+    #             domain.append((field, '=', self[field]))
+            
 
-            if self.search_count(domain):
-                raise ValidationError(_("هذه القيمة مكررة: %s") % field) 
+    #             if self.search_count(domain):
+    #                 raise UserError(
+    #                     "هذه القيمة مكررة {field}."
+    #                 )
+
+
+    #         # (_("هذه القيمة مكررة: %s") % field)
+
 
 
 class DropoffReason(models.Model):
