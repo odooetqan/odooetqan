@@ -189,6 +189,10 @@ class Studentguardian(models.Model):
             rec.state = 'blocked'
             rec.blocked_employee_id = self.env['hr.employee'].search([('user_id', '=', self.env.uid)], limit=1)
             rec.userblocked_date = fields.Date.today()
+    
+    def family_in_active(self):
+        for rec in self:
+            rec.state = 'in_active'
 
     def reset_draft(self):
         for rec in self:
