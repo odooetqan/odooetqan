@@ -119,10 +119,12 @@
 							<page name="student_ids" string="Students">
 								<group>
 									<field name="student_ids" >
-                                    <tree>
-                                        <field name="number"/>
-                                        <field name="name"/>
-                                        <field name="mobile"/>
+                                        <tree>
+                                            <field name="number"/>
+                                            <field name="name"/>
+                                            <field name="mobile"/>
+                                        </tree>
+                                    </field>
 								</group>
 							</page>
 							<page name="Qutataions">
