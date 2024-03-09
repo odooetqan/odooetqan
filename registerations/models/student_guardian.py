@@ -49,7 +49,7 @@ class Studentguardian(models.Model):
     work_type = fields.Many2one('work.type', required=True, copy=True,  tracking=True,)
     work_type_name = fields.Char(related='work_type.name')
     work_source = fields.Char('Work Source', required=True, copy=True,  tracking=True,)
-    partner_id = fields.Many2one('res.partner', required=True, copy=True,  tracking=True,)
+    partner_id = fields.Many2one('res.partner', readonly=True, copy=True,  tracking=True,)
     mobile = fields.Char('Mobile', required=True, copy=True, tracking=True,)
     mobile2 = fields.Char('Mobile2', required=True, copy=True,  tracking=True,)
     job_position = fields.Char('Job Position',  required=True, copy=True, tracking=True,)
@@ -198,6 +198,26 @@ class Studentguardian(models.Model):
         for rec in self:
             rec.active= False
 
+    @api.model
+    def create(self, vals):
+        # guardian_id = vals.get("guardian_id")
+        partner_vals = {
+            # "guardian_id": vals.get("id"),
+            "name": vals.get("name"),
+            "mobile": vals.get("mobile"),
+            "email": vals.get("email"),
+        }
+
+
+        # Create the partner with the provided values
+        partner = self.env["res.partner"].create(partner_vals)
+        partner.write({"guardian_id": self.id})
+        # Set the partner on the student
+        vals["partner_id"] = partner.id
+
+
+        guardian = super(Studentguardian, self).create(vals)
+        return guardian
     # Add a field to store the last sequence number for this guardian's students
     last_student_seq = fields.Integer(string='Last Student Sequence', default=0)
 
