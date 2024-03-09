@@ -115,13 +115,15 @@
 						</group>
 						<notebook>
 							<page name="student_ids" string="Students">
-								<field name="student_ids" >					                                        <tree>
+								<field name="student_ids" >					                                        
+									<tree>
 									    <field name="number"/>
 									    <field name="name"/>
 									    <field name="mobile"/>
 									</tree>
 								    </field>
- 							</page>							<page name="Qutataions">
+ 							</page>							
+							<page name="Qutataions">
 								<field name="sale_orders" domain="['|',('state', '=', 'cancle'),('state', '=', 'draft')]">
 				                                    <tree>
 				                                        <field name="name"/>
