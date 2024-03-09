@@ -8,11 +8,22 @@
 			<field name="arch" type="xml">
 				<form>
 					<header>
+					    <field name="state" widget="statusbar" string="Status" statusbar_visible="draft,active,blocked,in_active"/>
+					    <button name="family_confirm" type="object" string="Confirm" class="btn-success"
+					            attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+					    <button name="family_blocked" type="object" string="Blocked" class="btn-danger"
+					            attrs="{'invisible': [('state', 'not in', ['draft', 'active'])]}"/>
+					    <button name="reset_draft" type="object" string="Reset to Draft" class="btn-warning"
+					            attrs="{'invisible': [('state', '=', 'draft')]}"/>
+					</header>
+
+					
+<!-- 					<header>
 						<field name="state" widget="statusbar" string="Status" statusbar_visible="draft,active,blocked,in_active"/>
 						<button name="family_confirm" type="object" string="Confirm" class="btn-success"/>
 						<button name="family_blocked" type="object" string="Blocked" class="btn-danger"/>
 						<button name="reset_draft" type="object" string="Reset to Draft" class="btn-warning"/>
-					</header>
+					</header> -->
 					<sheet>
 						<div name="button_box" position="inside">
 							<button name="action_gurdian_students" type="object" class="oe_stat_button" icon="fa-graduation-cap">
