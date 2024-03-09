@@ -29,6 +29,7 @@ class resPartnerCategory(models.Model):
     _inherit = 'res.partner.category'
 
     student_id = fields.Many2one('student.student')
+    guardian_id = fields.Many2one('student.guardian')
     
 class Orders(models.Model):
     _inherit = "sale.order"
