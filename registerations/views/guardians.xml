@@ -155,23 +155,19 @@
 				                                </field>
 							</page>
 							<page  name="invoices">
-								<group name="Invoices">
-									<field name="invoices">
-				                                        <tree>
-				                                            <field name="name"/>
-				                                            <field name="date"/>
-				                                            <field name="partner_id"/>
-				                                            <field name="amount_untaxed_signed"/>
-				                                            <field name="amount_tax_signed"/>
-				                                            <field name="amount_total_signed"/>
-				                                            <field name="amount_residual_signed"/>
-				                                            <field name="payment_state"/>
-				                                            <field name="state"/>
-				                                        </tree>
-				                                    </field>
-								</group>
-							</page>
-
+								<field name="invoices">				                                        <tree>
+								    <field name="name"/>
+								    <field name="date"/>
+								    <field name="partner_id"/>
+								    <field name="amount_untaxed_signed"/>
+								    <field name="amount_tax_signed"/>
+								    <field name="amount_total_signed"/>
+								    <field name="amount_residual_signed"/>
+								    <field name="payment_state"/>
+								    <field name="state"/>
+								</tree>
+							    </field>
+ 							</page>
 							<page  name="Other Information">
 								<group name="Other Information">
 									<field name="create_date"/>
