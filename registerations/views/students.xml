@@ -19,12 +19,7 @@
 
 						<button name="student_confirm" type="object" string="Confirm" class="btn-success" invisible="state != 'draft'" />
 						<button name="student_blocked" type="object" string="Blocked" class="btn-danger"  invisible="state != 'draft'" />
-						<button name="student_in_active" type="object" string="In Active" class="btn-parimary" invisible="state != 'draft'" />
-
-
-						
-						
-						<button name="reset_draft" type="object" string="Reset to Draft" class="btn-warning"/>
+						<button name="student_in_active" type="object" string="In Active" class="btn-parimary" invisible="state != 'draft'" />			
 					</header>
 				
 					<sheet>
