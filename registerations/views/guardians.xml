@@ -118,15 +118,27 @@
 						<notebook>
 							<page name="student_ids" string="Students">
 								<group>
-									<field name="student_ids" />
+									<field name="student_ids" >
+                                    <tree>
+                                        <field name="number"/>
+                                        <field name="name"/>
+                                        <field name="mobile"/>
 								</group>
 							</page>
 							<page name="Sale Orders">
-								<field name="sale_orders"/>
+								<field name="sale_orders">
+                                    <tree>
+                                        <field name="id"/>
+                                    </tree>
+                                </field>
 							</page>
 							<page  name="invoices">
 								<group name="Invoices">
-									<field name="invoices"/>
+									<field name="invoices">
+                                        <tree>
+                                            <field name="id"/>
+                                        </tree>
+                                    </field>
 								</group>
 							</page>
 
