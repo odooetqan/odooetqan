@@ -119,26 +119,28 @@
 							<page name="student_ids" string="Students">
 								<group>
 									<field name="student_ids" >
-                                    <tree>
-                                        <field name="number"/>
-                                        <field name="name"/>
-                                        <field name="mobile"/>
+					                                    <tree>
+					                                        <field name="number"/>
+					                                        <field name="name"/>
+					                                        <field name="mobile"/>
+									    </tree>
+									</field>
 								</group>
 							</page>
 							<page name="Sale Orders">
 								<field name="sale_orders">
-                                    <tree>
-                                        <field name="id"/>
-                                    </tree>
-                                </field>
+				                                    <tree>
+				                                        <field name="id"/>
+				                                    </tree>
+				                                </field>
 							</page>
 							<page  name="invoices">
 								<group name="Invoices">
 									<field name="invoices">
-                                        <tree>
-                                            <field name="id"/>
-                                        </tree>
-                                    </field>
+					                                        <tree>
+					                                            <field name="id"/>
+					                                        </tree>
+					                                    </field>
 								</group>
 							</page>
 
