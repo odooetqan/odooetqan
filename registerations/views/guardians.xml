@@ -119,28 +119,56 @@
 							<page name="student_ids" string="Students">
 								<group>
 									<field name="student_ids" >
-					                                    <tree>
-					                                        <field name="number"/>
-					                                        <field name="name"/>
-					                                        <field name="mobile"/>
-									    </tree>
-									</field>
+                                    <tree>
+                                        <field name="number"/>
+                                        <field name="name"/>
+                                        <field name="mobile"/>
 								</group>
+							</page>
+							<page name="Qutataions">
+								<field name="sale_orders">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="date_order"/>
+                                        <field name="partner_id"/>
+                                        <field name="user_id"/>
+                                        <field name="amount_untaxed"/>
+                                        <field name="amount_tax"/>
+                                        <field name="amount_total"/>
+                                        <field name="state"/>
+                                    </tree>
+                                </field>
 							</page>
 							<page name="Sale Orders">
 								<field name="sale_orders">
-				                                    <tree>
-				                                        <field name="id"/>
-				                                    </tree>
-				                                </field>
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="date_order"/>
+                                        <field name="partner_id"/>
+                                        <field name="user_id"/>
+                                        <field name="amount_untaxed"/>
+                                        <field name="amount_tax"/>
+                                        <field name="amount_total"/>
+                                        <field name="state"/>
+                                        <field name="invoice_status"/>
+                                    </tree>
+                                </field>
 							</page>
 							<page  name="invoices">
 								<group name="Invoices">
 									<field name="invoices">
-					                                        <tree>
-					                                            <field name="id"/>
-					                                        </tree>
-					                                    </field>
+                                        <tree>
+                                            <field name="name"/>
+                                            <field name="date"/>
+                                            <field name="partner_id"/>
+                                            <field name="amount_untaxed_signed"/>
+                                            <field name="amount_tax_signed"/>
+                                            <field name="amount_total_sigend"/>
+                                            <field name="amount_residual_signed"/>
+                                            <field name="payment_state"/>
+                                            <field name="state"/>
+                                        </tree>
+                                    </field>
 								</group>
 							</page>
 
@@ -155,10 +183,6 @@
 									<field name="create_uid"/>
 								</group>
 							</page>
-							
-							
-
-							
 						</notebook>
 					</sheet>
 				</form>
