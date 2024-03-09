@@ -11,7 +11,7 @@
 					    <field name="state" widget="statusbar" string="Status" statusbar_visible="draft,active,blocked,in_active"/>
 					
 					    <button name="reset_draft" type="object" string="Reset to Draft" class="btn-warning"
-					            invisible = "state = 'draft'"/>
+					            invisible = "state == 'draft'"/>
 
 
 						<button name="student_confirm" type="object" string="Confirm" class="btn-success" invisible="state != 'draft'" />
