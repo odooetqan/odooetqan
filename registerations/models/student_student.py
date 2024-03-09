@@ -25,7 +25,11 @@ class Partners(models.Model):
         for rec in self:
             guardian = self.env['student.guardian'].search([('partner_id', '=', rec.id)], limit=1)
             rec.guardian_id = guardian
+class resPartnerCategory(models.Model):
+    _inherit = 'res.partner.category'
 
+    student_id = fields.Many2one('student.student')
+    
 class Orders(models.Model):
     _inherit = "sale.order"
 
@@ -126,7 +130,7 @@ class StudentStudent(models.Model):
     )
     id_number = fields.Char(string="ID Number", required=True, copy=True, tracking=True)
     tage = fields.Many2many(
-        "res.partner.category", string="Tage", copy=True, tracking=True
+        "res.partner.category", "student_id",string="Tage", copy=True, tracking=True
     )
     birth_date = fields.Date(string="Birth Date")
     hijri_date = fields.Date(string="Hijri Date")
