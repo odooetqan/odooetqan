@@ -98,7 +98,7 @@ class Studentguardian(models.Model):
             'type': 'ir.actions.act_window',
             'name': 'Order Count',
             'res_model': 'sale.order',
-            'domain': [('partner_id', 'in', guardian.student_ids.mapped('partner_id').ids)],
+            'domain': [('partner_id', 'in', self.student_ids.mapped('partner_id').ids)],
             'view_mode':'tree,form',
             'target': 'current',
     
@@ -124,7 +124,7 @@ class Studentguardian(models.Model):
             'type': 'ir.actions.act_window',
             'name': 'Invoices Count',
             'res_model': 'account.move',
-            'domain': [('partner_id', 'in', guardian.student_ids.mapped('partner_id').ids),('move_type', '=', 'out_invoice')],
+            'domain': [('partner_id', 'in', self.student_ids.mapped('partner_id').ids),('move_type', '=', 'out_invoice')],
             'view_mode':'tree,form',
             'target': 'current',
     
