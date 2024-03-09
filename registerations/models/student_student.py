@@ -411,29 +411,41 @@ class StudentStudent(models.Model):
     #     student = super(StudentStudent, self).create(vals)
     #     return student
  
-    @api.constrains("name")
-    def _check_name(self):
-        partner_rec = self.env["student.student"].search(
-            [("name", "=", self.name), ("id", "!=", self.id)]
-        )
-        if partner_rec:
-            raise ValueError(_("مكرر! الاسم موجود من قبل ."))
+    # @api.constrains("name")
+    # def _check_name(self):
+    #     partner_rec = self.env["student.student"].search(
+    #         [("name", "=", self.name), ("id", "!=", self.id)]
+    #     )
+    #     if partner_rec:
+    #         raise ValueError(_("مكرر! الاسم موجود من قبل ."))
 
-    @api.constrains("mobile")
-    def _check_mobile(self):
-        partner_rec = self.env["student.student"].search(
-            [("mobile", "=", self.mobile), ("id", "!=", self.id)]
-        )
-        if partner_rec:
-            raise ValueError(_("مكرر! هذا الرقم موجود "))
+    # @api.constrains("mobile")
+    # def _check_mobile(self):
+    #     partner_rec = self.env["student.student"].search(
+    #         [("mobile", "=", self.mobile), ("id", "!=", self.id)]
+    #     )
+    #     if partner_rec:
+    #         raise ValueError(_("مكرر! هذا الرقم موجود "))
 
-    @api.constrains("id_number")
-    def _check_id_number(self):
-        partner_rec = self.env["student.student"].search(
-            [("id_number", "=", self.id_number), ("id", "!=", self.id)]
-        )
-        if partner_rec:
-            raise ValueError(_("مكرر! هذا الرقم موجود "))
+    # @api.constrains("id_number")
+    # def _check_id_number(self):
+    #     partner_rec = self.env["student.student"].search(
+    #         [("id_number", "=", self.id_number), ("id", "!=", self.id)]
+    #     )
+    #     if partner_rec:
+    #         raise ValueError(_("مكرر! هذا الرقم موجود "))
+
+    @api.constrains('name', 'mobile', 'id_number')
+    def _check_unique(self):
+    
+    for field in ['name', 'mobile', 'id_number']:
+        if self[field]:
+            domain = [('id', '!=', self.id)]
+            domain.append((field, '=', self[field]))
+
+            if self.search_count(domain):
+                raise ValidationError(_("هذه القيمة مكررة: %s") % field) 
+
 
 class DropoffReason(models.Model):
     _name = "student.student.dropoff"
