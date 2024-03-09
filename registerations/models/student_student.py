@@ -327,8 +327,40 @@ class StudentStudent(models.Model):
             vals["number"] = self.env["ir.sequence"].next_by_code(
                 "student.student.seq"
             ) or _("New")
+        
+
+        
+        guardian_id = vals.get("guardian_id")
+        partner_vals = {
+            "student_id": vals.get("id"),
+            "name": vals.get("name"),
+            "mobile": vals.get("mobile"),
+            "email": vals.get("email"),
+        }
+
+        if guardian_id:
+            guardian = self.env["student.guardian"].browse(guardian_id)
+
+            # Create the partner with the provided values
+            partner = self.env["res.partner"].create(partner_vals)
+            partner.write({"student_id": self.id})
+            # Set the partner on the student
+            vals["partner_id"] = partner.id
+
+            # Increment the guardian's last student sequence
+            guardian.write({"last_student_seq": guardian.last_student_seq + 1})
+
+            # Assign the new sequence to the student
+            vals["student_seq"] = str(guardian.number) + str(guardian.last_student_seq)
+            vals["student_number"] = str(guardian.number) + str(
+                guardian.last_student_seq
+            )
+
+
         res = super(StudentStudent, self).create(vals)
         return res
+
+
 
     def student_confirm(self):
         for rec in self:
@@ -373,36 +405,11 @@ class StudentStudent(models.Model):
     student_seq = fields.Char(string="Student Sequence", readonly=True)
     student_number = fields.Char(string="Student Number", readonly=True)
 
-    @api.model
-    def create(self, vals):
-        guardian_id = vals.get("guardian_id")
-        partner_vals = {
-            "student_id": vals.get("id"),
-            "name": vals.get("name"),
-            "mobile": vals.get("mobile"),
-            "email": vals.get("email"),
-        }
+    # @api.model
+    # def create(self, vals):
 
-        if guardian_id:
-            guardian = self.env["student.guardian"].browse(guardian_id)
-
-            # Create the partner with the provided values
-            partner = self.env["res.partner"].create(partner_vals)
-            partner.write({"student_id": self.id})
-            # Set the partner on the student
-            vals["partner_id"] = partner.id
-
-            # Increment the guardian's last student sequence
-            guardian.write({"last_student_seq": guardian.last_student_seq + 1})
-
-            # Assign the new sequence to the student
-            vals["student_seq"] = str(guardian.number) + str(guardian.last_student_seq)
-            vals["student_number"] = str(guardian.number) + str(
-                guardian.last_student_seq
-            )
-
-        student = super(StudentStudent, self).create(vals)
-        return student
+    #     student = super(StudentStudent, self).create(vals)
+    #     return student
  
     @api.constrains("name")
     def _check_name(self):
