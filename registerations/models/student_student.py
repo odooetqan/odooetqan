@@ -366,12 +366,8 @@ class StudentStudent(models.Model):
             vals["student_number"] = str(guardian.number) + str(
                 guardian.last_student_seq
             )
-
-
         res = super(StudentStudent, self).create(vals)
         return res
-
-
 
     def student_confirm(self):
         for rec in self:
