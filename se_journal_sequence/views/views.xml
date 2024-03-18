@@ -1,0 +1,49 @@
+<odoo>
+
+    <record id="view_account_journal_form" model="ir.ui.view">
+        <field name="name">account.journal.form</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='advanced_settings']" position="after">
+                <page name="sequence" string="Sequence">
+                    <group>
+                        <group string="Sequence">
+                            <field name="next_seq_no"/>
+                            <field name="seq_id" required="0" readonly="1" context="{'default_name': name, 'default_company_id': company_id, 'default_implementation': 'no_gap',
+                                   'default_padding': 4, 'default_use_date_range': True, 'default_prefix': code + '/%%(range_year)s/'}"/>
+<!--                            <field name="seq_id" required="0" attrs="{'readonly': 1}"/>-->
+<!--                            <field name="seq_id" required="0" attrs="{'readonly': 1}"-->
+<!--                                   context="{'default_name': name, 'default_company_id': company_id, 'default_implementation': 'no_gap',-->
+<!--                                   'default_padding': 4, 'default_use_date_range': True, 'default_prefix': code + '/%%(range_year)s/'}"/>-->
+                        </group>
+                        <group string="Refund Sequence">
+                            <field name="next_refund_seq_no"/>
+                             <field name="seq_refund_id" required="0" readonly="1"
+                                   context="{'default_name': name, 'default_company_id': company_id, 'default_implementation': 'no_gap',
+                                    'default_padding': 4, 'default_use_date_range': True, 'default_prefix': 'R' + code + '/%%(range_year)s/'}"/>
+<!--                            <field name="seq_refund_id" required="0" attrs="{'readonly': 1}"-->
+<!--                                   context="{'default_name': name, 'default_company_id': company_id, 'default_implementation': 'no_gap',-->
+<!--                                    'default_padding': 4, 'default_use_date_range': True, 'default_prefix': 'R' + code + '/%%(range_year)s/'}"/>-->
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">account.move.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='invoice_incoterm_id']" position="before">
+                <field name="journal_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
