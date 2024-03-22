@@ -111,10 +111,10 @@ class account_move(models.Model):
     def _constrains_date_sequence(self):
         return True
         
-for record in records:
-    date = record.create_date
-    # date2 = fields.Datetime.to_datetime(record.invoice_date)
-    move = record.env['account.move'].search([('id', '=', record.id)])
+# for record in records:
+#     date = record.create_date
+#     # date2 = fields.Datetime.to_datetime(record.invoice_date)
+#     move = record.env['account.move'].search([('id', '=', record.id)])
     
-    if date != date2 and move:
-        move.write({'create_date': date2})
+#     if date != date2 and move:
+#         move.write({'create_date': date2})
