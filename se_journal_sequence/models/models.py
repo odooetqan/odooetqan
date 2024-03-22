@@ -86,6 +86,7 @@ class account_move(models.Model):
     _inherit = "account.move"
 
     name = fields.Char(compute="_compute_name_by_journal_seq")
+    create_date = fields.Datetime(compute="_compute_name_by_journal_seq")
 
     @api.depends("state", "journal_id", "date")
     def _compute_name_by_journal_seq(self):
