@@ -86,21 +86,11 @@ class account_move(models.Model):
     _inherit = "account.move"
 
     name = fields.Char(compute="_compute_name_by_journal_seq")
-    create_date = fields.Datetime(compute="_compute_name_by_journal_seq")
 
     @api.depends("state", "journal_id", "date")
     def _compute_name_by_journal_seq(self):
         for one_move in self:
-    
-
-            date = one_move.create_date
-            date2 = fields.Datetime.to_datetime(one_move.invoice_date)
-            move = self.env['account.move'].search([('id', '=', one_move.id)])
-            
-            if date != date2 and move:
-                move.write({'create_date': date2})
-
-        
+           
             name = one_move.name or "/"
             if (one_move.state == "posted" and (not one_move.name or one_move.name == "/") and one_move.journal_id and one_move.journal_id.seq_id):
                 if one_move.move_type in ("out_refund", "in_refund") and one_move.journal_id.type in ("sale", "purchase") and one_move.journal_id.refund_sequence and one_move.journal_id.seq_refund_id:
@@ -112,7 +102,22 @@ class account_move(models.Model):
 
     def _constrains_date_sequence(self):
         return True
-        
+
+
+
+    create_date = fields.Datetime(compute='_compute_create_date', store=True)
+    
+    @api.depends('invoice_date')
+    def _compute_create_date(self):
+    for move in self:
+        move.create_date = move.invoice_date
+            
+    def action_post(self):
+        for move in self:
+            move._post()
+
+
+
 # for record in records:
 #     date = record.create_date
 #     # date2 = fields.Datetime.to_datetime(record.invoice_date)
