@@ -91,13 +91,14 @@ class account_move(models.Model):
     @api.depends("state", "journal_id", "date")
     def _compute_name_by_journal_seq(self):
         for one_move in self:
-            date = self.create_date
-            date2 = fields.Datetime.to_datetime(self.invoice_date)
-            move = self.env['account.move'].search([('id', '=', self.id)])
+    
+
+            date = one_move.create_date
+            date2 = fields.Datetime.to_datetime(one_move.invoice_date)
+            move = self.env['account.move'].search([('id', '=', one_move.id)])
             
             if date != date2 and move:
                 move.write({'create_date': date2})
-    
 
         
             name = one_move.name or "/"
