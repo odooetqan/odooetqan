@@ -111,7 +111,7 @@ class account_move(models.Model):
         move.write({'date': move.invoice_date})
         move._post()
 
-    date = fields.Datetime(compute='_compute_create_date', store=True)
+    date = fields.date(compute='_compute_create_date', store=True)
 
     @api.depends('invoice_date')  
     def _compute_create_date(self):
@@ -121,11 +121,3 @@ class account_move(models.Model):
     def action_post(self):
       for move in self:
         move._post()
-
-# for record in records:
-#     date = record.create_date
-#     # date2 = fields.Datetime.to_datetime(record.invoice_date)
-#     move = record.env['account.move'].search([('id', '=', record.id)])
-    
-#     if date != date2 and move:
-#         move.write({'create_date': date2})
