@@ -111,7 +111,7 @@ class account_move(models.Model):
         move.write({'date': move.invoice_date})
         move._post()
 
-    date = fields.date(compute='_compute_create_date', store=True)
+    date = fields.Date(compute='_compute_create_date', store=True)
 
     @api.depends('invoice_date')  
     def _compute_create_date(self):
