@@ -108,8 +108,14 @@ class account_move(models.Model):
     @api.onchange('invoice_date')
     def action_post(self):
       for move in self:
-        move.write({'date': move.invoice_date})
-        move._post()
+        if move.invoice_date:
+            move.write({'date': move.invoice_date})
+            move._post()
+        else:
+            move.write({'date': move.create_date})
+            move._post()
+            
+        
 
     date = fields.Date(compute='_compute_create_date', store=True)
 
