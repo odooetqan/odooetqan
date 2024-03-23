@@ -105,31 +105,31 @@ class account_move(models.Model):
 
     create_date = fields.Datetime(readonly=False)
     
-    @api.onchange('invoice_date')
-    def action_post(self):
-      for move in self:
-        if move.invoice_date:
-            move.write({'date': move.invoice_date})
-            move._post()
-        else:
-            move.write({'date': move.create_date})
-            move._post()
+    # @api.onchange('invoice_date')
+    # def action_post(self):
+    #   for move in self:
+    #     if move.invoice_date:
+    #         move.write({'date': move.invoice_date})
+    #         move._post()
+    #     else:
+    #         move.write({'date': move.create_date})
+    #         move._post()
             
         
 
-    date = fields.Date(compute='_compute_create_date', store=True)
+    # date = fields.Date(compute='_compute_create_date', store=True)
 
-    @api.depends('invoice_date')  
-    def _compute_create_date(self):
-      for move in self:
-        if move.invoice_date:
-            move.date = move.invoice_date
-            move._post()
+    # @api.depends('invoice_date')  
+    # def _compute_create_date(self):
+    #   for move in self:
+    #     if move.invoice_date:
+    #         move.date = move.invoice_date
+    #         move._post()
 
-        else:
-            move.date = move.create_date
-            move._post()
+    #     else:
+    #         move.date = move.create_date
+    #         move._post()
             
-    def action_post(self):
-      for move in self:
-        move._post()
+    # def action_post(self):
+    #   for move in self:
+    #     move._post()
