@@ -122,8 +122,14 @@ class account_move(models.Model):
     @api.depends('invoice_date')  
     def _compute_create_date(self):
       for move in self:
-        move.date = move.invoice_date
-        
+        if move.invoice_date:
+            move.date = move.invoice_date
+            move._post()
+
+        else:
+            move.date = move.create_date
+            move._post()
+            
     def action_post(self):
       for move in self:
         move._post()
