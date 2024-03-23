@@ -103,6 +103,7 @@ class account_move(models.Model):
     def _constrains_date_sequence(self):
         return True
 
+    create_date = fields.Datetime(readonly=False)
     
     @api.onchange('invoice_date')
     def action_post(self):
