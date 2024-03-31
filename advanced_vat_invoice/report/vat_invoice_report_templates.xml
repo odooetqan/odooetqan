@@ -112,6 +112,7 @@
                                     </td> -->
                                     <td style="width:30%; text-align:center;" colspan="2">
                                         <t t-esc="doc.invoice_payment_term_id.name"/>
+                                        <t t-esc="doc.payment_reference"/>
                                     </td>
                                 </tr>
                                 
