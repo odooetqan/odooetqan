@@ -6,7 +6,9 @@
             <t t-call="web.external_layout">
                 <t t-foreach="docs" t-as="doc">
                     <div class="page">
- 
+
+                    <span t-if="doc.move_type=='out_refund'" style="color:red"> - Credit Note إشعار دائن</span>
+                    <span t-if="doc.move_type=='in_refund'" style="color:red"> - Debit Note إشعار مدين</span>
                         
                     <div class="row p-1 mt-1  bg-light">
                         <div class="col-6 text-right"><Strong>العميل</Strong></div>
