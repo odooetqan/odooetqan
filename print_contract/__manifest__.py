@@ -29,10 +29,28 @@
     'installable': True,
     'auto_install': False,
     'application': True,
+
+
+    
+    # "assets": {
+    #     "web.assets_backend": [
+    #         "your_module/static/src/css/styles.css",
+    #         "your_module/static/src/js/script.js"
+    #     ],
+    #     "web.assets_frontend": [
+    #         "your_module/static/src/css/styles.css",
+    #         "your_module/static/src/js/script.js"
+    #     ]
+    # },
+
+    
+    
     'assets': {
         'web.report_assets_common': [
             'print_contract/static/css/report_style.css',
         ],
     },
+
+    
 }
 
