@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<!-- ......................................Start Student Student .................................................... . -->
+		<record id="student_guardian_form_view" model="ir.ui.view">
+			<field name="name">student.guardian.form.view</field>
+			<field name="model">student.guardian</field>
+			<field name="arch" type="xml">
+				<form>
+					<header>
+						<field name="state" widget="statusbar" string="Status" statusbar_visible="draft,active,blocked,in_active"/>
+						<button name="family_confirm" type="object" string="Confirm" class="btn-success"/>
+						<button name="family_blocked" type="object" string="Blocked" class="btn-danger"/>
+						<button name="reset_draft" type="object" string="Reset to Draft" class="btn-warning"/>
+					</header>
+					<sheet>
+						<div name="button_box" position="inside">
+							<button name="action_gurdian_students" type="object" class="oe_stat_button" icon="fa-graduation-cap">
+								<div class="o_state_info">
+									<field name="student_count" class="o_state_value"/>
+									<span class="o_state_text">Students</span>
+								</div>
+							</button>
+
+							
+							<button name="action_gurdian_order_count" type="object" class="oe_stat_button" icon="fa-shopping-cart">
+								<div class="o_state_info">
+									<field name="order_count" class="o_state_value"/>
+									<span class="o_state_text">Sale Orders</span>
+								</div>
+							</button>
+							
+							<button name="action_gurdian_invoice_count" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+								<div class="o_state_info">
+									<field name="invoice_count" class="o_state_value"/>
+									<span class="o_state_text">Invoices</span>
+<!-- 									<field name="total_remaining_amount" class="o_state_value"/>
+									<span class="o_state_text">Remining Amount</span> -->
+								</div> 
+							</button>
+						</div>
+						<div class="oe_title">
+							<h1>Family Name</h1>
+							<h1>
+								<field name="name"/>
+								<br/>
+								<field name="number"/>
+							</h1>
+						</div>
+						<group>
+							<group>
+								<field name="relative_relation"/>
+								<field name="proof_of_kinship"/>
+								<field name="is_family"/>
+								<field name="is_main"/>
+								<field name="gender"/>
+								<field name="nationality"/>
+								<field name="id_type"/>
+								<field name="id_number"/>
+								<field name="tage"/>
+							</group>
+							<group>
+								<field name="work_type"/>
+								<field name="work_source" />
+								<field name="job_position"/>
+								<field name="know_us"/>
+								<field name="mobile"/>
+								<field name="mobile2"/>
+								<field name="email"/>
+								<field name="partner_id" readonly="0"/>
+							</group>
+						</group>
+						<notebook>
+							<page name="student_ids" string="Students">
+								<group>
+									<field name="student_ids" />
+								</group>
+							</page>
+							<page name="Sale Orders">
+								<field name="sale_orders"/>
+							</page>
+							<page  name="invoices">
+								<group name="Invoices">
+									<field name="invoices"/>
+								</group>
+							</page>
+
+							<page  name="Other Information">
+								<group name="Other Information">
+									<field name="create_date"/>
+									<field name="guardian_date"/>
+									<field name="date_end"/>
+									<field name="date_done"/>
+									<field name="confirm_date"/>
+									<field name="userblocked_date"/>
+									<field name="create_uid"/>
+								</group>
+							</page>
+							
+							
+
+							
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<!-- End Student Student -->
+		<record id="student_guardian_tree_view" model="ir.ui.view">
+			<field name="name">student.guardian.view.tree</field>
+			<field name="model">student.guardian</field>
+			<field name="arch" type="xml">
+				<tree >
+					<field name="number"/>
+					<field name="name"/>
+					<field name="relative_relation"/>
+					<field name="proof_of_kinship"/>
+					<field name="is_family"/>
+					<field name="is_main"/>
+					<field name="gender"/>
+					<field name="nationality"/>
+					<field name="id_type"/>
+					<field name="id_number"/>
+					<field name="tage"/>
+				</tree>
+			</field>
+		</record>
+		<record id="student_guardian_search_view" model="ir.ui.view">
+			<field name="name">student.guardian.search</field>
+			<field name="model">student.guardian</field>
+			<field name="arch" type="xml">
+				<search string="Students">
+					<field name="name"/>
+					<field name="gender"/>
+					<field name="nationality"/>
+					<field name="id_type"/>
+					<field name="id_number"/>
+					<field name="tage"/>
+					<field name="relative_relation"/>
+					<field name="proof_of_kinship"/>
+					<field name="is_family"/>
+					<field name="is_main"/>
+				</search>
+			</field>
+		</record>
+		<record id="student_guardian_seq" model="ir.sequence">
+			<field name="name">Student Guadrian Seq</field>
+			<field name="code">student.guardian.seq</field>
+			<field name="prefix"></field>
+			<!--Guardian-->
+			<field name="padding">5</field>
+			<field name="company_id" eval="False"/>
+		</record>
+		<!-- This action opens the list view of students related to the guardian -->
+		<record id="action_view_guardian_students_1" model="ir.actions.act_window">
+			<field name="name">Students</field>
+			<field name="res_model">student.student</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[('guardian_id', '=', active_id)]</field>
+		</record>
+		<!-- ......................................End Guardian Student   .................................................... . -->
+	</data>
+</odoo>
