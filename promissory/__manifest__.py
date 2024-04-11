@@ -3,7 +3,7 @@
 
 {
     'name': 'السندات لأمر شركة الحياة',
-    'version': '15.0.6.8.0',
+    'version': '17.0.0.1',
     'author': 'شركة الحياة المحدودة',
     'depends': ['account','contacts','partner_contact_personal_information_page'],
     'description': """Manage a...""",
