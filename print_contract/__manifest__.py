@@ -2,7 +2,7 @@
 
 {
     "name": "Print Contract . ",
-    "version": "1.2",
+    'version': '17.0.1.0.0',
     "sequence": "-10",
     "depends": [
         'base', 'web', 'account','contacts',
