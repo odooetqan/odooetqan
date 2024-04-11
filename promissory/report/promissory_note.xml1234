@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- report action -->
+        <record id="action_res_partner_report_pldge" model="ir.actions.report">
+            <field name="name">
+                promissory_note - السند لأمر</field>
+            <field name="model">promissory.note</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">promissory.promissory_note_report_last</field>
+            <field name="report_file">promissory.promissory_note_report_last</field>
+            <field name="print_report_name">'promissory - %s' % (object.issuer)</field>
+            <!-- <field name="binding_model_id" ref="model_res_partner"/> -->
+            <field name="binding_type">report</field>
+        </record>
+
+        <!-- تقرير التعـــــــــــــــــــــهد -->
+        <template id="promissory.promissory_header">
+            <br/><br/>
+            <div class="row p-1 my-2 border-bottom bg-light" style="font-size:24">
+
+                <br/>
+                <br/>
+                <br/>
+                <table
+                    dir="rtl"
+                    style="padding:1px;margin:1px;border:none; background-color:#fff;text-align:right;font-size:11px;">
+                    <tr  style="padding:1px;margin:1px;border:none; background-color:#fff;text-align:right">
+                        <td
+                            style="padding:1px;margin:1px;border:none;text-align:center;font-family:Arial,
+                                sans-serif;" colspan="4">
+                            <div>
+                            
+                              <br/>
+                              <br/>
+                              <br/>
+
+                                <h3
+                                    style="color:orange; background-color:#fff;padding-top:-50px;margin-top:-5px;">
+                                    <Strong>
+                                        <center>سند لأمر :
+                                            <span t-field="doc.reference"></span>
+                                        </center>
+                                    </Strong>
+                                </h3>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr
+                        style="padding:1px;margin:1px;border:none; background-color:#fff;text-align:right">
+                        <td
+                            style="padding:1px;margin:1px;border:none;text-align:center;font-family:Arial,
+                                sans-serif;font-size:14px;">تاريخ الانشاء
+                            <span t-field="doc.create_date"></span>
+                        </td>
+                        <td
+                            style="padding:1px;margin:1px;border:none;text-align:center;font-family:Arial,
+                                sans-serif;;font-size:14px;">
+                            مكان الانشاء : المدينة المنورة
+                        </td>
+                        <td></td>
+<!--                               -->
+                <t t-if="doc.amount_residual > 0"> <td
+                            style="padding:1px;margin:1px;border:none;text-align:center;font-family:Arial,
+                                sans-serif;;font-size:14px;">
+                            المبلغ:
+                            <span t-field="doc.amount_residual"/>
+                        </td>
+                </t>
+                     <t t-if="doc.partner_value">   <td
+                            style="padding:1px;margin:1px;border:none;text-align:center;font-family:Arial,
+                                sans-serif;;font-size:14px;">
+                            المبلغ:
+                            <span t-field="doc.partner_value"/>
+                        </td></t>
+<!--                               -->
+
+                    </tr>
+<!--                               -->
+
+                    <tr
+                        style="padding:1px;margin:1px;border:none; background-color:#fff;text-align:right"></tr>
+                    <tr
+                        style="padding:1px;margin:1px;border:none;text-align:center;font-family:Arial, sans-serif;;font-size:24px;">
+                        <td
+                            colspan="4"
+                            style="padding:1px;margin:1px;border:none;text-align:center;font-family:Arial,
+                                sans-serif;;font-size:24px;">
+                            : أتعهد أنا
+                            <span t-field="doc.issuer"/>
+<!--                            سعودي الجنسية-->
+ بموجب هوية رقم
+                            <span t-field="doc.issuer_id"/>. أن ادفع بموجب هذا السند لأمر شركة الحياة شركة
+                                سعودية بموجب القيد في السجل التجارى رقم (4650214659) الموضح اعلاه و مقداره (<span t-field="doc.amount_residual"/>)
+                            <t t-if="doc.invoice_id"> <span t-field="doc.text_amoun2"/><t>
+                            <t t-if="doc.partner_value"><span t-field="doc.text_amoun3"/></t>
+                            فقط لاغير و لحامل هذه الورقة حق الرجوع بدون مصروفات أو احتجاج.
+                        </td>
+                    </tr>
+<!--                               -->
+
+
+                    <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                        <td
+                            colspan="2"
+                            style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:Arial,
+                            sans-serif;;font-size:24px;"></td>
+                        <td
+                            colspan="2"
+                            style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:Arial,
+                            sans-serif;;font-size:24px;">
+                            <br/>
+                            <br/>
+                            <br/>
+
+                            : توقيع المحرر
+
+                        </td>
+                    </tr>
+                    <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                        <td
+                            colspan="2"
+                            style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:Arial,
+                            sans-serif;;font-size:24px;"></td>
+                        <td
+                            colspan="2"
+                            style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:Arial,
+                            sans-serif;;font-size:24px;">
+                            ..........................................................
+                        </td>
+                    </tr>
+                    <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                        <td
+                            colspan="2"
+                            style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:Arial,
+                            sans-serif;;font-size:24px;"></td>
+                        <td
+                            colspan="2"
+                            style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:Arial,
+                            sans-serif;;font-size:24px;">
+                            : الاسم
+                        </td>
+                    </tr>
+                    <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                        <td
+                            colspan="2"
+                            style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:Arial,
+                            sans-serif;;font-size:24px;"></td>
+                        <td
+                            colspan="2"
+                            style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:Arial,
+                            sans-serif;;font-size:24px;">
+                            ..........................................................
+                        </td>
+                    </tr>
+                    <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                        <td
+                            colspan="2"
+                            style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:Arial,
+                            sans-serif;;font-size:24px;"></td>
+                        <td
+                            colspan="2"
+                            style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:Arial,
+                            sans-serif;;font-size:24px;">
+                            : العنوان
+                        </td>
+                    </tr>
+                    <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                        <td
+                            colspan="2"
+                            style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:Arial,
+                            sans-serif;;font-size:24px;"></td>
+                        <td
+                            colspan="2"
+                            style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:Arial,
+                            sans-serif;;font-size:24px;">
+                            ..........................................................
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </template>
+        <!-- تقرير التعـــــــــــــــــــــهد -->
+
+        <!-- main document template Pldge -->
+        <template id="promissory.promissory_document_">
+            <t t-debug=""></t>
+            <t t-call="web.external_layout">
+                <t t-set="doc" t-value="doc.with_context({'lang': lang})"/>
+                <div class="page">
+                    <t t-call="promissory.promissory_header"/>
+                </div>
+            </t>
+        </template>
+
+        <!-- main template Pldge-->
+        <template id="promissory.promissory_note_report_last">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-set="lang" t-value="doc.create_uid.lang"/>
+                    <t t-call="promissory.promissory_document_"/>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>
