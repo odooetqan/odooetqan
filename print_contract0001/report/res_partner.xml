@@ -5,7 +5,7 @@
     <record id="action_student_student_report" model="ir.actions.report">
       <field name="name"> Contract - عقد</field>
       <!-- <field name="model">res.partner</field> -->
-      <field name="model">student.student</field>
+      <field name="model">student.student.contract</field>
 
 
       <field name="report_type">qweb-pdf</field>
