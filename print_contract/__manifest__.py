@@ -29,6 +29,12 @@
     'installable': True,
     'auto_install': False,
     'application': True,
+
+    'assets': {
+        'web.assets_common': [
+                        'print_contract/static/css/report_style.css',
+        ],
+    },
     # 'assets': {
     #     'web.report_assets_common': [
     #         'print_contract/static/css/report_style.css',
