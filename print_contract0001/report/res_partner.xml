@@ -2,14 +2,17 @@
 <odoo>
   <data>
     <!-- report action  -->
-    <record id="action_res_partner_report" model="ir.actions.report">
+    <record id="action_student_student_report" model="ir.actions.report">
       <field name="name"> Contract - عقد</field>
-      <field name="model">res.partner</field>
+      <!-- <field name="model">res.partner</field> -->
+      <field name="model">student.student</field>
+
+
       <field name="report_type">qweb-pdf</field>
-      <field name="report_name">print_contract0001.res_partner_report</field>
-      <field name="report_file">print_contract0001.res_partner_report</field>
+      <field name="report_name">print_contract0001.student_student_report</field>
+      <field name="report_file">print_contract0001.student_student_report</field>
       <field name="print_report_name">'Contract - %s' % (object.name).replace('/', '')</field>
-      <!-- <field name="binding_model_id" ref="model_res_partner"/> -->
+      <!-- <field name="binding_model_id" ref="model_student_student"/> -->
       <field name="binding_type">report</field>
     </record>
 
@@ -124,16 +127,16 @@
           </tr>
           <tr style="padding:1px;margin:1px;border:none;text-align:right">
             <td style="padding:1px;margin:1px;border:none;text-align:right">
-              <span t-field="doc.student_guardian.id_number" />
+              <!-- <span t-field="doc.student_guardian.id_number" /> -->
             </td>
             <td style="padding:1px;margin:1px;border:none;text-align:right">
-              <span t-field="doc.student_guardian.contact_id_type" />
+              <!-- <span t-field="doc.student_guardian.contact_id_type" /> -->
             </td>
             <td style="padding:1px;margin:1px;border:none;text-align:right">
-              <span t-field="doc.student_guardian.nationality" />
+              <!-- <span t-field="doc.student_guardian.nationality" /> -->
             </td>
             <td style="padding:1px;margin:1px;border:none;text-align:right">
-              <span t-field="doc.student_guardian" />
+              <!-- <span t-field="doc.student_guardian" /> -->
             </td>
           </tr>
           <tr style="padding:1px;margin:1px;border-top:1px solid #00FFFF;border-bottom:1px solid #00FFFF;text-align:right">
@@ -157,16 +160,16 @@
           <tr style="padding:1px;margin:1px;border:none;text-align:right">
           
             <td style="padding:1px;margin:1px;border:none;text-align:right">
-              <span t-field="doc.student_guardian.street" />
+              <!-- <span t-field="doc.student_guardian.street" /> -->
             </td>
             <td style="padding:1px;margin:1px;border:none;text-align:right">
-              <span t-field="doc.student_guardian.district" />
+              <!-- <span t-field="doc.student_guardian.district" /> -->
             </td>
             <td style="padding:1px;margin:1px;border:none;text-align:right">
-              <span t-field="doc.student_guardian.city" />
+              <!-- <span t-field="doc.student_guardian.city" /> -->
             </td>
             <td style="padding:1px;margin:1px;border:none;text-align:right">
-              <span t-field="doc.student_guardian.country_id" />
+              <!-- <span t-field="doc.student_guardian.country_id" /> -->
             </td>
           </tr>
           <tr style="padding:1px;margin:1px;border-top:1px solid #00FFFF;border-bottom:1px solid #00FFFF;text-align:right">
@@ -177,18 +180,19 @@
           </tr>
           <tr style="padding:1px;margin:1px;border:none;text-align:right">
             <td style="padding:1px;margin:1px;border:none;text-align:right">
-              <span t-field="doc.student_guardian.unit_number" />
+              <!-- <span t-field="doc.student_guardian.unit_number" /> -->
             </td>
             <td style="padding:1px;margin:1px;border:none;text-align:right">
-              <span t-field="doc.student_guardian.building_number" />
+              <!-- <span t-field="doc.student_guardian.building_number" /> -->
             </td>
             <td style="padding:1px;margin:1px;border:none;text-align:right">
-              <span t-field="doc.student_guardian.id" /><!--addetional Number-->
+              <!-- <span t-field="doc.student_guardian.id" /> -->
+                <!--addetional Number-->
             </td>
 
 
             <td style="padding:1px;margin:1px;border:none;text-align:right">
-              <span t-field="doc.student_guardian.zip" />
+              <!-- <span t-field="doc.student_guardian.zip" /> -->
             </td>
           </tr>
           <tr style="color:#FFA500; background-color:#191970;">
@@ -202,16 +206,16 @@
           </tr>
           <tr style="padding:1px;margin:1px;border:none;text-align:right">
             <td style="padding:1px;margin:1px;border:none;text-align:right">
-              <span t-field="doc.student_follow_up.id_number" />
+              <!-- <span t-field="doc.student_follow_up.id_number" /> -->
             </td>
             <td style="padding:1px;margin:1px;border:none;text-align:right">
-              <span t-field="doc.student_follow_up.contact_id_type" />
+              <!-- <span t-field="doc.student_follow_up.contact_id_type" /> -->
             </td>
             <td style="padding:1px;margin:1px;border:none;text-align:right">
-              <span t-field="doc.student_follow_up.nationality" />
+              <!-- <span t-field="doc.student_follow_up.nationality" /> -->
             </td>
             <td style="padding:1px;margin:1px;border:none;text-align:right">
-              <span t-field="doc.student_follow_up" />
+              <!-- <span t-field="doc.student_follow_up" /> -->
             </td>
           </tr>
           <tr style="padding:1px;margin:1px;border-top:1px solid #00FFFF;border-bottom:1px solid #00FFFF;text-align:right">
@@ -248,18 +252,18 @@
           </tr>
           <tr style="padding:1px;margin:1px;border:none;text-align:right">
             <td style="padding:1px;margin:1px;border:none;text-align:right">
-              <span t-field="doc.student_follow_up.street" />
+              <!-- <span t-field="doc.student_follow_up.street" /> -->
             </td>
             <td style="padding:1px;margin:1px;border:none;text-align:right">
-              <span t-field="doc.student_follow_up.district" />
+              <!-- <span t-field="doc.student_follow_up.district" /> -->
             </td>
             <td style="padding:1px;margin:1px;border:none;text-align:right">
-              <span t-field="doc.student_follow_up.city" />
+              <!-- <span t-field="doc.student_follow_up.city" /> -->
             </td>
 
 
             <td style="padding:1px;margin:1px;border:none;text-align:right">
-              <span t-field="doc.student_follow_up.country_id" />
+              <!-- <span t-field="doc.student_follow_up.country_id" /> -->
             </td>
           </tr>
           <tr style="padding:1px;margin:1px;border-top:1px solid #00FFFF;border-bottom:1px solid #00FFFF;text-align:right">
@@ -271,17 +275,18 @@
           <tr style="padding:1px;margin:1px;border:none;text-align:right">
           
             <td style="padding:1px;margin:1px;border:none;text-align:right">
-              <span t-field="doc.student_follow_up.unit_number" />
+              <!-- <span t-field="doc.student_follow_up.unit_number" /> -->
             </td>
             <td style="padding:1px;margin:1px;border:none;text-align:right">
-              <span t-field="doc.student_follow_up.building_number" />
+              <!-- <span t-field="doc.student_follow_up.building_number" /> -->
             </td>
             <td style="padding:1px;margin:1px;border:none;text-align:right">
-              <span t-field="doc.student_follow_up.id" /><!--addetional Number-->
+              <!-- <span t-field="doc.student_follow_up.id" /> -->
+                <!--addetional Number-->
             </td>
 
             <td style="padding:1px;margin:1px;border:none;text-align:right">
-              <span t-field="doc.student_follow_up.zip" />
+              <!-- <span t-field="doc.student_follow_up.zip" /> -->
             </td>
           </tr>
           <tr style="padding:1px;margin:1px;border:none;text-align:right">
@@ -455,7 +460,7 @@
         <template id="print_contract0001.inv_total"><div style="page-break-inside: avoid;"></div><div class="oe_structure"/></template> -->
     
     <!-- main document template -->
-    <template id="print_contract0001.res_partner_report_document">
+    <template id="print_contract0001.student_student_report_document">
       <t t-debug=""></t>
       <t t-call="web.external_layout">
         <t t-set="doc" t-value="doc.with_context({'lang': lang})" />
@@ -474,7 +479,7 @@
     
     
     <!-- main document template Pldge -->
-    <template id="print_contract0001.res_partner_report_document_pledge">
+    <template id="print_contract0001.student_student_report_document_pledge">
       <t t-debug=""></t>
       <t t-call="web.external_layout">
         <t t-set="doc" t-value="doc.with_context({'lang': lang})" />
@@ -485,7 +490,7 @@
     </template>
 
     <!-- main document template Trans student  -->
-    <template id="print_contract0001.res_partner_report_document_trans">
+    <template id="print_contract0001.student_student_report_document_trans">
       <t t-debug=""></t>
       <t t-call="web.external_layout">
         <t t-set="doc" t-value="doc.with_context({'lang': lang})" />
@@ -496,31 +501,31 @@
     </template>
 
     <!-- main template -->
-    <template id="print_contract0001.res_partner_report">
+    <template id="print_contract0001.student_student_report">
       <t t-call="web.html_container">
         <t t-foreach="docs" t-as="doc">
           <t t-set="lang" t-value="doc.create_uid.lang" />
-          <t t-call="print_contract0001.res_partner_report_document" />
+          <t t-call="print_contract0001.student_student_report_document" />
         </t>
       </t>
     </template>
 
     <!-- main template Pldge-->
-    <template id="print_contract0001.res_partner_report_pledge">
+    <template id="print_contract0001.student_student_report_pledge">
       <t t-call="web.html_container">
         <t t-foreach="docs" t-as="doc">
           <t t-set="lang" t-value="doc.create_uid.lang" />
-          <t t-call="print_contract0001.res_partner_report_document_pledge" />
+          <t t-call="print_contract0001.student_student_report_document_pledge" />
         </t>
       </t>
     </template>
 
     <!-- main template Transfer student -->
-    <template id="print_contract0001.res_partner_report_trans">
+    <template id="print_contract0001.student_student_report_trans">
       <t t-call="web.html_container">
         <t t-foreach="docs" t-as="doc">
           <t t-set="lang" t-value="doc.create_uid.lang" />
-          <t t-call="print_contract0001.res_partner_report_document_trans" />
+          <t t-call="print_contract0001.student_student_report_document_trans" />
         </t>
       </t>
     </template>
