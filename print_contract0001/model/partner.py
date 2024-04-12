@@ -10,7 +10,10 @@ from odoo.exceptions import UserError
 class Partner(models.Model):
     # _name = "student.student"
 
-    _inherit = "student.student"
+    _name = "student.student.contract"
+
+    student_id = fields.Many2one('student.student')
+    partner_id = fields.Many2one('res.partner', related= 'student_id.partner_id')
     building_no = fields.Char(string=" Building No ", help="Building No")
     district = fields.Char(string="District", help="District")
     code = fields.Char(string="Code", help="Code")
