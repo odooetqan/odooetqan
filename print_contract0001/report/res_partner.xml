@@ -6,15 +6,15 @@
       <field name="name"> Contract - عقد</field>
       <field name="model">res.partner</field>
       <field name="report_type">qweb-pdf</field>
-      <field name="report_name">print_contract.res_partner_report</field>
-      <field name="report_file">print_contract.res_partner_report</field>
+      <field name="report_name">print_contract0001.res_partner_report</field>
+      <field name="report_file">print_contract0001.res_partner_report</field>
       <field name="print_report_name">'Contract - %s' % (object.name).replace('/', '')</field>
       <!-- <field name="binding_model_id" ref="model_res_partner"/> -->
       <field name="binding_type">report</field>
     </record>
 
 
-    <template id="print_contract.inv_header">
+    <template id="print_contract0001.inv_header">
       <div class="row p-1 my-2 border-bottom bg-light">
         <br />
         <table style="padding:1px;margin:1px;border:none; background-color:#fff;text-align:right;font-size:11px;">
@@ -310,7 +310,7 @@
     </template>
 
 <!-- تقرير التعـــــــــــــــــــــهد -->
-    <template id="print_contract.pledge_header">
+    <template id="print_contract0001.pledge_header">
               <h2 style="color:orange; background-color:#fff;padding-top:-50px;margin-top:-5px;">
                 <Strong>
                   <center>تعهــــــد </center>
@@ -363,7 +363,7 @@
 <!-- تقرير التعـــــــــــــــــــــهد -->
 
 <!-- تقرير الموافقة علي قبول طالب -->    
-    <template id="print_contract.trans_header">
+    <template id="print_contract0001.trans_header">
               <h2 style="color:orange; background-color:#fff;padding-top:-50px;margin-top:-5px;">
                 <Strong>
                   <center>الموافقة على قبول طالب </center>
@@ -449,78 +449,78 @@
 <!-- تقرير الموافقة علي قبول طالب -->
 
 
-    <template id="print_contract.partner_info"></template>
-    <template id="print_contract.inv_lines"></template>
+    <template id="print_contract0001.partner_info"></template>
+    <template id="print_contract0001.inv_lines"></template>
     <!-- 
-        <template id="print_contract.inv_total"><div style="page-break-inside: avoid;"></div><div class="oe_structure"/></template> -->
+        <template id="print_contract0001.inv_total"><div style="page-break-inside: avoid;"></div><div class="oe_structure"/></template> -->
     
     <!-- main document template -->
-    <template id="print_contract.res_partner_report_document">
+    <template id="print_contract0001.res_partner_report_document">
       <t t-debug=""></t>
       <t t-call="web.external_layout">
         <t t-set="doc" t-value="doc.with_context({'lang': lang})" />
         <div class="page">
           <!-- Invoice fields-->
-          <t t-call="print_contract.inv_header" />
+          <t t-call="print_contract0001.inv_header" />
           <!-- partner fields-->
-          <t t-call="print_contract.partner_info" />
+          <t t-call="print_contract0001.partner_info" />
           <!-- Invoice fields-->
-          <t t-call="print_contract.inv_lines" t-lang="ar" />
+          <t t-call="print_contract0001.inv_lines" t-lang="ar" />
           <!-- Invoice total-->
-          <!-- <t t-call="print_contract.inv_total"/> -->
+          <!-- <t t-call="print_contract0001.inv_total"/> -->
         </div>
       </t>
     </template>
     
     
     <!-- main document template Pldge -->
-    <template id="print_contract.res_partner_report_document_pledge">
+    <template id="print_contract0001.res_partner_report_document_pledge">
       <t t-debug=""></t>
       <t t-call="web.external_layout">
         <t t-set="doc" t-value="doc.with_context({'lang': lang})" />
         <div class="page">
-          <t t-call="print_contract.pledge_header" />
+          <t t-call="print_contract0001.pledge_header" />
         </div>
       </t>
     </template>
 
     <!-- main document template Trans student  -->
-    <template id="print_contract.res_partner_report_document_trans">
+    <template id="print_contract0001.res_partner_report_document_trans">
       <t t-debug=""></t>
       <t t-call="web.external_layout">
         <t t-set="doc" t-value="doc.with_context({'lang': lang})" />
         <div class="page">
-          <t t-call="print_contract.trans_header" />
+          <t t-call="print_contract0001.trans_header" />
         </div>
       </t>
     </template>
 
     <!-- main template -->
-    <template id="print_contract.res_partner_report">
+    <template id="print_contract0001.res_partner_report">
       <t t-call="web.html_container">
         <t t-foreach="docs" t-as="doc">
           <t t-set="lang" t-value="doc.create_uid.lang" />
-          <t t-call="print_contract.res_partner_report_document" />
+          <t t-call="print_contract0001.res_partner_report_document" />
         </t>
       </t>
     </template>
 
     <!-- main template Pldge-->
-    <template id="print_contract.res_partner_report_pledge">
+    <template id="print_contract0001.res_partner_report_pledge">
       <t t-call="web.html_container">
         <t t-foreach="docs" t-as="doc">
           <t t-set="lang" t-value="doc.create_uid.lang" />
-          <t t-call="print_contract.res_partner_report_document_pledge" />
+          <t t-call="print_contract0001.res_partner_report_document_pledge" />
         </t>
       </t>
     </template>
 
     <!-- main template Transfer student -->
-    <template id="print_contract.res_partner_report_trans">
+    <template id="print_contract0001.res_partner_report_trans">
       <t t-call="web.html_container">
         <t t-foreach="docs" t-as="doc">
           <t t-set="lang" t-value="doc.create_uid.lang" />
-          <t t-call="print_contract.res_partner_report_document_trans" />
+          <t t-call="print_contract0001.res_partner_report_document_trans" />
         </t>
       </t>
     </template>
