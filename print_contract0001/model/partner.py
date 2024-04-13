@@ -17,7 +17,14 @@ class Partner(models.Model):
     mobile = fields.Char('الموبايل')
     id_number = fields.Char('الهوية')
     student_id = fields.Many2one('student.student')
-    partner_id = fields.Many2one('res.partner', related= 'student_id.partner_id')
+    partner_id = fields.Many2one('res.partner', compute= '_compute_partner_id')
+    def _compute_partner_id(self):
+        partner_id  = self.student_id.partner_id
+        if partner_id:
+            return partner_id
+        else:
+            return False
+            
     building_no = fields.Char(string=" Building No ", help="Building No")
     district = fields.Char(string="District", help="District")
     code = fields.Char(string="Code", help="Code")
