@@ -23,3 +23,4 @@ access_student_student,acc_student_student,model_student_student,,1,1,1,1
 access_student_guardian,acc_student_guardian,model_student_guardian,,1,1,1,1
 access_student_student_dropoff,acc_student_student_dropoff,model_student_student_dropoff,,1,1,1,1
 access_student_contracts,acc_student_contracts,model_student_student_contract,,1,1,1,1
+promissory_note_id,promissory.note.access,model_promissory_note,,1,1,1,1
