@@ -9,15 +9,15 @@
 
 
       <field name="report_type">qweb-pdf</field>
-      <field name="report_name">print_contract0001.student_student_report</field>
-      <field name="report_file">print_contract0001.student_student_report</field>
+      <field name="report_name">school_reg_base.student_student_report</field>
+      <field name="report_file">school_reg_base.student_student_report</field>
       <field name="print_report_name">'Contract - %s' % (object.name).replace('/', '')</field>
       <!-- <field name="binding_model_id" ref="model_student_student"/> -->
       <field name="binding_type">report</field>
     </record>
 
 
-    <template id="print_contract0001.inv_header">
+    <template id="school_reg_base.inv_header">
       <div class="row p-1 my-2 border-bottom bg-light">
         <br />
         <table style="padding:1px;margin:1px;border:none; background-color:#fff;text-align:right;font-size:11px;">
