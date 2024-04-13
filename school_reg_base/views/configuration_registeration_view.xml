@@ -867,6 +867,8 @@
 								<h1>Contract</h1>
 								<h1>
 									<field name="name"/>
+									<field name="student_id"/>
+
 									<br/>
 								</h1>
 							</div>
