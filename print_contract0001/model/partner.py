@@ -5,8 +5,8 @@ from odoo import models, fields, api, _
 from odoo.exceptions import UserError
 
 # , Warning
-class Students(models.Model):
-    _inherit = 'student.student'
+# class Students(models.Model):
+#     _inherit = 'student.student'
 
 class Partner(models.Model):
     # _name = "student.student"
