@@ -315,7 +315,7 @@
     </template>
 
 <!-- تقرير التعـــــــــــــــــــــهد -->
-    <template id="print_contract0001.pledge_header">
+    <template id="school_reg_base.pledge_header">
               <h2 style="color:orange; background-color:#fff;padding-top:-50px;margin-top:-5px;">
                 <Strong>
                   <center>تعهــــــد </center>
@@ -368,7 +368,7 @@
 <!-- تقرير التعـــــــــــــــــــــهد -->
 
 <!-- تقرير الموافقة علي قبول طالب -->    
-    <template id="print_contract0001.trans_header">
+    <template id="school_reg_base.trans_header">
               <h2 style="color:orange; background-color:#fff;padding-top:-50px;margin-top:-5px;">
                 <Strong>
                   <center>الموافقة على قبول طالب </center>
@@ -454,78 +454,78 @@
 <!-- تقرير الموافقة علي قبول طالب -->
 
 
-    <template id="print_contract0001.partner_info"></template>
-    <template id="print_contract0001.inv_lines"></template>
+    <template id="school_reg_base.partner_info"></template>
+    <template id="school_reg_base.inv_lines"></template>
     <!-- 
-        <template id="print_contract0001.inv_total"><div style="page-break-inside: avoid;"></div><div class="oe_structure"/></template> -->
+        <template id="school_reg_base.inv_total"><div style="page-break-inside: avoid;"></div><div class="oe_structure"/></template> -->
     
     <!-- main document template -->
-    <template id="print_contract0001.student_student_report_document">
+    <template id="school_reg_base.student_student_report_document">
       <t t-debug=""></t>
       <t t-call="web.external_layout">
         <t t-set="doc" t-value="doc.with_context({'lang': lang})" />
         <div class="page">
           <!-- Invoice fields-->
-          <t t-call="print_contract0001.inv_header" />
+          <t t-call="school_reg_base.inv_header" />
           <!-- partner fields-->
-          <t t-call="print_contract0001.partner_info" />
+          <t t-call="school_reg_base.partner_info" />
           <!-- Invoice fields-->
-          <t t-call="print_contract0001.inv_lines" t-lang="ar" />
+          <t t-call="school_reg_base.inv_lines" t-lang="ar" />
           <!-- Invoice total-->
-          <!-- <t t-call="print_contract0001.inv_total"/> -->
+          <!-- <t t-call="school_reg_base.inv_total"/> -->
         </div>
       </t>
     </template>
     
     
     <!-- main document template Pldge -->
-    <template id="print_contract0001.student_student_report_document_pledge">
+    <template id="school_reg_base.student_student_report_document_pledge">
       <t t-debug=""></t>
       <t t-call="web.external_layout">
         <t t-set="doc" t-value="doc.with_context({'lang': lang})" />
         <div class="page">
-          <t t-call="print_contract0001.pledge_header" />
+          <t t-call="school_reg_base.pledge_header" />
         </div>
       </t>
     </template>
 
     <!-- main document template Trans student  -->
-    <template id="print_contract0001.student_student_report_document_trans">
+    <template id="school_reg_base.student_student_report_document_trans">
       <t t-debug=""></t>
       <t t-call="web.external_layout">
         <t t-set="doc" t-value="doc.with_context({'lang': lang})" />
         <div class="page">
-          <t t-call="print_contract0001.trans_header" />
+          <t t-call="school_reg_base.trans_header" />
         </div>
       </t>
     </template>
 
     <!-- main template -->
-    <template id="print_contract0001.student_student_report">
+    <template id="school_reg_base.student_student_report">
       <t t-call="web.html_container">
         <t t-foreach="docs" t-as="doc">
           <t t-set="lang" t-value="doc.create_uid.lang" />
-          <t t-call="print_contract0001.student_student_report_document" />
+          <t t-call="school_reg_base.student_student_report_document" />
         </t>
       </t>
     </template>
 
     <!-- main template Pldge-->
-    <template id="print_contract0001.student_student_report_pledge">
+    <template id="school_reg_base.student_student_report_pledge">
       <t t-call="web.html_container">
         <t t-foreach="docs" t-as="doc">
           <t t-set="lang" t-value="doc.create_uid.lang" />
-          <t t-call="print_contract0001.student_student_report_document_pledge" />
+          <t t-call="school_reg_base.student_student_report_document_pledge" />
         </t>
       </t>
     </template>
 
     <!-- main template Transfer student -->
-    <template id="print_contract0001.student_student_report_trans">
+    <template id="school_reg_base.student_student_report_trans">
       <t t-call="web.html_container">
         <t t-foreach="docs" t-as="doc">
           <t t-set="lang" t-value="doc.create_uid.lang" />
-          <t t-call="print_contract0001.student_student_report_document_trans" />
+          <t t-call="school_reg_base.student_student_report_document_trans" />
         </t>
       </t>
     </template>
