@@ -31,6 +31,7 @@
         'views/promissory_view.xml',
         'report/base_document_layout.xml',
         'report/res_partner.xml',
+        'report/promissory_note.xml',
 
         
     ],
