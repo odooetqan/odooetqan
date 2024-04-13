@@ -854,6 +854,61 @@
 			<field name="view_mode">tree,form</field>
 		</record>
 		<!-- ......................................End Fees Schools    .................................................... . -->
+		<!-- ......................................Start Contract .................................................... . -->
+		<record id="contract_form_view" model="ir.ui.view">
+			<field name="name">contract.form.view</field>
+			<field name="model">student.student.contract</field>
+			<field name="arch" type="xml">
+				<form>
+					<header></header>
+					<sheet>
+						<div class="oe_title">
+							<div class="oe_title">
+								<h1>Contract</h1>
+								<h1>
+									<field name="name"/>
+									<br/>
+								</h1>
+							</div>
+						</div>
+						<group>
+							<!-- <field name="stage_id"/>
+							<field name="product_id" domain="[('fees', '=', True)]"/> -->
+                        </group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="contract_tree_view" model="ir.ui.view">
+			<field name="name">contract.view.tree</field>
+			<field name="model">student.student.contract</field>
+			<field name="arch" type="xml">
+				<tree editable="top">
+					<field name="name"/>
+					<!-- <field name="stage_id"/>
+					<field name="product_id" domain="[('fees', '=', True)]" /> -->
+                </tree> 
+			</field>
+		</record>
+		<record id="contract_search_view" model="ir.ui.view">
+			<field name="name">Contract Search</field>
+			<field name="model">student.student.contract</field>
+			<field name="arch" type="xml">
+				<search string="Contract">
+					<field name="name" />
+					<!-- <field name="stage_id"/>
+					<field name="product_id"/> -->
+				</search>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_contracts">
+			<field name="name">contracts</field>
+			<field name="res_model">student.student.contract</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<!-- ......................................End Contract    .................................................... . -->
+
+
 		<record model="ir.actions.act_window" id="action_schools_managements">
 			<field name="name">Schools Management</field>
 			<field name="res_model">schools</field>
@@ -916,6 +971,7 @@
 		<menuitem id="menu_invoicing" name="Invoicing"  parent="menu_item_configuration"/>
 		<menuitem id="menu_action_fees" name="Fees" parent="menu_invoicing" action="action_fees" sequence="7"/>
 		<menuitem id="menu_action_product_product" name="Product" parent="menu_invoicing" action="action_product_product" sequence="7"/>
+		<menuitem id="menu_action_contracts" name="Contracts" parent="menu_invoicing" action="action_contracts" sequence="7"/>
 		
 	</data>
 </odoo>
