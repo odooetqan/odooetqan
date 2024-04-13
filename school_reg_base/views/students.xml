@@ -58,7 +58,7 @@
 								<div class="o_state_info">
 									<div class="o_form_field o_stat_info">
 										<span class="o_stat_value">
-											<field name="contract_count" />
+<!-- 											<field name="contract_count" /> -->
 										</span>
 										<span class="o_stat_text">Contracts</span>
 									</div>
