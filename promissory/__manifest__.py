@@ -3,9 +3,9 @@
 
 {
     'name': 'السندات لأمر شركة الحياة',
-    'version': '15.0.6.8.0',
+    'version': '17.0.1.8.0',
     'author': 'شركة الحياة المحدودة',
-    'depends': ['account','contacts','partner_contact_personal_information_page'],
+    'depends': ['account','contacts'],
     'description': """Manage a...""",
     'summary': 'Odoo 15  .. ..',
     'category': 'Accounting',
