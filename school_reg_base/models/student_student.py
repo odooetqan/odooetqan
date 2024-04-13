@@ -149,7 +149,35 @@ class StudentStudent(models.Model):
     )
     
     currency_id = fields.Many2one('res.currency', string='Currency', related='partner_id.currency_id')
+
+
+    contract_ids = fields.Many2many(comodel_name='student.student.contract', compute='_compute_contracts', string='Contracts',readonly=True)
+
+    def _compute_contracts(self):
+        for record in self:
+            student_id = record.id
+            contracts = self.env['student.student.contract'].search([('student_id', '=', student_id)])
+            record.contract_ids = contracts or False
+                
+    contract_count = fields.Integer(string='Contract Count', compute='_compute_contract_count')
+
+    @api.depends('contract_ids')
+    def _compute_contract_count(self):
+        for contract in self:
+            student.invoice_count = len(contract.contract_ids)
+
+    def action_student_contract_count(self):
+        return{
+            'type': 'ir.actions.act_window',
+            'name': 'Contract Count',
+            'res_model': 'student.student.contract',
+            'domain': [('student_id', '=', self.id)],
+            'view_mode':'tree,form',
+            'target': 'current',
     
+        }
+
+                
     #----------------------------
     invoice_ids = fields.Many2many(comodel_name='account.move', compute='_compute_invoices', string='Invoices', readonly=True)
     invoices = fields.Many2many(comodel_name='account.move', compute='_compute_invoices', string='Invoices', readonly=True)
