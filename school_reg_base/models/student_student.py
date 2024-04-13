@@ -150,9 +150,7 @@ class StudentStudent(models.Model):
     
     currency_id = fields.Many2one('res.currency', string='Currency', related='partner_id.currency_id')
 
-
     contract_ids = fields.Many2many(comodel_name='student.student.contract', compute='_compute_contracts', string='Contracts',readonly=True)
-
     def _compute_contracts(self):
         for record in self:
             student_id = record.id
