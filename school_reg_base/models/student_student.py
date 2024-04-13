@@ -151,13 +151,13 @@ class StudentStudent(models.Model):
     currency_id = fields.Many2one('res.currency', string='Currency', related='partner_id.currency_id')
 
 
-    contract_ids = fields.Many2many(comodel_name='student.student.contract', compute='_compute_contracts', string='Contracts',readonly=True)
+    # contract_ids = fields.Many2many(comodel_name='student.student.contract', compute='_compute_contracts', string='Contracts',readonly=True)
 
-    def _compute_contracts(self):
-        for record in self:
-            student_id = record.id
-            contracts = self.env['student.student.contract'].search([('student_id', '=', student_id)])
-            record.contract_ids = contracts or False
+    # def _compute_contracts(self):
+    #     for record in self:
+    #         student_id = record.id
+    #         contracts = self.env['student.student.contract'].search([('student_id', '=', student_id)])
+    #         record.contract_ids = contracts or False
                 
     contract_count = fields.Integer(string='Contract Count', compute='_compute_contract_count')
 
