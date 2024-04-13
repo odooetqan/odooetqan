@@ -54,6 +54,16 @@
 									</div>
 								</div>
 							</button>
+							<button name="action_student_contract_count" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+								<div class="o_state_info">
+									<div class="o_form_field o_stat_info">
+										<span class="o_stat_value">
+											<field name="contract_count" />
+										</span>
+										<span class="o_stat_text">Contracts</span>
+									</div>
+								</div>
+							</button>
 <!-- 							<button name="action_student_invoice_count" type="object" class="oe_stat_button" icon="fa-list">
 								<div class="o_state_info">
 									<div class="o_form_field o_stat_info">
