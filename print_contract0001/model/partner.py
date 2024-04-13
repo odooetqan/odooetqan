@@ -12,6 +12,10 @@ class Partner(models.Model):
 
     _name = "student.student.contract"
 
+
+    name = fields.Char('الاسم')
+    mobile = fields.Char('الموبايل')
+    id_number = fields.Char('الهوية')
     student_id = fields.Many2one('student.student')
     partner_id = fields.Many2one('res.partner', related= 'student_id.partner_id')
     building_no = fields.Char(string=" Building No ", help="Building No")
