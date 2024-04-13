@@ -164,7 +164,7 @@ class StudentStudent(models.Model):
     @api.depends('contract_ids')
     def _compute_contract_count(self):
         for contract in self:
-            student.invoice_count = len(contract.contract_ids)
+            contract.invoice_count = len(contract.contract_ids)
 
     def action_student_contract_count(self):
         return{
