@@ -27,6 +27,8 @@
         'views/students.xml',
         'views/guardians.xml',
         'views/dropofoo_reasons.xml',
+        'report/base_document_layout.xml',
+        'report/res_partner.xml',
 
         
     ],
