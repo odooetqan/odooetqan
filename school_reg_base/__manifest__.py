@@ -27,6 +27,8 @@
         'views/students.xml',
         'views/guardians.xml',
         'views/dropofoo_reasons.xml',
+        'views/promissory_sequence.xml',
+        'views/promissory_view.xml',
         'report/base_document_layout.xml',
         'report/res_partner.xml',
 
