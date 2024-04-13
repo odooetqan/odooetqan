@@ -159,16 +159,15 @@ class StudentStudent(models.Model):
             contracts = self.env['student.student.contract'].search([('student_id', '=', student_id)])
             record.contract_ids = contracts or False
                 
-    contract_count = fields.Integer(string='Contract Count', compute='_compute_contract_count')
-
-    @api.depends('contract_ids')
-    def _compute_contract_count(self):
-        for contract in self:
-            contracts = contract.contract_ids
-            if contracts:
-                contract.invoice_count = len(contract.contract_ids)
-            else:
-                contract.invoice_count = 0
+    # contract_count = fields.Integer(string='Contract Count', compute='_compute_contract_count')
+    # @api.depends('contract_ids')
+    # def _compute_contract_count(self):
+    #     for contract in self:
+    #         contracts = contract.contract_ids
+    #         if contracts:
+    #             contract.invoice_count = len(contract.contract_ids)
+    #         else:
+    #             contract.invoice_count = 0
 
     def action_student_contract_count(self):
         return{
