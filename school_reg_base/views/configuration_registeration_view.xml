@@ -883,7 +883,7 @@
 			<field name="name">contract.view.tree</field>
 			<field name="model">student.student.contract</field>
 			<field name="arch" type="xml">
-				<tree editable="top">
+				<tree ><!--editable="top"-->
 					<field name="name"/>
 					<!-- <field name="stage_id"/>
 					<field name="product_id" domain="[('fees', '=', True)]" /> -->
