@@ -40,7 +40,7 @@
         <template id="einv_external_layout_standard"
                   inherit_id="web.external_layout_standard">
             <xpath expr="//div[contains(@t-attf-class,'footer')]/div/ul" position="before">
-                <div t-call="print_contract0001.financial_layout_row">
+                <div t-call="school_reg_base.financial_layout_row">
                 </div>
             </xpath>
         </template>
