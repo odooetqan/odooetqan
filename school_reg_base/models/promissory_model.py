@@ -7,16 +7,13 @@ from odoo import api, fields, models, _
 from num2words import num2words
 
 
-     
-
-
 class Partner(models.Model):
     
     _name = 'res.partner'
     _inherit = 'res.partner'
     
     company_registeration = fields.Char('سجل الشركة ', default='000000000000')
-
+    district = fields.Char(string="District")
     
 class Company(models.Model):
     _name = 'res.company'
@@ -103,7 +100,15 @@ class PromissoryNote(models.Model):
     payee_company_registeration  = fields.Char(related='company_id.partner_id.company_registeration', string='Company  ')
     invoice_no = fields.Many2one('account.move', string=' Invoice', domain=[("move_type", "!=", "entry")], index=True)
     partner_id = fields.Many2one('res.partner', string='  Partner', index=True)
-    partner_value = fields.Float(related='partner_id.total_due', string='  Balance ', index=True)    
+    partner_value = fields.Monetary(related='partner_id.total_due', string='  Balance ', index=True)    
+    currency_id = fields.Many2one('res.currency', string='Currency', required=True,                            
+    readonly=True, states={'draft': [('readonly', False)]},
+            default=lambda self: self.env.user.company_id.currency_id.id)
+    company_id = fields.Many2one('res.company', string='Company', required=True,
+                                 readonly=True, states={'draft': [('readonly', False)]},
+                                 default=lambda self: self.env.company)
+
+
     text_amoun3 = fields.Char(string="Amount in words   ", required=False, compute="amount_to_words3" )
 
     
