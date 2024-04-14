@@ -13,12 +13,7 @@
     'website': 'http://alhayah.edu.sa',
     'support': 's.musa@alhayah.edu.sa',
     'images': ['static/description/img1.jpeg'],
-    'depends': [
-                'base',
-                'sale',
-                ],
-                                # 'contact',
-
+    'depends': [  'base','contact',  'sale',  ],
     'data':[
         'security/multi_company_security.xml',
         'security/ir.model.access.csv',
