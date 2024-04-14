@@ -64,6 +64,19 @@
 									</div>
 								</div>
 							</button>
+							<button name="action_student_promissory_count" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+								<div class="o_state_info">
+									<div class="o_form_field o_stat_info">
+										<span class="o_stat_value">
+<!-- 											<field name="contract_count" /> -->
+										</span>
+										<span class="o_stat_text">Promissory</span>
+									</div>
+								</div>
+							</button>
+
+							
+							
 <!-- 							<button name="action_student_invoice_count" type="object" class="oe_stat_button" icon="fa-list">
 								<div class="o_state_info">
 									<div class="o_form_field o_stat_info">
@@ -170,6 +183,38 @@
 									    <field name="amount_residual_signed"/>
 									    <field name="payment_state"/>
 									    <field name="state"/>
+									</tree>
+							    </field>
+ 							</page>
+							
+							<page  name="contracts">
+								<field name="contract_ids">				                                        
+									<tree>
+<!-- 									    <field name="student_id"/>
+									    <field name="date"/>
+									    <field name="partner_id"/>
+									    <field name="amount_untaxed_signed"/>
+									    <field name="amount_tax_signed"/>
+									    <field name="amount_total_signed"/>
+									    <field name="amount_residual_signed"/>
+									    <field name="payment_state"/>
+									    <field name="state"/> -->
+									</tree>
+							    </field>
+ 							</page>
+							
+							<page  name="promissory">
+								<field name="promissory_ids">				                                        
+									<tree>
+									    <field name="student_id"/>
+<!-- 									    <field name="date"/>
+									    <field name="partner_id"/>
+									    <field name="amount_untaxed_signed"/>
+									    <field name="amount_tax_signed"/>
+									    <field name="amount_total_signed"/>
+									    <field name="amount_residual_signed"/>
+									    <field name="payment_state"/>
+									    <field name="state"/> -->
 									</tree>
 							    </field>
  							</page>
