@@ -174,9 +174,11 @@
     <field name="target">new</field>
 </record> -->
 
-<menuitem id="promissory_note_alhayah" name="السندات لأمر" sequence="14"/> <!-- parent="contacts.res_asset_menu_config"-->
-<menuitem action="action_promissory_note_alhayah" id="promissory_note_alhayah_menu"
-    parent="promissory_note_alhayah" />
+<!-- <menuitem id="promissory_note_alhayah" name="السندات لأمر" sequence="14"/>  -->
+    
+    <!-- parent="contacts.res_asset_menu_config"-->
+    
+<!-- <menuitem action="action_promissory_note_alhayah" id="promissory_note_alhayah_menu"     parent="promissory_note_alhayah" /> -->
 
 
 </odoo>
