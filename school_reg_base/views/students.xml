@@ -68,7 +68,7 @@
 								<div class="o_state_info">
 									<div class="o_form_field o_stat_info">
 										<span class="o_stat_value">
-											<field name="promissory_count " />
+<!-- 											<field name="promissory_count " /> -->
 										</span>
 										<span class="o_stat_text">Promissory</span>
 									</div>
