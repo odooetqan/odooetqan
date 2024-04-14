@@ -148,7 +148,36 @@ class StudentStudent(models.Model):
     invoice_line_ids = fields.One2many(
         "account.move.line", "partner_id", string="Invoices Items"
     )
+    #----------------------------------
+    promissory_ids = fields.Many2many(comodel_name='promissory.note', compute='_compute_promissory', string='Promissory',readonly=True)
+    def _compute_promissory(self):
+        for record in self:
+            student_id = record.id
+            promissorys = self.env['promissory.note'].search([('student_id', '=', student_id)])
+            record.promissory_ids = promissorys or False
+                
+    # promissory_count = fields.Integer(string='Promissory Count', compute='_compute_promissory_count')
+    # @api.depends('promissory_ids')
+    # def _compute_promissory_count(self):
+    #     for promissory in self:
+    #         promissorys = promissory.promissory_ids
+    #         if promissorys:
+    #             promissory.promissory_count = len(promissory.promissory_ids)
+    #         else:
+    #             contract.promissory_count = 0
+
+    def action_student_promissory_count(self):
+        return{
+            'type': 'ir.actions.act_window',
+            'name': 'Promissory Count',
+            'res_model': 'promissory.note',
+            'domain': [('student_id', '=', self.id)],
+            'view_mode':'tree,form',
+            'target': 'current',
     
+        }
+
+#----------------------------------
     currency_id = fields.Many2one('res.currency', string='Currency', related='partner_id.currency_id')
 
     contract_ids = fields.Many2many(comodel_name='student.student.contract', compute='_compute_contracts', string='Contracts',readonly=True)
