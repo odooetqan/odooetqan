@@ -156,16 +156,25 @@ class StudentStudent(models.Model):
             promissorys = self.env['promissory.note'].search([('student_id', '=', student_id)])
             record.promissory_ids = promissorys or False
                 
-    promissory_count = fields.Integer(string='Promissory Count', compute='_compute_promissory_count')
-    @api.depends('promissory_ids')
-    def _compute_promissory_count(self):
-        for promissory in self:
-            promissorys = promissory.promissory_ids
-            if promissorys:
-                promissory.promissory_count = len(promissory.promissory_ids)
-            else:
-                contract.promissory_count = 0
+    # promissory_count = fields.Integer(string='Promissory Count', compute='_compute_promissory_count')
+    # @api.depends('promissory_ids')
+    # def _compute_promissory_count(self):
+    #     for promissory in self:
+    #         promissorys = promissory.promissory_ids
+    #         if promissorys:
+    #             promissory.promissory_count = len(promissory.promissory_ids)
+    #         else:
+    #             contract.promissory_count = 0
 
+    promissory_count = fields.Integer(string="Promissory Count", compute="_compute_order_count")
+    
+    @api.depends("promissory_ids")
+    def _compute_promissory_count(self):
+        for record in self:
+            record.promissory_count = len(record.promissory_ids)
+    
+
+    
     def action_student_promissory_count(self):
         return{
             'type': 'ir.actions.act_window',
