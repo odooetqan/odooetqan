@@ -3,7 +3,7 @@
 
 
 
-    <record id="view_res_partner_form_view" model="ir.ui.view">            
+    <!-- <record id="view_res_partner_form_view" model="ir.ui.view">            
         <field name="name">res.partner form</field>
         <field name="model">res.partner</field>
         <field
@@ -19,7 +19,7 @@
                         </group>
                     </xpath>
         </field>
-    </record>
+    </record> -->
 
 
     <record id="view_promissory_note_form" model="ir.ui.view">
@@ -61,8 +61,8 @@
                     <group>
                         <group string="Periodicity">
                            <!-- <field name="text_amount"/> -->
-                            <field name="text_amoun2"  attrs="{'invisible': [('invoice_no', '=', False)]}"/>
-                            <field name="text_amoun3"  attrs="{'invisible': [('partner_id', '=', False)]}"/>
+                            <field name="text_amoun2" /><!-- attrs="{'invisible': [('invoice_no', '=', False)]}"/>-->
+                            <field name="text_amoun3"/><!--  attrs="{'invisible': [('partner_id', '=', False)]}"/>-->
 
                         </group>
                         <group>

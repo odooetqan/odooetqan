@@ -15,10 +15,8 @@
     'images': ['static/description/img1.jpeg'],
     'depends': [
                 'base',
-                'sale',
+                'sale','contacts',
                 ],
-                                # 'contact',
-
     'data':[
         'security/multi_company_security.xml',
         'security/ir.model.access.csv',
@@ -30,10 +28,8 @@
         'views/promissory_sequence.xml',
         'views/promissory_view.xml',
         'report/base_document_layout.xml',
-        'report/res_partner.xml',
+        'report/res_partner.xml',       
         'report/promissory_note.xml',
-
-        
     ],
     'installable': True,
     'application': True,

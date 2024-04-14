@@ -87,7 +87,7 @@
               <span t-field="doc.partner_id.street" />
             </td>
             <td style="padding:1px;margin:1px;border:none;text-align:right">
-              <span t-field="doc.partner_id.district" />
+              <!-- <span t-field="doc.partner_id.district" /> -->
             </td>
             <td style="padding:1px;margin:1px;border:none;text-align:right">
               <span t-field="doc.partner_id.city" />

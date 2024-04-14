@@ -14,7 +14,7 @@ class Partners(models.Model):
     district = fields.Char(string="Discrit")
     
     @api.depends('is_company', 'child_ids', 'child_ids.student_id')
-    def _compute_student(self):
+    def _compute_students(self):
         for rec in self:
             student = self.env['student.student'].search([('partner_id', '=', rec.id)], limit=1)
             rec.student_id = student

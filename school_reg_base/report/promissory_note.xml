@@ -8,15 +8,15 @@
                 promissory_note - السند لأمر</field>
             <field name="model">promissory.note</field>
             <field name="report_type">qweb-pdf</field>
-            <field name="report_name">promissory.promissory_note_report_last</field>
-            <field name="report_file">promissory.promissory_note_report_last</field>
+            <field name="report_name">school_reg_base.promissory_note_report_last</field>
+            <field name="report_file">school_reg_base.promissory_note_report_last</field>
             <field name="print_report_name">'promissory - %s' % (object.issuer)</field>
-            <!-- <field name="binding_model_id" ref="model_res_partner"/> -->
             <field name="binding_type">report</field>
         </record>
+            <!-- <field name="binding_model_id" ref="model_res_partner"/> -->
 
         <!-- تقرير التعـــــــــــــــــــــهد -->
-        <template id="promissory.promissory_header">
+        <!-- <template id="school_reg_base.promissory_header">
             <br/><br/>
             <div class="row p-1 my-2 border-bottom bg-light" style="font-size:24">
 
@@ -60,7 +60,6 @@
                             مكان الانشاء : المدينة المنورة
                         </td>
                         <td></td>
-<!--                               -->
  
 
                 <t t-if="float(doc.amount_residual) > 1"> <td
@@ -76,10 +75,7 @@
                             المبلغ:
                             <span t-field="doc.partner_value"/>
                         </td></t>
-<!--                               -->
-
                     </tr>
-<!--                               -->
 
                     <tr
                         style="padding:1px;margin:1px;border:none; background-color:#fff;text-align:right"></tr>
@@ -91,7 +87,6 @@
                                 sans-serif;;font-size:24px;">
                             : أتعهد أنا
                             <span t-field="doc.issuer"/>
-<!--                            سعودي الجنسية-->
  بموجب هوية رقم
                             <span t-field="doc.issuer_id"/>. أن ادفع بموجب هذا السند لأمر شركة الحياة شركة
                                 سعودية بموجب القيد في السجل التجارى رقم (4650214659) الموضح اعلاه و مقداره 
@@ -102,7 +97,6 @@
                             فقط لاغير و لحامل هذه الورقة حق الرجوع بدون مصروفات أو احتجاج.
                         </td>
                     </tr>
-<!--                               -->
 
 
                     <tr style="padding:1px;margin:1px;border:none;text-align:right">
@@ -185,26 +179,25 @@
                 </table>
             </div>
 
-        </template>
+        </template> -->
         <!-- تقرير التعـــــــــــــــــــــهد -->
 
         <!-- main document template Pldge -->
-        <template id="promissory.promissory_document_">
+        <template id="school_reg_base.promissory_document_">
             <t t-debug=""></t>
             <t t-call="web.external_layout">
                 <t t-set="doc" t-value="doc.with_context({'lang': lang})"/>
                 <div class="page">
-                    <t t-call="promissory.promissory_header"/>
+                    <t t-call="school_reg_base.promissory_header"/>
                 </div>
             </t>
         </template>
 
-        <!-- main template Pldge-->
-        <template id="promissory.promissory_note_report_last">
+        <template id="school_reg_base.promissory_note_report_last">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="doc">
                     <t t-set="lang" t-value="doc.create_uid.lang"/>
-                    <t t-call="promissory.promissory_document_"/>
+                    <t t-call="school_reg_base.promissory_document_"/>
                 </t>
             </t>
         </template>
