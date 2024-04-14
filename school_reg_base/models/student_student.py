@@ -166,7 +166,7 @@ class StudentStudent(models.Model):
     #         else:
     #             contract.promissory_count = 0
 
-    promissory_count = fields.Integer(string="Promissory Count", compute="_compute_order_count")
+    promissory_count = fields.Integer(string="Promissory Count", compute="_compute_promissory_count")
     
     @api.depends("promissory_ids")
     def _compute_promissory_count(self):
