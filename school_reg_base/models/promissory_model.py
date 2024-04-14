@@ -95,8 +95,8 @@ class PromissoryNote(models.Model):
     # reference = fields.Char(string="promissory Refrence", required=True, copy=False, readonly=True, default=lambda self: _('NEW'))
     reference = fields.Char(string='promissory Refrence', required=True,
                           readonly=True, default=lambda self: _('New'))
-    issuer_id = fields.Char(related='issuer.id_number', string=' Identification' , index=True)
-    issuer_id_nationality = fields.Char(related='issuer.nationality.name', string=' Id ' , index=True)
+    issuer_id = fields.Char(related='issuer.student_id.id_number', string=' Identification' , index=True)
+    issuer_id_nationality = fields.Char(related='issuer.student_id.nationality.name', string=' Id ' , index=True)
     issuer_date = fields.Date(string=' Date ', index=True)
     payee = fields.Many2one('res.company', string='Company ', index=True)
     company_id = fields.Many2one('res.company', string='Company ' , default=1, index=True)
