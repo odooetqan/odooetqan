@@ -103,7 +103,7 @@ class PromissoryNote(models.Model):
     payee_company_registeration  = fields.Char(related='company_id.partner_id.company_registeration', string='Company  ')
     invoice_no = fields.Many2one('account.move', string=' Invoice', domain=[("move_type", "!=", "entry")], index=True)
     partner_id = fields.Many2one('res.partner', string='  Partner', index=True)
-    partner_value = fields.Float(related='partner_id.balance', string='  Balance ', index=True)    
+    partner_value = fields.Float(related='partner_id.total_due', string='  Balance ', index=True)    
     text_amoun3 = fields.Char(string="Amount in words   ", required=False, compute="amount_to_words3" )
 
     
