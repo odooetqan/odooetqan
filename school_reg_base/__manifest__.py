@@ -5,18 +5,13 @@
     'name': 'Registeration Student Base',
     'version': '17.0.1.0.0',
     'summary': """Base Module of Registeration students in school with all configuration""",
-    'description': """
-    """,
+    'description': """  """,
     'sequence': -100,
-
     'author': 'Alhayah Ltd.',
     'website': 'http://alhayah.edu.sa',
     'support': 's.musa@alhayah.edu.sa',
     'images': ['static/description/img1.jpeg'],
-    'depends': [
-                'base',
-                'sale','contacts',
-                ],
+    'depends': [ 'base', 'sale','contacts',  ],
     'data':[
         'security/multi_company_security.xml',
         'security/ir.model.access.csv',
