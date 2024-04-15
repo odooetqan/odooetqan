@@ -18,7 +18,7 @@
         <!-- تقرير التعـــــــــــــــــــــهد -->
         <template id="school_reg_base.promissory_header">
             <br/><br/>
-            <div class="row p-1 my-2 border-bottom bg-light" style="font-size:24; font-family:Cairo;">
+            <div class="row p-1 my-2 border-bottom bg-light" style="font-size:24;  font-family: 'Cairo';">
 
                 <br/>
                 <br/>
