@@ -25,10 +25,10 @@
                 <br/>
                 <table
                     dir="rtl"
-                    style="padding:1px;margin:1px;border:none; background-color:#fff;text-align:right;font-size:11px;">
+                    style="padding:1px;margin:1px;border:none; background-color:#fff;text-align:right;font-size:11px; font-family: 'Cairo'">
                     <tr  style="padding:1px;margin:1px;border:none; background-color:#fff;text-align:right">
                         <td
-                            style="padding:1px;margin:1px;border:none;text-align:center;font-family:Arial,
+                            style="padding:1px;margin:1px;border:none;text-align:center; font-family: 'Cairo',
                                 sans-serif;" colspan="4">
                             <div>
                             
@@ -37,7 +37,7 @@
                               <br/>
 
                                 <h3
-                                    style="color:orange; background-color:#fff;padding-top:-50px;margin-top:-5px;">
+                                    style="color:orange; background-color:#fff;padding-top:-50px;margin-top:-5px; font-family: 'Cairo'">
                                     <Strong>
                                         <center>سند لأمر :
                                             <span t-field="doc.reference"></span>
@@ -50,12 +50,12 @@
                     <tr
                         style="padding:1px;margin:1px;border:none; background-color:#fff;text-align:right">
                         <td
-                            style="padding:1px;margin:1px;border:none;text-align:center;font-family:Arial,
+                            style="padding:1px;margin:1px;border:none;text-align:center; font-family: 'Cairo',
                                 sans-serif;font-size:14px;">تاريخ الانشاء
                             <span t-field="doc.create_date"></span>
                         </td>
                         <td
-                            style="padding:1px;margin:1px;border:none;text-align:center;font-family:Arial,
+                            style="padding:1px;margin:1px;border:none;text-align:center; font-family: 'Cairo',
                                 sans-serif;;font-size:14px;">
                             مكان الانشاء : المدينة المنورة
                         </td>
@@ -63,14 +63,14 @@
  
 
                 <t t-if="float(doc.amount_residual) > 1"> <td
-                            style="padding:1px;margin:1px;border:none;text-align:center;font-family:Arial,
+                            style="padding:1px;margin:1px;border:none;text-align:center; font-family: 'Cairo',
                                 sans-serif;;font-size:14px;">
                             المبلغ:
                             <span t-field="doc.amount_residual"/>
                         </td>
                         </t>
                      <t t-if="float(doc.partner_value) > 1">   <td 
-                            style="padding:1px;margin:1px;border:none;text-align:center;font-family:Arial,
+                            style="padding:1px;margin:1px;border:none;text-align:center; font-family: 'Cairo',
                                 sans-serif;;font-size:14px;">
                             المبلغ:
                             <span t-field="doc.partner_value"/>
@@ -80,10 +80,10 @@
                     <tr
                         style="padding:1px;margin:1px;border:none; background-color:#fff;text-align:right"></tr>
                     <tr
-                        style="padding:1px;margin:1px;border:none;text-align:center;font-family:Arial, sans-serif;;font-size:24px;">
+                        style="padding:1px;margin:1px;border:none;text-align:center; font-family: 'Cairo', sans-serif;;font-size:24px;">
                         <td
                             colspan="4"
-                            style="padding:1px;margin:1px;border:none;text-align:center;font-family:Arial,
+                            style="padding:1px;margin:1px;border:none;text-align:center; font-family: 'Cairo',
                                 sans-serif;;font-size:24px;">
                             : أتعهد أنا
                             <span t-field="doc.issuer"/>
@@ -102,11 +102,11 @@
                     <tr style="padding:1px;margin:1px;border:none;text-align:right">
                         <td
                             colspan="2"
-                            style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:Arial,
+                            style="padding:1px;margin:1px;border:none;text-align:justfy; font-family: 'Cairo',
                             sans-serif;;font-size:24px;"></td>
                         <td
                             colspan="2"
-                            style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:Arial,
+                            style="padding:1px;margin:1px;border:none;text-align:justfy; font-family: 'Cairo',
                             sans-serif;;font-size:24px;">
                             <br/>
                             <br/>
@@ -119,11 +119,11 @@
                     <tr style="padding:1px;margin:1px;border:none;text-align:right">
                         <td
                             colspan="2"
-                            style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:Arial,
+                            style="padding:1px;margin:1px;border:none;text-align:justfy; font-family: 'Cairo',
                             sans-serif;;font-size:24px;"></td>
                         <td
                             colspan="2"
-                            style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:Arial,
+                            style="padding:1px;margin:1px;border:none;text-align:justfy; font-family: 'Cairo',
                             sans-serif;;font-size:24px;">
                             ..........................................................
                         </td>
@@ -131,11 +131,11 @@
                     <tr style="padding:1px;margin:1px;border:none;text-align:right">
                         <td
                             colspan="2"
-                            style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:Arial,
+                            style="padding:1px;margin:1px;border:none;text-align:justfy; font-family: 'Cairo',
                             sans-serif;;font-size:24px;"></td>
                         <td
                             colspan="2"
-                            style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:Arial,
+                            style="padding:1px;margin:1px;border:none;text-align:justfy; font-family: 'Cairo',
                             sans-serif;;font-size:24px;">
                             : الاسم
                         </td>
@@ -143,11 +143,11 @@
                     <tr style="padding:1px;margin:1px;border:none;text-align:right">
                         <td
                             colspan="2"
-                            style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:Arial,
+                            style="padding:1px;margin:1px;border:none;text-align:justfy; font-family: 'Cairo',
                             sans-serif;;font-size:24px;"></td>
                         <td
                             colspan="2"
-                            style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:Arial,
+                            style="padding:1px;margin:1px;border:none;text-align:justfy; font-family: 'Cairo',
                             sans-serif;;font-size:24px;">
                             ..........................................................
                         </td>
@@ -155,11 +155,11 @@
                     <tr style="padding:1px;margin:1px;border:none;text-align:right">
                         <td
                             colspan="2"
-                            style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:Arial,
+                            style="padding:1px;margin:1px;border:none;text-align:justfy; font-family: 'Cairo',
                             sans-serif;;font-size:24px;"></td>
                         <td
                             colspan="2"
-                            style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:Arial,
+                            style="padding:1px;margin:1px;border:none;text-align:justfy; font-family: 'Cairo',
                             sans-serif;;font-size:24px;">
                             : العنوان
                         </td>
@@ -167,11 +167,11 @@
                     <tr style="padding:1px;margin:1px;border:none;text-align:right">
                         <td
                             colspan="2"
-                            style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:Arial,
+                            style="padding:1px;margin:1px;border:none;text-align:justfy; font-family: 'Cairo',
                             sans-serif;;font-size:24px;"></td>
                         <td
                             colspan="2"
-                            style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:Arial,
+                            style="padding:1px;margin:1px;border:none;text-align:justfy; font-family: 'Cairo',
                             sans-serif;;font-size:24px;">
                             ..........................................................
                         </td>
