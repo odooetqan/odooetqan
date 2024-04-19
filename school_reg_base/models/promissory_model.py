@@ -87,11 +87,9 @@ class PromissoryNote(models.Model):
     
     _name = "promissory.note"
     
-    
     issuer = fields.Many2one('res.partner', string='Issuer ')
     # reference = fields.Char(string="promissory Refrence", required=True, copy=False, readonly=True, default=lambda self: _('NEW'))
-    reference = fields.Char(string='promissory Refrence', required=True,
-                          readonly=True, default=lambda self: _('New'))
+    reference = fields.Char(string='promissory Refrence', required=True, readonly=True, default=lambda self: _('New'))
     issuer_id = fields.Char(related='issuer.student_id.id_number', string=' Identification' , index=True)
     issuer_id_nationality = fields.Char(related='issuer.student_id.nationality.name', string=' Id ' , index=True)
     issuer_date = fields.Date(string=' Date ', index=True)
@@ -101,7 +99,6 @@ class PromissoryNote(models.Model):
     invoice_no = fields.Many2one('account.move', string=' Invoice', domain=[("move_type", "!=", "entry")], index=True)
     partner_id = fields.Many2one('res.partner', string='  Partner', index=True)
     student_id = fields.Many2one('student.student', related="partner_id.student_id")
-    
     partner_value = fields.Monetary(related='partner_id.total_due', string='  Balance ', index=True)    
     currency_id = fields.Many2one('res.currency', string='Currency', required=True,                            
     readonly=True, states={'draft': [('readonly', False)]},
@@ -110,38 +107,32 @@ class PromissoryNote(models.Model):
                                  readonly=True, states={'draft': [('readonly', False)]},
                                  default=lambda self: self.env.company)
 
-
     text_amoun3 = fields.Char(string="Amount in words   ", required=False, compute="amount_to_words3" )
 
-    
+
+    def get_default_calculation_method(self):
+        default_calculation_method = '1'
+        return default_calculation_method
+   
     calculation_method = fields.Selection(
         string=' Calculation Type ',
         selection =[
-                ('1',' Custom'),
+                ('1','Partner Value'),
+                ('2','Invoice Value'),
             ],
+        default=get_default_calculation_method, 
+        required=True
     )
 
-    amount = fields.Float(
-        string="Amount",
-        digits="Account",
-        default="",
-        # readonly=True,
-        required=True,index=True
-    ) 
-    
+    amount = fields.Float(   string="Amount",   digits="Account", default="", required=True,index=True ) # readonly=True,
     text_amount = fields.Char(string="   Amount in words", required=False, compute="amount_to_words" )
     text_amoun2 = fields.Char(string="   Amoount in words ", required=False, compute="amount_to_words2" )
     amount_residual = fields.Char(string=" Residual Value",  required=False, compute="compute_amount_residual")
 
-    
     # @api.depends('invoice_no')
     def compute_amount_residual(self):
         for rec in self:
             rec['amount_residual'] = rec.invoice_no.amount_residual
-        # if self.invoice_no:
-        #     self.amount_residual = self.invoice_no.amount_residual
-        # else:
-        #     self.amount_residual = 1.1
 
     @api.depends('amount')
     def amount_to_words(self):
@@ -154,9 +145,8 @@ class PromissoryNote(models.Model):
             else:
                 rec.text_amount = "صفر"
 
-
 #---------------------------------------------------------------------------------------------------------------
-    @api.depends('partner_id', 'partner_value')
+    @api.depends('partner_id', 'partner_value','calculation_method','invoice_no')
     def amount_to_words3(self):
         from num2words import num2words
         
@@ -180,12 +170,15 @@ class PromissoryNote(models.Model):
         else:
             self.text_amoun3 = "صفر"
 #---------------------------------------------------------------------------------------------------------------
-#---------------------------------------------------------------------------------------------------------------
-    @api.depends('amount_residual', 'invoice_no')
+    @api.depends('partner_id', 'partner_value','amount_residual', 'invoice_no','calculation_method')
     def amount_to_words2(self):
         from num2words import num2words
         
-        amount_residual_1 = self.amount_residual
+        if calculation_method == '1':
+            amount_residual_1 = self.amount_residual
+        else:
+            amount_residual_1 = self.partner_value
+
         if amount_residual_1:
                 
             pre = float(amount_residual_1)
