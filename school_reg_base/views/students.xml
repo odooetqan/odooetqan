@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<!-- ......................................Start Student Student .................................................... . -->
+		<!-- Start Student Student -->
+		<record id="student_student_form_view" model="ir.ui.view">
+			<field name="name">student.student.form.view</field>
+			<field name="model">student.student</field>
+			<field name="arch" type="xml">
+				<form>
+					<header>
+						<field name="state" widget="statusbar" string="Status" statusbar_visible="draft,active,blocked,in_active"/>
+						
+						<button name="reset_draft" type="object" string="Reset to Draft" class="btn-warning"  invisible = "state == 'draft'"/>
+						<button name="student_confirm" type="object" string="Confirm" class="btn-success" invisible="state != 'draft'" />
+						<button name="student_blocked" type="object" string="Blocked" class="btn-danger"  invisible="state != 'draft'" />
+						<button name="student_in_active" type="object" string="In Active" class="btn-parimary" invisible="state != 'draft'" />			
+						<!-- Create buttons create promissory create contract create sale order -->
+						<button name="action_order_students_form" type="object"  string="Create Sales Order" class="btn-success" />
+						<button name="action_contract_students_form" type="object"  string="Create Contract" class="btn-success" />
+						<button name="action_promissory_students_form" type="object"  string="Create Promissory" class="btn-success" />
+					</header>
+					<sheet>
+						<div name="button_box" position="inside">
+							<button name="action_qutation_students" type="object" class="oe_stat_button" icon="fa-shopping-cart">
+								<div class="o_state_info">
+									<div class="o_form_field o_stat_info">
+										<span class="o_stat_value">
+											<field name="qutation_count" />
+										</span>
+										<span class="o_stat_text">Qutations</span>
+									</div>
+								</div>
+							</button>
+
+							<button name="action_order_students" type="object" class="oe_stat_button" icon="fa-usd">
+								<div class="o_state_info">
+									<div class="o_form_field o_stat_info">
+										<span class="o_stat_value">
+											<field name="order_count" />
+										</span>
+										<span class="o_stat_text">Sale Orders</span>
+									</div>
+								</div>
+							</button>
+							<button name="action_student_invoice_count" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+								<div class="o_state_info">
+									<div class="o_form_field o_stat_info">
+										<span class="o_stat_value">
+											<field name="invoice_count" />
+										</span>
+										<span class="o_stat_text">Invoices</span>
+									</div>
+								</div>
+							</button>
+							<button name="action_student_contract_count" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+								<div class="o_state_info">
+									<div class="o_form_field o_stat_info">
+										<span class="o_stat_value">
+											<field name="contract_count" />
+										</span>
+										<span class="o_stat_text">Contracts</span>
+									</div>
+								</div>
+							</button>
+							<button name="action_student_promissory_count" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+								<div class="o_state_info">
+									<div class="o_form_field o_stat_info">
+										<span class="o_stat_value">
+											<field name="promissory_count" />
+										</span>
+										<span class="o_stat_text">Promissory</span>
+									</div>
+								</div>
+							</button>
+
+							
+							
+<!-- 							<button name="action_student_invoice_count" type="object" class="oe_stat_button" icon="fa-list">
+								<div class="o_state_info">
+									<div class="o_form_field o_stat_info">
+										<span class="o_stat_value">
+											<field name="currency_id" invisible="1"/>
+											<field name="total_remaining_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+										</span>
+										<span class="o_stat_text">Due</span>
+									</div>
+								</div>
+							</button> -->
+						</div>
+						<div class="oe_title">
+							<h3>Student</h3>
+							<h3>
+								<label for="name">Name</label>
+								<field name="name" placeholder="Example: Ahmed Omar"/>
+								<label for="family_name">Family Name</label>
+								<field name="family_name"/>
+								<label for="family_number">Family Number</label>
+								<field name="family_number"/>
+								<label for="student_seq">Student Number</label>
+								<field name="student_seq"/>
+							</h3>
+						</div>
+						<group>
+							<group>
+								<field name="student_status" />
+								<field name="guardian_id" options="{'no_create_edit': True}"/>
+								<field name="gender" options="{'no_create_edit': True}"/>
+								<field name="nationality" options="{'no_create_edit': True}"/>
+								<field name="id_type" options="{'no_create_edit': True}"/>
+								<field name="id_number"/>
+								<field name="tage" options="{'no_create_edit': True}"  widget="many2many_tags"/>
+								<field name="reason"  options="{'no_create_edit': True}"  invisible="state != 'in_active'"/>
+								<field name="know_us" options="{'no_create_edit': True}"/>
+							</group>
+							<group>
+								<field name="birth_date"/>
+<!-- 								<field name="hijri_date"/> -->
+								<field name="mobile"/>
+								<field name="mobile2"/>
+								<field name="email"/>
+								<field name="partner_id" required="0" readonly="1"/>
+							</group>
+						</group>
+						<notebook>
+							<page name="class" string="Class">
+								<group>
+									<field name="class_id" options="{'no_create_edit': True}"/>
+									<field name="stage_id"/>
+									<field name="section_id"/>
+									<field name="is_secondary" string="Is Secondary"/>
+									
+									<field name="tax_type"/>
+									<field name="analytic_accounts"  widget="many2many_tags"/>
+									<field name="track_id"/>
+									<field name="product_id"/>
+									<field name="secondary_major" options="{'no_create_edit': True}" invisible="is_secondary != False" />
+									<field name="ex_school"/>
+									<field name="current_year" options="{'no_create_edit': True}"/>
+									<field name="previous_year" options="{'no_create_edit': True}"/>
+									<field name="company_current_year" options="{'no_create_edit': True}"/>
+								</group>
+							</page>
+							<page name="discount" string="Discount">
+								<group>
+									<field name="pricelist_id" />
+									<field name="sibling_discount" />
+									<field name="student_discount" />
+									<field name="discount" />
+								</group>
+							</page>
+							<page name="Qutataions">
+								<field name="qutetions_ids" domain="['|',('state', '=', 'cancle'),('state', '=', 'draft')]">
+				                                    <tree>
+				                                        <field name="name"/>
+				                                        <field name="date_order"/>
+				                                        <field name="partner_id"/>
+				                                        <field name="user_id"/>
+				                                        <field name="amount_untaxed"/>
+				                                        <field name="amount_tax"/>
+				                                        <field name="amount_total"/>
+				                                        <field name="state"/>
+				                                    </tree>
+				                                </field>
+							</page>
+							<page name="Sale Orders">
+								<field name="qutetions_ids"  domain="['|',('state', '!=', 'cancle'),('state', '!=', 'draft')]">
+				                                    <tree>
+				                                        <field name="name"/>
+				                                        <field name="date_order"/>
+				                                        <field name="partner_id"/>
+				                                        <field name="user_id"/>
+				                                        <field name="amount_untaxed"/>
+				                                        <field name="amount_tax"/>
+				                                        <field name="amount_total"/>
+				                                        <field name="state"/>
+				                                        <field name="invoice_status"/>
+				                                    </tree>
+				                                </field>
+							</page>
+							<page  name="invoices">
+								<field name="invoices">				                                        
+									<tree>
+									    <field name="name"/>
+									    <field name="date"/>
+									    <field name="partner_id"/>
+									    <field name="amount_untaxed_signed"/>
+									    <field name="amount_tax_signed"/>
+									    <field name="amount_total_signed"/>
+									    <field name="amount_residual_signed"/>
+									    <field name="payment_state"/>
+									    <field name="state"/>
+									</tree>
+							    </field>
+ 							</page>
+							
+							<page  name="contracts">
+								<field name="contract_ids">				                                        
+									<tree>
+										<field name="student_number"/>
+										<field name="name"/>
+										<field name="guardian_id" options="{'no_create_edit': True}"/>
+										<field name="gender" options="{'no_create_edit': True}" optional="hide"/>
+										<field name="nationality" options="{'no_create_edit': True}" optional="hide"/> 
+										<field name="id_type" options="{'no_create_edit': True}" optional="hide"/>
+										<field name="id_number" optional="hide"/>
+										<field name="reason"  options="{'no_create_edit': True}"  optional="hide" />
+										<field name="know_us" options="{'no_create_edit': True}" optional="hide"/>
+										<field name="birth_date" optional="hide"/>
+										<field name="mobile"/>
+										<field name="mobile2"/>
+										<field name="email"/>
+										<field name="partner_id" required="0" readonly="0" optional="hide"/>
+										<field name="class_id" options="{'no_create_edit': True}"/>
+										<field name="stage_id"/>
+										<field name="section_id"/>
+										<field name="track_id"/>
+										<field name="ex_school" optional="hide"/>
+										<field name="current_year" options="{'no_create_edit': True}" optional="hide"/>
+										<field name="previous_year" options="{'no_create_edit': True}" optional="hide"/>
+										<field name="sibling_discount"  optional="hide"/>
+										<field name="student_discount"  optional="hide"/>
+										<!--  <field name="student_id"/>
+										<field name="date"/>
+										<field name="partner_id"/>
+										<field name="amount_untaxed_signed"/>
+										<field name="amount_tax_signed"/>
+										<field name="amount_total_signed"/>
+										<field name="amount_residual_signed"/>
+										<field name="payment_state"/>
+										<field name="state"/> -->
+									</tree>
+							    </field>
+ 							</page>
+							
+							<page  name="promissory">
+								<field name="promissory_ids">				                                        
+									<tree>
+									    <field name="student_id"/>
+										<field name="issuer"/>
+										<field name="issuer_id"/>
+										<field name="student_id" required="1"/>                
+										<field name="calculation_method"/>
+										<field name="amount"/>
+										<field name="amount_residual"/>             
+										<field name="issuer_date"/>
+										<field name="payee"/>
+										<field name="payee_company_registeration"/>
+										<field name="invoice_no"/>
+										<field name="text_amount"/>
+										<field name="partner_value"/>
+<!-- 									    <field name="date"/>
+									    <field name="partner_id"/>
+									    <field name="amount_untaxed_signed"/>
+									    <field name="amount_tax_signed"/>
+									    <field name="amount_total_signed"/>
+									    <field name="amount_residual_signed"/>
+									    <field name="payment_state"/>
+									    <field name="state"/> -->
+									</tree>
+							    </field>
+ 							</page>
+							
+							<page name="other_information" string="Other Informations">
+								<group>
+									<group>
+										<field name="street"/>
+										<field name="street2"/>
+										<field name="city"/>
+										<field name="country_id"/>
+									</group>
+									<group>
+										<field name="student_date"/>
+										<field name="date_end"/>
+										<field name="date_done"/>
+										<field name="confirm_date"/>
+										<field name="userblocked_date"/>
+									</group>
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers"/>
+						<field name="message_ids" widget="mail_thread"/>
+					</div>
+				</form>
+			</field>
+		</record>
+		<!-- ......................................End Student Student   .................................................... . -->
+	</data>
+</odoo>
