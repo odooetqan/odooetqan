@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- <record id="view_res_partner_form_view" model="ir.ui.view">            
+        <field name="name">res.partner form</field>
+        <field name="model">res.partner</field>
+        <field
+                name="inherit_id"
+                ref="partner_contact_personal_information_page.personal_information"
+            />
+        <field name="arch" type="xml">
+                    <xpath expr="//group[1]" position="before">
+                        <group name="contact_details">
+                            <group>                                    
+                                <field name="company_registeration" string="سجل الشركة" />
+                            </group>
+                        </group>
+                    </xpath>
+        </field>
+    </record> -->
+    <record id="view_promissory_note_form" model="ir.ui.view">
+        <field name="name">promissory_note</field>
+        <field name="model">promissory.note</field>
+        <field name="arch" type="xml">
+            <form string="السند لأمر">
+                <sheet>
+
+                      
+
+
+                    
+					<header>
+						<field name="state" widget="statusbar" string="Status" statusbar_visible="draft,active,blocked,in_active"/>
+
+						
+					    <button name="reset_draft" type="object" string="Reset to Draft" class="btn-warning"
+					            invisible = "state == 'draft'"/>
+
+
+						<button name="student_confirm" type="object" string="Confirm" class="btn-success" invisible="state != 'draft'" />
+						<button name="student_blocked" type="object" string="Blocked" class="btn-danger"  invisible="state != 'draft'" />
+						<button name="student_in_active" type="object" string="In Active" class="btn-parimary" invisible="state != 'draft'" />	
+                        
+					</header>
+				
+                    <div class="oe_title">
+                        <!-- <label for="name" string="Asset Type" class="oe_edit_only"
+                               attrs="{'invisible': [('type','!=','purchase')]}"/>
+                        <label for="name" string="Deferred Revenue Type" class="oe_edit_only"
+                               attrs="{'invisible': [('type','==','purchase')]}"/> -->
+                        <h1>
+                            <field name="reference" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="المحرر ">
+                            <field name="issuer"/>
+                            <field name="student_id" required="1"/>                
+                            <field name="partner_id"/>                
+                            <field name="issuer_id"/>
+                            <field name="calculation_method"/>
+                            <!-- <field name="amount"/> -->
+                            <!-- <field name="issuer_id_nationality"/> -->
+                        </group>
+                        <group  string="الدائن">
+                            <field name="issuer_date"/>
+                            <field name="payee"/>
+                            <field name="payee_company_registeration"/>
+                            <field name="invoice_no" invisible="calculation_method == '1'"/>
+                           <!-- <field name="partner_id"  invisible="calculation_method == '2'" /> -->
+                             <field name="amount" />
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Periodicity">
+                            <field name="text_amount" />
+
+                        </group>
+                        <group>
+                           
+                        </group>
+                        <group string="Additional Options">
+                         
+                        </group> 
+                    </group>
+
+                 <!--    <notebook colspan="4">
+                        <page string="Depreciation Board">
+                            <field name="asstes" mode="tree" options="{'reload_whole_on_button': true}"> 
+                                <tree string="Depreciation Lines" > 
+                                </tree>
+                                <!- - <form string="Depreciation Lines" create="false">
+                                    <group>
+                                        <group>
+                                            <field name="parent_state" invisible="1"/>
+                                            <field name="name"/>
+                                            <field name="sequence"/>
+                                            <field name="move_id"/>
+                                            <field name="move_check"/>
+                                            <field name="parent_state" invisible="1"/>
+                                        </group>
+                                        <group>
+                                            <field name="amount" widget="monetary"/>
+                                            <field name="depreciation_date"/>
+                                            <field name="depreciated_value"/>
+                                            <field name="remaining_value"/>
+                                        </group>
+                                    </group>
+                                </form> - ->
+                            <!- -  </field> - - >
+                        </page>
+                    </notebook>-->
+                </sheet>
+                
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+            </form>
+        </field>
+    </record>
+
+
+  <record id="view_promissory_note_kanban" model="ir.ui.view">
+        <field name="name">promossory.note.kanban</field>
+        <field name="model">promissory.note</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <!-- <field name="name"/> -->
+                <!-- <field name="image" widget="image" class="oe_avatar" /> -->
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_promissory_note_tree" model="ir.ui.view">
+        <field name="name">promissory.note.tree</field>
+        <field name="model">promissory.note</field>
+        <field name="arch" type="xml">
+            <tree string=" السندات لأمر"> <field name="issuer"/>
+                <field name="issuer_id"/>
+                <field name="student_id" required="1"/>                
+                <field name="calculation_method"/>
+                <field name="amount"/>
+                <field name="amount_residual"/>             
+                <field name="issuer_date"/>
+                <field name="payee"/>
+                <field name="payee_company_registeration"/>
+                <field name="invoice_no"/>
+                <field name="text_amount"/>
+                <field name="partner_value"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_promissory_note_search" model="ir.ui.view">
+        <field name="name">promissory.note.search</field>
+        <field name="model">promissory.note</field>
+        <field name="arch" type="xml">
+            <search string="Search  السندات لأمر">
+                <field name="issuer"/>
+                <field name="reference"/>
+                <field name="issuer_id"/>
+                <field name="issuer_date"/>
+                <field name="payee"/>
+                <field name="invoice_no"/>
+                <!-- <filter string="name" name="name" />
+                <filter string="name" name="sub_categ" /> -->
+                 <!-- <field name="asstes" /> -->
+                <!-- <field name="asset_type" />  -->
+            </search>
+        </field>
+    </record>
+
+<record id="action_promissory_note_alhayah" model="ir.actions.act_window">
+    <field name="name">Promissory Note alhayah</field>
+    <field name="res_model">promissory.note</field>
+    <field name="view_mode">tree,form</field>
+    <!-- <field name="context">{ 'search_default_not_cashed': 1}</field> -->
+</record>
+
+<!-- 
+<record id="action_promissory_note" model="ir.actions.act_window">
+    <field name="name">promissory_note</field>
+    <field name="res_model">promissory.note</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+</record> -->
+
+<!-- <menuitem id="promissory_note_alhayah" name="السندات لأمر" sequence="14"/>  -->
+    
+    <!-- parent="contacts.res_asset_menu_config"-->
+    
+<!-- <menuitem action="action_promissory_note_alhayah" id="promissory_note_alhayah_menu"     parent="promissory_note_alhayah" /> -->
+
+
+</odoo>
+
