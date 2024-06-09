@@ -18,8 +18,8 @@ class ResStudentInherit(models.Model):
                 'phone': student.mobile,
                 'mobile': student.mobile,
                 'email': student.email,
-                'company_id': self.env.ref('base.main_company').id,
-                'groups_id': [(6, 0, [self.env.ref('base.group_user').id])]
+                # 'company_id': self.env.ref('base.main_company').id,
+                # 'groups_id': [(6, 0, [self.env.ref('base.group_user').id])]
             }
             partner = self.env['res.partner'].create(partner_vals)
             student.partner_id = partner.id
