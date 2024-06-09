@@ -620,10 +620,10 @@ class StudentStudent(models.Model):
             if track_rec.analytic_account_id:
                 analytic_accounts.append(track_rec.analytic_account_id.id)
         if vals.get("partner_id"):
-            # partner_rec = self.env["res.partner"].browse(vals["partner_id"])
-            # if partner_rec.analytic_account_id:
-            #     analytic_accounts.append(partner_rec.analytic_account_id.id)
-        # return [(6, 0, analytic_accounts)]
+            partner_rec = self.env["res.partner"].browse(vals["partner_id"])
+            if partner_rec.analytic_account_id:
+                analytic_accounts.append(partner_rec.analytic_account_id.id)
+        return [(6, 0, analytic_accounts)]
 
 
  
