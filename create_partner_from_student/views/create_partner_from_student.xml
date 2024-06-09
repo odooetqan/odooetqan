@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+
+        <record id="view_student_from_inherit" model="ir.ui.view">
+            <field name="name">res.student.form</field>
+            <field name="model">student.student</field>
+            <field name="inherit_id" ref="school_reg_base.student_student_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button['action_promissory_students_form']" position="after">
+                    <button name="create_partner" type="object"  string="Make Partner"   class="btn-danger" />
+                </xpath>
+            </field>
+        </record>
+
+<!--         
         <record id="view_student_from_inherit" model="ir.ui.view">
             <field name="name">student.student.form</field>
             <field name="model">student.student</field>
@@ -17,7 +30,7 @@
             </field>
         </record>
     </data>
-</odoo>
+</odoo> -->
 
 
 
