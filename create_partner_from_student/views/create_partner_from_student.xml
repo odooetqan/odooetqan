@@ -7,7 +7,7 @@
             <field name="model">student.student</field>
             <field name="inherit_id" ref="school_reg_base.student_student_form_view"/>
             <field name="arch" type="xml">
-                <xpath expr="//button['action_promissory_students_form']" position="after">
+                <xpath expr="//field['state']" position="after">
                     <button name="create_partner_from_student" type="object"  string="Make Partner"   class="btn-danger" />
                 </xpath>
             </field>
