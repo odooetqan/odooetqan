@@ -9,7 +9,7 @@ from odoo.exceptions import UserError
 class Partners(models.Model):
     _inherit = "res.partner"
  
-    analytic_account_id = fields.Many2one('account.analytic.account', string='Anyltic Account')
+    # analytic_account_id = fields.Many2one('account.analytic.account', string='Anyltic Account')
     student_id = fields.Many2one("student.student", compute="_compute_students")
     guardian_id = fields.Many2one("student.guardian", compute="_compute_guardian")
     district = fields.Char(string="Discrit")
