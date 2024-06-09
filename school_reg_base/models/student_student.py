@@ -2,6 +2,10 @@
 
 from odoo import models, fields, api, _
 from datetime import datetime, date
+from odoo.tools import SQL
+from odoo.tools.float_utils import float_round, float_compare
+from odoo.exceptions import UserError, ValidationError
+
 
 # from odoo.exceptions import Warning, UserError
 from odoo.exceptions import UserError
@@ -42,6 +46,38 @@ class Orders(models.Model):
 
     student_id = fields.Many2one(related="partner_id.student_id")#"student.student", compute="_compute_students")
     guardian_id = fields.Many2one(related="student_id.guardian_id")#"student.student", compute="_compute_students")
+    current_year = fields.Many2one('years', string='Current Year')
+
+        
+    @api.depends('partner_id','current_year')
+    def _compute_sale_current_year(self):
+        company_current_year_rec = self.env['res.company'].search([('current_year', '=', self.current_year.id)])
+        student = self.env['student.student'].search([('partner_id', '=', self.partner_id.id), ('current_year', '=', self.current_year.id)])
+
+        equal_current_year = self.env['sale.order'].search([
+            ('partner_id', '=', self.partner_id.id), 
+            ('current_year', '=', company_current_year_rec.id)
+        ], limit=1)
+        if equal_current_year:
+            student.sale_current_year = 1
+        else:
+            student.sale_current_year = 0
+
+    @api.model
+    def create(self, vals):
+        order = super(Orders, self).create(vals)
+        company_current_year_rec = self.env['res.company'].search([('current_year', '=', order.current_year.id)])
+        student = self.env['student.student'].search([('partner_id', '=', order.partner_id.id), ('current_year', '=', order.current_year.id)])
+
+        equal_current_year = self.env['sale.order'].search([
+            ('partner_id', '=', order.partner_id.id), 
+            ('current_year', '=', company_current_year_rec.id)
+        ], limit=1)
+        if equal_current_year:
+            student.sale_current_year = 1
+        else:
+            student.sale_current_year = 0
+        return order
 
 class AccountMove(models.Model):
     _inherit = "account.move"
@@ -54,7 +90,6 @@ class StudentStudent(models.Model):
     _name = "student.student"
     _description = "Students Model"
     # _inherit = ['mail.thread', 'mail.activity.mixin', 'portal.mixin']
-
     #_inherit = ['mail.thread', 'ir.needaction_mixin']
     _inherit = ['mail.thread', 'mail.activity.mixin', 'portal.mixin']      # odoo11
     _order = 'id desc'
@@ -101,17 +136,13 @@ class StudentStudent(models.Model):
     ex_school = fields.Many2one("ex.schools", string="Ex School", copy=True, tracking=True)
     current_year = fields.Many2one("years", string="Current Year", required=True, copy=True, tracking=True)
     previous_year = fields.Many2one("years", string="Previous Year", copy=True)
-    company_current_year = fields.Integer(related="company_id.current_year") 
+    company_current_year = fields.Integer(related="company_id.current_year")
     active = fields.Boolean(default=True)
     gender = fields.Many2one("gender", string="Gender", required=True, copy=True, tracking=True)
     nationality = fields.Many2one("res.country", string="Nationality", required=True, copy=True, tracking=True)
     id_type = fields.Many2one("id.type", string="ID Type", required=True, copy=True, tracking=True)
     id_number = fields.Char(string="ID Number", required=True, copy=True, tracking=True)
-
     tax_type = fields.Many2one('account.tax', string="Tax Type")
-
-
- 
 
     @api.onchange('id_number')
     def _onchange_id_number(self):
@@ -121,14 +152,11 @@ class StudentStudent(models.Model):
             self.tax_type = zero_rate_tax
         else:
             self.tax_type = standard_rate_tax
-
-
  
     tage = fields.Many2many("res.partner.category", "student_id",string="Tage", copy=True, tracking=True)
     birth_date = fields.Date(string="Birth Date")
     hijri_date = fields.Date(string="Hijri Date")
     reason = fields.Many2one("dropoff.reasons", string="Reason")
-
     student_discount = fields.One2many("discounts","student_id", string="Student Discount")
     discount = fields.Float(compute="_compute_total_discounts", string="Total Discounts")
 
@@ -142,24 +170,7 @@ class StudentStudent(models.Model):
             rec.discount = total_discount
 
 
- 
-    # @api.depends("student_discount")
-    # def _compute_total_discounts(self):
-    #     for rec in self:
-    #         if rec.student_discount:
-    #             rec.discount = rec.student_discount.ratio
-    #         else:
-    #             rec.discount = 0.0
-  
-    # discount = fields.Integer(string="Discount", compute="_compute_discount")
-    # def _compute_discount(self):
-    #     discounts = self.env['discounts'].search([('student_id', '=', id)])
-    #     for record in discounts:
-    #         discount += record.ratio
-    #     self.discount = discount
     sibling_discount = fields.Many2one("discount.type", string="Sibling Discount")
-    # student_discount = fields.Many2one("discounts", string="Student Discount")
-    # Rename the following fields to have unique names
     invoice_line_ids = fields.One2many("account.move.line", "partner_id", string="Invoices Items")
     #----------------------------------
     promissory_ids = fields.Many2many(comodel_name='promissory.note', compute='_compute_promissory', string='Promissory',readonly=True)#, ondelete='cascade'
@@ -168,7 +179,23 @@ class StudentStudent(models.Model):
             student_id = record.id
             promissorys = self.env['promissory.note'].search([('student_id', '=', student_id)])
             record.promissory_ids = promissorys or False
-                
+
+    promissory_current_year = fields.Integer(default=0, compute="_compute_promissory_current_year")
+
+    @api.depends('partner_id','current_year','promissory_ids')
+    def _compute_promissory_current_year(self):
+        company_current_year_rec = self.env['res.company'].search([('current_year', '=', self.current_year.id)])
+
+        equal_current_year = self.env['promissory.note'].search([
+            ('partner_id', '=', self.partner_id.id), 
+            ('promissory_current_year', '=', company_current_year_rec.id)
+        ], limit=1)
+        if equal_current_year:
+            self.promissory_current_year = 1
+        else:
+            self.promissory_current_year = 0
+
+
     # promissory_count = fields.Integer(string='Promissory Count', compute='_compute_promissory_count')
     # @api.depends('promissory_ids')
     # def _compute_promissory_count(self):
@@ -178,8 +205,6 @@ class StudentStudent(models.Model):
     #             promissory.promissory_count = len(promissory.promissory_ids)
     #         else:
     #             contract.promissory_count = 0
-    
-
     # promissory_ids = fields.One2many('promissory.note', 'student_id', string='Promissory Notes', ondelete='cascade')
   
     @api.model
@@ -198,7 +223,6 @@ class StudentStudent(models.Model):
         for record in self:
             record.promissory_count = len(record.promissory_ids)
     
-
     
     def action_student_promissory_count(self):
         
@@ -220,10 +244,26 @@ class StudentStudent(models.Model):
             student_id = record.id
             contracts = self.env['student.student.contract'].search([('student_id', '=', student_id)])
             record.contract_ids = contracts or False
-
     
     contract_count = fields.Integer(string="Promissory Count", compute="_compute_contract_count")
-    
+    contract_current_year = fields.Integer(default=0, compute="_compute_contract_current_year")
+
+    @api.depends('partner_id','current_year','promissory_ids')
+    def _compute_contract_current_year(self):
+        company_current_year_rec = self.env['res.company'].search([('current_year', '=', self.current_year.id)])
+
+        equal_current_year = self.env['student.student.contract'].search([
+            ('partner_id', '=', self.partner_id.id), 
+            ('contract_current_year', '=', company_current_year_rec.id)
+        ], limit=1)
+        if equal_current_year:
+            self.contract_current_year = 1
+        else:
+            self.contract_current_year = 0
+
+
+
+
     @api.depends("contract_ids")
     def _compute_contract_count(self):
         for record in self:
@@ -278,9 +318,23 @@ class StudentStudent(models.Model):
                 record.invoice_ids = False
                 record.total_remaining_amount = 0.0
 #-------------------------------------------------------------------------------------------------------------------------------
-
     order_count = fields.Integer(string="Order Count", compute="_compute_order_count")
+    sale_current_year = fields.Integer(default=0, compute="_compute_sale_current_year")
     
+
+    @api.depends('partner_id','current_year','sale_order_ids','order_count')
+    def _compute_sale_current_year(self):
+        company_current_year_rec = self.env['res.company'].search([('current_year', '=', self.current_year.id)])
+
+        equal_current_year = self.env['sale.order'].search([
+            ('partner_id', '=', self.partner_id.id), 
+            ('current_year', '=', company_current_year_rec.id)
+        ], limit=1)
+        if equal_current_year:
+            self.sale_current_year = 1
+        else:
+            self.sale_current_year = 0
+
     @api.depends("sale_order_ids")
     def _compute_order_count(self):
         for record in self:
@@ -297,7 +351,18 @@ class StudentStudent(models.Model):
         }
 
     pricelist_id = fields.Many2one('product.pricelist')
+
     def action_order_students_form(self):
+        for rec in self:
+            self['sale_current_year'] = 1
+            analytic_distribution = {}
+            analytic_distribution[str(rec.class_id.analytic_account_id.id)] = 100
+            analytic_distribution[str(rec.stage_id.analytic_account_id.id)] = 100
+            analytic_distribution[str(rec.track_id.analytic_account_id.id)] = 100
+            rec.analytic_distribution = analytic_distribution       
+            distribution = self.env["account.analytic.distribution.model"].search([('partner_id', '=', self.partner_id.id)])
+            distribution.write({"analytic_distribution": analytic_distribution})
+
         return {
             "type": "ir.actions.act_window",
             "name": "Orders",
@@ -307,25 +372,20 @@ class StudentStudent(models.Model):
             "target": "current",
             "context": {
                 "default_partner_id": self.partner_id.id,
+                'default_current_year': self.current_year.id,
                 "default_order_line": [(0, 0, {
-                               
-                    'name' : self.product_id.name,
-                    'product_id' : self.product_id.id,
-                    'product_uom' : self.product_id.uom_id.id,
-                    'product_uom_qty' : 1
-
-
-                 
-                 # "product_id": self.product_id.id, 
-                 # "discount": self.discount
+                    'name': self.product_id.name,
+                    'product_id': self.product_id.id,
+                    'product_uom': self.product_id.uom_id.id,
+                    'product_uom_qty': 1,
+                    'discount': self.discount,
+                    # 'analytic_account_id': self.analytic_accounts.id,  # Add the analytic account
                 })],
                 "form_view_ref": "sale.view_order_form",
                 "tree_view_ref": "sale.view_order_tree",
             },
         }
 
- 
-           
     def action_contract_students_form(self):
         return {
             "type": "ir.actions.act_window",
@@ -336,11 +396,11 @@ class StudentStudent(models.Model):
             "target": "current",
             "context": {
                 "default_student_id": self.id,
+                "contract_current_year": self.current_year.id,
                 "default_partner_id": self.partner_id.id,
             },
         }
 
-        
     def action_promissory_students_form(self):
         return {
             "type": "ir.actions.act_window",
@@ -351,35 +411,10 @@ class StudentStudent(models.Model):
             "target": "current",
             "context": {
                 "default_student_id": self.id,
+                "promissory_current_year": self.current_year.id,
                 "default_partner_id": self.partner_id.id,
             },
         }
-
- 
-# , "product_uom_qty": 1, "product_uom": self.product_id.uom_id.id
- 
-    # def action_order_students_form(self):
-    #     # pricelist_id = self.pricelist_id or False
-    #     return {
-    #         "type": "ir.actions.act_window",
-    #         "name": "Orders",
-    #         "res_model": "sale.order",
-    #         "domain": [("partner_id", "=", self.partner_id.id)],#, ("state", "!=", "sale")
-    #         "view_mode": "form,tree",
-    #         "target": "current",
-    #         "context": {
-    #             "default_partner_id": self.partner_id.id,
-    #             # "default_pricelist_id": pricelist_id.id,
-    #             "default_order_line": [
-    #                 (0, 0, {
-    #                     "product_id": self.product_id.id,
-    #                     "product_uom_qty": 1,
-    #                     "product_uom": self.product_id.uom_id.id,
-    #                     "discount": self.discount,                     
-    #                 }),
-    #             ],
-    #         },
-    #     }
 
 
     qutation_count = fields.Integer(string="Qutation Count", compute="_compute_qutation_count")
@@ -458,76 +493,204 @@ class StudentStudent(models.Model):
         if self.guardian_id:
             self.mobile = self.guardian_id.mobile 
             self.name = self.name + ' ' + self.guardian_id.name
-
-
-    # seq
+    
     @api.model
     def create(self, vals):
-        if vals.get("number", _("New")) == _("New") and vals.get(
-            "guardian_id"
-        ):  # adding add....
-            guardian = self.env["student.guardian"].browse(
-                vals["guardian_id"]
-            )  # addtional
+        guardian = None  # Initialize guardian as None
+    
+        if vals.get("number", _("New")) == _("New") and vals.get("guardian_id"):
+            guardian = self.env["student.guardian"].browse(vals["guardian_id"])
             if guardian:
                 vals["number"] = guardian.number or _("New")
-            vals["number"] = self.env["ir.sequence"].next_by_code(
-                "student.student.seq"
-            ) or _("New")
-
-        if not vals.get("mobile"):
-            vals["mobile"] = self.env.context.get("default_mobile", "000-000-0000")
-            
+            vals["number"] = self.env["ir.sequence"].next_by_code("student.student.seq") or _("New")
+    
+        vals["mobile"] = self.env.context.get("default_mobile", "000-000-0000")
+    
         guardian_id = vals.get("guardian_id")
         name = vals.get("name")
-        partner_vals = {
-            "student_id": vals.get("id"),
-            "name": vals.get("name"),
-            "mobile": vals.get("mobile"),
-            "email": vals.get("email"),
-        }
-
+    
         if guardian_id:
-            guardian = self.env["student.guardian"].browse(guardian_id)
-
-            # Create the partner with the provided values
-            partner = self.env["res.partner"].create(partner_vals)
-            partner.write({"student_id": self.id})
-            # Set the partner on the student
-            vals["partner_id"] = partner.id
-
-            # Increment the guardian's last student sequence
-            guardian.write({"last_student_seq": guardian.last_student_seq + 1})
-
-            # Assign the new sequence to the student
-            vals["student_seq"] = str(guardian.number) + str(guardian.last_student_seq)
-            vals["student_number"] = str(guardian.number) + str(guardian.last_student_seq)
-            vals["name"] = str(name) + str(guardian.name)
-            vals["mobile"] = guardian.mobile
-            vals["email"] = guardian.email
-
-            # name = vals.get("name") + '' + (vals.get("guardian_id.name") or "")        
-
-
-        
+            # Check if guardian was found
+            if guardian:
+                # partner_vals = {
+                #     "student_id": vals.get("id"),
+                #     "name": name,
+                #     "mobile": vals.get("mobile"),
+                #     "email": vals.get("email"),
+                # }
+    
+                # partner = self.env["res.partner"].create(partner_vals)
+                # partner.write({"student_id": self.id})
+                # vals["partner_id"] = partner.id
+    
+                # Only write to guardian if it's not None
+                guardian.write({"last_student_seq": guardian.last_student_seq + 1})
+    
+                vals["student_seq"] = str(guardian.number) + str(guardian.last_student_seq)
+                vals["student_number"] = str(guardian.number) + str(guardian.last_student_seq)
+                # vals["name"] = str(name) + str(guardian.name)
+                vals["mobile"] = guardian.mobile
+                vals["email"] = guardian.email
+    
+                # distribution = self.env["account.analytic.distribution.model"].create(
+                #     {"partner_id": partner.id}
+                # )
+    
+                # vals["analytic_distribution_id"] = distribution.id
+    
         res = super(StudentStudent, self).create(vals)
         return res
 
-    # def student_confirm(self):
-    #     for rec in self:
-    #         rec.confirm_date = fields.Date.today()
-    #         rec.state = "active"
-
 
  
+   #Create Partner & its analytic distribution  
+    def create_partner_distribution(self, vals):
+        partner = self.env["res.partner"].browse("partner_id")
+        if not partner:
+            partner_vals = {
+                "student_id": self.id,
+                "name": self.name,
+                "mobile": self.mobile,
+                "email": self.email,
+            }
+
+            partner = self.env["res.partner"].create(partner_vals)
+            student = self.env["student.student"].browse(student_id)
+            partner_id = partner.id
+            distribution_vals = {"partner_id": partner.id}  # replace with the actual values
+            distribution = self.env["res.account.analytic.distribution.model"].create(partner_vals)
+            # student.create_partner_distribution(vals)
+            # distribution = self.env["account.analytic.distribution.model"].create(
+            #     {"partner_id": partner.id}
+            # )
+         
+            self.analytic_distribution_id = distribution.id
+#------------------------------------------------------------------------------------------------------------------
+    # def create_partner(self, vals):
+    #     partner = self.env["res.partner"].browse("partner_id")
+    #     if not partner:
+    #         partner_vals = {
+    #             "student_id": self.id,
+    #             "name": self.name,
+    #             "mobile": self.mobile,
+    #             "email": self.email,
+    #         }
+
+    #         partner = self.env["res.partner"].create(partner_vals)
+    #         return partner
+
+    def create_partner(self, vals):
+       partner = self.env["res.partner"].browse("partner_id")
+       if not partner:
+           partner_vals = {
+               "student_id": self.id,
+               "name": self.name,
+               "mobile": self.mobile,
+               "email": self.email,
+           }
+   
+           # Create a verifiable claim using Ceramic's decentralized event streaming protocol
+           event = {
+               "type": "partner",
+               "data": partner_vals
+           }
+           self.publish_event(event)
+   
+           partner = self.env["res.partner"].create(partner_vals)
+           return partner
+
+  
+#------------------------------------------------------------------------------------------------------------------
+    def create_analytic_distribution(self, partner_id):
+        distribution_vals = {"partner_id": partner_id}
+        distribution = self.env["account.analytic.distribution.model"].create(distribution_vals)
+        return distribution 
+#------------------------------------------------------------------------------------------------------------------
+    def create_partner_analytic_distribution(self, vals):
+        partner = self.create_partner(vals)
+        distribution = self.create_analytic_distribution(partner.id)
+        self.analytic_distribution_id = distribution.id
+#------------------------------------------------------------------------------------------------------------------
+    # def create_partner_analytic_distribution(self, vals):
+    #     partner = self.create_partner(vals)
+    #     distribution_vals = {"partner_id": partner.id}
+    #     event = {
+    #         "type": "partner_analytic_distribution",
+    #         "data": distribution_vals
+    #     }
+    #     self.publish_event(event)
+    #     self.analytic_distribution_id = distribution.id
+#------------------------------------------------------------------------------------------------------------------
+
+    # #seq 
+    # @api.model
+    # def create(self, vals):
+    #     guardian = None  # Initialize guardian as None
+     
+    #     if vals.get("number", _("New")) == _("New") and vals.get("guardian_id"):
+    #         guardian = self.env["student.guardian"].browse(vals["guardian_id"])
+    #         if guardian:
+    #             vals["number"] = guardian.number or _("New")
+    #         vals["number"] = self.env["ir.sequence"].next_by_code("student.student.seq") or _("New")
+    
+    #     vals["mobile"] = self.env.context.get("default_mobile", "000-000-0000")
+    
+    #     guardian_id = vals.get("guardian_id")
+    #     name = vals.get("name")
+    
+    #     if guardian_id:
+    #         partner_vals = {
+    #             "student_id": vals.get("id"),
+    #             "name": name,
+    #             "mobile": vals.get("mobile"),
+    #             "email": vals.get("email"),
+    #         }
+    
+    #         partner = self.env["res.partner"].create(partner_vals)
+    #         partner.write({"student_id": self.id})
+    #         vals["partner_id"] = partner.id
+    
+    #         guardian.write({"last_student_seq": guardian.last_student_seq + 1})
+    
+    #         vals["student_seq"] = str(guardian.number) + str(guardian.last_student_seq)
+    #         vals["student_number"] = str(guardian.number) + str(guardian.last_student_seq)
+    #         # vals["name"] = str(name) + str(guardian.name)
+    #         vals["mobile"] = guardian.mobile
+    #         vals["email"] = guardian.email
+    
+    #         distribution = self.env["account.analytic.distribution.model"].create(
+    #             {"partner_id": partner.id}
+    #         )
+
+    #         vals["analytic_distribution_id"] = distribution.id
+
+    #     res = super(StudentStudent, self).create(vals)
+    #     return res
+
+    
+    analytic_distribution = fields.Json(
+        'Analytic Distribution',
+        compute="_compute_analytic_distribution", store=True, copy=True, readonly=False,
+    )
+
+    @api.depends('class_id', 'stage_id', 'track_id', 'partner_id')
+    def _compute_analytic_distribution(self):
+        for rec in self:
+            analytic_distribution = {}
+            analytic_distribution[str(rec.class_id.analytic_account_id.id)] = 100
+            analytic_distribution[str(rec.stage_id.analytic_account_id.id)] = 100
+            analytic_distribution[str(rec.track_id.analytic_account_id.id)] = 100
+            rec.analytic_distribution = analytic_distribution
+            distribution = self.env["account.analytic.distribution.model"].search([('partner_id', '=', self.partner_id.id)])
+            distribution.write({"analytic_distribution": analytic_distribution})
+    
+
     def student_confirm(self):
         for rec in self:
             # manager_mail_template = self.env.ref('reg.email_confirm_school_reg_base')
             # rec.employee_confirm_id = self.env["hr.employee"].search( [("user_id", "=", self.env.uid)], limit=1 )
             rec.confirm_date = fields.Date.today()
             rec.state = "active"
-            
-            # contracts = self.env["student.student.contract"].sudo().browse(rec.partner_id.id)
             contracts = self.env["student.student.contract"].search( [("student_id", "=", self.id)])#, limit=1 )
             if contracts:
                 for record in contracts:
@@ -548,7 +711,6 @@ class StudentStudent(models.Model):
     def student_blocked(self):
         for rec in self:
             rec.state = "blocked"
-            # rec.blocked_employee_id = self.env["hr.employee"].search( [("user_id", "=", self.env.uid)], limit=1)
             rec.userblocked_date = fields.Date.today()
 
     def reset_draft(self):
@@ -567,13 +729,13 @@ class StudentStudent(models.Model):
     student_seq = fields.Char(string="Student Sequence", readonly=True)
     student_number = fields.Char(string="Student Number", readonly=True)
  
-    @api.constrains("display_name")
-    def _check_name(self):
-        partner_rec = self.env["student.student"].search(
-            [("display_name", "=", self.display_name), ("id", "!=", self.id)]
-        )
-        if partner_rec:
-            raise UserError(_("مكرر! الاسم موجود من قبل ."))
+    # @api.constrains("display_name")
+    # def _check_name(self):
+    #     partner_rec = self.env["student.student"].search(
+    #         [("display_name", "=", self.display_name), ("id", "!=", self.id)]
+    #     )
+    #     if partner_rec:
+    #         raise UserError(_("مكرر! الاسم موجود من قبل ."))
 
     @api.constrains("id_number")
     def _check_id_number(self):
@@ -585,25 +747,14 @@ class StudentStudent(models.Model):
 
 
     # add analtic account of related fields 
-
-    analytic_accounts = fields.Many2many("account.analytic.account", string="Analytic Accounts")
-    @api.model
-    def create(self, vals):
-        vals["analytic_accounts"] = self._get_analytic_accounts(vals)
-        return super(StudentStudent, self).create(vals)
+    analytic_accounts = fields.Many2many("account.analytic.account", string="Analytic Accounts", ondelete="cascade", index=True, tracking=True, )
+    analytic_distribution_id = fields.Many2one( comodel_name="account.analytic.distribution.model", string="Analytic Distribution", ondelete="cascade", index=True, )
 
     def write(self, vals):
         vals["analytic_accounts"] = self._get_analytic_accounts(vals)
         return super(StudentStudent, self).write(vals)
     
-    @api.model
-    def create(self, vals):
-        vals["analytic_accounts"] = self._get_analytic_accounts(vals)
-        return super(StudentStudent, self).create(vals)
-    
-    def write(self, vals):
-        vals["analytic_accounts"] = self._get_analytic_accounts(vals)
-        return super(StudentStudent, self).write(vals)
+
     
     def _get_analytic_accounts(self, vals):
         analytic_accounts = []
@@ -619,36 +770,12 @@ class StudentStudent(models.Model):
             track_rec = self.env["tracks"].browse(vals["track_id"])
             if track_rec.analytic_account_id:
                 analytic_accounts.append(track_rec.analytic_account_id.id)
-        if vals.get("partner_id"):
-            partner_rec = self.env["res.partner"].browse(vals["partner_id"])
-            if partner_rec.analytic_account_id:
-                analytic_accounts.append(partner_rec.analytic_account_id.id)
+        # if vals.get("partner_id"):
+        #     partner_rec = self.env["res.partner"].browse(vals["partner_id"])
+        #     if partner_rec.analytic_account_id:
+        #         analytic_accounts.append(partner_rec.analytic_account_id.id)
         return [(6, 0, analytic_accounts)]
 
-
- 
-    # def _get_analytic_accounts(self, vals):
-    #     analytic_accounts = []
-    #     if vals.get("class_id"):
-    #         stage_rec = stage_id = self.class_id.stage_id
-    #         track_rec = track_id = self.class_id.stage_id.track_id
-    #         class_rec = self.env["classes"].browse(vals["class_id"])
-    #         if class_rec.analytic_account_id:
-    #             analytic_accounts.append(class_rec.analytic_account_id.id)
-    #             analytic_accounts.append(stage_rec.analytic_account_id.id)
-    #             analytic_accounts.append(track_rec.analytic_account_id.id)
-     
-    #     # if vals.get("stage_id"):
-    #     #     # stage_rec = self.env["stages"].browse(vals["stage_id"])
-    #     #     # if stage_rec.analytic_account_id:
-    #     # if vals.get("track_id"):
-    #     #     # track_rec = self.env["tracks"].browse(vals["track_id"])
-    #     #     # if track_rec.analytic_account_id:
-    #     if vals.get("partner_id"):
-    #         partner_rec = self.env["res.partner"].browse(vals["partner_id"])
-    #         if partner_rec.analytic_account_id:
-    #             analytic_accounts.append(partner_rec.analytic_account_id.id)
-    #     return [(6, 0, analytic_accounts)]
 
 
 class DropoffReason(models.Model):
