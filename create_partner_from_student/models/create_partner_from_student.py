@@ -10,26 +10,26 @@ class ResStudentInherit(models.Model):
                                 #   , ondelete='restrict', auto_join=True,
                                   help='Partner-related data of the Student')
 
-    @api.model
-    def create(self, vals):
-        """Creates a partner record when a new student is created."""
-        # Call the original create method to create the student
-        student = super(ResStudentInherit, self).create(vals)
+    # @api.model
+    # def create(self, vals):
+    #     """Creates a partner record when a new student is created."""
+    #     # Call the original create method to create the student
+    #     student = super(ResStudentInherit, self).create(vals)
 
-        # Create the partner record
-        partner_vals = {
-            'name': vals.get('display_name'),
-            'student_id': student.id,
-            'phone': vals.get('mobile'),
-            'mobile': vals.get('mobile'),
-            'email': vals.get('email'),
-        }
-        partner = self.env['res.partner'].create(partner_vals)
+    #     # Create the partner record
+    #     partner_vals = {
+    #         'name': vals.get('display_name'),
+    #         'student_id': student.id,
+    #         'phone': vals.get('mobile'),
+    #         'mobile': vals.get('mobile'),
+    #         'email': vals.get('email'),
+    #     }
+    #     partner = self.env['res.partner'].create(partner_vals)
 
-        # Link the partner to the student
-        student.partner_id = partner
+    #     # Link the partner to the student
+    #     student.partner_id = partner
 
-        return student
+    #     return student
     
     
 
