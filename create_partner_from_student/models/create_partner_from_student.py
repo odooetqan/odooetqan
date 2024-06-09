@@ -6,7 +6,7 @@ class ResStudentInherit(models.Model):
     _inherit = 'student.student'
 
     partner_id = fields.Many2one('res.partner',
-                                  string='Partner '
+                                  string='Partner ',
                                 #   , ondelete='restrict', auto_join=True,
                                   help='Partner-related data of the Student')
 
