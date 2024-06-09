@@ -623,7 +623,7 @@ class StudentStudent(models.Model):
             # partner_rec = self.env["res.partner"].browse(vals["partner_id"])
             # if partner_rec.analytic_account_id:
             #     analytic_accounts.append(partner_rec.analytic_account_id.id)
-        return [(6, 0, analytic_accounts)]
+        # return [(6, 0, analytic_accounts)]
 
 
  
