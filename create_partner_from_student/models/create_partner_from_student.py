@@ -8,7 +8,7 @@ class ResStudentInherit(models.Model):
                                   string='Partner ', ondelete='restrict', auto_join=True,
                                   help='Employee-related data of the user')
 
-    @api.multi
+    # @api.multi
     def create_partner(self):
         """Creates a partner record associated with the current student."""
         for student in self:
