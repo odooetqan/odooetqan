@@ -157,9 +157,7 @@ class StagesBase(models.Model):
     name = fields.Char("Stages", tracking=True, required=True)
     is_secondary = fields.Boolean("Stages", tracking=True)
     section_id = fields.Many2one("sections", tracking=True, required=True)
-    track_id = fields.Many2one(
-        "tracks", related="section_id.track_id", tracking=True, required=True
-    )
+    track_id = fields.Many2one( "tracks", related="section_id.track_id", tracking=True, required=True )
     analytic_account_id = fields.Many2one('account.analytic.account', string='Anyltic Account')
     manager =  fields.Many2one('res.partner')
     display_name= fields.Char(string="Display Name", compute = "_compute_display_name")
@@ -210,25 +208,86 @@ class ClassesBase(models.Model):
             section_name = rec.section_id.name or ' '
             stage_name = rec.stage_id.name or ' '
             rec.display_name = name + ' ' + stage_name + ' ' + section_name + ' ' + track_name
-
-
    
     @api.model
     def create(self, vals):
         res = super(ClassesBase, self).create(vals)
+
+        # Create analytic account
         analytic_account = self.env['account.analytic.account'].create({
             'name': res.display_name,
             'plan_id': res.track_id.analytic_account_id.plan_id.id
         })
+
+        # Create product template
+        product_id = self.env['product.template'].create({
+            'name': res.display_name,
+            'fees': True,
+            'detailed_type': 'service',
+            'list_price': vals.get('fees', 0.0),
+            # Set list_price based on 'fees' value
+        })
+
+        # Assign product and analytic account to the class
+        res.product_id = product_id.id
         res.analytic_account_id = analytic_account.id
+
         return res
-     
+    
+    
+# Write to update product      
+    # def write(self, vals):
+    #     res = super(ClassesBase, self).write(vals)
+    #     if 'name' in vals:
+    #         for rec in self:
+    #             rec.analytic_account_id.write({'name': rec.display_name})
+    #             product = self.env['product.template'].search([('name','=', rec.display_name)])
+    #             if not rec.product_id:
+    #              # Create product template
+    #                 product_id = self.env['product.template'].create({
+    #                     'name': rec.display_name,
+    #                     'fees': True,
+    #                     'detailed_type': 'service',
+    #                     'list_price': vals.get('fees', 0.0),
+    #                     # Set list_price based on 'fees' value
+    #                 })
+    #             product = self.env['product.template'].search([('name','=', rec.display_name)])
+    #             product.write({'name':rec.display_name})
+    #             rec.product_id = product.id
+    #     return res
+    
     def write(self, vals):
         res = super(ClassesBase, self).write(vals)
+
         if 'name' in vals:
             for rec in self:
+                # Update analytic account name
                 rec.analytic_account_id.write({'name': rec.display_name})
+
+                # Check if product template exists
+                product = self.env['product.template'].search([('name', '=', rec.display_name)])
+
+                if not product:
+                    # Create product template if it doesn't exist
+                    product = self.env['product.template'].create({
+                        'name': rec.display_name,
+                        'fees': True,
+                        'detailed_type': 'service',
+                        'list_price': vals.get('fees', 0.0),  # Set list_price based on 'fees' value
+                    })
+                else:
+                    # Update product template name and price if necessary
+                    product.write({
+                        'name': rec.display_name,  # Update name if changed
+                        'list_price': vals.get('fees', product.list_price),  # Update price if 'fees' is provided
+                    })
+
+                # Assign product to the class
+                rec.product_id = product.id
+
         return res
+
+
      
 class SecondryMajorsBase(models.Model):
     _name = "secondry.majors"
@@ -279,7 +338,6 @@ class Years(models.Model):
     def _compute_company_current_year(self):
         for record in self:
             record.company_current_year = record.company_id.current_year
-
 
 
 class Fees(models.Model):

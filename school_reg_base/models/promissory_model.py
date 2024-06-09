@@ -284,18 +284,36 @@ class PromissoryNote(models.Model):
         else:
             self.text_amount = "صفر"
 #---------------------------------------------------------------------------------------------------------------
-
-
-
+    promissory_current_year = fields.Many2one('years', string='Current Year')
     
     @api.model
     def create(self, vals):
         if vals.get('reference', _('New')) == _('New'):
             vals['reference'] = self.env['ir.sequence'].next_by_code(
                 'promissory.note') or _('New')
+            
+        company_current_year_rec = self.env['res.company'].search([('current_year', '=', self.current_year.id)])
+        student = self.env['student.student'].search([('partner_id', '=', self.partner_id.id), ('current_year', '=', self.current_year.id)])
+
+        equal_current_year = self.env['promissory.note'].search([
+            ('partner_id', '=', self.partner_id.id), 
+            ('current_year', '=', company_current_year_rec.id)
+        ], limit=1)
+        if equal_current_year:
+            student.promissory_current_year = 1
+        else:
+            student.promissory_current_year = 0
+
+
         res = super(PromissoryNote, self).create(vals)
         return res
     
+
+    
+        
+   
+
+
 
     def student_blocked(self):
         for rec in self:

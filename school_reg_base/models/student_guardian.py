@@ -81,7 +81,7 @@ class Studentguardian(models.Model):
     employee_confirm_id = fields.Many2one('hr.employee', string='Confirmed by',  readonly=True,copy=False, )
     blocked_employee_id = fields.Many2one('hr.employee', string='Blocked by',  readonly=True,copy=False, )
     relative_relation = fields.Many2one('relative.relation',string='Relative Relation')
-    proof_of_kinship = fields.Binary(string='Proof of Kinship')
+    proof_of_kinship = fields.Binary(string='Proof of Relationship')
     is_family = fields.Boolean('IS Familly')
     is_main = fields.Boolean('IS Main Guardian ')
 

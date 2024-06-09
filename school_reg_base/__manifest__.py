@@ -11,7 +11,12 @@
     'website': 'http://alhayah.edu.sa',
     'support': 's.musa@alhayah.edu.sa',
     'images': ['static/description/img1.jpeg'],
-    'depends': [ 'base', 'sale','contacts', 'account_accountant' ],
+    'depends': [ 'base', 'sale','contacts', 'account_accountant'], #, 'account_analytic_distribution' ],
+
+
+ 
+
+
     'data':[
         'security/multi_company_security.xml',
         'security/ir.model.access.csv',

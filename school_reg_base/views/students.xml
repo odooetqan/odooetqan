@@ -10,15 +10,19 @@
 				<form>
 					<header>
 						<field name="state" widget="statusbar" string="Status" statusbar_visible="draft,active,blocked,in_active"/>
-						
 						<button name="reset_draft" type="object" string="Reset to Draft" class="btn-warning"  invisible = "state == 'draft'"/>
 						<button name="student_confirm" type="object" string="Confirm" class="btn-success" invisible="state != 'draft'" />
 						<button name="student_blocked" type="object" string="Blocked" class="btn-danger"  invisible="state != 'draft'" />
 						<button name="student_in_active" type="object" string="In Active" class="btn-parimary" invisible="state != 'draft'" />			
 						<!-- Create buttons create promissory create contract create sale order -->
-						<button name="action_order_students_form" type="object"  string="Create Sales Order" class="btn-success" />
-						<button name="action_contract_students_form" type="object"  string="Create Contract" class="btn-success" />
-						<button name="action_promissory_students_form" type="object"  string="Create Promissory" class="btn-success" />
+						<!-- <button name="action_order_students_form" type="object"  string="Create Sales Order" invisible="sale_current_year != 0"  class="btn-success" /> -->
+						<button name="action_order_students_form" type="object"  string="Create Sales Order" invisible="sale_current_year != 0"  class="btn-success" />
+						<button name="action_contract_students_form" type="object"  string="Create Contract" invisible="contract_current_year != 0"   class="btn-warning" />
+						<button name="action_promissory_students_form" type="object"  string="Create Promissory" invisible="promissory_current_year != 0"   class="btn-danger" />
+						<!-- <button name="create_analytic_distribution" type="object"  string="Create Distribution" class="btn-warning" /> -->
+						<button name="create_partner" type="object"  string="Create Partner"   class="btn-danger" />
+						<button name="create_partner_analytic_distribution" type="object"  string="Create Partner and Analytic Distribution"   class="btn-danger" /> 
+						
 					</header>
 					<sheet>
 						<div name="button_box" position="inside">
@@ -132,6 +136,8 @@
 									
 									<field name="tax_type"/>
 									<field name="analytic_accounts"  widget="many2many_tags"/>
+									<field name="analytic_distribution_id" />
+
 									<field name="track_id"/>
 									<field name="product_id"/>
 									<field name="secondary_major" options="{'no_create_edit': True}" invisible="is_secondary != False" />
@@ -144,7 +150,6 @@
 							<page name="discount" string="Discount">
 								<group>
 									<field name="pricelist_id" />
-									<field name="sibling_discount" />
 									<field name="student_discount" />
 									<field name="discount" />
 								</group>
@@ -162,6 +167,8 @@
 				                                        <field name="state"/>
 				                                    </tree>
 				                                </field>
+												<field name="sale_current_year"/>
+
 							</page>
 							<page name="Sale Orders">
 								<field name="qutetions_ids"  domain="['|',('state', '!=', 'cancle'),('state', '!=', 'draft')]">
@@ -177,6 +184,8 @@
 				                                        <field name="invoice_status"/>
 				                                    </tree>
 				                                </field>
+												<field name="sale_current_year"/>
+
 							</page>
 							<page  name="invoices">
 								<field name="invoices">				                                        
@@ -231,6 +240,8 @@
 										<field name="state"/> -->
 									</tree>
 							    </field>
+								<field name="contract_current_year"/>
+
  							</page>
 							
 							<page  name="promissory">
@@ -259,6 +270,7 @@
 									    <field name="state"/> -->
 									</tree>
 							    </field>
+								<field name="promissory_current_year"/>
  							</page>
 							
 							<page name="other_information" string="Other Informations">
