@@ -12,9 +12,9 @@
     'support': 's.musa@alhayah.edu.sa',
     # 'images': ['static/description/img1.jpeg'],
     'depends': [ 'base', 'sale','contacts', 'school_reg_base'], #, 'account_analytic_distribution' ],
-    'data':[
-        'views/create_partner_from_student.xml'
-    ],
+    # 'data':[
+    #     'views/create_partner_from_student.xml'
+    # ],
     'installable': True,
     'application': True,
     'auto_install': False,
