@@ -9,7 +9,7 @@ class ResStudentInherit(models.Model):
                                   help='Employee-related data of the user')
 
     # @api.multi
-    def create_partner(self):
+    def create_partner_from_student(self):
         """Creates a partner record associated with the current student."""
         for student in self:
             partner_vals = {
