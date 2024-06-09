@@ -1083,6 +1083,6 @@
 		<menuitem id="menu_action_fees" name="Fees" parent="menu_invoicing" action="action_fees" sequence="7"/>
 		<menuitem id="menu_action_product_product" name="Product" parent="menu_invoicing" action="action_product_product" sequence="7"/>
 		<menuitem id="menu_action_contracts" name="Contracts" parent="registeration" action="action_contracts" sequence="7"/>
-<!-- 		<menuitem id="promissory_note_alhayah_menu" name="Promissory" parent="registeration" action="action_promissory_note_alhayah" sequence="7"/>
-	</data> -->
+<!-- 		<menuitem id="promissory_note_alhayah_menu" name="Promissory" parent="registeration" action="action_promissory_note_alhayah" sequence="7"/> -->
+	</data>
 </odoo>
