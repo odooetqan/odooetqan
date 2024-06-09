@@ -48,6 +48,6 @@
                             context="{'active_id': active_id}" />
                 </xpath>
             </field>
-        </record>
+        </record>-->
     </data>
-</odoo> -->
+</odoo> 
