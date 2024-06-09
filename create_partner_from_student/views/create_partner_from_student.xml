@@ -2,7 +2,7 @@
 <odoo>
     <data>        
         <record id="view_student_from _inherit" model="ir.ui.view">
-            <field name="name">res.student.form</field>
+            <field name="name">student.student.form</field>
             <field name="model">student.student</field>
             <field name="inherit_id" ref="school_reg_base.student_student_form_view"/>
             <field name="arch" type="xml">
@@ -12,7 +12,5 @@
                 </xpath>
             </field>
         </record>
-
-
     </data>
 </odoo>
