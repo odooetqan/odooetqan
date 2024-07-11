@@ -6,7 +6,10 @@ er<?xml version="1.0" encoding="utf-8"?>
             <t t-call="web.external_layout">
                 <t t-foreach="docs" t-as="doc">
                     <div class="page">
-                    <center><h4 style="align:center; ">فاتورة ضريبية</h4></center>
+                        <table class="text-center"><tr><td>
+                            <center><h4 style="align:center; ">فاتورة ضريبية</h4></center>
+                            </td></tr>
+                        </table>
                     <span t-if="doc.move_type=='out_refund'" style="color:red;" class="text-center">
                      إشعار دائن 
                      Credit Note 
