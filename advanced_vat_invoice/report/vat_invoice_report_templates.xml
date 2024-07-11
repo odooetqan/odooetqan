@@ -6,13 +6,13 @@
             <t t-call="web.external_layout">
                 <t t-foreach="docs" t-as="doc">
                     <div class="page">
-                        <table class="text-center">
+<!--                         <table class="text-center">
                             <tr>
                                 <td>
                                     <h4>فاتورة ضريبية</h4>
                                 </td>
                             </tr>
-                        </table>
+                        </table> -->
                     <span t-if="doc.move_type=='out_refund'" style="color:red;" class="text-center">
                      إشعار دائن 
                      Credit Note 
@@ -22,7 +22,9 @@
                       Debit Note
                      </span>
 
-                        
+                    <div class="row text-center">
+                        <h4>فاتورة ضريبية</h4>
+                    </div>
                     <div class="row p-1 mt-1  bg-light">
                         <div class="col-6 text-right"><Strong>العميل</Strong></div>
                         <div class="col-6 text-left"><Strong>Buyer</Strong></div> </div>
