@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 	<data>
-		<!-- ......................................Start Student Student .................................................... . -->
-		<!-- Start Student Student -->
+		<!-- ......................................Start Student Student Form.................................................... . -->
 		<record id="student_student_form_view" model="ir.ui.view">
 			<field name="name">student.student.form.view</field>
 			<field name="model">student.student</field>
@@ -11,17 +10,14 @@
 					<header>
 						<field name="state" widget="statusbar" string="Status" statusbar_visible="draft,active,blocked,in_active"/>
 						<button name="reset_draft" type="object" string="Reset to Draft" class="btn-warning"  invisible = "state == 'draft'"/>
-						<button name="student_confirm" type="object" string="Confirm" class="btn-success" invisible="state != 'draft'" />
-						<button name="student_blocked" type="object" string="Blocked" class="btn-danger"  invisible="state != 'draft'" />
+						<button name="student_confirm" type="object" string="ساري" class="btn-success" invisible="state != 'draft'" />
+						<button name="student_blocked" type="object" string="تم التخرج" class="btn-danger"  invisible="state != 'draft'" />
 						<button name="student_in_active" type="object" string="In Active" class="btn-parimary" invisible="state != 'draft'" />			
 						<!-- Create buttons create promissory create contract create sale order -->
 						<!-- <button name="action_order_students_form" type="object"  string="Create Sales Order" invisible="sale_current_year != 0"  class="btn-success" /> -->
 						<button name="action_order_students_form" type="object"  string="Create Sales Order" invisible="sale_current_year != 0"  class="btn-success" />
 						<button name="action_contract_students_form" type="object"  string="Create Contract" invisible="contract_current_year != 0"   class="btn-warning" />
 						<button name="action_promissory_students_form" type="object"  string="Create Promissory" invisible="promissory_current_year != 0"   class="btn-danger" />
-						<!-- <button name="create_analytic_distribution" type="object"  string="Create Distribution" class="btn-warning" /> -->
-						<button name="create_partner" type="object"  string="Create Partner"   class="btn-danger" />
-						<button name="create_partner_analytic_distribution" type="object"  string="Create Partner and Analytic Distribution"   class="btn-danger" /> 
 						
 					</header>
 					<sheet>
@@ -80,7 +76,7 @@
 
 							
 							
-<!-- 							<button name="action_student_invoice_count" type="object" class="oe_stat_button" icon="fa-list">
+							<!-- <button name="action_student_invoice_count" type="object" class="oe_stat_button" icon="fa-list">
 								<div class="o_state_info">
 									<div class="o_form_field o_stat_info">
 										<span class="o_stat_value">
@@ -113,6 +109,7 @@
 								<field name="nationality" options="{'no_create_edit': True}"/>
 								<field name="id_type" options="{'no_create_edit': True}"/>
 								<field name="id_number"/>
+								<field name="id_file"/>
 								<field name="tage" options="{'no_create_edit': True}"  widget="many2many_tags"/>
 								<field name="reason"  options="{'no_create_edit': True}"  invisible="state != 'in_active'"/>
 								<field name="know_us" options="{'no_create_edit': True}"/>
@@ -120,6 +117,9 @@
 							<group>
 								<field name="birth_date"/>
 <!-- 								<field name="hijri_date"/> -->
+								<field name="children_of_employees"/>
+								<field name="properties"/>
+								
 								<field name="mobile"/>
 								<field name="mobile2"/>
 								<field name="email"/>
@@ -299,6 +299,70 @@
 				</form>
 			</field>
 		</record>
-		<!-- ......................................End Student Student   .................................................... . -->
+		<!-- ......................................End Student Student  Form .................................................... . -->
+		<!-- ......................................Start Student Student Tree.................................................... . -->
+		<record id="student_student_tree_view" model="ir.ui.view">
+			<field name="name">student.student.tree.view</field>
+			<field name="model">student.student</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="family_number"/>
+					<field name="student_seq" string="Student Number"/>
+					<field name="name"/>
+					<field name="gender"/>
+					<field name="nationality"/>
+					<field name="id_type"/>
+					<field name="id_number"/>
+					<field name="tage"/>
+					<field name="birth_date"/>
+					<field name="hijri_date"/>
+					<field name="class_id"/>
+					<field name="stage_id"/>
+					<field name="section_id"/>
+					<field name="track_id"/> 
+				</tree>
+			</field>
+		</record>
+		<!-- ......................................End Student Student Tree.................................................... . -->
+		<!-- ......................................End Student Student Search.................................................... . -->
+		<record id="student_student_search_view" model="ir.ui.view">
+			<field name="name">student.student.search.view</field>
+			<field name="model">student.student</field>
+			<field name="arch" type="xml">
+				<search string="Search Partner Category">
+					<filter name="students" string="السنة الحالية 1446هـ" domain="[('current_year','=','1446')]" />
+					<separator/>
+					<filter name="gender" string="البنين" domain="[('gender','=','ذكر')]" />
+					<filter name="gender" string="البنات" domain="[('gender','=','أنثى')]" />
+					<separator/>
+					<separator/>
+					<filter name="Student_status_new" string="متقدم جديد" domain="[('Student_status','=','جديد')]" />
+					<separator/>
+					<!-- <separator/>
+					<filter name="Wating" string=" قائمة الانتظار" domain="[('contact_reg_status','=','قائمة الإنتظار')]" />
+					<separator/>
+					<separator/>
+					<filter name="In interview" string=" محال للمقابلة" domain="[('contact_reg_status','=','محال للمقابلة')]" />
+					<separator/>
+					<filter name="In payment" string=" في انتظار الفوترة و السداد" domain="[('contact_reg_status','=','في انتظار الفوترة و السداد')]" />
+					<separator/>
+					<filter name="Registered" string=" تم استكمال إجراءات التسجيل" domain="[('contact_reg_status','=','تم استكمال إجراءات التسجيل')]" />
+					<separator/>
+					<filter name="Cancled Registeration" string=" قائمة تم الغاء التسجيل" domain="[('contact_reg_status','=','تم إلغاء التسجيل')]" /> -->
+					<separator/>
+					<filter name="education_path" string="االمسار الوطني" domain="[('track_id','=','وطني')]" />
+					<separator/>
+					<filter name="education_path" string="المسار المصري" domain="[('track_id','=','مصري')]" />
+					<separator/>
+					<!-- <separator/>
+					<filter name="education_class" string="الروضة + الحضانة" domain="[('education_class','like','ض')]" />
+					<separator/> -->
+					<separator/>
+					<separator/>
+					<filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+				</search>
+			</field>
+		</record>
+		<!-- ......................................End Student Student Search.................................................... . -->
 	</data>
 </odoo>
