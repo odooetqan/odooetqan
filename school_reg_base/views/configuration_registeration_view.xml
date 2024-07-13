@@ -1053,7 +1053,7 @@
 		<record model="ir.actions.act_window" id="action_student_student">
 			<field name="name">Student </field>
 			<field name="res_model">student.student</field>
-			<field name="view_mode">tree,form</field>
+			<field name="view_mode">tree,form,search</field>
 		</record>
 
 		
