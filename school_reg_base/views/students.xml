@@ -117,8 +117,8 @@
 							<group>
 								<field name="birth_date"/>
 <!-- 								<field name="hijri_date"/> -->
-								<field name="children_of_employees"/>
-								<field name="properties"/>
+								<!-- <field name="children_of_employees"/> -->
+								<!-- <field name="properties"/> -->
 								
 								<field name="mobile"/>
 								<field name="mobile2"/>
