@@ -336,7 +336,7 @@
 					<filter name="gender" string="البنات" domain="[('gender','=','أنثى')]" />
 					<separator/>
 					<separator/>
-					<filter name="Student_status_new" string="متقدم جديد" domain="[('Student_status','=','جديد')]" />
+<!-- 					<filter name="Student_status_new" string="متقدم جديد" domain="[('Student_status','=','جديد')]" /> -->
 					<separator/>
 					<!-- <separator/>
 					<filter name="Wating" string=" قائمة الانتظار" domain="[('contact_reg_status','=','قائمة الإنتظار')]" />
