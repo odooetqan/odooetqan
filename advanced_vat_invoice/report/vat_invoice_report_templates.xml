@@ -38,12 +38,12 @@
                         <div class="row">
                             <div class="col-4 text-right"><Strong>الاسم</Strong></div>
                             <div class="col-5 text-center"><span t-field="doc.partner_id.name"></span></div>
-                            <div class="col-3 text-left"><Strong text-left">Name</Strong></div>
+                            <div class="col-3 text-right"><Strong>Name</Strong></div>
                         </div>
 <!--                         <div class="row">
                             <div class="col-4 text-right"><Strong>رقم المبني</Strong></div>
                             <div class="col-5 text-center"><span t-field="doc.partner_id.id"></span></div>
-                            <div class="col-3 text-left"><Strong text-left">Building No</Strong></div>
+                            <div class="col-3 text-left"><Strong >Building No</Strong></div>
                         </div> -->
                         <div class="row">
                             <div class="col-4 text-right"><Strong>اسم الشارع</Strong></div>
