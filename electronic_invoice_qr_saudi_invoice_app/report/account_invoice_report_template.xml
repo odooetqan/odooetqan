@@ -35,8 +35,8 @@
         <t t-call="web.html_container">
             <t t-call="electronic_invoice_qr_saudi_invoice_app.custom_external_layout">
                 <t t-set="company" t-value="res_company" />
-                <div class="page">
-                    <t t-foreach="docs" t-as="doc">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
                     <p style="border-style:solid;text-align:center;background-color: lightgrey;"><b>فاتورة ضريبية<br></br>TAX INVOICE</b></p>
                     <div>
                         <table class="table" style="width:100%">
@@ -293,8 +293,9 @@
                         </tbody>
                     </table>
                     <p style="page-break-after:always;"/>
+
+                    </div>                        
                 </t>
-                </div>
             </t>
         </t>
     </template>
