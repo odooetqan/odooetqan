@@ -3,9 +3,15 @@
     <!--Template for VAT invoice report-->
     <template id="vat_template">
         <t t-call="web.html_container">
-            <t t-call="web.external_layout">
                 <t t-foreach="docs" t-as="doc">
-                    <div class="page">
+                    
+				<t t-call="web.external_layout">
+
+                    <t t-set="page_break" t-value="True"/>
+                    <div class="page" t-if="page_break">
+
+                        
+                    <!-- <div class="page"> -->
 <!--                         <table class="text-center">
                             <tr>
                                 <td>
