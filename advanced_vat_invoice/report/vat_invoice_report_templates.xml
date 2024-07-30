@@ -38,12 +38,12 @@
                         <div class="row">
                             <div class="col-4 text-right"><Strong>الاسم</Strong></div>
                             <div class="col-5 text-center"><span t-field="doc.partner_id.name"></span></div>
-                            <div class="col-3 text-right"><Strong>Name</Strong></div>
+                            <div class="col-3 text-right" style="text-align:left;"><Strong>Name</Strong></div>
                         </div>
 <!--                         <div class="row">
                             <div class="col-4 text-right"><Strong>رقم المبني</Strong></div>
                             <div class="col-5 text-center"><span t-field="doc.partner_id.id"></span></div>
-                            <div class="col-3 text-left"><Strong >Building No</Strong></div>
+                            <div class="col-3 text-left" style="text-align:left;"><Strong >Building No</Strong></div>
                         </div> -->
                         <div class="row">
                             <div class="col-4 text-right"><Strong>اسم الشارع</Strong></div>
@@ -53,28 +53,28 @@
 <!--                         <div class="row">
                             <div class="col-4 text-right"><Strong>الحي</Strong></div>
                             <div class="col-5 text-center"><span t-field="doc.partner_id.id"></span></div> 
-                            <div class="col-3 text-left"><Strong>District</Strong></div>
+                            <div class="col-3 text-left" style="text-align:left;"><Strong>District</Strong></div>
                         </div> -->
                         <div class="row">
                             <div class="col-4 text-right"><Strong>المدينة</Strong></div>
                             <div class="col-5 text-center"><span t-field="doc.partner_id.city"></span></div>
-                            <div class="col-3 text-left"><Strong>City</Strong></div>
+                            <div class="col-3 text-left" style="text-align:left;"><Strong>City</Strong></div>
                         </div>
                         <div class="row">
                             <div class="col-4 text-right"><Strong>البلد</Strong></div>
                             <div class="col-5 text-center"><span t-field="doc.partner_id.country_id.name"></span>
                             </div>
-                            <div class="col-3 text-left"><Strong>Country</Strong></div>
+                            <div class="col-3 text-left" style="text-align:left;"><Strong>Country</Strong></div>
                         </div>
                         <div class="row">
                             <div class="col-4 text-right"><Strong>الرمز البريدي</Strong></div>
                             <div class="col-5 text-center"><span t-field="doc.partner_id.zip"></span></div>
-                            <div class="col-3 text-left"><Strong>Postal Code</Strong></div>
+                            <div class="col-3 text-left" style="text-align:left;"><Strong>Postal Code</Strong></div>
                         </div> 
                         <div class="row">
                             <div class="col-4 text-right"><Strong>رقم تسجيل ضريبة القيمة المضافة</Strong></div>
                             <div class="col-5 text-center"><span t-field="doc.partner_id.vat"></span></div>
-                            <div class="col-3  text-left"><Strong>Vat Number</Strong></div>
+                            <div class="col-3  text-left" style="text-align:left;"><Strong>Vat Number</Strong></div>
                         </div> 
                         <div class="oe_structure"/>
                     </div>
@@ -275,36 +275,36 @@
                     
             <div style="page-break-inside: avoid;">
                 <div class="row p-1 mt-1 bg-light">
-                    <div class="col-6"><Strong>Total Amount: </Strong></div>
                     <div class="col-6 text-right"><Strong>:الاجمالي</Strong></div>
+                    <div class="col-6" style="text-align:left;"><Strong>Total Amount: </Strong></div>
                 </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="row border border-top-0">
-                            <div class="col-4">Total (Excluding VAT)</div>
                             <div class="col-6 text-right">الاجمالي غير شامل ضريبة القيمة المضافة</div>
+                            <div class="col-4" style="text-align:left;">Total (Excluding VAT)</div>
                             <div class="col-2 text-center"><span t-field="doc.einv_amount_sale_total"></span></div>
                         </div>
                         <div class="row border border-top-0">
-                            <div class="col-4">Discount</div>
                             <div class="col-6 text-right">إجمالي الخصومات</div>
+                            <div class="col-4" style="text-align:left;">Discount</div>
                             <div class="col-2 text-center"><span
                                     t-field="doc.einv_amount_discount_total"></span></div>
                         </div>
                         <div class="row border border-top-0">
-                            <div class="col-4">Total Taxable Amount (Excluding VAT)</div>
                             <div class="col-6 text-right">الإجمالي الخاضع للضريبة غير شامل ضريبة القيمة
                                 المضافة</div>
+                            <div class="col-4" style="text-align:left;">Total Taxable Amount (Excluding VAT)</div>
                             <div class="col-2 text-center"><span t-field="doc.amount_untaxed"></span></div>
                         </div>
                         <div class="row border border-top-0">
-                            <div class="col-4">Total VAT</div>
                             <div class="col-6 text-right">إجمالي الضريبة المضافة</div>
+                            <div class="col-4" style="text-align:left;">Total VAT</div>
                             <div class="col-2 text-center"><span t-field="doc.amount_tax_signed"></span></div>
                         </div>
                         <div class="row border border-top-0">
-                            <div class="col-4">Total Amount Due</div>
                             <div class="col-6 text-right"> الإجمالي المستحق </div>
+                            <div class="col-4" style="text-align:left;">Total Amount Due</div>
                             <div class="col-2 text-center"><span t-field="doc.amount_total"></span></div>
                         </div>
                     </div>
