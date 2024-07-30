@@ -33,7 +33,7 @@
                     </div>
                     <div class="row p-1 mt-1  bg-light">
                         <div class="col-6 text-right"><Strong>العميل</Strong></div>
-                        <div class="col-6 text-left"><Strong>Buyer</Strong></div> </div>
+                        <div class="col-6 text-left" style="text-align:left;"><Strong>Buyer</Strong></div> </div>
                     <div class="px-2">
                         <div class="row">
                             <div class="col-4 text-right"><Strong>الاسم</Strong></div>
