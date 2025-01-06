@@ -1,0 +1,160 @@
+    <odoo>
+        <data>
+
+<!-- POrtal Tree ttee attendance -->
+        <!-- <record id="portal_attendance_menu" model="ir.ui.menu">
+            <field name="name">My Attendance</field>
+            <field name="parent_id" ref="portal.portal_main_menu"/>
+            <field name="action" ref="action_portal_attendance"/>
+            <field name="sequence" eval="20"/>
+        </record> -->
+        <!-- <record id="portal_attendance_main_menu" model="ir.ui.menu">
+            <field name="name">Attendance</field>
+            <field name="parent_id" ref="portal.menu_my_home"/>
+            <field name="sequence" eval="10"/>
+        </record> -->
+
+        <!-- <record id="portal_attendance_menu" model="ir.ui.menu">
+            <field name="name">My Attendance</field>
+            <field name="parent_id" ref="portal_attendance_main_menu"/>
+            <field name="action" ref="action_portal_attendance"/>
+            <field name="sequence" eval="20"/>
+        </record> -->
+
+
+        <record id="action_portal_attendance" model="ir.actions.server">
+            <field name="name">My Attendance</field>
+            <field name="model_id" ref="hr.model_hr_employee"/>
+            <field name="binding_model_id" ref="hr.model_hr_employee"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = {
+                    "type": "ir.actions.act_url",
+                    "url": "/my/attendance",
+                    "target": "self",
+                }
+            </field>
+        </record>
+
+        <template id="portal_my_home_attendance" 
+
+        
+              name="Portal Home Attendance "
+              inherit_id="portal.portal_breadcrumbs" priority="2">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+
+            <!-- <xpath expr="//div[@id='content']" position="inside"> -->
+                <a href="/my/attendance" class="btn btn-primary">View My Attendance</a>
+            </xpath>
+        </template>
+
+        <!-- <record id="portal_attendance_main_menu" model="ir.ui.menu">
+            <field name="name">Attendance</field>
+            <field name="parent_id" ref="portal.menu_my_home"/>
+            <field name="sequence" eval="10"/>
+        </record> -->
+
+        <!-- <record id="portal_attendance_menu" model="ir.ui.menu">
+            <field name="name">My Attendance</field>
+            <field name="parent_id" ref="portal_attendance_main_menu"/>
+            <field name="action" ref="action_portal_attendance"/>
+            <field name="sequence" eval="20"/>
+        </record> -->
+
+<!-- POrtal Tree ttee attendance -->
+
+    <template id="portal_my_home_attendance" inherit_id="portal.portal_my_home" priority="10">
+    <xpath expr="//div[@class='o_portal_docs list-group']" position="after">
+        <div class="list-group">
+            <a class="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
+               href="/my/attendance" title="Attendance">
+                Attendance
+                <span class="badge text-bg-secondary rounded-pill">
+                    <i class="fa fa-sign-in"></i>
+                </span>
+            </a>
+        </div>
+    </xpath>
+</template>
+<template id="portal_my_attendance" name="Portal Attendance">
+    <t t-call="portal.portal_layout">
+        <div class="container">
+            <h1>Attendance Records</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <!-- <th>Date</th> -->
+                        <th>Check-In</th>
+                        <th>Check-Out</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="attendance_records" t-as="record">
+                        <tr>
+                            <!-- <td><t t-esc="record.check_in_date"/></td> -->
+                            <td><t t-esc="record.check_in"/></td>
+                            <td><t t-esc="record.check_out"/></td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </div>
+    </t>
+</template> 
+
+
+    <template id="portal_my_home_vendor_rfq" name="Show Vendor RFQs"
+              customize_show="True" inherit_id="portal.portal_my_home"
+              priority="25">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">RFQ's</t>
+                <t t-set="url" t-value="'/my/vendor_rfqs'"/>
+                <t t-set="placeholder_count" t-value="'my_rfq_count'"/>
+            </t>
+        </xpath>
+    </template>
+<!--    Portal table views-->
+
+            <template id="portal_my_home_sale" name="Show Quotations / Sales Orders" customize_show="True"
+                    inherit_id="portal.portal_my_home" priority="1">
+                <div class="oe_structure" position="inside">
+                    <div class="container">
+                        <button id="attendanceBtn" class="btn btn-warning attendanceBtn">
+                            <i class="fa fa-sign-in" aria-hidden="true"></i>
+                            <span id="btnText">Click to Check In</span>
+                        </button>
+
+                    </div>
+                </div>
+            </template>
+<!-- POrtal Tree ttee attendance  template -->
+
+            <template id="portal_attendance_tree" name="Portal Attendance Tree">
+                <t t-call="portal.layout">
+                    <div class="container">
+                        <h1>Your Attendance Records</h1>
+                        <t t-foreach="attendance_records" t-as="record">
+                            <div>
+                                <span><t t-esc="record.check_in"/></span>
+                                <span><t t-esc="record.check_out"/></span>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+            </template>
+<!-- POrtal Tree ttee attendance template -->
+
+            <record id="action_hr_employee_create_portal_user" model="ir.actions.server">
+                <field name="name">Create Portal User</field>
+                <field name="model_id" ref="hr.model_hr_employee"/>
+                <field name="binding_model_id" ref="hr.model_hr_employee"/>
+                <field name="binding_view_types">form</field>
+                <field name="groups_id" eval="[(4, ref('base.group_erp_manager'))]"/>
+                <field name="state">code</field>
+                <field name="code">
+                    action = records.action_create_portal_user()
+                </field>
+            </record>
+        </data>
+    </odoo>
