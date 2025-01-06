@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--  attendance tree view  -->
+    <record id="hr_attendance_view_tree_v3s" model="ir.ui.view">
+        <field name="name">hr.attendance.tree.v3s</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='check_in']" position="after">
+                <field name="check_in_url" widget="url" attrs="{'invisible': [('check_in', '=', False)]}"/>
+            </xpath>
+            <xpath expr="//field[@name='check_out']" position="after">
+                <field name="check_out_url" widget="url" attrs="{'invisible': [('check_out', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--  attendance form view  -->
+    <record id="hr_attendance_view_form_v3s" model="ir.ui.view">
+        <field name="name">hr.attendance.form.v3s</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group" position="after">
+                <group name="locations" string="Check-in Location">
+                    <group>
+                        <field name="check_in_latitude" nolabel="0"/>
+                        <field name="check_in_longitude" nolabel="0"/>
+                        <field name="check_in_url" widget="url"/>
+                    </group>
+                </group>
+                <group name="locations" string="Check-out Location">
+                    <group>
+                        <field name="check_out_latitude" nolabel="0"/>
+                        <field name="check_out_longitude" nolabel="0"/>
+                        <field name="check_out_url" widget="url"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

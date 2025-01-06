@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- <template id="assets_backend_hr_attendance_base" name="hr_attendance_info assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/hr_attendance_base/static/src/css/steps.css"/>
+            <link rel="stylesheet" href="/hr_attendance_base/static/src/css/sweetalert2.css"/>
+            <script type="text/javascript" src="/hr_attendance_base/static/src/js/lib/sweetalert2.js"></script>
+            <script type="text/javascript" src="/hr_attendance_base/static/src/js/attendances_base.js"></script>
+            <script type="text/javascript" src="/hr_attendance_base/static/src/js/kiosk_mode_base.js"></script>
+        </xpath>
+    </template> -->
+
+        <!-- pattern for depends modules -->
+        <record id="hr_attendance_view_form_base" model="ir.ui.view">
+            <field name="name">hr.attendance.form.base</field>
+            <field name="model">hr.attendance</field>
+            <field name="priority" eval="80"/>
+            <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="replace">
+                    <sheet>
+                        <group col="4">
+                            <field name="check_in"/>
+                            <field name="check_out"/>
+                            <field name="ismobile_check_in"/>
+                            <field name="ismobile_check_out"/>
+                            <field name="worked_hours" style="font-size:25px"/>
+                        </group>
+
+                        <div class="o_horizontal_separator">Face control</div>
+                        <div>
+                            <field name="employee_id" style="width:50%"/>
+                            <field name="employee_id_image" widget="image" style="width:50%"/>
+                        </div>
+                        <group col="8">
+                            <!-- <field name="employee_id" colspan="4"/>
+                    <field name="employee_id_image" widget="image" colspan="4"/> -->
+                        </group>
+                        <newline/>
+                        <group>
+                            <group string="Check in">
+                                <group col="4"></group>
+                                <group></group>
+                                <group></group>
+                                <group col="2" colspan="4"></group>
+                            </group>
+                            <group string="Check out">
+                                <group col="4"></group>
+                                <group></group>
+                                <group></group>
+                                <group col="2" colspan="4"></group>
+                            </group>
+                        </group>
+                    </sheet>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

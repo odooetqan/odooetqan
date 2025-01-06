@@ -1,0 +1,29 @@
+span.round-tab {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    display: inline-block;
+    border-radius: 100px;
+    background: #fff;
+    border: 2px solid #e0e0e0;
+    z-index: 2;
+    position: absolute;
+    left: 20px;
+    text-align: center;
+    font-size: 17px;
+}
+span.round-tab i {
+    color:#555555;
+}
+.hr-attendance-base-width {
+    width: 3%;
+}
+.hr-attendance-base-down-icon {
+    color: #555555;
+    position: absolute;
+    cursor: pointer;
+    right: 20px
+}
+.hr-attendance-base-denied {
+    color: #f27474 !important;
+}
