@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="realestate_see_own_reservations" model="ir.rule">
+            <field name="name">See Own Reservations</field>
+            <field name="model_id" ref="model_unit_reservation"/>
+            <field name="domain_force">['|',('user_id', '=', False),('user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('itsys_real_estate.group_reservation'))]"/>
+        </record>
+        
+        <record id="realestate_see_own_ownership_contracts" model="ir.rule">
+            <field name="name">See Own Ownership Contracts</field>
+            <field name="model_id" ref="model_ownership_contract"/>
+            <field name="domain_force">['|',('user_id', '=', False),('user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('itsys_real_estate.group_ownership_rental_contracts'))]"/>
+        </record>  
+        
+        <record id="realestate_see_own_rental_contracts" model="ir.rule">
+            <field name="name">See Own Rental Contracts</field>
+            <field name="model_id" ref="model_rental_contract"/>
+            <field name="domain_force">['|',('user_id', '=', False),('user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('itsys_real_estate.group_ownership_rental_contracts'))]"/>
+        </record>
+
+        <record model="ir.rule" id="building_desc_comp_rule">
+            <field name="name">Real Estate - Building Desc. company rule</field>
+            <field name="model_id" ref="model_building_desc"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record model="ir.rule" id="building_status_comp_rule">
+            <field name="name">Real Estate - Building Status company rule</field>
+            <field name="model_id" ref="model_building_status"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record model="ir.rule" id="building_type_comp_rule">
+            <field name="name">Real Estate - Building Type company rule</field>
+            <field name="model_id" ref="model_building_type"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record model="ir.rule" id="installment_template_comp_rule">
+            <field name="name">Real Estate - Installment Template company rule</field>
+            <field name="model_id" ref="model_installment_template"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record model="ir.rule" id="ownership_contract_comp_rule">
+            <field name="name">Real Estate - Ownership Contract company rule</field>
+            <field name="model_id" ref="model_ownership_contract"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record model="ir.rule" id="rental_contract_comp_rule">
+            <field name="name">Real Estate - Rental Contract company rule</field>
+            <field name="model_id" ref="model_rental_contract"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record model="ir.rule" id="loan_line_rs_own_comp_rule">
+            <field name="name">Real Estate - Ownership Contract Lines company rule</field>
+            <field name="model_id" ref="model_loan_line_rs_own"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record model="ir.rule" id="loan_line_rs_rent_comp_rule">
+            <field name="name">Real Estate - Rental Contract Lines company rule</field>
+            <field name="model_id" ref="model_loan_line_rs_rent"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record model="ir.rule" id="regions_comp_rule">
+            <field name="name">Real Estate - Regions company rule</field>
+            <field name="model_id" ref="model_regions"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record model="ir.rule" id="unit_reservation_comp_rule">
+            <field name="name">Real Estate - Unit Reservation company rule</field>
+            <field name="model_id" ref="model_unit_reservation"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record model="ir.rule" id="unit_reservation_lines_comp_rule">
+            <field name="name">Real Estate - Unit Reservation Lines company rule</field>
+            <field name="model_id" ref="model_loan_line_rs"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+    </data>
+</odoo>

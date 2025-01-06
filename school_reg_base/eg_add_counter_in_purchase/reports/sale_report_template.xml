@@ -1,0 +1,10 @@
+<odoo>
+    <template id="report_Purchase_document_for_print_counter" inherit_id="purchase.report_purchaseorder_document">
+        <xpath expr="//div[hasclass('page')]" position="inside">
+            <t t-set="counter" t-value="o.add_count()"/>
+            <t t-if="o.print_count">
+                Counter: <span t-field="o.print_count"/>
+            </t>
+        </xpath>
+    </template>
+</odoo>

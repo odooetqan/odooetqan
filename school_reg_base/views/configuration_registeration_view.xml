@@ -1,0 +1,1088 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id="gender_form_view" model="ir.ui.view">
+			<field name="name">gender.form.view</field>
+			<field name="model">gender</field>
+			<field name="arch" type="xml">
+				<form>
+					<header></header>
+					<sheet>
+						<div class="oe_title">
+							<div class="oe_title">
+								<h1>Gender</h1>
+								<h1>
+									<field name="name"/>
+									<br/>
+								</h1>
+							</div>
+						</div>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="gender_tree_view" model="ir.ui.view">
+			<field name="name">gender.view.tree</field>
+			<field name="model">gender</field>
+			<field name="arch" type="xml">
+				<tree editable="top">
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+		<record id="gender_search_view" model="ir.ui.view">
+			<field name="name">gender search</field>
+			<field name="model">gender</field>
+			<field name="arch" type="xml">
+				<search string="Gender search">
+					<!-- <field name="name"/> -->
+				</search>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_gender">
+			<field name="name">Gender</field>
+			<field name="res_model">gender</field>
+			<!--<field name="view_type">form</field>-->
+			<field name="view_mode">tree,form</field>
+		</record>
+		<!-- ...................................... .................................................... . -->
+		<record id="id_type_form_view" model="ir.ui.view">
+			<field name="name">id_type.form.view</field>
+			<field name="model">id.type</field>
+			<field name="arch" type="xml">
+				<form>
+					<header></header>
+					<sheet>
+						<div class="oe_title">
+							<div class="oe_title">
+								<h1>Id Type</h1>
+								<h1>
+									<field name="name"/>
+									<br/>
+								</h1>
+							</div>
+						</div>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="id_type_tree_view" model="ir.ui.view">
+			<field name="name">id_type.view.tree</field>
+			<field name="model">id.type</field>
+			<field name="arch" type="xml">
+				<tree editable="top">
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+		<record id="id_type_search_view" model="ir.ui.view">
+			<field name="name">id_type search</field>
+			<field name="model">id.type</field>
+			<field name="arch" type="xml">
+				<search string="Id Type search">
+					<field name="name" string="ID type"/>
+				</search>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_id_type">
+			<field name="name">ID type</field>
+			<field name="res_model">id.type</field>
+			<!--<field name="view_type">form</field>-->
+			<field name="view_mode">tree,form</field>
+		</record>
+		<!-- ...................................... .................................................... . -->
+		<!-- ......................................Work type  .................................................... . -->
+		<record id="work_type_form_view" model="ir.ui.view">
+			<field name="name">work.type.form.view</field>
+			<field name="model">work.type</field>
+			<field name="arch" type="xml">
+				<form>
+					<header></header>
+					<sheet>
+						<div class="oe_title">
+							<div class="oe_title">
+								<h1>Work Type</h1>
+								<h1>
+									<field name="name"/>
+									<br/>
+								</h1>
+							</div>
+						</div>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="work_type_tree_view" model="ir.ui.view">
+			<field name="name">work.type.view.tree</field>
+			<field name="model">work.type</field>
+			<field name="arch" type="xml">
+				<tree editable="top">
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+		<record id="work_type_search_view" model="ir.ui.view">
+			<field name="name">Work Type search</field>
+			<field name="model">work.type</field>
+			<field name="arch" type="xml">
+				<search string="Work Type search">
+					<field name="name"/>
+				</search>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_work_type">
+			<field name="name">Work Type</field>
+			<field name="res_model">work.type</field>
+			<!--<field name="view_type">form</field>-->
+			<field name="view_mode">tree,form</field>
+		</record>
+		<!-- ......................................End Work Type .................................................... . -->
+		<!-- ......................................Start Relative Relation  .................................................... . -->
+		<record id="relative_relation_form_view" model="ir.ui.view">
+			<field name="name">relative.relation.form.view</field>
+			<field name="model">relative.relation</field>
+			<field name="arch" type="xml">
+				<form>
+					<header></header>
+					<sheet>
+						<div class="oe_title">
+							<div class="oe_title">
+								<h1>Relative Relation</h1>
+								<h1>
+									<field name="name"/>
+									<br/>
+								</h1>
+							</div>
+						</div>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="relative_relation_tree_view" model="ir.ui.view">
+			<field name="name">relative.relation.view.tree</field>
+			<field name="model">relative.relation</field>
+			<field name="arch" type="xml">
+				<tree editable="top">
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+		<record id="relative_relation_search_view" model="ir.ui.view">
+			<field name="name">Relative Relation search</field>
+			<field name="model">relative.relation</field>
+			<field name="arch" type="xml">
+				<search string="Relative Relation search">
+					<field name="name"/>
+				</search>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_relative_relation">
+			<field name="name">Relative Relation</field>
+			<field name="res_model">relative.relation</field>
+			<!--<field name="view_type">form</field>-->
+			<field name="view_mode">tree,form</field>
+		</record>
+		<!-- ......................................End Relative Relation .................................................... . -->
+
+		
+		<!-- ......................................Know US .................................................... . -->
+		<record id="know_us_form_view" model="ir.ui.view">
+			<field name="name">know.us.form.view</field>
+			<field name="model">know.us</field>
+			<field name="arch" type="xml">
+				<form>
+					<header></header>
+					<sheet>
+						<div class="oe_title">
+							<div class="oe_title">
+								<h1>Know US</h1>
+								<h1>
+									<field name="name"/>
+									<br/>
+								</h1>
+							</div>
+						</div>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="know_us_tree_view" model="ir.ui.view">
+			<field name="name">know.us.view.tree</field>
+			<field name="model">know.us</field>
+			<field name="arch" type="xml">
+				<tree editable="top">
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+		<record id="know_us_search_view" model="ir.ui.view">
+			<field name="name">know nus search</field>
+			<field name="model">know.us</field>
+			<field name="arch" type="xml">
+				<search string="Know Us search">
+					<field name="name"/>
+				</search>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_know_us">
+			<field name="name">Know Us</field>
+			<field name="res_model">know.us</field>
+			<!--<field name="view_type">form</field>-->
+			<field name="view_mode">tree,form</field>
+		</record>
+		<!-- ...................................... .................................................... . -->
+		<!-- ......................................Drop off reasons .................................................... . -->
+		<record id="dropoff_reasons_form_view" model="ir.ui.view">
+			<field name="name">dropoff.reasons.form.view</field>
+			<field name="model">dropoff.reasons</field>
+			<field name="arch" type="xml">
+				<form>
+					<header></header>
+					<sheet>
+						<div class="oe_title">
+							<div class="oe_title">
+								<h1>Drop off Reasons</h1>
+								<h1>
+									<field name="name"/>
+									<br/>
+								</h1>
+							</div>
+						</div>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="dropoff_reasons_tree_view" model="ir.ui.view">
+			<field name="name">dropoff.reasons.view.tree</field>
+			<field name="model">dropoff.reasons</field>
+			<field name="arch" type="xml">
+				<tree editable="top">
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+		<record id="dropoff_reasons_search_view" model="ir.ui.view">
+			<field name="name">Dropoff Reasons search</field>
+			<field name="model">dropoff.reasons</field>
+			<field name="arch" type="xml">
+				<search string="Drop off reasons search">
+					<field name="name"/>
+				</search>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_dropoff_reasons">
+			<field name="name">Drop off reasons</field>
+			<field name="res_model">dropoff.reasons</field>
+			<!--<field name="view_type">form</field>-->
+			<field name="view_mode">tree,form</field>
+		</record>
+		<!-- ...................................... .................................................... . -->
+		<!-- ......................................student_status  .................................................... . -->
+		<record id="student_status_form_view" model="ir.ui.view">
+			<field name="name">student.status.form.view</field>
+			<field name="model">student.status</field>
+			<field name="arch" type="xml">
+				<form>
+					<header></header>
+					<sheet>
+						<div class="oe_title">
+							<div class="oe_title">
+								<h1>Student Status</h1>
+								<h1>
+									<field name="name"/>
+									<br/>
+								</h1>
+							</div>
+						</div>
+						<group>
+							<field name="need_reason"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="student_status_tree_view" model="ir.ui.view">
+			<field name="name">student.status.view.tree</field>
+			<field name="model">student.status</field>
+			<field name="arch" type="xml">
+				<tree editable="top">
+					<field name="name"/>
+					<field name="need_reason"/>
+				</tree>
+			</field>
+		</record>
+		<record id="student_status_search_view" model="ir.ui.view">
+			<field name="name">Student Status search</field>
+			<field name="model">student.status</field>
+			<field name="arch" type="xml">
+				<search string="Student Status search">
+					<field name="name"/>
+					<field name="need_reason"/>
+				</search>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_student_status">
+			<field name="name">Student Status</field>
+			<field name="res_model">student.status</field>
+			<!--<field name="view_type">form</field>-->
+			<field name="view_mode">tree,form</field>
+		</record>
+		<!-- ...................................... .................................................... . -->
+		<!-- ......................................discount.type .................................................... . -->
+		<record id="discount_type_form_view" model="ir.ui.view">
+			<field name="name">discount.type.form.view</field>
+			<field name="model">discount.type</field>
+			<field name="arch" type="xml">
+				<form>
+					<header></header>
+					<sheet>
+						<div class="oe_title">
+							<div class="oe_title">
+								<h1>Discount Type</h1>
+								<h1>
+									<field name="name"/>
+									<br/>
+								</h1>
+							</div>
+						</div>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="discount_type_tree_view" model="ir.ui.view">
+			<field name="name">discount.type.view.tree</field>
+			<field name="model">discount.type</field>
+			<field name="arch" type="xml">
+				<tree editable="top">
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+		<record id="discount_type_search_view" model="ir.ui.view">
+			<field name="name">Discount Type search</field>
+			<field name="model">discount.type</field>
+			<field name="arch" type="xml">
+				<search string="Discount Type">
+					<field name="name"/>
+				</search>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_discount_type">
+			<field name="name">Discount Type</field>
+			<field name="res_model">discount.type</field>
+			<!--<field name="view_type">form</field>-->
+			<field name="view_mode">tree,form</field>
+		</record>
+		<!-- ...................................... ............................................................ . -->
+		<!-- ......................................Discounts .................................................... . -->
+		<record id="discounts_form_view" model="ir.ui.view">
+			<field name="name">discounts.form.view</field>
+			<field name="model">discounts</field>
+			<field name="arch" type="xml">
+				<form>
+					<header></header>
+					<sheet>
+						<div class="oe_title">
+							<div class="oe_title">
+								<h1>Discounts</h1>
+								<h1>
+									<field name="name"/>
+									<br/>
+								</h1>
+							</div>
+						</div>
+						<group name="Discounts" string="Strings">
+							<field name="ratio"/>
+							<field name="discount_id"/>
+							<field name="discription"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="discounts_tree_view" model="ir.ui.view">
+			<field name="name">discounts.view.tree</field>
+			<field name="model">discounts</field>
+			<field name="arch" type="xml">
+				<tree editable="top">
+					<field name="name"/>
+					<field name="ratio"/>
+					<field name="discount_id"/>
+					<field name="discription"/>
+				</tree>
+			</field>
+		</record>
+		<record id="discounts_search_view" model="ir.ui.view">
+			<field name="name">Discount Type search</field>
+			<field name="model">discounts</field>
+			<field name="arch" type="xml">
+				<search string="Discounts">
+					<field name="name" />
+					<field name="ratio" />
+					<field name="discount_id" />
+					<field name="discription" />
+				</search>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_discounts">
+			<field name="name">Discounts</field>
+			<field name="res_model">discounts</field>
+			<!--<field name="view_type">form</field>-->
+			<field name="view_mode">tree,form</field>
+		</record>
+		<!-- ......................................End Discounts .................................................... . -->
+		<!-- ......................................Start Tracks .................................................... . -->
+		<record id="tracks_form_view" model="ir.ui.view">
+			<field name="name">tracks.form.view</field>
+			<field name="model">tracks</field>
+			<field name="arch" type="xml">
+				<form>
+					<header></header>
+					<sheet>
+						<div class="oe_title">
+							<div class="oe_title">
+								<h1>Tracks</h1>
+								<h1>
+									<field name="name"/>
+									<br/>
+								</h1>
+							</div>
+						</div>
+						<group>
+							<field name="analytic_account_id"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="tracks_tree_view" model="ir.ui.view">
+			<field name="name">tracks.view.tree</field>
+			<field name="model">tracks</field>
+			<field name="arch" type="xml">
+				<tree editable="top">
+					<field name="name"/>
+					<field name="analytic_account_id"/>
+				</tree>
+			</field>
+		</record>
+		<record id="tracks_search_view" model="ir.ui.view">
+			<field name="name">Tracks Type search</field>
+			<field name="model">tracks</field>
+			<field name="arch" type="xml">
+				<search string="Tracks">
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_tracks">
+			<field name="name">Tracks</field>
+			<field name="res_model">tracks</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<!-- ......................................End Tracks  .................................................... . -->
+		<!-- ......................................Start Sections .................................................... . -->
+		<record id="sections_form_view" model="ir.ui.view">
+			<field name="name">sections.form.view</field>
+			<field name="model">sections</field>
+			<field name="arch" type="xml">
+				<form>
+					<header></header>
+					<sheet>
+						<div class="oe_title">
+							<div class="oe_title">
+								<h1>Sections</h1>
+								<h1>
+									<field name="name"/>
+									<br/>
+								</h1>
+							</div>
+						</div>
+						<group>							
+							<field name="analytic_account_id"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="sections_tree_view" model="ir.ui.view">
+			<field name="name">sections.view.tree</field>
+			<field name="model">sections</field>
+			<field name="arch" type="xml">
+				<tree editable="top">
+					<field name="name"/>
+					<field name="display_name"/>
+
+					
+					<field name="analytic_account_id"/>				
+					<field name="track_id"/>
+				</tree>
+			</field>
+		</record>
+		<record id="sections_search_view" model="ir.ui.view">
+			<field name="name">Sections Type search</field>
+			<field name="model">sections</field>
+			<field name="arch" type="xml">
+				<search string="Sections">
+					<field name="name" />
+					<field name="track_id"/>
+				</search>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_sections">
+			<field name="name">Sections</field>
+			<field name="res_model">sections</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<!-- ......................................End Sections  .................................................... . -->
+		<!-- ......................................Start Stages .................................................... . -->
+		<record id="stages_form_view" model="ir.ui.view">
+			<field name="name">stages.form.view</field>
+			<field name="model">stages</field>
+			<field name="arch" type="xml">
+				<form>
+					<header></header>
+					<sheet>
+						<div class="oe_title">
+							<div class="oe_title">
+								<h1>Stages</h1>
+								<h1>
+									<field name="name"/>
+									<br/>
+								</h1>
+							</div>
+						</div>
+						<group>
+							<field name="analytic_account_id"/>
+							<field name="is_secondary"/>
+							<field name="section_id"/>
+							<field name="track_id"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="stages_tree_view" model="ir.ui.view">
+			<field name="name">stages.view.tree</field>
+			<field name="model">stages</field>
+			<field name="arch" type="xml">
+				<tree editable="top">
+					<field name="name"/>
+					<field name="display_name"/>
+					<field name="analytic_account_id"/>
+					<field name="is_secondary" string="Is Secondary"/>
+					<field name="section_id"/>
+					<field name="track_id"/>
+				</tree>
+			</field>
+		</record>
+		<record id="stages_search_view" model="ir.ui.view">
+			<field name="name">Stages Type search</field>
+			<field name="model">stages</field>
+			<field name="arch" type="xml">
+				<search string="Stages">
+					<field name="name"/>
+					<field name="is_secondary"/>
+					<field name="section_id"/>
+					<field name="track_id"/>
+				</search>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_stages">
+			<field name="name">Stages</field>
+			<field name="res_model">stages</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<!-- ......................................End Stages  .................................................... . -->
+		<!-- ......................................Start Classes .................................................... . -->
+		<record id="classes_form_view" model="ir.ui.view">
+			<field name="name">classes.form.view</field>
+			<field name="model">classes</field>
+			<field name="arch" type="xml">
+				<form>
+					<header></header>
+					<sheet>
+						<div class="oe_title">
+							<div class="oe_title">
+								<h1>Classes</h1>
+								<h1>
+									<field name="name"/>
+									<br/>
+								</h1>
+							</div>
+						</div>
+						<group>
+							<field name="seq"/>
+							<field name="display_name"/>
+							<field name="product_id"/>
+							<field name="analytic_account_id"/>
+							<field name="stage_id"/>
+							<field name="section_id"/>
+							<field name="track_id"/>
+							
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="classes_tree_view" model="ir.ui.view">
+			<field name="name">classes.view.tree</field>
+			<field name="model">classes</field>
+			<field name="arch" type="xml">
+				<tree editable="top">
+					<field name="seq"/>
+					<field name="analytic_account_id"/>
+					<field name="name"/>
+					<field name="display_name"/>
+					<field name="product_id"/>
+
+					
+					<field name="stage_id"/>
+					<field name="section_id"/>
+					<field name="track_id"/>
+				</tree>
+			</field>
+		</record>
+		<record id="classes_search_view" model="ir.ui.view">
+			<field name="name">Classes search</field>
+			<field name="model">classes</field>
+			<field name="arch" type="xml">
+				<search string="Stages">
+					<field name="seq"/>
+					<field name="name" />
+					<field name="stage_id"/>
+					<field name="section_id"/>
+					<field name="track_id"/>
+				</search>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_classes">
+			<field name="name">Classes</field>
+			<field name="res_model">classes</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<!-- ......................................End Classes  .................................................... . -->
+		<!-- ......................................Start Secondry Majors .................................................... . -->
+		<record id="secondry_majors_form_view" model="ir.ui.view">
+			<field name="name">secondry.majors.form.view</field>
+			<field name="model">secondry.majors</field>
+			<field name="arch" type="xml">
+				<form>
+					<header></header>
+					<sheet>
+						<div class="oe_title">
+							<div class="oe_title">
+								<h1>Classes</h1>
+								<h1>
+									<field name="name"/>
+									<br/>
+								</h1>
+							</div>
+						</div>
+						<group>
+							<field name="stage_id"/>
+							<field name="section_id"/>
+							<field name="track_id"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="secondry_majors_tree_view" model="ir.ui.view">
+			<field name="name">secondry.majors.view.tree</field>
+			<field name="model">secondry.majors</field>
+			<field name="arch" type="xml">
+				<tree editable="top">
+					<field name="name"/>
+					<field name="stage_id"/>
+					<field name="section_id"/>
+					<field name="track_id"/>
+				</tree>
+			</field>
+		</record>
+		<record id="classes_search_view" model="ir.ui.view">
+			<field name="name">secondry.majors.search</field>
+			<field name="model">secondry.majors</field>
+			<field name="arch" type="xml">
+				<search string="Stages">
+					<field name="name" />
+					<field name="stage_id"/>
+					<field name="section_id"/>
+					<field name="track_id"/>
+				</search>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_secondry_majors">
+			<field name="name">Secondary Majors</field>
+			<field name="res_model">secondry.majors</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<!-- ......................................End Secondry Majors   .................................................... . -->
+		<!-- ......................................Start Ex Schools .................................................... . -->
+		<record id="ex_schools_form_view" model="ir.ui.view">
+			<field name="name">ex.schools.form.view</field>
+			<field name="model">ex.schools</field>
+			<field name="arch" type="xml">
+				<form>
+					<header></header>
+					<sheet>
+						<div class="oe_title">
+							<div class="oe_title">
+								<h1>Ex Schools</h1>
+								<h1>
+									<field name="name"/>
+									<br/>
+								</h1>
+							</div>
+						</div>
+						<group>
+							<field name="outside_madinah"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="ex_schools_tree_view" model="ir.ui.view">
+			<field name="name">ex.schools.view.tree</field>
+			<field name="model">ex.schools</field>
+			<field name="arch" type="xml">
+				<tree editable="top">
+					<field name="name"/>
+					<field name="outside_madinah"/>
+				</tree>
+			</field>
+		</record>
+		<record id="ex_schools_search_view" model="ir.ui.view">
+			<field name="name">ex.schools.search</field>
+			<field name="model">ex.schools</field>
+			<field name="arch" type="xml">
+				<search string="Stages">
+					<field name="name" />
+					<field name="outside_madinah"/>
+				</search>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_ex_schools">
+			<field name="name">Ex Schools</field>
+			<field name="res_model">ex.schools</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<!-- ......................................End Ex Schools.................................................... . -->
+		<!-- ......................................Start Years .................................................... . -->
+		<record id="years_form_view" model="ir.ui.view">
+			<field name="name">years.form.view</field>
+			<field name="model">years</field>
+			<field name="arch" type="xml">
+				<form>
+					<header></header>
+					<sheet>
+						<div class="oe_title">
+							<div class="oe_title">
+								<h1>years</h1>
+								<h1>
+									<field name="name"/>
+									<br/>
+								</h1>
+							</div>
+						</div>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="years_tree_view" model="ir.ui.view">
+			<field name="name">years.view.tree</field>
+			<field name="model">years</field>
+			<field name="arch" type="xml">
+				<tree editable="top">
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+		<record id="years_search_view" model="ir.ui.view">
+			<field name="name">years Type search</field>
+			<field name="model">years</field>
+			<field name="arch" type="xml">
+				<search string="Sections">
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_years">
+			<field name="name">Years </field>
+			<field name="res_model">years</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<!-- ......................................End Years  .................................................... . -->
+		<!-- ......................................Start Fees .................................................... . -->
+		<record id="fees_form_view" model="ir.ui.view">
+			<field name="name">fees.form.view</field>
+			<field name="model">fees</field>
+			<field name="arch" type="xml">
+				<form>
+					<header></header>
+					<sheet>
+						<div class="oe_title">
+							<div class="oe_title">
+								<h1>ExSchools</h1>
+								<h1>
+									<field name="name"/>
+									<br/>
+								</h1>
+							</div>
+						</div>
+						<group>
+							<field name="stage_id"/>
+							<field name="product_id" domain="[('fees', '=', True)]"/>
+                        </group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="fees_tree_view" model="ir.ui.view">
+			<field name="name">fees.view.tree</field>
+			<field name="model">fees</field>
+			<field name="arch" type="xml">
+				<tree editable="top">
+					<field name="name"/>
+					<field name="stage_id"/>
+					<field name="product_id" domain="[('fees', '=', True)]" />
+                </tree> 
+			</field>
+		</record>
+		<record id="fees_search_view" model="ir.ui.view">
+			<field name="name">Fees Search</field>
+			<field name="model">fees</field>
+			<field name="arch" type="xml">
+				<search string="Fees">
+					<field name="name" />
+					<field name="stage_id"/>
+					<field name="product_id"/>
+				</search>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_fees">
+			<field name="name">Fees</field>
+			<field name="res_model">fees</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<!-- ......................................End Fees Schools    .................................................... . -->
+		<!-- ......................................Start Contract .................................................... . -->
+		<record id="contract_form_view" model="ir.ui.view">
+			<field name="name">contract.form.view</field>
+			<field name="model">student.student.contract</field>
+			<field name="arch" type="xml">
+				<form>
+					<header>
+						<field name="state" widget="statusbar" string="Status" statusbar_visible="draft,active,blocked,in_active"/>
+
+					    <button name="reset_draft" type="object" string="Reset to Draft" class="btn-warning" invisible = "state == 'draft'"/>
+						<button name="student_confirm" type="object" string="Confirm" class="btn-success" invisible="state != 'draft'" />
+						<button name="student_blocked" type="object" string="Blocked" class="btn-danger"  invisible="state != 'draft'" />
+						<button name="student_in_active" type="object" string="In Active" class="btn-parimary" invisible="state != 'draft'" />	
+					</header>	
+					<sheet>
+						<div class="oe_title">
+							<div class="oe_title">
+								<h1>Contract</h1>
+								<h1>
+									<field name="reference"/>
+									<field name="student_id"/>
+								</h1>
+								
+							</div>
+								<h4>
+									<label for="name">Name</label>
+									<field name="name" placeholder="Example: Ahmed Omar"/>
+									<label for="family_name">Family Name</label>
+									<field name="family_name"/>
+									<label for="family_number">Family Number</label>
+									<field name="family_number"/>
+									<label for="student_number">Student Number</label>
+									<field name="student_number"/>
+								</h4>
+						</div>
+						<group>
+							<group>
+								<field name="guardian_id" options="{'no_create_edit': True}"/>
+								<field name="gender" options="{'no_create_edit': True}"/>
+								<field name="nationality" options="{'no_create_edit': True}"/>
+								<field name="id_type" options="{'no_create_edit': True}"/>
+								<field name="id_number"/>
+								<field name="reason"  options="{'no_create_edit': True}"  invisible="state != 'in_active'"/>
+								<field name="know_us" options="{'no_create_edit': True}"/>
+							</group>
+							<group>
+								<field name="birth_date"/>
+<!-- 								<field name="hijri_date"/> -->
+								<field name="mobile"/>
+								<field name="mobile2"/>
+								<field name="email"/>
+								<field name="partner_id" required="0" readonly="0"/>
+							</group>
+						</group>
+						<notebook>
+							<page name="class" string="Class">
+								<group>
+									<field name="class_id" options="{'no_create_edit': True}"/>
+									<field name="stage_id"/>
+									<field name="section_id"/>
+									<field name="track_id"/>
+									<!-- <field name="secondary_major" options="{'no_create_edit': True}" invisible="is_secondary != False" /> -->
+									<field name="ex_school"/>
+									<field name="current_year" options="{'no_create_edit': True}"/>
+									<field name="previous_year" options="{'no_create_edit': True}"/>
+								</group>
+							</page>
+							<page name="discount" string="Discount">
+								<group>
+									<field name="sibling_discount" />
+									<field name="student_discount" />
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers"/>
+						<field name="message_ids" widget="mail_thread"/>
+					</div>
+				</form>
+			</field>
+		</record>
+		<record id="contract_tree_view" model="ir.ui.view">
+			<field name="name">contract.view.tree</field>
+			<field name="model">student.student.contract</field>
+			<field name="arch" type="xml">
+				<tree ><!--editable="top"-->
+					<field name="student_number"/>
+					<field name="name"/>
+					<field name="guardian_id"/>
+					<field name="gender"  optional="hide"/>
+					<field name="nationality" optional="hide"/> 
+					<field name="id_type"  optional="hide"/>
+					<field name="id_number" optional="hide"/>
+					<field name="reason"  options="{'no_create_edit': True}"  optional="hide"/> <!-- invisible="state != 'in_active'"-->
+					<field name="know_us" options="{'no_create_edit': True}" optional="hide"/>
+					<field name="birth_date" optional="hide"/>
+					<field name="mobile"/>
+					<field name="mobile2"/>
+					<field name="email"/>
+					<field name="partner_id" required="0" readonly="0" optional="hide"/>
+					<field name="class_id" options="{'no_create_edit': True}"/>
+					<field name="stage_id"/>
+					<field name="section_id"/>
+					<field name="track_id"/>
+					<field name="ex_school" optional="hide"/>
+					<field name="current_year" options="{'no_create_edit': True}" optional="hide"/>
+					<field name="previous_year" options="{'no_create_edit': True}" optional="hide"/>
+					<field name="sibling_discount"  optional="hide"/>
+					<field name="student_discount"  optional="hide"/>
+					<!-- <field name="stage_id"/>
+					<field name="product_id" domain="[('fees', '=', True)]" /> -->
+                </tree> 
+			</field>
+		</record>
+		<record id="contract_search_view" model="ir.ui.view">
+			<field name="name">Contract Search</field>
+			<field name="model">student.student.contract</field>
+			<field name="arch" type="xml">
+				<search string="Contract">
+					<field name="name" />
+					<field name="student_number"/>
+					<field name="name"/>
+					<field name="guardian_id" />
+					<field name="gender" />
+					<field name="nationality" /> 
+					<field name="id_type" />
+					<field name="id_number"/>
+					<field name="reason" />
+					<field name="know_us" />
+					<field name="birth_date"/>
+					<field name="mobile"/>
+					<field name="mobile2"/>
+					<field name="email"/>
+					<field name="partner_id"/>
+					<field name="class_id" />
+					<field name="stage_id"/>
+					<field name="section_id"/>
+					<field name="track_id"/>
+					<field name="ex_school" />
+					<field name="current_year" />
+					<field name="previous_year" />
+					<field name="sibling_discount"  />
+					<field name="student_discount" />
+					<!-- <field name="stage_id"/>
+					<field name="product_id"/> -->
+				</search>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_contracts">
+			<field name="name">contracts</field>
+			<field name="res_model">student.student.contract</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<!-- ......................................End Contract    .................................................... . -->
+
+		<record model="ir.actions.act_window" id="action_schools_managements">
+			<field name="name">Schools Management</field>
+			<field name="res_model">schools</field>
+			<!--<field name="view_type">form</field>-->
+			<field name="view_mode">tree,form</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_students">
+			<field name="name">Students</field>
+			<field name="res_model">students</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_guardians">
+			<field name="name">Guardians</field>
+			<field name="res_model">guardians</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_product_product">
+			<field name="name">Products</field>
+			<field name="res_model">product.template</field>
+            <field name="domain">[('fees', '=', True)]</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_student_guardian">
+			<field name="name">Student Guardian</field>
+			<field name="res_model">student.guardian</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_student_student">
+			<field name="name">Student </field>
+			<field name="res_model">student.student</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<!-- ...................................................... Start Menus...................................................... -->
+		<menuitem id="registeration"  name="School Registeration Base"  web_icon="school_reg_base,static/description/student.png" sequence="-10"/>
+		<menuitem id="menu_action_student_student" name="Students" parent="registeration" action="action_student_student" sequence="5"/>
+		<menuitem id="menu_action_student_guardian" name="Guardian" parent="registeration" action="action_student_guardian" sequence="5"/>
+		<menuitem id="menu_item_configuration" name="Configuration" parent="registeration"   sequence="50"/>
+		<!--<menuitem id="menu_dropoff_reason_new" name="Dropoff Reason" parent="registeration" action="action_dropoff_student"/>-->
+		<menuitem id="menu_general" name="General" parent="menu_item_configuration" />
+		<menuitem id="menu_action_gender" name="Gender" parent="menu_general" action="action_gender" sequence="1"/>
+		<menuitem id="menu_action_id_type" name="ID Type" parent="menu_general" action="action_id_type" sequence="2"/>
+		<menuitem id="menu_action_work_type" name="Work Type" parent="menu_general" action="action_work_type" sequence="3"/>
+		<menuitem id="menu_action_relative_relation" name="Relative Relation" parent="menu_general" action="action_relative_relation" sequence="3"/>
+		<menuitem id="menu_action_know_us" name="Know Us" parent="menu_general" action="action_know_us" sequence="4"/>
+		<menuitem id="menu_action_dropoff_reasons" name="Drop Off Reasons" parent="menu_general" action="action_dropoff_reasons" sequence="4"/>
+		<menuitem id="menu_action_student_status" name="Student Status" parent="menu_general" action="action_student_status" sequence="5"/>
+		<menuitem id="menu_action_discount_type" name="Discount Type" parent="menu_general" action="action_discount_type" sequence="6"/>
+		<menuitem id="menu_action_discounts" name="Discounts" parent="menu_general" action="action_discounts" sequence="7"/>
+		<menuitem id="menu_classes_information" name="Classes Information"  parent="menu_item_configuration"/>
+		<menuitem id="menu_action_tracks" name="Tracks" parent="menu_classes_information" action="action_tracks" sequence="7"/>
+		<menuitem id="menu_action_sections" name="Sections" parent="menu_classes_information" action="action_sections" sequence="7"/>
+		<menuitem id="menu_action_stages" name="Stages" parent="menu_classes_information" action="action_stages" sequence="7"/>
+		<menuitem id="menu_action_classes" name="classes" parent="menu_classes_information" action="action_classes" sequence="7"/>
+		<menuitem id="menu_action_secondry_majors" name="Secondry Majors" parent="menu_classes_information" action="action_secondry_majors" sequence="7"/>
+		<menuitem id="menu_action_ex_schools" name="Ex Schools" parent="menu_classes_information" action="action_ex_schools" sequence="7"/>
+		<menuitem id="menu_action_years" name="years" parent="menu_classes_information" action="action_years" sequence="7"/>
+		<menuitem id="menu_invoicing" name="Invoicing"  parent="menu_item_configuration"/>
+		<menuitem id="menu_action_fees" name="Fees" parent="menu_invoicing" action="action_fees" sequence="7"/>
+		<menuitem id="menu_action_product_product" name="Product" parent="menu_invoicing" action="action_product_product" sequence="7"/>
+		<menuitem id="menu_action_contracts" name="Contracts" parent="registeration" action="action_contracts" sequence="7"/>
+<!-- 		<menuitem id="promissory_note_alhayah_menu" name="Promissory" parent="registeration" action="action_promissory_note_alhayah" sequence="7"/> -->
+	</data>
+</odoo>

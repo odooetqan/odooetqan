@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<template id="report_rental_contract_document">
+			<t t-call="web.external_layout">
+				<div class="page">
+		            <link rel="stylesheet" href="/itsys_real_estate/static/src/css/report-style.css"/>
+		            <!-- <link rel="stylesheet" href="/itsys_real_estate/static/src/css/report-style.css"/> -->
+					<table class="report_table">
+						<tr>
+							<th align="center">
+								<!--Rental Contract--> إستلام وحدة  # <span style="color: white !important" t-field="o.building_unit.code"/>
+							</th>
+						</tr>
+					</table>
+					<br/>
+					<p style="text-decoration: underline;font-size: 16px;">رقم العقد : ..............  تاريخ العقد : ................... مبلغ الضمان المسلم (إن وجد ) : ............. : </p>
+					<!-- <p style="text-decoration: underline;font-size: 16px;">This Agreement is made by and between: </p> -->
+
+					<table class="report_table">
+						<tr>
+							<th colspan="2">1- بيانات المستأجر: Tenant</th>
+						</tr>
+						<tr>
+							<td><span t-field="o.partner_id.name"/></td>
+							<td><span t-field="o.partner_id.id"/></td>
+						</tr>				
+					</table>
+					<table class="report_table">
+						<tr>
+							<th colspan="2">2- بيانات المؤجر:    Lessor Data </th>
+						</tr>
+						<tr>
+							<td><span t-field="o.partner_id.name"/></td>
+							<td><span t-field="o.partner_id.id"/></td>
+						</tr>				
+					</table>
+					<table class="report_table">
+						<tr>
+							<th colspan="2">3- بيانات الوسيط العقارى (إن وجد):    Broker Data </th>
+						</tr>
+						<tr>
+							<td><span t-field="o.partner_id.name"/></td>
+							<td><span t-field="o.partner_id.id"/></td>
+						</tr>				
+					</table>
+					<table class="report_table">
+						<tr>
+							<th colspan="2">4- حالة الوحدة عند الاستلام :      over handing upon condition unit Rental  </th>
+						</tr>
+					</table>
+					
+					<table  class="report_table">
+							<tr><th style="width:250px;">البند  </th><th style="width:80px;">الحـــــالة</th><th>الملاحظـــــــــــــــــــات</th></tr>
+							<tr>
+								<!-- <t t-if="p.code == 'BASIC'">
+								<t t-if="p.code == 'BASIC' or p.code == 'GROSS' or p.code == 'NET' or p.code == 'TOTAL' ">  -->
+
+
+								<td>دهان السقف و الجدران </td>
+								<th>
+									<t t-if="o.paints == True"><span>مقبول</span></t>
+									<t t-if="o.paints == False"><span style="background-color:red;">تالف</span></t>							
+								</th>
+								<td></td>
+							</tr>
+							<tr><td>الارضيات</td>
+								<th>
+									<t t-if="o.grounds == True"><span>مقبول</span></t>
+									<t t-if="o.grounds == False"><span style="background-color:red;">تالف</span></t>
+								</th><td></td></tr>
+							<tr><td>الحمامات و الاطقم الصحية</td><th>
+									<t t-if="o.pathrooms == True"><span>مقبول</span></t>
+									<t t-if="o.pathrooms == False"><span style="background-color:red;">تالف</span></t>
+								</th><td></td></tr>
+							<tr><td>المطبخ</td><th>
+									<t t-if="o.kitchen == True"><span>مقبول</span></t>
+									<t t-if="o.kitchen == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>الغرف و الملاحق</td><th>
+									<t t-if="o.rooms == True"><span>مقبول</span></t>
+									<t t-if="o.rooms == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>الكهرباء و الاضاءة</td><th>
+									<t t-if="o.electricity == True"><span>مقبول</span></t>
+									<t t-if="o.electricity == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>السباكة و التمديدات</td><th>
+									<t t-if="o.plumbing == True"><span>مقبول</span></t>
+									<t t-if="o.plumbing == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>خزان المياه</td><th>
+									<t t-if="o.water == True"><span>مقبول</span></t>
+									<t t-if="o.water == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>الابواب </td><th>
+									<t t-if="o.doors == True"><span>مقبول</span></t>
+									<t t-if="o.doors == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>النوافذ</td><th>
+									<t t-if="o.windows == True"><span>مقبول</span></t>
+									<t t-if="o.windows == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>اجهزة التكييف</td><th>
+									<t t-if="o.air_conditions == True"><span>مقبول</span></t>
+									<t t-if="o.air_conditions == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>الإنتركوم (النداء الخارجي)</td><th>
+									<t t-if="o.intercome == True"><span>مقبول</span></t>
+									<t t-if="o.intercome == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>أعمال الجبس</td><th>
+									<t t-if="o.gibs == True"><span>مقبول</span></t>
+									<t t-if="o.gibs == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>المفاتيح</td><th>
+									<t t-if="o.keys == True"><span>مقبول</span></t>
+									<t t-if="o.keys == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>الكراج</td><th>
+									<t t-if="o.grage == True"><span>مقبول</span></t>
+									<t t-if="o.grage == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>أخرى</td><th>
+									<t t-if="o.others == True"><span>مقبول</span></t>
+									<t t-if="o.others == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+					</table>
+					
+						<p>
+							انه في يوم ......... بتاريخ ............... الموافق ..........قام المستأجر الموضح ببياناته اعلاه باخلاء و تسليم الوحدات الايجارية الموضح بياناتها في البند الثامن من العقد و هي بحالة جيدة و مماثلة التي كانت عليهت عند استلامها و ذلك بعد التأكد من سلامة كافة مرافقها و محتوياتها و مطابقتها من قبل المؤجر مع نموزج الاستلام اعلاه.
+						</p>
+							<p>
+
+							كما يقر المؤجر بانه استلم كافة مستحقاته المالية الناتجة عن تأجير الوحدات الايجارية، بما فيها قيمة الفواتير الخاصة بالخدمات حتي تاريخ اليوم، و بانه لاتوجد اي ملاحظات تمنع من استلام و إخلاء الوحدات الايجارية.
+
+							</p>
+							<p><b>و عليه جري التوقيع من الطرفين: </b>
+							</p>
+					<table class="report_table">
+						<tr>
+							<th colspan="2">المستأجر المسلم Tenant Signature </th>
+							<th colspan="2">المستأجر المستلم Lessor Signature </th>
+						</tr>
+						<tr>
+							<td colspan="2"> الاسم : ............................. </td>
+							<td colspan="2"> التوقيع : ............................. </td>
+						</tr>
+						<tr>
+							<td colspan="2"> الاسم : ............................. </td>
+							<td colspan="2"> التوقيع : ............................. </td>
+						</tr>
+					</table>
+				</div>
+			</t>
+		</template>
+
+
+		<template id="report_rental_contract_document2">
+			<t t-call="web.external_layout">
+				<div class="page">
+		            <link rel="stylesheet" href="/itsys_real_estate/static/src/css/report-style.css"/>
+		            <!-- <link rel="stylesheet" href="/itsys_real_estate/static/src/css/report-style.css"/> -->
+					<table class="report_table">
+						<tr>
+							<th align="center">
+								<!--Rental Contract--> إستلام وحدة  # <span style="color: white !important" t-field="o.building_unit.code"/>
+							</th>
+						</tr>
+					</table>
+					<br/>
+					<p style="text-decoration: underline;font-size: 16px;">رقم العقد : ..............  تاريخ العقد : ................... مبلغ الضمان المسلم (إن وجد ) : ............. : </p>
+					<!-- <p style="text-decoration: underline;font-size: 16px;">This Agreement is made by and between: </p> -->
+
+					<table class="report_table">
+						<tr>
+							<th colspan="2">1- بيانات المستأجر: Tenant</th>
+						</tr>
+						<tr>
+							<td><span t-field="o.partner_id.name"/></td>
+							<td><span t-field="o.partner_id.id"/></td>
+						</tr>				
+					</table>
+					<table class="report_table">
+						<tr>
+							<th colspan="2">2- بيانات المؤجر:    Lessor Data </th>
+						</tr>
+						<tr>
+							<td><span t-field="o.partner_id.name"/></td>
+							<td><span t-field="o.partner_id.id"/></td>
+						</tr>				
+					</table>
+					<table class="report_table">
+						<tr>
+							<th colspan="2">3- بيانات الوسيط العقارى (إن وجد):    Broker Data </th>
+						</tr>
+						<tr>
+							<td><span t-field="o.partner_id.name"/></td>
+							<td><span t-field="o.partner_id.id"/></td>
+						</tr>				
+					</table>
+					<table class="report_table">
+						<tr>
+							<th colspan="2">4- حالة الوحدة عند الاستلام :      over handing upon condition unit Rental  </th>
+						</tr>
+					</table>
+					
+					<table  class="report_table">
+							<tr><th style="width:250px;">البند  </th><th style="width:80px;">الحـــــالة</th><th>الملاحظـــــــــــــــــــات</th></tr>
+							<tr>
+								<!-- <t t-if="p.code == 'BASIC'">
+								<t t-if="p.code == 'BASIC' or p.code == 'GROSS' or p.code == 'NET' or p.code == 'TOTAL' ">  -->
+
+
+								<td>دهان السقف و الجدران </td>
+								<th>
+									<t t-if="o.paints == True"><span>مقبول</span></t>
+									<t t-if="o.paints == False"><span style="background-color:red;">تالف</span></t>							
+								</th>
+								<td></td>
+							</tr>
+							<tr><td>الارضيات</td>
+								<th>
+									<t t-if="o.grounds == True"><span>مقبول</span></t>
+									<t t-if="o.grounds == False"><span style="background-color:red;">تالف</span></t>
+								</th><td></td></tr>
+							<tr><td>الحمامات و الاطقم الصحية</td><th>
+									<t t-if="o.pathrooms == True"><span>مقبول</span></t>
+									<t t-if="o.pathrooms == False"><div style="background-color:red;">تالف</div></t>
+								</th><td></td></tr>
+							<tr><td>المطبخ</td><th>
+									<t t-if="o.kitchen == True"><span>مقبول</span></t>
+									<t t-if="o.kitchen == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>الغرف و الملاحق</td><th>
+									<t t-if="o.rooms == True"><span>مقبول</span></t>
+									<t t-if="o.rooms == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>الكهرباء و الاضاءة</td><th>
+									<t t-if="o.electricity == True"><span>مقبول</span></t>
+									<t t-if="o.electricity == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>السباكة و التمديدات</td><th>
+									<t t-if="o.plumbing == True"><span>مقبول</span></t>
+									<t t-if="o.plumbing == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>خزان المياه</td><th>
+									<t t-if="o.water == True"><span>مقبول</span></t>
+									<t t-if="o.water == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>الابواب </td><th>
+									<t t-if="o.doors == True"><span>مقبول</span></t>
+									<t t-if="o.doors == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>النوافذ</td><th>
+									<t t-if="o.windows == True"><span>مقبول</span></t>
+									<t t-if="o.windows == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>اجهزة التكييف</td><th>
+									<t t-if="o.air_conditions == True"><span>مقبول</span></t>
+									<t t-if="o.air_conditions == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>الإنتركوم (النداء الخارجي)</td><th>
+									<t t-if="o.intercome == True"><span>مقبول</span></t>
+									<t t-if="o.intercome == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>أعمال الجبس</td><th>
+									<t t-if="o.gibs == True"><span>مقبول</span></t>
+									<t t-if="o.gibs == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>المفاتيح</td><th>
+									<t t-if="o.keys == True"><span>مقبول</span></t>
+									<t t-if="o.keys == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>الكراج</td><th>
+									<t t-if="o.grage == True"><span>مقبول</span></t>
+									<t t-if="o.grage == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>أخرى</td><th>
+									<t t-if="o.others == True"><span>مقبول</span></t>
+									<t t-if="o.others == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+					</table>
+					
+						<p>
+							انه في يوم ......... بتاريخ ............... الموافق ..........قام المستأجر الموضح ببياناته اعلاه باخلاء و تسليم الوحدات الايجارية الموضح بياناتها في البند الثامن من العقد و هي بحالة جيدة و مماثلة التي كانت عليهت عند استلامها و ذلك بعد التأكد من سلامة كافة مرافقها و محتوياتها و مطابقتها من قبل المؤجر مع نموزج الاستلام اعلاه.
+						</p>
+							<p>
+
+							كما يقر المؤجر بانه استلم كافة مستحقاته المالية الناتجة عن تأجير الوحدات الايجارية، بما فيها قيمة الفواتير الخاصة بالخدمات حتي تاريخ اليوم، و بانه لاتوجد اي ملاحظات تمنع من استلام و إخلاء الوحدات الايجارية.
+
+							</p>
+							<p><b>و عليه جري التوقيع من الطرفين: </b>
+							</p>
+					<table class="report_table">
+						<tr>
+							<th colspan="2">المستأجر المسلم Tenant Signature </th>
+							<th colspan="2">المستأجر المستلم Lessor Signature </th>
+						</tr>
+						<tr>
+							<td colspan="2"> الاسم : ............................. </td>
+							<td colspan="2"> التوقيع : ............................. </td>
+						</tr>
+						<tr>
+							<td colspan="2"> الاسم : ............................. </td>
+							<td colspan="2"> التوقيع : ............................. </td>
+						</tr>
+					</table>
+				</div>
+			</t>
+		</template>
+
+
+		<template id="report_rental_contract_document3">
+			<t t-call="web.external_layout">
+				<div class="page">
+		            <link rel="stylesheet" href="/itsys_real_estate/static/src/css/report-style.css"/>
+		            <!-- <link rel="stylesheet" href="/itsys_real_estate/static/src/css/report-style.css"/> -->
+					<table class="report_table">
+						<tr>
+							<th align="center">
+								<!--Rental Contract--> إستلام وحدة  # <span style="color: white !important" t-field="o.building_unit.code"/>
+							</th>
+						</tr>
+					</table>
+					<br/>
+					<p style="text-decoration: underline;font-size: 16px;">رقم العقد : ..............  تاريخ العقد : ................... مبلغ الضمان المسلم (إن وجد ) : ............. : </p>
+					<!-- <p style="text-decoration: underline;font-size: 16px;">This Agreement is made by and between: </p> -->
+
+					<table class="report_table">
+						<tr>
+							<th colspan="2">1- بيانات المستأجر: Tenant</th>
+						</tr>
+						<tr>
+							<td><span t-field="o.partner_id.name"/></td>
+							<td><span t-field="o.partner_id.id"/></td>
+						</tr>				
+					</table>
+					<table class="report_table">
+						<tr>
+							<th colspan="2">2- بيانات المؤجر:    Lessor Data </th>
+						</tr>
+						<tr>
+							<td><span t-field="o.partner_id.name"/></td>
+							<td><span t-field="o.partner_id.id"/></td>
+						</tr>				
+					</table>
+					<table class="report_table">
+						<tr>
+							<th colspan="2">3- بيانات الوسيط العقارى (إن وجد):    Broker Data </th>
+						</tr>
+						<tr>
+							<td><span t-field="o.partner_id.name"/></td>
+							<td><span t-field="o.partner_id.id"/></td>
+						</tr>				
+					</table>
+					<table class="report_table">
+						<tr>
+							<th colspan="2">4- حالة الوحدة عند الاستلام :      over handing upon condition unit Rental  </th>
+						</tr>
+					</table>
+					
+					<table  class="report_table">
+							<tr><th style="width:250px;">البند  </th><th style="width:80px;">الحـــــالة</th><th>الملاحظـــــــــــــــــــات</th></tr>
+							<tr>
+								<!-- <t t-if="p.code == 'BASIC'">
+								<t t-if="p.code == 'BASIC' or p.code == 'GROSS' or p.code == 'NET' or p.code == 'TOTAL' ">  -->
+
+
+								<td>دهان السقف و الجدران </td>
+								<th>
+									<t t-if="o.paints == True"><span>مقبول</span></t>
+									<t t-if="o.paints == False"><span style="background-color:red;">تالف</span></t>							
+								</th>
+								<td></td>
+							</tr>
+							<tr><td>الارضيات</td>
+								<th>
+									<t t-if="o.grounds == True"><span>مقبول</span></t>
+									<t t-if="o.grounds == False"><span style="background-color:red;">تالف</span></t>
+								</th><td></td></tr>
+							<tr><td>الحمامات و الاطقم الصحية</td><th>
+									<t t-if="o.pathrooms == True"><span>مقبول</span></t>
+									<t t-if="o.pathrooms == False"><span style="background-color:red;">تالف</span></t>
+								</th><td></td></tr>
+							<tr><td>المطبخ</td><th>
+									<t t-if="o.kitchen == True"><span>مقبول</span></t>
+									<t t-if="o.kitchen == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>الغرف و الملاحق</td><th>
+									<t t-if="o.rooms == True"><span>مقبول</span></t>
+									<t t-if="o.rooms == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>الكهرباء و الاضاءة</td><th>
+									<t t-if="o.electricity == True"><span>مقبول</span></t>
+									<t t-if="o.electricity == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>السباكة و التمديدات</td><th>
+									<t t-if="o.plumbing == True"><span>مقبول</span></t>
+									<t t-if="o.plumbing == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>خزان المياه</td><th>
+									<t t-if="o.water == True"><span>مقبول</span></t>
+									<t t-if="o.water == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>الابواب </td><th>
+									<t t-if="o.doors == True"><span>مقبول</span></t>
+									<t t-if="o.doors == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>النوافذ</td><th>
+									<t t-if="o.windows == True"><span>مقبول</span></t>
+									<t t-if="o.windows == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>اجهزة التكييف</td><th>
+									<t t-if="o.air_conditions == True"><span>مقبول</span></t>
+									<t t-if="o.air_conditions == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>الإنتركوم (النداء الخارجي)</td><th>
+									<t t-if="o.intercome == True"><span>مقبول</span></t>
+									<t t-if="o.intercome == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>أعمال الجبس</td><th>
+									<t t-if="o.gibs == True"><span>مقبول</span></t>
+									<t t-if="o.gibs == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>المفاتيح</td><th>
+									<t t-if="o.keys == True"><span>مقبول</span></t>
+									<t t-if="o.keys == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>الكراج</td><th>
+									<t t-if="o.grage == True"><span>مقبول</span></t>
+									<t t-if="o.grage == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+							<tr><td>أخرى</td><th>
+									<t t-if="o.others == True"><span>مقبول</span></t>
+									<t t-if="o.others == False"><span style="background-color:red;">تالف</span></t>
+									</th><td></td></tr>
+					</table>
+					
+						<p>
+							انه في يوم ......... بتاريخ ............... الموافق ..........قام المستأجر الموضح ببياناته اعلاه باخلاء و تسليم الوحدات الايجارية الموضح بياناتها في البند الثامن من العقد و هي بحالة جيدة و مماثلة التي كانت عليهت عند استلامها و ذلك بعد التأكد من سلامة كافة مرافقها و محتوياتها و مطابقتها من قبل المؤجر مع نموزج الاستلام اعلاه.
+						</p>
+							<p>
+
+							كما يقر المؤجر بانه استلم كافة مستحقاته المالية الناتجة عن تأجير الوحدات الايجارية، بما فيها قيمة الفواتير الخاصة بالخدمات حتي تاريخ اليوم، و بانه لاتوجد اي ملاحظات تمنع من استلام و إخلاء الوحدات الايجارية.
+
+							</p>
+							<p><b>و عليه جري التوقيع من الطرفين: </b>
+							</p>
+					<table class="report_table">
+						<tr>
+							<th colspan="2">المستأجر المسلم Tenant Signature </th>
+							<th colspan="2">المستأجر المستلم Lessor Signature </th>
+						</tr>
+						<tr>
+							<td colspan="2"> الاسم : ............................. </td>
+							<td colspan="2"> التوقيع : ............................. </td>
+						</tr>
+						<tr>
+							<td colspan="2"> الاسم : ............................. </td>
+							<td colspan="2"> التوقيع : ............................. </td>
+						</tr>
+					</table>
+				</div>
+			</t>
+		</template>
+
+
+		<template id="report_rental_contract">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-call="itsys_real_estate.report_rental_contract_document" t-lang="o.partner_id.lang"/>
+				</t>
+			</t>
+		</template>
+
+		<template id="report_rental_contract2">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-call="itsys_real_estate.report_rental_contract_document2" t-lang="o.partner_id.lang"/>
+				</t>
+			</t>
+		</template>
+
+		<template id="report_rental_contract3">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-call="itsys_real_estate.report_rental_contract_document2" t-lang="o.partner_id.lang"/>
+				</t>
+			</t>
+		</template>
+	</data>
+</odoo>

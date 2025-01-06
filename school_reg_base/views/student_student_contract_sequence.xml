@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sequence_promissory" model="ir.sequence">
+            <field name="name">Student Contract</field>
+            <field name="code">student.student.contract</field>
+            <field name="prefix">CONTRACT</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

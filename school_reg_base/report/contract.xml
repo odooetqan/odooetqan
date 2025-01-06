@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <data>
+      <!-- report action  -->
+      <record id="action_student_student_report" model="ir.actions.report">
+         <field name="name"> Contract - عقد</field>
+         <!-- <field name="model">res.partner</field> -->
+         <field name="model">student.student.contract</field>
+         <field name="report_type">qweb-pdf</field>
+         <field name="report_name">school_reg_base.student_student_report</field>
+         <field name="report_file">school_reg_base.student_student_report</field>
+         <field name="print_report_name">'Contract - %s' % (object.name).replace('/', '')</field>
+         <!-- <field name="binding_model_id" ref="model_student_student"/> -->
+         <field name="binding_type">report</field>
+      </record>
+      <!-- report action  -->
+      <record id="action_student_student_report_pledge" model="ir.actions.report">
+         <field name="name"> Pledge - تعهـــد</field>
+         <!-- <field name="model">res.partner</field> -->
+         <field name="model">student.student</field>
+         <field name="report_type">qweb-pdf</field>
+         <field name="report_name">school_reg_base.student_student_report_pledge</field>
+         <field name="report_file">school_reg_base.student_student_report_pledge</field>
+         <field name="print_report_name">'pledge - %s' % (object.name).replace('/', '')</field>
+         <!-- <field name="binding_model_id" ref="model_student_student"/> -->
+         <field name="binding_type">report</field>
+      </record>
+      <!-- report action  -->
+      <record id="action_student_student_report_transfer" model="ir.actions.report">
+         <field name="name"> Transfer - نقل طالب</field>
+         <!-- <field name="model">res.partner</field> -->
+         <field name="model">student.student</field>
+         <field name="report_type">qweb-pdf</field>
+         <field name="report_name">school_reg_base.student_student_report_trans</field>
+         <field name="report_file">school_reg_base.student_student_report_trans</field>
+         <field name="print_report_name">'Transfer - %s' % (object.name).replace('/', '')</field>
+         <!-- <field name="binding_model_id" ref="model_student_student"/> -->
+         <field name="binding_type">report</field>
+      </record>
+      <template id="school_reg_base.contract_header">
+         <div class="row p-1 my-2 border-bottom bg-light" style="font-family: 'Cairo'; ">
+            <br />
+            <table style="padding:1px;margin:1px;border:none; background-color:#fff;text-align:right; direction: rtl;font-size:11px; font-family: 'Cairo'; ">
+               <tr style="padding:1px;margin:1px;border:none; background-color:#fff;text-align:right; direction: rtl;">
+                  <td colspan="4" style="padding:1px;margin:1px;border:none; background-color:#fff;text-align:right; direction: rtl;">
+                     <h4 style="color:orange; background-color:#fff;">
+                        <Strong>
+                           <center> عقد تسجيل طالب </center>
+                        </Strong>
+                     </h4>
+                     <h6 style="color:#191970; background-color:#fff;">
+                        <center>في مدارس الحياة الاهلية </center>
+                     </h6>
+                  </td>
+               </tr>
+               <tr style="color:#FFA500; background-color:#191970;">
+                  <td colspan="4">بيانات الطالب</td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border:none;text-align:right; direction:RTL;">
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">الأسم</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">الجنسية</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">نوع الهوية</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">رقم الهوية</td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <span t-field="doc.student_id.name" />
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <span t-field="doc.student_id.nationality" />
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <span t-field="doc.student_id.contact_id_type" />
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <span t-field="doc.student_id.id_number" />
+                  </td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border-top:1px solid #00FFFF;border-bottom:1px solid #00FFFF;text-align:right">
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">الصف الدراسي</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">المرحلة الدراسية</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">المسار الدراسي</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right"></td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <span t-field="doc.student_id.class_id" />           
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <span t-field="doc.student_id.stage_id" />
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <span t-field="doc.student_id.track_id" />
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.name" /> -->
+                  </td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">اسم الشارع</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">الحي</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">المدينة</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">الدولة</td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <span t-field="doc.partner_id.street" />
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.partner_id.district" /> -->
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <span t-field="doc.partner_id.city" />
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <span t-field="doc.partner_id.country_id" />
+                  </td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border-top:1px solid #00FFFF;border-bottom:1px solid #00FFFF;text-align:right">
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">رقم الوحدة</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">رقم المبني</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">الرقم الأضافي</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">الرمز البريدي</td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <span t-field="doc.unit_number" />
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <span t-field="doc.building_number" />
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <span t-field="doc.id" /><!--addetional Number-->
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <span t-field="doc.partner_id.zip" />
+                  </td>
+               </tr>
+               <tr style="color:#FFA500; background-color:#191970;">
+                  <td colspan="4">بيانات ولي الأمر</td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">الأسم</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">الجنسية</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">نوع الهوية</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">رقم الهوية</td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <span t-field="doc.student_id.guardian_id" />
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <span t-field="doc.student_id.guardian_id.nationality" />
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <span t-field="doc.student_id.guardian_id.contact_id_type" />
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <span t-field="doc.student_id.guardian_id.id_number" />
+                  </td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border-top:1px solid #00FFFF;border-bottom:1px solid #00FFFF;text-align:right">
+                  <td style="padding:1px;margin:1px;border:none;text-align:right"></td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right"></td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right"></td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right"></td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                  <td style="padding:1px;margin:1px;border:none;text-align:right"></td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right"></td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right"></td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right"></td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">اسم الشارع</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">الحي</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">المدينة</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">الدولة</td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.student_id.guardian_id.partner_id.street" /> -->
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.student_id.guardian_id.partner_id.district" /> -->
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.student_id.guardian_id.partner_id.city" /> -->
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.student_id.guardian_id.partner_id.country_id" /> -->
+                  </td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border-top:1px solid #00FFFF;border-bottom:1px solid #00FFFF;text-align:right">
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">رقم الوحدة</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">رقم المبني</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">الرقم الأضافي</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">الرمز البريدي</td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.student_id.guardian_id.partner_id.unit_number" /> -->
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.student_id.guardian_id.partner_id.building_number" /> -->
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.student_id.guardian_id.partner_id.id" /> -->
+                     <!--addetional Number-->
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.student_id.guardian_id.partner_id.zip" /> -->
+                  </td>
+               </tr>
+               <tr style="color:#FFA500; background-color:#191970;">
+                  <td colspan="4">بيانات الطرف الثالث (إن وجد )[المسؤول مالياً عن سداد الرسوم غير ولي الأمر] </td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">الأسم</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">الجنسية</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">نوع الهوية</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">رقم الهوية</td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.student_follow_up" /> -->
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.student_follow_up.nationality" /> -->
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.student_follow_up.contact_id_type" /> -->
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.student_follow_up.id_number" /> -->
+                  </td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border-top:1px solid #00FFFF;border-bottom:1px solid #00FFFF;text-align:right">
+                  <td style="padding:1px;margin:1px;border:none;text-align:right"></td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right"></td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right"></td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right"></td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                  <td style="padding:1px;margin:1px;border:none;text-align:right"></td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right"></td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right"></td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right"></td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.name" /> -->
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.name" /> -->
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.name" /> -->
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.name" /> -->
+                  </td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">اسم الشارع</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">الحي</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">المدينة</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">الدولة</td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.student_follow_up.street" /> -->
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.student_follow_up.district" /> -->
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.student_follow_up.city" /> -->
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.student_follow_up.country_id" /> -->
+                  </td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border-top:1px solid #00FFFF;border-bottom:1px solid #00FFFF;text-align:right">
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">رقم الوحدة</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">رقم المبني</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">الرقم الأضافي</td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">الرمز البريدي</td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.student_follow_up.unit_number" /> -->
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.student_follow_up.building_number" /> -->
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.student_follow_up.id" /> -->
+                     <!--addetional Number-->
+                  </td>
+                  <td style="padding:1px;margin:1px;border:none;text-align:right">
+                     <!-- <span t-field="doc.student_follow_up.zip" /> -->
+                  </td>
+               </tr>
+               <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                  <td colspan="2" style="padding:1px;margin:1px;border:none;text-align:right;font-size:12px;">
+                     <br /> أقـر -أنـا ولـي أمـر الطـالـب الموضح اسمه وبياناته أعلاه- بما يلي: <br /> ١. أنني قمت بقراءة الشروط والأحكام الخاصة بمدارس الحياة وفهمت محتواها ووافقت عليها. <br /> ٢. أنني قمت بالإطلاع على الرسوم الدراسية المعتمدة من وزارة التعليم ووافقت عليها. <br /> ٣. أنني قمت بقراءة قواعد السلوك والمواظبة المعتمدة من وزارة التعليم، وبناء عليه أتعهد بأن أتعاون مع إدارة المدرسة في سبيل مصلحة أبني؛ ليكون ملتزماً بالأنظمة والتعليمات الخاصة بقواعد السلوك والمواظبة، وأتحمل مسؤولية وتبعة ذلك. <br /> ٤. أننـي قمـت بقراءة ميثـاق الحقـوق والواجبـات والأدوارللمدرسـة والطالب والأسرة والمعد من وزارة التعليم، وألتزم بأن أقوم بما فيه وأتحمل مسؤولية وتبعة ذلك. <br /> ٥. أنني فهمت بأن لهـذا العقـد مسـتندات تعـد جزءاً لا يتجـزأ مـن هـذا العقـد وتقرأ وتفسر بصورة واحدة وهي: <br /> ٥.١ استمارة القبول. <br /> ٥.٢ الشروط والأحكام. <br /> ٥.٣ قواعد السلوك والمواظبة.
+                  </td>
+                  <td colspan="2" style="padding:1px;margin:1px;border:none;text-align:right;font-size:12px;"> ٥.٤ ميثاق الشراكة بين المدرسة والأسرة. <br /> ٥.٥ الرسوم الدراسية. <br /> ٦ . أنني فهمت أحقية المدارس باحتساب مبلغ الرسوم الأصلية وعودتها إلى المبلغ الأساسي للرسوم دون خضوعه لأي تخفيض عند سحب ملف ابني بعد انتهاء مدة العرض وكان التسجيل في فترة العروض وتنطبق عليه الشروط و الأحكام الخاصة بالطلاب . <br /> ٧ . أنني فهمت حقي في استرداد كامل قيمة الرسوم المسددة أو بعضها أو استرداد السند التنفيذي وفقاً للمادة الثامنة من الشروط والأحكام <br /> ٨. أنني بتوقيعي على هذا العقد فأنه يعتبر موافقة مني على الإلتزام بالعقد و مستنداته. <br /> ٩. يخضع هذا العقد وتفسيره لانظمة المملكة العربية السعودية ، وأي منازعة او خلاف او مطالبة تنشأ عن هذا العقد أو تتعلق به او الإخلال بما فيه او إنهائه أو بطلانه فيتم الفصل فيها عن طريق محكم و يتحمل الطرف الخاسر مصاريف التحكيم و الخبير و المحاماة. <br />
+                  </td>
+               </tr>
+            </table>
+         </div>
+         <!-- <div class="oe_structure"/> -->
+         <table style="padding:1px;margin:1px;border:none; background-color:#fff;text-align:right;font-size:15px;width:100%; font-family: 'Cairo'; ">
+            <tr style="padding:1px;margin:1px;border:none;text-align:right">
+               <td style="padding:1px;margin:1px;border:none;text-align:right"> الطرف الثالث (إن وجد) </td>
+               <td style="padding:1px;margin:1px;border:none;text-align:right"> الطرف الثاني ( ولي الأمر ) </td>
+               <td colspan="2" style="padding:1px;margin:1px;border:none;text-align:right"> الطرف الأول ( مدارس الحياة الأهلية ) </td>
+            </tr>
+            <tr style="padding:1px;margin:1px;border:none;text-align:right">
+               <td style="padding:1px;margin:1px;border:none;text-align:right"> .................................................................... </td>
+               <td style="padding:1px;margin:1px;border:none;text-align:right"> .................................................................... </td>
+               <td colspan="2" style="padding:1px;margin:1px;border:none;text-align:right">                                     
+                  <img t-if="doc.sign" t-attf-src="data:image/png;base64,{{ doc.sign }}" style="heigh:60px; width:100px;"/>
+               </td>
+            </tr>
+            <img t-if="doc.seal" t-attf-src="data:image/png;base64,{{ doc.seal }}" style="heigh:60px; width:100px;"/>
+         </table>
+      </template>
+      <!-- تقرير التعـــــــــــــــــــــهد -->
+      <template id="school_reg_base.pledge_header">
+         <h2 style="color:orange; background-color:#fff;padding-top:-50px;margin-top:-5px;font-family: 'Cairo';  ">
+         <style>
+            table {
+               line-height: 2; /* Increase the line height */
+            }
+         </style>
+            <Strong>
+               <center>تعهــــــد </center>
+            </Strong>
+         </h2>
+         <br/><br/>
+         <div class="row p-1 my-2 border-bottom bg-light" style="font-size:24">
+            <br />
+            <table style="padding:1px;margin:1px;border:none; background-color:#fff;text-align:right;font-size:11px; font-family: 'Cairo';  ">
+               <tr style="padding:1px;margin:1px;border:none; background-color:#fff;text-align:right">
+               </tr>
+               <tr style="padding:1px;margin:1px;border:none;text-align:center;font-family:'Cairo';font-size:24px;">
+                  <center>
+                     <td colspan="4" style="padding:1px;margin:1px;border:none;text-align:center;font-family:'Cairo';font-size:24px;">
+                        :  أتعهد انا ولي امر الطالب   
+                        <h3 style="color:blue;"><span t-field="doc.name" /></h3>
+                     </td>
+                  </center>
+               </tr>
+               <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                  <td colspan="4" style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:'Cairo';font-size:24px;">
+                     هوية رقم (<span t-field="doc.id_number" />) 
+                     المنقول الي
+                     <span t-field="doc.class_id" /> 
+                     ب<span t-field="doc.track_id" /> 
+                     بأنه في حالة سحب ملف الطالب المذكور  قبل بداية العام الدارسي 1445 هـ
+                     فأنه يخصم من الرسوم الدراسية التي دفعتها  ما يعادل 5% من الرسوم المعتمدة من وزارة التعليم
+                     (بحد أدني 1000ريال فقط ألف ريال) كرسوم تسجيل لا تسترد، يضاف إليها ضريبة القيمة المضافة. 
+                  </td>
+               </tr>
+            </table>
+         </div>
+         <br/>
+         <br/>
+         <br/>
+         <table style="padding:1px;margin:1px;border:none; background-color:#fff;text-align:center;font-family: 'Cairo';   font-size:24px;;font-size:15px;width:100%">
+            <tr>
+               <td colspan="4" style="text-align:center;font-family:'Cairo';font-size:24px;">وهذا إقرارا مني بذلك </td>
+            </tr>
+            <tr>
+               <td colspan="4" style="text-align:center;font-family:'Cairo';font-size:24px;">المقر بمافيه </td>
+            </tr>
+            <tr>
+               <td colspan="4" style="text-align:center;font-family:'Cairo';font-size:24px;">
+                  الاسم :  
+                  <!-- <span t-field="doc.student_id.guardian_id.partner_id.name" /> -->
+               </td>
+            </tr>
+            <tr>
+               <td colspan="4" style="text-align:center;font-family:'Cairo'font-size:24px;font-size:24px;">
+                  رقم الهوية : 
+                  <!-- <span t-field="doc.student_id.guardian_id.partner_id.id_number" /> -->
+               </td>
+            </tr>
+         </table>
+      </template>
+      <!-- تقرير التعـــــــــــــــــــــهد -->
+      <!-- تقرير الموافقة علي قبول طالب -->    
+      <template id="school_reg_base.trans_header">
+         <h2 style="color:orange; background-color:#fff;padding-top:-50px;margin-top:-5px; font-family: 'Cairo';  ">
+         <style>
+            table {
+               line-height: 2; /* Increase the line height */
+            }
+         </style>
+            <Strong>
+               <center>الموافقة على قبول طالب </center>
+            </Strong>
+         </h2>
+         <br/>
+         <br/>
+         <div class="row p-1 my-2 border-bottom bg-light" style="font-size:24">
+            <br />
+            <table style="padding:1px;margin:1px;border:none; background-color:#fff;text-align:right;font-size:11px;font-family: 'Cairo';  ">
+               <tr style="padding:1px;margin:1px;border:none; background-color:#fff;text-align:right">
+               </tr>
+               <tr style="padding:1px;margin:1px;border:none;text-align:center;font-family:'Amiri';font-size:24px;">
+                  <center>
+                     <td colspan="4" style="padding:1px;margin:1px;border:none;text-align:center;font-family:'Amiri';font-size:24px;"> 
+                        إلى المكرم مدير مدرسة :   
+                        <span style="color:blue;"><span t-field="doc.ex_school" /></span><span> وفقكم الله </span>
+                     </td>
+                  </center>
+               </tr>
+               <tr style="padding:1px;margin:1px;border:none;text-align:center;font-family:'Amiri';font-size:24px;">
+                  <center>
+                     <td colspan="4" style="padding:1px;margin:1px;border:none;text-align:center;font-family:'Amiri';font-size:24px;">
+                        <span>
+                           <h4>السلام عليكم ورحمة الله و بركاته</h4>
+                        </span>
+                     </td>
+                  </center>
+               </tr>
+               <tr style="padding:1px;margin:1px;border:none;text-align:right">
+                  <td colspan="4" style="padding:1px;margin:1px;border:none;text-align:justfy;font-family:'Cairo';font-size:24px;">
+                     <p> بناء على رغبة ولي أمر الطالب المذكور أدناه في 
+                        النقل إلى مدرستنا؛ فإنه لا مانع لدينا من قبوله آملين تسليمه الملف الورقي للطالب كاملا وتحويله عبر نظام نور
+                     </p>
+                  </td>
+               </tr>
+            </table>
+         </div>
+         <br/>
+         <br/>
+         <br/>
+         <table style="padding:1px;margin:1px;border:solid 1px black; text-align:center; font-family: 'Cairo';  font-size:24px;width:100%">
+            <tr style="border:solid 1px black;">
+               <td style="text-align:center;font-family:'Amiri';font-size:24px;border:solid 1px black;"> العام </td>
+               <td style="text-align:center;font-family:'Amiri';font-size:24px;border:solid 1px black;"> الصف </td>
+               <td colspan="2" style="text-align:center;font-family:'Amiri'font-size:24px;border:solid 1px black;"> اسم الطالب </td>
+            </tr>
+            <tr style="padding:1px;margin:1px;border:solid 1px black; text-align:center;font-family:'Amiri'font-size:24px;width:100%">
+               <td  style="border:solid 1px black;"><span t-field="doc.current_year" /></td>
+               <td style="border:solid 1px black;"><span t-field="doc.class_id" /></td>
+               <td style="border:solid 1px black;"><span t-field="doc.name" /></td>
+            </tr>
+            <tr>
+               <td></td>
+               <td></td>
+            </tr>
+         </table>
+         <br/>
+         <br/>
+         <br/>
+         <p style="text-align:center; font-family: 'Cairo';   font-size:24px;"> 
+            .هذا وتفضلوا بقبول تحياتنا وتقديرنا              
+         </p>
+         <br/>
+         <br/>
+         <br/>
+         <table>
+            <tr>
+               <td></td>
+               <td></td>
+               <td style="padding-left:40px; margin-left:40px">
+                  <h3>
+                     <center>مدير المدرسة </center>
+                  </h3>
+               </td>
+            </tr>
+            <tr>
+               <td></td>
+               <td></td>
+               <td style="padding-left:40px; margin-left:40px">
+                  <h3>
+                     <center>
+                        أ.
+                        <span t-field="doc.stage_id.manager" />
+                     </center>
+                  </h3>
+               </td>
+            </tr>
+         </table>
+      </template>
+      <!-- تقرير الموافقة علي قبول طالب -->
+      <template id="school_reg_base.partner_info"></template>
+      <template id="school_reg_base.inv_lines"></template>
+      <!-- 
+         <template id="school_reg_base.inv_total"><div style="page-break-inside: avoid;"></div><div class="oe_structure"/></template> -->
+      <!-- main document template -->
+      <template id="school_reg_base.student_student_report_document">
+         <t t-debug=""></t>
+         <t t-call="web.external_layout">
+            <t t-set="doc" t-value="doc.with_context({'lang': lang})" />
+            <div class="page">
+               <!-- Invoice fields-->
+               <t t-call="school_reg_base.contract_header" />
+               <!-- partner fields-->
+               <t t-call="school_reg_base.partner_info" />
+               <!-- Invoice fields-->
+               <t t-call="school_reg_base.inv_lines" t-lang="ar" />
+               <!-- Invoice total-->
+               <!-- <t t-call="school_reg_base.inv_total"/> -->
+            </div>
+         </t>
+      </template>
+      <!-- main document template Pldge -->
+      <template id="school_reg_base.student_student_report_document_pledge">
+         <t t-debug=""></t>
+         <t t-call="web.external_layout">
+            <t t-set="doc" t-value="doc.with_context({'lang': lang})" />
+            <div class="page">
+               <t t-call="school_reg_base.pledge_header" />
+            </div>
+         </t>
+      </template>
+      <!-- main document template Trans student  -->
+      <template id="school_reg_base.student_student_report_document_trans">
+         <t t-debug=""></t>
+         <t t-call="web.external_layout">
+            <t t-set="doc" t-value="doc.with_context({'lang': lang})" />
+            <div class="page">
+               <t t-call="school_reg_base.trans_header" />
+            </div>
+         </t>
+      </template>
+      <!-- main template -->
+      <template id="school_reg_base.student_student_report">
+         <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+               <t t-set="lang" t-value="doc.create_uid.lang" />
+               <t t-call="school_reg_base.student_student_report_document" />
+            </t>
+         </t>
+      </template>
+      <!-- main template Pldge-->
+      <template id="school_reg_base.student_student_report_pledge">
+         <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+               <t t-set="lang" t-value="doc.create_uid.lang" />
+               <t t-call="school_reg_base.student_student_report_document_pledge" />
+            </t>
+         </t>
+      </template>
+      <!-- main template Transfer student -->
+      <template id="school_reg_base.student_student_report_trans">
+         <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+               <t t-set="lang" t-value="doc.create_uid.lang" />
+               <t t-call="school_reg_base.student_student_report_document_trans" />
+            </t>
+         </t>
+      </template>
+   </data>
+</odoo>

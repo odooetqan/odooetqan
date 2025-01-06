@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="building_unit_form">
+            <field name="name">property.form</field>
+            <field name="priority" eval="10"/>
+            <field name="model">product.template</field>
+            <field name="arch" type="xml">
+                <form string="Real Estate">
+                    <header>
+                        <button name="make_reservation"
+                             
+                                string="Reservation" type="object"/>   <!--attrs="{'invisible': [('state', '!=', 'free')]}"-->
+                        <field name="state"
+                               widget="statusbar"
+                               clickable="true"
+                               statusbar_visible="free,reserved,on_lease,sold"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object"
+                                    name="view_reservations"
+                                    class="oe_stat_button"
+                                    icon="fa-book">
+                                <field name="reservation_count" widget="statinfo" string="Reservations"/>
+                            </button>                                    <!--attrs="{'invisible': [('reservation_count', '=', 0)]}">-->
+
+                        </div>
+                        <field name="image_1920" widget="image" class="oe_avatar" options="{'preview_image': 'image_128'}"/>
+                        <div class="oe_title">
+                            <h2><field name="code" placeholder="Property Code"/></h2>
+                            <h2><field name="name" placeholder="Property Name"/></h2>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="partner_id"
+                                 context="{'res_partner_search_mode': 'is_owner', 'default_is_owner':True,}"
+                                 domain="[('is_owner','=',True)]"/>
+                                <field name="video_url"/>
+                                <field name="active"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                            <group >
+                                <field name="building_id"/>
+                                <field name="region_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Basic Information">
+                                <group>
+                                    <group>
+                                        <field name="ptype"/>
+                                        <field name="rental_fee"/>
+                                        <field name="insurance_fee"/>
+                                        <field name="status"/>
+                                        <field name="building_area"/>
+                                        <field name="building_area_net"/>
+                                        <field name="land_area"/>
+                                        <field name="constructed"/>
+                                        <field name="air_condition"/>
+                                        <field name="rooms"/>
+                                        <field name="bathrooms"/>
+                                        <field name="telephon"/>
+                                        <field name="internet"/>
+                                        <field name="pricing" requied="1"/>
+                                        <field name="floor"/>
+                                    </group>
+                                    <group>
+                                        <field name="surface"/>
+                                        <field name="garage"/>
+                                        <field name="garden"/>
+                                        <field name="balcony"/>
+                                        <field name="solar_electric"/>
+                                        <field name="heating_source"/>
+                                        <field name="desc"/>
+                                        <field name="electricity_meter" string="عداد الكهرباء" />
+                                        <field name="is_electricity_sub_1"  />
+                                        <field name="electricity_meter_sub_1"/><!--
+                                            attrs="{'invisible': [('is_electricity_sub_1', '=', False)]}"/>-->
+                                        <field name="is_electricity_main_2"  />
+                                        <field name="electricity_meter_main_2"  /><!-- attrs="{'invisible': [('is_electricity_main_2', '=', False)]}"/>-->
+                                        <field name="is_electricity_sub_2"  />
+                                        <field name="electricity_meter_sub_2"/><!--  attrs="{'invisible': [('is_electricity_sub_2', '=', False)]}"/>-->
+                                        <field name="water_meter"/>
+                                        <field name="is_water_meter_sub_1"/>
+                                        <field name="water_meter_sub_1" /><!--attrs="{'invisible': [('is_water_meter_sub_1', '=', False)]}"/>-->
+                                        <field name="is_water_meter_main_2"/>
+                                        <field name="water_meter_main_2" /><!--attrs="{'invisible': [('is_water_meter_main_2', '=', False)]}"/>-->
+                                        <field name="is_water_meter_sub_2"/>
+                                        <field name="water_meter_sub_2" /><!--attrs="{'invisible': [('is_water_meter_sub_2', '=', False)]}"/>-->
+
+                                        
+                                        <field name="template_id"/>
+                                        <field name="north"/>
+                                        <field name="south"/>
+                                        <field name="east"/>
+                                        <field name="west"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Components List">
+                                <field name="component_ids" >
+                                    <tree editable="bottom">
+                                        <field name="component" />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Additional Information">
+                                <group>
+                                    <group>
+                                        <field name="license_code"/>
+                                        <field name="license_date"/>
+                                        <field name="date_added"/>
+                                        <field name="license_location"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Geolocation">
+                                <group>
+                                    <group>
+                                        <field name="address" widget="place_autocomplete" class="oe_inline"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Images">
+                                <group name="product_template_images" string="Extra Property Media">
+                                    <field name="property_template_image_ids" class="o_website_sale_image_list" context="{'default_name': name}" mode="kanban" options="{'create_text':'Add a Media'}" nolabel="1"/>
+                                </group>
+                            </page>
+                            <page string="Documents">
+                                <field name="attach_line">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="file"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Contacts">
+                                <field name="contacts"/>
+                            </page>
+                            <page string="Notes">
+                                <field name="note"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="building_unit_list">
+            <field name="name">property.template.tree</field>
+            <field name="model">product.template</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="Building" >
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="building_id"/>
+                    <field name="region_id"/>
+                    <field name="desc"/>
+                    <field name="ptype" />
+                    <field name="status" />
+                    <field name="rooms" />
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="building_unit_kanban">
+            <field name="name">property.template.kanban</field>
+            <field name="model">product.template</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+               <kanban class="o_hr_employee_kanban" js_class="hr_employee_kanban" sample="1">
+                   <field name="id"/>
+                   <progressbar field="state" colors='{"free": "success", "reserved": "warning", "sold": "danger", "on_lease":"info"}'/>
+                   <templates>
+                       <t t-name="kanban-box">
+                       <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_hr_kanban_record">
+                           <field name="image_1920" widget="image" class="o_kanban_image_fill_left" options="{'zoom': true, 'zoom_delay': 1000, 'background': true, 'preventClicks': false}"/>
+
+                            <div class="oe_kanban_details">
+                               <div class="o_kanban_record_top">
+                                   <div class="o_kanban_record_headings">
+                                       <b><span t-if="record.name.raw_value" class="o_kanban_record_subtitle"><field name="name"/></span></b>
+                                   </div>
+                               </div>
+                               <ul>
+                                   <li />
+                                   <li t-if="record.status.raw_value" class="o_text_overflow"><b>Status : </b><field name="status"/></li>
+                                   <li t-if="record.floor.raw_value" class="o_force_ltr"><b>Floor : </b> <field name="floor"/></li>
+                                   <li t-if="record.ptype.raw_value" class="o_force_ltr"><b>Type : </b> <field name="ptype"/></li>
+                                   <li t-if="record.pricing.raw_value" class="o_force_ltr"><b>Home Price : </b> <field name="pricing"/></li>
+                               </ul>
+                           </div>
+                       </div>
+                       </t>
+                   </templates>
+               </kanban>
+
+            </field>
+        </record>
+
+
+        <record id="building_unit_filter" model="ir.ui.view">
+            <field name="name">property.template.search</field>
+            <field name="model">product.template</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Top Search">
+                    <group>
+                        <field name="name"/>
+                        <field name="partner_id"/>
+                    </group>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter name="status" string="Unit Status" domain="[]"  context="{'group_by':'state'}"/>
+                        <filter name="region" string="Region" domain="[]"  context="{'group_by':'region_id'}"/>
+                        <filter name="building" string="Building" domain="[]"  context="{'group_by':'building_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="building_unit_act1">
+            <field name="name">Sub Property</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">kanban,tree,form,graph</field>
+            <field name="domain">[('is_property','=',True)]</field>
+            <field name="context">{'search_default_status': 1,'default_is_property':True,'default_sale_ok':False, 'default_purchase_ok':False}</field>
+            <field name="view_id" ref="building_unit_list"/>
+            <field name="search_view_id" ref="building_unit_filter"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="building_unit_act_kanban_view2">
+            <field name="sequence" eval="0"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="building_unit_kanban"/>
+            <field name="act_window_id" ref="building_unit_act1"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="building_unit_act1_view2">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="building_unit_list"/>
+            <field name="act_window_id" ref="building_unit_act1"/>
+        </record>
+        <record model="ir.actions.act_window.view" id="building_unit_act1_view1">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="building_unit_form"/>
+            <field name="act_window_id" ref="building_unit_act1"/>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_unit_graph">
+            <field name="name">product.template.graph</field>
+            <field name="model">product.template</field>
+            <field name="arch" type="xml">
+                <graph string="Invoices" type="pie">
+                    <field name="state" type="row"/>
+                    <field name="cnt"  type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_product_furniture_form" model="ir.ui.view">
+            <field name="name">product.template.expense.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <div name="options" position="inside">
+                    <div>
+                        <field name="furniture"/>
+                        <label for="furniture"/>
+                    </div>
+                </div>
+            </field>
+        </record>
+
+        <record id="furniture_product" model="ir.actions.act_window">
+            <field name="name">Furnitures</field>
+            <field name="res_model">product.product</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="context">{"default_furniture":1}</field>
+            <field name="domain">[('furniture','=',True)]</field>
+            <field name="search_view_id" ref="product.product_search_form_view"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new furniture item.
+                </p>
+            </field>
+        </record>
+        <menuitem id="menu_furniture_form" parent="itsys_real_estate.menu_settings" groups="group_real_estate_admin" action="furniture_product" sequence="40"/>
+
+
+        <menuitem
+                sequence="4"
+                action="building_unit_act1"
+                id="menu_building_list_sub_unit"
+                parent="itsys_real_estate.menu_building_list"/>
+        <!-- Property Status -->
+        <record id="component_tree_view" model="ir.ui.view">
+            <field name="name">component.tree</field>
+            <field name="model">component</field>
+            <field name="arch" type="xml">
+                <tree string="component">
+                    <field name="name"/>
+                    <field name="qty"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="component_form_view" model="ir.ui.view">
+            <field name="name">component.form</field>
+            <field name="model">component</field>
+            <field name="arch" type="xml">
+                <form string="Component">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="furniture_details_ids" string="Furniture List" >
+                                <tree string="Furniture List" editable="bottom">
+                                    <field name="product_id" context="{'search_default_furniture':1,'default_furniture': 1}" domain="[('furniture', '=', True)]"/>
+                                    <field name="qty"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="component_form_action" model="ir.actions.act_window">
+            <field name="name">Building Unit Component</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">component</field>
+            <field name="view_id" ref="component_tree_view"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a new Building Unit Component
+                </p>
+            </field>
+        </record>
+        <menuitem action="component_form_action" id="menu_component_form_action" parent="itsys_real_estate.menu_settings" sequence="90" />
+
+    </data>
+</odoo>
