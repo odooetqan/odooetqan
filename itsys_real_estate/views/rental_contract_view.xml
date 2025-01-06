@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="rental_contract_tree_view" model="ir.ui.view">
+            <field name="name">rental.contract.tree</field>
+            <field name="model">rental.contract</field>
+            <field name="arch" type="xml">
+                <tree  decoration-danger="date_to &lt;= (context_today() + relativedelta(days=30)).strftime('%Y-%m-%d')
+                    and date_to &gt; context_today().strftime('%%Y-%%m-%%d')"
+                 decoration-muted="date_to &lt; context_today().strftime('%Y-%m-%d')">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="date"/>
+                    <field name="partner_id"/>
+                    <field name="user_id"/>
+                    <field name="building" />
+                    <field name="building_unit"/>
+                    <field name="floor"/>
+                    <field name="rental_fee"/>
+                    <field name="insurance_fee"/>
+                    <field name="address"/>
+                    <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state in ('confirmed','renew')" decoration-danger="state == 'cancel'"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="rental_contract_filter" model="ir.ui.view">
+            <field name="name">rental.contract.tree.filter</field>
+            <field name="model">rental.contract</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Top Search">
+                    <group>
+                        <field name="name"/>
+                        <field name="partner_id"/>
+                        <field name="user_id"/>
+                        <field name="building"/>
+                        <field name="building_code"/>
+                        <field name="building_unit" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="unit_code"/>
+                    </group>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter name="user_id" string="Responsible" domain="[]"  context="{'group_by':'user_id'}"/>
+                        <filter name="partner_id" string="Partner" domain="[]"  context="{'group_by':'partner_id'}"/>
+                        <filter name="building" string="Building" domain="[]"  context="{'group_by':'building'}"/>
+                        <filter name="state" string="State" domain="[]"  context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="rental_contract_form_view" model="ir.ui.view">
+            <field name="name">rental.contract.form</field>
+            <field name="model">rental.contract</field>
+            <field name="arch" type="xml">
+                <form string="rental Contract">
+                    <header>
+                        <button name="action_confirm" type="object" string="Confirm" class="oe_highlight"/>
+                        <button name="action_calculate" type="object"  string="Calculate " class="oe_highlight"/>
+                        <button name="action_cancel" type="object"  string="Cancel" class="oe_highlight"/>
+                        <button name="%(action_customer_rental_renew_check)d" type="action"  string="Renew Contract" class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,cancel" />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+
+                        </div>
+                        <group string="Rental Contract Data">
+                            <group>
+                                <field name="name"/>
+                                <field name="date" required="1"/>
+                                <field name="user_id"/>
+                                <field name="partner_id"
+                                 context="{'res_partner_search_mode': 'is_tenant', 'default_is_tenant':True,}"
+                                 domain="[('is_tenant','=',True)]"  />
+                                <field name="account_analytic_id"   />
+                                <field name="origin"  />
+                                <field name="reservation_id"  />
+                                <field name="apply_tax" />
+                            </group>
+                            <group>
+                                <field name="date_from"  />
+                                <field name="date_to"  />
+                                <label for="recurring_interval"/>
+                                <div class="o_row">
+                                    <span class="mr-1">Every</span>
+                                    <field name="recurring_interval" required="1"  />
+                                    <field name="periodicity" class="field_rule_type" required="1"  />
+                                </div>
+
+                                <field name="n"  />
+                                <field name="rental_fee"  />
+                                <field name="insurance_fee"  />
+                                <field name="account_income" />
+                                <field name="account_security_deposit"   />
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                        </group>
+                        <group string="Location">
+                            <group>
+                                <field name="building"  />
+                                <field name="building_code"  />
+                                <field name="no_of_floors"  />
+                            </group>
+                            <group>
+					            <field name="property_owner_id" options="{'no_create_edit': True}" />
+                                <field name="region"   />
+                            </group>
+                        </group>
+                        <separator string="Building Unit" colspan="4"/>
+                        <group>
+                            <group>
+                                <field name="building_unit" options="{'no_create': True, 'no_open': True}"  />
+                                <field name="unit_code"  />
+                                <field name="floor"  />
+                                <field name="address"  />
+                            </group>
+                            <group>
+                                <field name="type"  />
+                                <field name="status"  />
+                                <field name="building_area"  />
+                            </group>
+
+                        </group>
+                        <notebook colspan="2">
+                            <page string="Installments">
+                                <field name="loan_line"  >
+                                    <tree string="Installments" editable="bottom">
+                                        <field widget="handle" name="serial" required="1" />
+                                        <field name="date" required="1" />
+                                        <field name="name" required="1" />
+                                        <field name="amount" required="1" />
+                                        <field name="amount_residual"/>
+                                        <field name="invoice_id" readonly="1"/>
+                                        <field name="invoice_state" widget="badge" decoration-success="invoice_state == 'posted'"
+                                               decoration-info="invoice_state == 'draft'" optional="show"/>
+                                        <field name="payment_state" widget="badge"
+                                               decoration-danger="payment_state == 'not_paid'" decoration-warning="payment_state in ('partial', 'in_payment')"
+                                               decoration-success="payment_state in ('paid', 'reversed')"
+                                               />
+                                        <button string="Make Invoice" name="make_invoice"
+                                                type="object" icon="fa-money"
+                                                 groups="itsys_real_estate.group_payments"/>
+                                        <button string="View Invoice" name="view_invoice" type="object" style="background-color:rgba(0, 160, 74, 0.5);color: #333;"
+                                                 
+                                                groups="itsys_real_estate.group_payments"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Documents">
+                                <field name="attach_line">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="file"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="التسليم و التسلم ">
+                                <group>
+                                    <group> 
+                                        <field name="paints"/>
+                                        <field name="grounds"/>
+                                        <field name="pathrooms"/>
+                                        <field name="kitchen"/>
+                                        <field name="rooms"/>
+                                    </group>                                    
+                                    <group>
+                                        <field name="electricity"/>
+                                        <field name="plumbing"/>
+                                        <field name="water"/>
+                                        <field name="doors"/>
+                                    </group>
+                                </group>
+                            <separator string="Building Unit" colspan="4"/>
+                                <group>
+                                    <group>
+                                        <field name="air_conditions"/>
+                                        <field name="gibs"/>
+                                        <field name="keys"/>
+                                    </group>
+                                    <group>                                                                      
+                                        <field name="windows"/>
+                                        <field name="grage"/>
+                                        <field name="others"/>                                                        
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                        <group>
+                            <field name="amount_total"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="rental_contract_form_action" model="ir.actions.act_window">
+            <field name="name">Rental Contract</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">rental.contract</field>
+            <field name="view_id" ref="rental_contract_tree_view"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a new rental Contract
+                </p>
+            </field>
+        </record>
+        <menuitem
+                id="menu_contracts_main"
+                name="Contracts"
+                parent="itsys_real_estate.menu_itsys_real_estate"
+                sequence="23"/>
+
+        <menuitem action="rental_contract_form_action"
+                  id="menu_rental_contract_form_action"
+                  parent="itsys_real_estate.menu_contracts_main" sequence="40" />
+
+        <record model="ir.cron" id="auto_rental_invoice_sync">
+            <field name="name">Auto Generate Rental Invoices</field>
+            <field name="model_id" ref="model_rental_contract"/>
+            <field name="state">code</field>
+            <field name="code">model.auto_rental_invoice()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="view_partner_is_tenant_is_owner_form" model="ir.ui.view">
+            <field name="name">res.partner.is_tenant.is_owner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <group name="sale" position="before">
+                    <group string="Partner Type" name="partner_type">
+                        <field name="is_tenant"/>
+                        <field name="is_owner"/>
+                    </group>
+                </group>
+            </field>
+        </record>
+
+        <menuitem
+        id="menu_partners"
+        name="Partners"
+        parent="menu_itsys_real_estate"
+        sequence="20"/>
+
+        <record id="action_partner_form_tenant" model="ir.actions.act_window">
+            <field name="name">Tenants</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('is_tenant','=',True)]</field>
+            <field name="context">{'search_default_is_tenant': 1, 'search_default_customer': 1,'res_partner_search_mode': 'customer', 'default_customer_rank': 1, 'default_is_tenant': True}</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a tenant in your address book.
+              </p>
+            </field>
+        </record>
+
+        <menuitem
+                sequence="100"
+                action="action_partner_form_tenant"
+                id="menu_res_partners_tentants"
+                parent="menu_partners"/>
+
+        <record id="action_partner_form_owner" model="ir.actions.act_window">
+            <field name="name">Owners</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('is_owner','=',True)]</field>
+<!--            <field name="context">{'search_default_is_owner': 1,'search_default_customer': 1, 'search_default_supplier': 1, 'default_is_owner': True, 'default_supplier_rank': 1,}</field>-->
+            <field name="context">{'search_default_is_owner': 1, 'search_default_customer': 1,'res_partner_search_mode': 'customer', 'default_customer_rank': 1, 'default_supplier_rank': 1, 'default_is_owner': True}</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add an owner in your address book.
+              </p>
+            </field>
+        </record>
+
+        <menuitem
+                sequence="100"
+                action="action_partner_form_owner"
+                id="menu_res_partners_owners"
+                parent="menu_partners"/>
+    </data> 
+</odoo>
