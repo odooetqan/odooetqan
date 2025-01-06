@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <!-- <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"> -->
+</head>
+<!-- odoo description page css -->
+<style>
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .h1,
+    .h2,
+    .h3,
+    .h4,
+    .h5,
+    .h6 {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400;
+        line-height: 1.1;
+        color: #21272b;
+    }
+
+    ul {
+        color: #222020;
+    }
+
+    * {
+        font-family: "Montserrat", sans-serif;
+    }
+
+    .sb-faq-container .panel .panel-heading a:before {
+        content: '\f056';
+        font-family: 'FontAwesome';
+        position: absolute;
+        top: 7px;
+        left: 5px;
+        bottom: auto;
+        right: auto;
+        color: #3b3b98;
+    }
+
+    .sb-faq-container .panel .panel-heading a.collapsed:before {
+        content: '\f055';
+        font-family: 'FontAwesome';
+        position: absolute;
+        top: 7px;
+        left: 5px;
+        bottom: auto;
+        right: auto;
+        color: #3b3b98;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div style="margin: 0px; width: 100%; align-items: center; align-self: center;">
+            <img style="align-self: center; height:250px;" src="./icon.png" alt="ServerDetails" class="inline"
+                loading="lazy" />
+        </div>
+        <nav class="navbar navbar-dark bg-dark" style="margin-bottom: 50px; margin-top: 50px">
+            <a class="navbar-brand" href="javascript:void(0)">
+                Document of V3C Attendance Module.
+            </a>
+        </nav>
+
+        <div class="init-intro-container"
+            style="padding: 50px;margin-bottom: 50px; background-color: #f5f5ff; border-radius: 25px;">
+            <div class="col-12 col-sm-12 col-md-12 text-left">
+                <h2>Which odoo version support?</h2>
+                <li>
+                    odoo v16 (Community & Enterprise)
+                </li>
+                <li>
+                    odoo v15 (Community & Enterprise)
+                </li>
+                <li>
+                    odoo v14 (Community & Enterprise)
+                </li>
+                <li>
+                    odoo v13 (Community & Enterprise)
+                </li>
+            </div>
+        </div>
+
+        <div class="alert alert-warning" style="margin-bottom: 50px; border-radius: 25px;">
+            <div style="align-items: center; text-align:center; margin-bottom: 10px;">
+                <i class="fa fa-info-circle fa-4x" aria-hidden="true"></i>
+            </div>
+            <h4>Note: "v3c_hr_attendance" module is installed on the Odoo server before logging in to
+                the
+                Android app.</h4>
+        </div>
+
+        <div style="padding: 50px;margin-bottom: 50px;background-color: #f5f5ff; border-radius: 25px;">
+            <h2>How to Login?</h2>
+
+            <div class="row align-items-center">
+                <div>
+                    <img style="max-width: auto; height: 500px; margin: 0;" src="./1.png" alt="ServerDetails"
+                        class="inline" loading="lazy" />
+                </div>
+                <div class="col-lg-8 pt16 pb16" style="width: 100%;">
+                    <h5>Open Server URL Screen by default when you open the mobile application</h5>
+                    <div style="padding-left: 50px;">
+                        <ol>
+                            <li>
+                                Get "server details" & "your credential" from your server administrator / odoo
+                                administrator.
+                            </li>
+                            <li>
+                                Enter your odoo server URL.
+                            </li>
+                            <div style="padding-left: 25px;">
+                                <p>Here example of URL<i><code>"https://runbot.odoo.com"</code></i><br />
+                                    <!-- i.e. <code><i>"https://24070692-15-0-all.runbot179.odoo.com"</code></i> -->
+                                </p>
+                            </div>
+                            <li>
+                                Enter your port number.
+                                i.e. <code>8069</code> or "blank".
+                            </li>
+                            <li>
+                                Enter database name which database you want to login.<br />i.e.
+                                <code>"24070692-15-0-all"</code>
+                            </li>
+                        </ol>
+                    </div>
+                    <h5>Click on Next button</h5>
+
+                </div>
+            </div>
+
+            <hr class="rounded">
+
+            <div class="row align-items-center">
+                <div>
+                    <img style="max-width: auto; height: 500px; margin: 0;" src="./2.png" alt="ServerDetails"
+                        class="inline" loading="lazy" />
+                </div>
+                <div class="col-lg-6 pt16 pb16">
+                    <h5>Now enter user details</h5>
+
+                    <div style="padding-left: 50px;">
+                        <ol>
+                            <li>
+                                Enter your user name (same user name which you logn in to odoo backend).
+                            </li>
+                            <div style="padding-left: 50px;">
+                                <p>Here example of odoorunbot "admin"</p>
+                            </div>
+                            <li>
+                                Enter your password (same password which you logn in to odoo backend).
+                            </li>
+                            <div style="padding-left: 50px;">
+                                <p>Here example of odoorunbot password "admin"</p>
+                            </div>
+                            <li>
+                                If you want to rembember login details then click rembember me check box. (It is
+                                optional)
+                            </li>
+                        </ol>
+                    </div>
+                    <h5>Click to Login button</h5>
+                </div>
+            </div>
+        </div>
+
+        <div style="padding: 50px;margin-bottom: 50px;background-color: #f5f5ff; border-radius: 25px;">
+            <h2>How it works</h2>
+
+            <div class="row align-items-center">
+                <div>
+                    <img style="max-width: auto; height: 500px; margin: 0;" src="./3.png" alt="ServerDetails"
+                        class="inline" loading="lazy" />
+                    <img style="max-width: auto; height: 500px; margin: 0;" src="./4.png" alt="ServerDetails"
+                        class="inline" loading="lazy" />
+                </div>
+                <div class="col-lg-6 pt16 pb16">
+                    <h5>Dashboard Screen</h5>
+                    <div style="padding-left: 50px;">
+                        <ol>
+                            <li>
+                                Allow Location permisison popup.
+                            </li>
+                            <li>
+                                Slide to check in. (Slide right to check-in).
+                            </li>
+                            <li>
+                                Slide to check out. (Slide left to check-out).
+                            </li>
+                            <li>
+                                Bottom of Slide button you can check last 5 history of check-in and check-out.
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="padding: 50px;margin-bottom: 50px;background-color: #f5f5ff; border-radius: 25px;">
+            <h2>Track Attendance from odoo backend</h2>
+            <div class="row align-items-center">
+
+                <div style="border-radius: 25px; overflow:hidden">
+                    <img style="max-width: auto; width:100%; margin: 0; padding-top: 25px;"
+                        src="./attendance_odoo_screenshot.jpg" alt="ServerDetails" class="inline" loading="lazy" />
+                </div>
+                <div style="margin-top: 50px;">
+                    <h5>How to check geolocation on Google map?</h5>
+                    <div style="padding-left: 50px;">
+                        <ol>
+                            <li>
+                                Open Attendance App from Menu.
+                            </li>
+                            <li>
+                                Click on "Check in Location" or<br />
+                                "Check out Location" Link.
+                            </li>
+                        </ol>
+                        For more reference please check the video.
+                    </div>
+                </div>
+
+                <div style="margin-top: 50px;">
+                    <h2>Video Preview</h2>
+                    <div style="border-radius: 20px; overflow:hidden">
+                        <video width="100%" controls>
+                            <source src="./Attendance_odoo_video.mp4" type="video/mp4">
+                            <!-- <source src="movie.ogg" type="video/ogg"> -->
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="padding: 50px;margin-bottom: 50px;background-color: #f5f5ff; border-radius: 25px;">
+            <h2>APK File (Android Mobile Application)</h2>
+            <div class="row align-items-center">
+
+                <div style="margin-top: 25px;">
+                    <h5>How to get APK file?</h5>
+                    <div style="padding-left: 50px;">
+                        <ol>
+                            <li>
+                                Open "v3c_hr_attendance" module folder.
+                            </li>
+                            <li>
+                                Open "static" folder.
+                            </li>
+                            <li>
+                                Open "APK" folder.
+                            </li>
+                            <li>
+                                Now you copy "V3C_Attendance.apk" from this location and install it on your android
+                                device.
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <hr class="rounded">
+            </div>
+        </div>
+
+        <div style="padding: 50px;margin-bottom: 50px;background-color: #f5f5ff; border-radius: 25px;">
+            <h2>Support</h2>
+            <div style="align-items: center; text-align:center;">
+                <img style="align-self: center; height:250px;" src="./icon.png" alt="ServerDetails" class="inline"
+                    loading="lazy" />
+            </div>
+
+            <div style="margin-top: 25px; align-self: center;">
+                <div style="margin-top: 25px; margin-bottom: 25px;">
+                    <h3>
+                        • Request for Odoo Customization
+                    </h3>
+                    <h3>
+                        • Request for Mobile Application
+                    </h3>
+                    <h3>
+                        • Request for Older Version Support
+                    </h3>
+                </div>
+
+                <h5>Please feel free to contact us at <a
+                        href='mailto:v3codestudio@gmail.com?subject=Me&body=Hello!'><code>v3codestudio@gmail.com</code></a>
+                    if you have any questions or concerns. We are always happy to assist you!
+                </h5>
+
+                <div class="row">
+                    <div style="width: 40%;">
+                        <a style="align-self: center;
+                    text-align: center;
+                    border-radius: 10px;
+                    background-color: purple;
+                    color: white;
+                    margin-top: 25px;
+                    " class="d-flex align-items-center px-2 py-3"
+                            href="mailto:v3codestudio@gmail?subject=Me&body=Hello!">
+                            <i class="fa fa-envelope fa-2x" style="margin-right: 10px; margin-left: 10px;"
+                                aria-hidden="true"></i>
+                            v3codestudio@gmail.com
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="rounded">
+    </div>
+</body>
+
+</html>
