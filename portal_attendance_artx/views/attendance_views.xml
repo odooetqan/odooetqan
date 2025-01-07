@@ -126,6 +126,18 @@
                             <i class="fa fa-sign-in" aria-hidden="true"></i>
                             <span id="btnText">Click to Check In</span>
                         </button>
+                        <button id="leave_portal_request_main" class="btn btn-succes leave_portal_request_main">
+                            
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <!-- <h1>Your Leave Requests</h1> -->
+                        <!-- Button to Create New Leave Request -->
+                        <h1>
+                        <a href="/my/leave/new" class="btn btn-primary">
+                            <i class="fa fa-plus me-1"></i>Create Leave Request
+                        </a>
+                        </h1>
+                    </div>
+                        </button>
 
                     </div>
                 </div>
