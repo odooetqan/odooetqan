@@ -117,6 +117,47 @@ class AttendanceController(http.Controller):
 
         return request.make_response(json.dumps(response_data), headers=[('Content-Type', 'application/json')])
 
+# --- leaves 
+# from odoo import http
+# from odoo.http import request
+
+class PortalLeaves(http.Controller):
+
+    @http.route('/my/leaves', type='http', auth='user', website=True)
+    def portal_my_leaves(self, **kwargs):
+        # Fetch leave requests for the logged-in user
+        employee = request.env['hr.employee'].search([('user_id', '=', request.env.user.id)], limit=1)
+        leave_records = request.env['hr.leave'].search([('employee_id', '=', employee.id)])
+
+        values = {
+            'leave_records': leave_records,
+        }
+        return request.render('portal_attendance_artx.portal_my_leaves', values)
+ 
+
+class PortalLeave(http.Controller):
+    @http.route(['/my/leave/new'], type='http', auth="user", website=True)
+    def portal_new_leave(self, **kw):
+        return request.render('portal_attendance_artx.portal_new_leave_form', {})
+
+ 
+class PortalLeave(http.Controller):
+    @http.route(['/my/leave/submit'], type='http', auth="user", methods=["POST"], website=True)
+    def portal_leave_submit(self, **post):
+        user = request.env.user
+        request.env['hr.leave'].sudo().create({
+            'employee_id': user.employee_id.id,
+            'leave_type': post.get('leave_type'),
+            'start_date': post.get('start_date'),
+            'end_date': post.get('end_date'),
+            'state': 'draft',
+        })
+        return request.redirect('/my/leaves')
+
+
+
+
+
     # @http.route('/portal/get_attendance_status', type='http', auth="none", methods=['GET'], csrf=False)
     # def get_attendance_status(self, **kwargs):
     #     # Simulate fetching data, including datetime objects
