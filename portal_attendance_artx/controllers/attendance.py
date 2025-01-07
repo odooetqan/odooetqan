@@ -135,7 +135,7 @@ class PortalLeaves(http.Controller):
         return request.render('portal_attendance_artx.portal_my_leaves', values)
  
 
-# <<<<<<< HEAD
+
 # class PortalLeave(http.Controller):
     @http.route(['/my/leave/new'], type='http', auth="user", website=True)
     def portal_new_leave(self, **kw):
