@@ -64,7 +64,9 @@
 <!-- POrtal Tree ttee attendance -->
 
     <template id="portal_my_home_attendance" inherit_id="portal.portal_my_home" priority="10">
-    <xpath expr="//div[@class='o_portal_docs list-group']" position="after">
+<!--     <xpath expr="//div[@class='o_portal_docs list-group']" position="after"> -->
+            <xpath expr="//div[@id='portal_client_category']" position="inside">
+
         <div class="list-group">
             <a class="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
                href="/my/attendance" title="Attendance">
