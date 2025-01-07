@@ -133,9 +133,26 @@ class PortalLeaves(http.Controller):
             'leave_records': leave_records,
         }
         return request.render('portal_attendance_artx.portal_my_leaves', values)
+ 
 
+class PortalLeave(http.Controller):
+    @http.route(['/my/leave/new'], type='http', auth="user", website=True)
+    def portal_new_leave(self, **kw):
+        return request.render('your_module.portal_new_leave_form', {})
 
-
+ 
+class PortalLeave(http.Controller):
+    @http.route(['/my/leave/submit'], type='http', auth="user", methods=["POST"], website=True)
+    def portal_leave_submit(self, **post):
+        user = request.env.user
+        request.env['hr.leave'].sudo().create({
+            'employee_id': user.employee_id.id,
+            'leave_type': post.get('leave_type'),
+            'start_date': post.get('start_date'),
+            'end_date': post.get('end_date'),
+            'state': 'draft',
+        })
+        return request.redirect('/my/leaves')
 
 
 
