@@ -176,7 +176,11 @@
             
         <!-- Action to Handle Leave Requests -->
         <record id="action_portal_request_leave" model="ir.actions.server">
+<<<<<<< HEAD
             <field name="name">طلب إجازة</field>
+=======
+            <field name="name">Request Leave</field>
+>>>>>>> 022d7593f1a45baf9e7bdf31720178099ceb9a94
             <field name="model_id" ref="hr.model_hr_employee"/>
             <field name="state">code</field>
             <field name="code">
@@ -198,8 +202,13 @@
                             <img src="/path_to_your_image/leaves_icon.svg" loading="lazy"/>
                         </div>
                         <div>
+<<<<<<< HEAD
                             <h5 class="mt-0 mb-1">طلب إجازة</h5>
                             <p class="m-0 text-600">تتبع طلبات الإجازة</p>
+=======
+                            <h5 class="mt-0 mb-1">Request Leave</h5>
+                            <p class="m-0 text-600">Submit and track your leave requests</p>
+>>>>>>> 022d7593f1a45baf9e7bdf31720178099ceb9a94
                         </div>
                     </a>
                 </div>
@@ -235,6 +244,7 @@
             </t>
         </template> -->
 
+<<<<<<< HEAD
 
 <template id="portal_my_leaves" name="Portal Leave List">
     <t t-call="portal.portal_layout">
@@ -279,33 +289,57 @@
     </t>
 </template>
 <!--             
+=======
+            
+>>>>>>> 022d7593f1a45baf9e7bdf31720178099ceb9a94
         <template id="portal_my_leaves" name="Portal Leave List">
             <t t-call="portal.portal_layout">
                 <div class="container">
                     <div class="d-flex justify-content-between align-items-center mb-3">
+<<<<<<< HEAD
                         <h1>طلبات الاجازة </h1>
                         <!- - Button to Create New Leave Request - ->
                         <h1>
                         <a href="/my/leave/new" class="btn btn-primary">
                             <i class="fa fa-plus me-1"></i>إنشاء طلب اجازة
+=======
+                        <h1>Your Leave Requests</h1>
+                        <!- - Button to Create New Leave Request - ->
+                        <h1>
+                        <a href="/my/leave/new" class="btn btn-primary">
+                            <i class="fa fa-plus me-1"></i>Create Leave Request
+>>>>>>> 022d7593f1a45baf9e7bdf31720178099ceb9a94
                         </a>
                         </h1>
                     </div>
                     <table class="table table-striped">
                         <thead>
                             <tr>
+<<<<<<< HEAD
                                 <th>نوع الاجازة</th>
                                 <th>تاريخ البدء</th>
                                 <th>تاريخ الانتهاء</th>
                                 <th>الحالة</th>
+=======
+                                <th>Leave Type</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Status</th>
+>>>>>>> 022d7593f1a45baf9e7bdf31720178099ceb9a94
                             </tr>
                         </thead>
                         <tbody>
                             <t t-foreach="leave_records" t-as="leave">
                                 <tr>
+<<<<<<< HEAD
                                     <td><t t-esc="leave.holiday_status_id"/></td><!- -leave_type_id- ->
                                     <td><t t-esc="leave.date_from"/></td>
                                     <td><t t-esc="leave.date_to"/></td>
+=======
+                                    <td><t t-esc="leave.leave_type"/></td>
+                                    <td><t t-esc="leave.start_date"/></td>
+                                    <td><t t-esc="leave.end_date"/></td>
+>>>>>>> 022d7593f1a45baf9e7bdf31720178099ceb9a94
                                     <td><t t-esc="leave.state"/></td>
                                 </tr>
                             </t>
@@ -313,6 +347,7 @@
                     </table>
                 </div>
             </t>
+<<<<<<< HEAD
         </template> -->
         <template id="portal_new_leave_form" name="Portal New Leave Form">
             <t t-call="portal.portal_layout">
@@ -388,6 +423,14 @@
                             <button type="submit" class="btn btn-success">طلب </button>
                         </form> -->
                     <!-- <form action="/my/leave/submit" method="post" class="mt-4">
+=======
+        </template>
+        <template id="portal_new_leave_form" name="Portal New Leave Form">
+            <t t-call="portal.portal_layout">
+                <div class="container">
+                    <h1>Create Leave Request</h1>
+                    <form action="/my/leave/submit" method="post" class="mt-4">
+>>>>>>> 022d7593f1a45baf9e7bdf31720178099ceb9a94
                         <div class="mb-3">
                             <label for="leave_type" class="form-label">Leave Type</label>
                             <select id="leave_type" name="leave_type" class="form-select">
@@ -405,7 +448,11 @@
                             <input type="date" id="end_date" name="end_date" class="form-control" required="true" />
                         </div>
                         <button type="submit" class="btn btn-success">Submit</button>
+<<<<<<< HEAD
                     </form> -->
+=======
+                    </form>
+>>>>>>> 022d7593f1a45baf9e7bdf31720178099ceb9a94
                 </div>
             </t>
         </template>

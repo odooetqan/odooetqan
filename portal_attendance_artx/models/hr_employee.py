@@ -6,6 +6,11 @@ from odoo.exceptions import UserError
 #     _name = 'hr.contract.history'
 
 #     time_credit = fields.Float(string="Time Credit")
+class HrContractHistory(models.Model):
+    _name = "hr.contract.history"
+    _inherit = "hr.contract.history"
+    
+    time_credit = fields.Float(string="Time Credit")
 
 class EmployeeInherit(models.Model):
     _inherit = 'hr.employee'
