@@ -156,5 +156,68 @@
                     action = records.action_create_portal_user()
                 </field>
             </record>
+
+            <!-- Leaves -->
+            
+        <!-- Action to Handle Leave Requests -->
+        <record id="action_portal_request_leave" model="ir.actions.server">
+            <field name="name">Request Leave</field>
+            <field name="model_id" ref="hr.model_hr_employee"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = {
+                    "type": "ir.actions.act_url",
+                    "url": "/my/leaves",
+                    "target": "self",
+                }
+            </field>
+        </record>
+
+        <!-- Add "Request Leave" Card to Portal -->
+        <template id="portal_my_home_leaves" inherit_id="portal.portal_my_home" priority="20">
+            <xpath expr="//div[@id='portal_client_category']" position="inside">
+                <div class="o_portal_index_card col-md-6">
+                    <a href="/my/leaves" title="Leaves" class="d-flex justify-content-start gap-2 align-items-center py-3 px-3 rounded text-decoration-none text-reset text-bg-light">
+                        <div class="o_portal_icon">
+                            <img src="/path_to_your_image/leaves_icon.svg" loading="lazy"/>
+                        </div>
+                        <div>
+                            <h5 class="mt-0 mb-1">Request Leave</h5>
+                            <p class="m-0 text-600">Submit and track your leave requests</p>
+                        </div>
+                    </a>
+                </div>
+            </xpath>
+        </template>
+
+        <!-- Template for Leave List -->
+        <template id="portal_my_leaves" name="Portal Leave List">
+            <t t-call="portal.portal_layout">
+                <div class="container">
+                    <h1>Your Leave Requests</h1>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Leave Type</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="leave_records" t-as="leave">
+                                <tr>
+                                    <td><t t-esc="leave.leave_type"/></td>
+                                    <td><t t-esc="leave.start_date"/></td>
+                                    <td><t t-esc="leave.end_date"/></td>
+                                    <td><t t-esc="leave.state"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </template>
+        <!-- Leaves -->
         </data>
     </odoo>
