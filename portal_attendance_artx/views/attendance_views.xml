@@ -262,7 +262,29 @@
             <t t-call="portal.portal_layout">
                 <div class="container">
                     <h1>Create Leave Request</h1>
-                    <form action="/my/leave/submit" method="post" class="mt-4">
+                        <form action="/my/leave/submit" method="POST" class="mt-4">
+                            <!-- CSRF Token -->
+                            <t t-esc="request.csrf_token()"/>
+                            
+                            <div class="mb-3">
+                                <label for="leave_type" class="form-label">Leave Type</label>
+                                <select id="leave_type" name="leave_type" class="form-select">
+                                    <option value="sick">Sick Leave</option>
+                                    <option value="vacation">Vacation Leave</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="start_date" class="form-label">Start Date</label>
+                                <input type="date" id="start_date" name="start_date" class="form-control" required="true" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="end_date" class="form-label">End Date</label>
+                                <input type="date" id="end_date" name="end_date" class="form-control" required="true" />
+                            </div>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </form>
+                    <!-- <form action="/my/leave/submit" method="post" class="mt-4">
                         <div class="mb-3">
                             <label for="leave_type" class="form-label">Leave Type</label>
                             <select id="leave_type" name="leave_type" class="form-select">
@@ -280,7 +302,7 @@
                             <input type="date" id="end_date" name="end_date" class="form-control" required="true" />
                         </div>
                         <button type="submit" class="btn btn-success">Submit</button>
-                    </form>
+                    </form> -->
                 </div>
             </t>
         </template>
