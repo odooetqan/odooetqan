@@ -178,7 +178,8 @@
         <!-- Add "Request Leave" Card to Portal -->
         <template id="portal_my_home_leaves" inherit_id="portal.portal_my_home" priority="20">
             <xpath expr="//div[@id='portal_client_category']" position="inside">
-                <div class="o_portal_index_card col-md-6">
+ 
+                <div class="o_portal_index_card col-md-6" style="background-color:green">
                     <a href="/my/leaves" title="Leaves" class="d-flex justify-content-start gap-2 align-items-center py-3 px-3 rounded text-decoration-none text-reset text-bg-light">
                         <div class="o_portal_icon">
                             <img src="/path_to_your_image/leaves_icon.svg" loading="lazy"/>
