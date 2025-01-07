@@ -260,9 +260,9 @@
                         <tbody>
                             <t t-foreach="leave_records" t-as="leave">
                                 <tr>
-                                    <td><t t-esc="leave.holiday_status_id"/></td>
-                                    <td><t t-esc="leave.start_date"/></td>
-                                    <td><t t-esc="leave.end_date"/></td>
+                                    <td><t t-esc="leave.holiday_status_id"/></td><!--leave_type_id-->
+                                    <td><t t-esc="leave.date_from"/></td>
+                                    <td><t t-esc="leave.date_to"/></td>
                                     <td><t t-esc="leave.state"/></td>
                                 </tr>
                             </t>
