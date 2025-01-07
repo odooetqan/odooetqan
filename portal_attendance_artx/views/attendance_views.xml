@@ -124,19 +124,20 @@
                     <div class="container">
                         <button id="attendanceBtn" class="btn btn-warning attendanceBtn">
                             <i class="fa fa-sign-in" aria-hidden="true"></i>
-                            <span id="btnText">للدخول اضعط هنا</span>
+                            <span id="btnText">تسجيل الدخول  </span>
                         </button>
+
                         <button id="leave_portal_request_main" class="btn btn-succes leave_portal_request_main">
-                            
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <!-- <h1>Your Leave Requests</h1> -->
-                        <!-- Button to Create New Leave Request -->
-                        <h1>
-                        <a href="/my/leave/new" class="btn btn-primary">
-                            <i class="fa fa-plus me-1"></i>
-                        </a>
-                        </h1>
-                    </div>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <!-- <h1>Your Leave Requests</h1> -->
+                                <!-- Button to Create New Leave Request -->
+                                <h1>
+                                    <a href="/my/leave/new" class="btn btn-primary">
+                                        <i class="fa fa-plus me-1"></i>                             
+                                        <span id="btnText">  إنشاء طلب اجازة</span>
+                                    </a>
+                                </h1>
+                            </div>
                         </button>
 
                     </div>
@@ -273,9 +274,32 @@
         <template id="portal_new_leave_form" name="Portal New Leave Form">
             <t t-call="portal.portal_layout">
                 <div class="container">
-                    <h1>إنشاء طلب اجازة</h1>
-                        <form action="/my/leave/submit" method="POST" class="mt-4">
-                            <!-- CSRF Token -->
+                    <h1>إنشاء طلب اجازة</h1>                            
+                    
+                    <form action="/my/leave/submit" method="POST">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <!-- Other form fields -->
+                        <div class="mb-3">
+                            <label for="leave_type" class="form-label">نوع الاجازة</label>
+                            <select id="leave_type" name="leave_type" class="form-select">
+                                <option value="sick">إجازة مرضية </option>
+                                <option value="vacation"> إجازة سنوية</option>
+                                <option value="other">أخري</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="start_date" class="form-label">تاريخ البدء</label>
+                            <input type="date" id="start_date" name="start_date" class="form-control" required="true" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="end_date" class="form-label">تاريخ الانتهاء</label>
+                            <input type="date" id="end_date" name="end_date" class="form-control" required="true" />
+                        </div>
+                        <button type="submit" class="btn btn-success">اطلب</button>
+                    </form>
+
+                    <!-- CSRF Token -->
+                        <!-- <form action="/my/leave/submit" method="POST" class="mt-4">
                             <t t-esc="request.csrf_token()"/>
                             
                             <div class="mb-3">
@@ -295,7 +319,7 @@
                                 <input type="date" id="end_date" name="end_date" class="form-control" required="true" />
                             </div>
                             <button type="submit" class="btn btn-success">طلب </button>
-                        </form>
+                        </form> -->
                     <!-- <form action="/my/leave/submit" method="post" class="mt-4">
                         <div class="mb-3">
                             <label for="leave_type" class="form-label">Leave Type</label>
