@@ -138,7 +138,7 @@ class PortalLeaves(http.Controller):
 class PortalLeave(http.Controller):
     @http.route(['/my/leave/new'], type='http', auth="user", website=True)
     def portal_new_leave(self, **kw):
-        return request.render('your_module.portal_new_leave_form', {})
+        return request.render('portal_attendance_artx.portal_new_leave_form', {})
 
  
 class PortalLeave(http.Controller):
