@@ -194,7 +194,7 @@
         </template>
 
         <!-- Template for Leave List -->
-        <template id="portal_my_leaves" name="Portal Leave List">
+<!--         <template id="portal_my_leaves" name="Portal Leave List">
             <t t-call="portal.portal_layout">
                 <div class="container">
                     <h1>Your Leave Requests</h1>
@@ -220,7 +220,71 @@
                     </table>
                 </div>
             </t>
+        </template> -->
+
+            
+        <template id="portal_my_leaves" name="Portal Leave List">
+            <t t-call="portal.portal_layout">
+                <div class="container">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h1>Your Leave Requests</h1>
+                        <!-- Button to Create New Leave Request -->
+                        <a href="/my/leave/new" class="btn btn-primary">
+                            <i class="fa fa-plus me-1"></i>Create Leave Request
+                        </a>
+                    </div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Leave Type</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="leave_records" t-as="leave">
+                                <tr>
+                                    <td><t t-esc="leave.leave_type"/></td>
+                                    <td><t t-esc="leave.start_date"/></td>
+                                    <td><t t-esc="leave.end_date"/></td>
+                                    <td><t t-esc="leave.state"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
         </template>
+        <template id="portal_new_leave_form" name="Portal New Leave Form">
+            <t t-call="portal.portal_layout">
+                <div class="container">
+                    <h1>Create Leave Request</h1>
+                    <form action="/my/leave/submit" method="post" class="mt-4">
+                        <div class="mb-3">
+                            <label for="leave_type" class="form-label">Leave Type</label>
+                            <select id="leave_type" name="leave_type" class="form-select">
+                                <option value="sick">Sick Leave</option>
+                                <option value="vacation">Vacation Leave</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="start_date" class="form-label">Start Date</label>
+                            <input type="date" id="start_date" name="start_date" class="form-control" required/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="end_date" class="form-label">End Date</label>
+                            <input type="date" id="end_date" name="end_date" class="form-control" required/>
+                        </div>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+                </div>
+            </t>
+        </template>
+
+            
+
         <!-- Leaves -->
         </data>
     </odoo>
