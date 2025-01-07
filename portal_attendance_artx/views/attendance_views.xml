@@ -235,13 +235,56 @@
             </t>
         </template> -->
 
-            
+
+<template id="portal_my_leaves" name="Portal Leave List">
+    <t t-call="portal.portal_layout">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h1>طلبات الاجازة</h1>
+                <!-- Button to Create New Leave Request -->
+                <h1>
+                    <a href="/my/leave/new" class="btn btn-primary">
+                        <i class="fa fa-plus me-1"></i>إنشاء طلب اجازة
+                    </a>
+                </h1>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>نوع الاجازة</th>
+                        <th>تاريخ البدء</th>
+                        <th>تاريخ الانتهاء</th>
+                        <th>الحالة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="leave_records" t-as="leave">
+                        <tr>
+                            <!-- Display the name of the leave type -->
+                            <td><t t-esc="leave.holiday_status_id.name"/></td>
+                            <td><t t-esc="leave.date_from"/></td>
+                            <td><t t-esc="leave.date_to"/></td>
+                            <td>
+                                <t t-if="leave.state == 'draft'">مسودة</t>
+                                <t t-if="leave.state == 'confirm'">في انتظار الموافقة</t>
+                                <t t-if="leave.state == 'validate1'">موافقة المدير</t>
+                                <t t-if="leave.state == 'validate'">موافقة كاملة</t>
+                                <t t-if="leave.state == 'refuse'">مرفوضة</t>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </div>
+    </t>
+</template>
+<!--             
         <template id="portal_my_leaves" name="Portal Leave List">
             <t t-call="portal.portal_layout">
                 <div class="container">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h1>طلبات الاجازة </h1>
-                        <!-- Button to Create New Leave Request -->
+                        <!- - Button to Create New Leave Request - ->
                         <h1>
                         <a href="/my/leave/new" class="btn btn-primary">
                             <i class="fa fa-plus me-1"></i>إنشاء طلب اجازة
@@ -270,7 +313,7 @@
                     </table>
                 </div>
             </t>
-        </template>
+        </template> -->
         <template id="portal_new_leave_form" name="Portal New Leave Form">
             <t t-call="portal.portal_layout">
                 <div class="container">
