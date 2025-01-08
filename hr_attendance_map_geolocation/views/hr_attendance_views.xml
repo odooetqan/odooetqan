@@ -13,7 +13,7 @@
                     <button name="check_location_in" string="Check in" class="btn-primary" type="object" 
                             groups="hr.group_hr_manager" icon="fa-map-marker"/>
                     <button name="check_location_out" string="Check out" class="btn-danger" type="object"
-                            attrs="{'invisible': [('check_out', '=', False)]}" groups="hr.group_hr_manager" icon="fa-map-marker"/>
+                            modifiers="{'invisible': [('check_out', '=', False)]}" groups="hr.group_hr_manager" icon="fa-map-marker"/>
                 </group>
             </xpath>
         </field>
@@ -28,7 +28,7 @@
                 <button name="check_location_in" string="Check In" class="btn-primary" type="object" icon="fa-map-marker" 
                             groups="hr.group_hr_manager"/>
                 <button name="check_location_out" string="Check Out" class="btn-danger" type="object" icon="fa-map-marker"
-                            attrs="{'invisible': [('check_out', '=', False)]}" groups="hr.group_hr_manager"/>
+                            modifiers="{'invisible': [('check_out', '=', False)]}" groups="hr.group_hr_manager"/>
                 </xpath>
         </field>
     </record>
