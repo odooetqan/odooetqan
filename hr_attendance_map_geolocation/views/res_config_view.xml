@@ -5,7 +5,11 @@
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="hr_attendance.res_config_settings_view_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//div[contains(@class, 'o_setting_section')]" position="inside">
+            <!-- <xpath expr="//div[contains(@class, 'o_setting_section')]" position="inside"> -->
+
+                    <xpath expr="//div[@class='o_setting_box']" position="inside">
+
+
                 <div class="row mt16 o_settings_container">
                     <div class="col-xs-12 col-md-6 o_setting_box" 
                          title="Set attendance location to allow sign-in/sign-out for employees within this location.">
@@ -36,7 +40,7 @@
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="hr_attendance.res_config_settings_view_form"/>
         <field name="arch" type="xml">
-            <!-- <xpath expr="//div[@data-key='hr_attendance']" position="inside"> -->
+            <!- - <xpath expr="//div[@data-key='hr_attendance']" position="inside"> - ->
             <xpath expr="//div[contains(@class, 'o_setting_box') and contains(@data-key, 'hr_attendance')]" position="inside">
 
                 <div class="row mt16 o_settings_container">
