@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_location" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.hr.attendance.location</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="82"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="Attendances" string="Attendances" name="hr_attendance" groups="hr_attendance.group_hr_attendance_manager">
+                    <block title="company Location" name="company_location">
+                        <setting string="company latitude" company_dependent="1" help="Define accuerd company location by set lattiude and Longtude from maps.">
+                            <field name="company_latitude"/>
+                        </setting>
+                        <setting string="company longitude" company_dependent="1" help="Define accuerd company location by set lattiude and Longtude from maaps.">
+                            <field name="company_longitude"/>
+                        </setting>
+                        <setting string="Allowed Distance" company_dependent="1" help="Define accuerd company location by set lattiude and Longtude from maaps.">
+                        <div class="d-flex align-items-center">
+                            <field name="allowed_distance"/>
+                            <span>km</span>
+                        </div>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>
