@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.module.category" id="category_hr_attendance_pro">
+        <field name="name">HR PRO</field>
+        <field name="description">Helps you manage the attendances pro.</field>
+        <field name="sequence">14</field>
+        <field name="parent_id" ref="base.module_category_human_resources"/>
+    </record>
+
+    <record id="group_hr_attendance_user_pro" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="category_hr_attendance_pro"/>
+        <!-- <field name="implied_ids" eval="[(4, ref('hr.group_hr_user'))]"/> -->
+    </record>
+
+    <record id="group_hr_attendance_manager_pro" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="category_hr_attendance_pro"/>
+        <field name="implied_ids" eval="[(4, ref('group_hr_attendance_user_pro'))]"/>
+        <!-- <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/> -->
+    </record>
+
+    <record id="group_hr_attendance_admin_pro" model="res.groups">
+        <field name="name">Admin</field>
+        <field name="category_id" ref="category_hr_attendance_pro"/>
+        <field name="implied_ids" eval="[(4, ref('group_hr_attendance_manager_pro'))]"/>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sr_rental_pricing,access_sr_rental_pricing,model_sr_rental_pricing,,1,1,1,1
+access_sr_rental_product_wizard,access_sr_rental_product_wizard,model_sr_rental_product_wizard,,1,1,1,1
+access_sr_rental_order_wizard,access_sr_rental_order_wizard,model_sr_rental_order_wizard,,1,1,1,1
+access_sr_rental_order_line_wizard,access_sr_rental_order_line_wizard,model_sr_rental_order_line_wizard,,1,1,1,1

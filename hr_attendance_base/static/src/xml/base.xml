@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template xml:space="preserve">
+    <t t-name="HrAttendanceAccessAllowed">
+        <h5>
+            <div>
+                <div>
+                    <i class="fa fa-check-square-o token-fa-3x" style="color:green"></i>
+                </div>
+            </div>
+        </h5>
+    </t>
+    <t t-name="HrAttendanceAccessDenied">
+        <h5>
+            <div>
+                <div>
+                    <i class="fa fa-ban token-fa-3x" style="color:red"></i>
+                </div>
+            </div>
+        </h5>
+    </t>
+    <t t-name="HrAttendanceAccessAllowedDisable">
+        <h5>
+            <div>
+                <div>
+                    <i class="fa fa-check-square-o token-fa-3x" style="color:#ced4da"></i>
+                </div>
+            </div>
+        </h5>
+    </t>
+    <t t-name="HrAttendanceAccessDeniedDisable">
+        <h5>
+            <div>
+                <div>
+                    <i class="fa fa-ban token-fa-3x" style="color:#ced4da"></i>
+                </div>
+            </div>
+        </h5>
+    </t>
+</template>

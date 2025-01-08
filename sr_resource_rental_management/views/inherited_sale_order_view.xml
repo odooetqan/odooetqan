@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <record id="sr_rental_view_order_extend_form" model="ir.ui.view">
+      <field name="name">sr.rental.order.extend.form</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//button[@name='action_quotation_send']" position="before">
+          <field name="is_pickup" invisible="1"/>
+          <field name="is_returned" invisible="1"/>
+          <field name="is_late" invisible="1"/>
+          <field name="rental_status" invisible="1"/>
+          <field name="is_rental" invisible="1"/>
+          <button
+            name="action_pickup"
+            type="object"
+            class="btn-primary"
+            string="PICKUP"
+            attrs="{'invisible':['|', '|', ('is_rental', '!=', True), ('is_pickup', '=', True), ('state', 'not in', ['sale', 'done'])]}"
+          />
+          <button
+            name="action_return"
+            type="object"
+            class="btn-primary"
+            string="RETURN"
+            attrs="{'invisible':['|', '|', '|', ('is_rental', '!=', True), ('is_pickup', '=', False), ('is_returned', '=', True), ('state', 'not in', ['sale', 'done'])]}"
+          />
+        </xpath>
+        <xpath expr="//div[@name='button_box']" position="after">
+          <div class="badge-pill badge-info float-right"
+            attrs="{'invisible': [
+              '|', ('is_rental', '!=', True),
+              '|', ('state', 'not in', ['sale', 'done']),
+              '|', ('rental_status', '!=', 'reserved'), ('is_late', '=', True)]}">Reserved</div>
+          <div class="badge-pill badge-info float-right"
+            attrs="{'invisible': [
+              '|', ('is_rental', '!=', True),
+              '|', ('state', 'not in', ['sale', 'done']),
+              '|', ('rental_status', '!=', 'pickup'), ('is_late', '=', False)]}">Late Pickup</div>
+          <div class="badge-pill badge-warning float-right"
+            attrs="{'invisible': [
+              '|', ('is_rental', '!=', True),
+              '|', ('state', 'not in', ['sale', 'done']),
+              '|', ('rental_status', '!=', 'pickup'), ('is_late', '=', True)]}">Picked-up</div>
+          <div class="badge-pill badge-danger float-right"
+            attrs="{'invisible': [
+              '|', ('is_rental', '!=', True),
+              '|', ('state', 'not in', ['sale', 'done']),
+              '|', ('rental_status', '!=', 'return'), ('is_late', '=', False)]}">Late Return</div>
+          <div class="badge-pill badge-success float-right"
+            attrs="{'invisible': [
+              '|', ('is_rental', '!=', True),
+              '|', ('state', 'not in', ['sale', 'done']), ('rental_status', '!=', 'return')]}">Returned</div>
+        </xpath>
+        <xpath expr="//field[@name='order_line']" position="before">
+          <button
+            name="add_rental_product"
+            type="object"
+            class="btn-primary"
+            string="Add Rental Product"
+            attrs="{'invisible': ['|', ('state', 'in', ['sale', 'done']), ('is_rental', '!=', True)]}"
+          />
+        </xpath>
+        <xpath expr="//field[@name='order_line']" position="attributes">
+          <attribute name="context">{'default_is_rental': is_rental}</attribute>
+          <attribute name="attrs">{'readonly': [('is_rental', '=', True)]}</attribute>
+        </xpath>
+        <xpath expr="//field[@name='order_line']//tree//field[@name='product_id']" position="before">
+          <button
+            name="action_rental"
+            type="object"
+            class="fa fa-calendar btn btn-secondary"
+            attrs="{'invisible': ['|', ('state', 'in', ['sale', 'done']), ('is_rental', '!=', True)]}"
+          />
+        </xpath>
+        <xpath expr="//field[@name='order_line']//tree//field[@name='qty_delivered']" position="after">
+          <field name="returned_qty" attrs="{'column_invisible': [('parent.state', 'in', ['draft', 'sent']), '|', ('is_rental', '!=', True)]}"/>
+          <field name="rental_status" invisible="1"/>
+          <field name="lot_ids" invisible="1"/>
+          <field name="is_rental" invisible="1"/>
+          <field name="is_pickup" invisible="1"/>
+          <field name="is_returned" invisible="1"/>
+          <field name="is_late" invisible="1"/>
+        </xpath>
+      </field>
+  </record>
+
+  <record id="sr_rental_order_view_search" model="ir.ui.view">
+    <field name="name">sr_rental.order.search</field>
+    <field name="model">sale.order</field>
+    <field name="arch" type="xml">
+      <search string="Search Sales Order">
+        <field name="name"/>
+        <field name="partner_id"/>
+        <field name="user_id"/>
+        <field name="date_order"/>
+        <field name="is_rental"/>
+        <field name="pickup_date"/>
+        <field name="return_date"/>
+        <field name="is_pickup"/>
+        <field name="is_returned"/>
+        <field name="is_late"/>
+        <field name="state"/>
+        <field name="rental_status"/>
+        <separator/>
+        <filter string="Rental Orders" name="filter_to_rental_order" domain="[('is_rental', '=', True)]"/>
+        <separator/>
+        <filter string="To Pickup" name="filter_to_pickup" domain="[('rental_status', '=', 'pickup')]"/>
+        <filter string="To Return" name="filter_to_return" domain="[('rental_status', '=', 'return')]"/>
+        <group expand="0" string="Group By">
+            <filter string="Salesperson" name="salesperson" domain="[]" context="{'group_by': 'user_id'}"/>
+            <filter name="customer" string="Customer" domain="[]" context="{'group_by': 'partner_id'}"/>
+            <filter string="Order Date" name="order_month" domain="[]" context="{'group_by': 'date_order'}"/>
+            <filter string="Pickup Date" name="order_month" domain="[]" context="{'group_by': 'pickup_date'}"/>
+            <filter string="Return Date" name="order_month" domain="[]" context="{'group_by': 'return_date'}"/>
+            <filter name="Rentals" string="Confirmed Orders" domain="[('state','not in',('draft', 'cancel', 'sent'))]"/>
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <record id="sr_rental_order_extend_view_kanban" model="ir.ui.view">
+    <field name="name">sr.rental.order.extend.kanban</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_sale_order_kanban"/>
+    <field name="arch" type="xml">
+      <xpath expr="//kanban" position="attributes">
+        <attribute name="quick_create">false</attribute>
+        <attribute name="class">o_kanban_mobile align-content-start</attribute>
+      </xpath>
+      <field name="state" position="after">
+        <field name="pickup_date"/>
+        <field name="return_date"/>
+        <field name="is_late"/>
+      </field>
+      <xpath expr="//div[hasclass('oe_kanban_bottom_right')]/field[@name='state']" position="attributes">
+        <attribute name="attrs">
+          {'invisible': [('state', '=', 'sale'), ('rental_status', '!=', False)]}
+        </attribute>
+      </xpath>
+      <xpath expr="//div[hasclass('oe_kanban_bottom_right')]/field[@name='state']" position="after">
+        <field name="rental_status" widget="label_selection"
+          attrs="{'invisible': ['|', ('state', '!=', 'sale'), ('rental_status', '=', False)]}"
+          options="{'classes': {'pickup': 'info', 'return': 'warning', 'returned': 'success'}}"/>
+      </xpath>
+    </field>
+  </record>
+
+  <record id="sr_rental_order_action" model="ir.actions.act_window">
+      <field name="name">Rental Orders</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">sale.order</field>
+      <field name="view_mode">kanban,form,calendar,pivot,graph,activity</field>
+      <field name="search_view_id" ref="sr_rental_order_view_search"/>
+      <field name="context">{'default_is_rental': 1, 'search_default_filter_to_rental_order': 1}</field>
+  </record>
+
+  <record id="sr_rental_order_pickup_action" model="ir.actions.act_window">
+      <field name="name">Pickup Orders</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">sale.order</field>
+      <field name="view_mode">kanban,form,calendar,pivot,graph,activity</field>
+      <field name="search_view_id" ref="sr_rental_order_view_search"/>
+      <field name="context">{'default_is_rental': 1, 'search_default_filter_to_pickup': 1}</field>
+      <field name="domain">[('is_rental', '=', True)]</field>
+  </record>
+
+  <record id="sr_rental_order_return_action" model="ir.actions.act_window">
+    <field name="name">Return Orders</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">sale.order</field>
+    <field name="view_mode">kanban,form,calendar,pivot,graph,activity</field>
+    <field name="search_view_id" ref="sr_rental_order_view_search"/>
+    <field name="context">{'default_is_rental': 1, 'search_default_filter_to_return': 1}</field>
+    <field name="domain">[('is_rental', '=', True)]</field>
+  </record>
+
+  <menuitem id="sr_rental_order_menu" name="Rental Orders" parent="sr_resource_rental_management.sr_rental_menu" sequence="2"/>
+  <menuitem id="sr_rental_orders_all" name="Orders" parent="sr_rental_order_menu" sequence="1" action="sr_rental_order_action"/>
+  <menuitem id="sr_menu_orders_customers" name="Customers"
+    action="account.res_partner_action_customer"
+    parent="sr_rental_order_menu" sequence="1"/>
+  <menuitem id="sr_rental_pickup_orders" name="Pickup Orders" parent="sr_rental_order_menu" action="sr_rental_order_pickup_action" sequence="2"/>
+  <menuitem id="rental_orders_return" name="Return Orders" parent="sr_rental_order_menu" action="sr_rental_order_return_action" sequence="3"/>
+</odoo>

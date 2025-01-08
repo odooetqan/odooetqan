@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+      <record id="action_report_pickup" model="ir.actions.report">
+            <field name="name">Receipt Picked-up</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">sr_resource_rental_management.report_rental_pickup</field>
+            <field name="report_file">sr_resource_rental_management.report_rental_pickup</field>
+            <field name="binding_model_id" ref="sale.model_sale_order"/>
+            <field name="binding_type">report</field>
+      </record>
+
+      <record id="action_report_return" model="ir.actions.report">
+            <field name="name">Receipt Returned</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">sr_resource_rental_management.report_rental_return</field>
+            <field name="report_file">sr_resource_rental_management.report_rental_return</field>
+            <field name="binding_model_id" ref="sale.model_sale_order"/>
+            <field name="binding_type">report</field>
+      </record>
+</odoo>
