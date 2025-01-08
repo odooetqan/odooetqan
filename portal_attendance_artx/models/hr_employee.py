@@ -11,6 +11,7 @@ class HrContractHistory(models.Model):
     _inherit = "hr.contract.history"
     
     time_credit = fields.Float(string="Time Credit")
+    work_time_rate = fields.Float(string="Work Time Rate")
 
 class EmployeeInherit(models.Model):
     _inherit = 'hr.employee'
