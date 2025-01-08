@@ -196,7 +196,7 @@
                 <div class="o_portal_index_card col-md-6" >
                     <a href="/my/leaves" title="Leaves" class="d-flex justify-content-start gap-2 align-items-center py-3 px-3 rounded text-decoration-none text-reset text-bg-light text-bg-danger">
                         <div class="o_portal_icon">
-                            <img src="/path_to_your_image/leaves_icon.svg" loading="lazy"/>
+                            <img src="//portal_attendance_artx/static/src/images/leaves_iconsun-bath-svgrepo-com.svg" loading="lazy"/>
                         </div>
                         <div>
                             <h5 class="mt-0 mb-1">طلب إجازة</h5>
