@@ -190,7 +190,7 @@
         </record>
 
         <!-- Add "Request Leave" Card to Portal -->
-        <template id="portal_my_home_leaves" inherit_id="portal.portal_my_home" priority="8">
+        <template id="portal_my_home_leaves" inherit_id="portal.portal_my_home" priority="11">
             <xpath expr="//div[@id='portal_client_category']" position="inside">
  
                 <div class="o_portal_index_card col-md-6" >
