@@ -202,9 +202,8 @@
                             <img width="150px" src="/portal_attendance_artx/static/src/images/sun-bath-svgrepo-com.svg" loading="lazy"/>
                         </div>
                         <div>
-                            <h5 class="mt-0 mb-1">طلب إجازة</h5>
-                            <p class="m-0 text-600">تتبع طلبات الإجازة</p>
-                            <h5 class="mt-0 mb-1">طلب اجازة </h5>
+
+                            <h5 class="mt-0 mb-1">طلبات الاجازة </h5>
                             <p class="m-0 text-600">اطلب و تتبع اجازاتك من هنا </p>
                         </div>
                     </a>
