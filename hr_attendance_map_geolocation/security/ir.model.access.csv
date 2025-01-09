@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_attendance_portal,access_attendance_portal,model_hr_attendance,base.group_portal,1,0,0,0
-access_leaves_portal,access_leaves_portal,model_hr_leave,base.group_portal,1,0,0,0
