@@ -137,14 +137,28 @@ class PortalLeaves(http.Controller):
 
 
 # class PortalLeave(http.Controller):
+    # @http.route(['/my/leave/new'], type='http', auth="user", website=True)
+    # def portal_new_leave(self, **kw):
+
+    #     leave_types = request.env['hr.leave.type'].sudo().search([])
+    #     return request.render('portal_attendance_artx.portal_new_leave_form', {
+    #         'leave_types': leave_types,
+    #     })
+    #     # return request.render('portal_attendance_artx.portal_new_leave_form', {})
+
     @http.route(['/my/leave/new'], type='http', auth="user", website=True)
     def portal_new_leave(self, **kw):
-
         leave_types = request.env['hr.leave.type'].sudo().search([])
+        # Log the leave types for debugging
+        request.env['ir.logging'].sudo().create({
+            'name': 'Portal Leave Types Debug',
+            'type': 'server',
+            'level': 'info',
+            'message': f"Leave Types: {leave_types.mapped('name')}",
+        })
         return request.render('portal_attendance_artx.portal_new_leave_form', {
             'leave_types': leave_types,
         })
-        # return request.render('portal_attendance_artx.portal_new_leave_form', {})
     
 # class PortalLeave(http.Controller):
     @http.route(['/my/leave/submit'], type='http', auth='user', methods=['POST'], website=True)
@@ -191,9 +205,9 @@ class PortalLeaves(http.Controller):
 #         })
 #         return request.redirect('/my/leaves')
 # class PortalLeave(http.Controller):
-    @http.route(['/my/leave/new'], type='http', auth="user", website=True)
-    def portal_new_leave(self, **kw):
-        return request.render('portal_attendance_artx.portal_new_leave_form', {})
+    # @http.route(['/my/leave/new'], type='http', auth="user", website=True)
+    # def portal_new_leave(self, **kw):
+    #     return request.render('portal_attendance_artx.portal_new_leave_form', {})
 
  
 # class PortalLeave(http.Controller):
