@@ -363,7 +363,7 @@
 
                                         <form action="/my/leave/submit" method="POST">
                                             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                                            <!- - Other form fields - ->
+                                            <!-- Other form fields -->
                                             <div class="mb-3">
                                                 <label for="leave_type" class="form-label">نوع الاجازة</label>
                                                 <select id="leave_type" name="leave_type" class="form-select">
