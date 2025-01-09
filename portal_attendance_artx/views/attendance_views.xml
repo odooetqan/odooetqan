@@ -337,6 +337,8 @@
                 <div class="container">
                     <h1>إنشاء طلب اجازة</h1>    
                         <form method="POST" action="/my/leave/submit">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
                             <div class="form-group">
                                 <label for="leave_type">نوع الإجازة</label>
                                 <select name="leave_type" id="leave_type" class="form-control">
