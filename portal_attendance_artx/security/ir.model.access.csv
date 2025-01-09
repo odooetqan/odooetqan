@@ -1,9 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_attendance_portal,access_attendance_portal,model_hr_attendance,base.group_portal,1,0,0,0
-access_attendance_portal_employee,access_attendance_portal_employee,model_hr_employee,base.group_portal,1,0,0,0
-access_leaves_portal,access_leaves_portal,model_hr_leave,base.group_portal,1,0,0,0
-access_leaves_portal_type,access_leaves_portal_type,model_hr_leave_type,base.group_portal,1,0,0,0
-access_attendance_public,access_attendance_public,model_hr_attendance,,1,0,0,0
-access_attendance_public_employee,access_attendance_public_employee,model_hr_employee,,1,0,0,0
-access_leaves_public,access_leaves_public,model_hr_leave,,1,0,0,0
-access_leaves_public_type,access_leaves_public_type,model_hr_leave_type,,1,0,0,0

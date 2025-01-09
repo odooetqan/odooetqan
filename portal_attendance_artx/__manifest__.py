@@ -17,8 +17,6 @@
     'depends': ['hr_attendance', 'portal'],
     'data': [
         'views/attendance_views.xml',
-        'security/ir.model.access.csv',
-        'security/security.xml',
     ],
     'assets': {
         'web.assets_frontend': [
