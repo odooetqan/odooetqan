@@ -142,7 +142,9 @@ class PortalLeaves(http.Controller):
         return request.render('portal_attendance_artx.portal_new_leave_form', {
             'leave_types': leave_types,
         })
-    @http.route(['/my/leave/submit'], type='http', auth='user', methods=['POST'], website=True, csrf=False)
+    # @http.route(['/my/leave/submit'], type='http', auth='user', methods=['POST'], website=True, csrf=False)
+    # def portal_leave_submit(self, **post):
+    @http.route(['/my/leave/submit'], type='http', auth='user', methods=['POST'], csrf=False)
     def portal_leave_submit(self, **post):
         leave_type_id = post.get('leave_type')
         start_date = post.get('start_date')
