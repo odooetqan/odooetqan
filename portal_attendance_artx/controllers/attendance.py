@@ -19,6 +19,11 @@ from odoo.http import request
 #---- TO addd tree attendance  portal gate
 # from odoo import http
 # from odoo.http import request
+from odoo import http
+from odoo.http import request
+import logging
+
+_logger = logging.getLogger(__name__)
 
 class PortalAttendance(http.Controller):
     @http.route(['/my/attendance'], type='http', auth='user', website=True)
@@ -128,11 +133,25 @@ class PortalLeaves(http.Controller):
         # Fetch leave requests for the logged-in user
         employee = request.env['hr.employee'].search([('user_id', '=', request.env.user.id)], limit=1)
         leave_records = request.env['hr.leave'].search([('employee_id', '=', employee.id)])
-
+        
+        # Add logging here where it is contextually appropriate
+        _logger.info(f"Employee: {employee.name}, Leave Records: {leave_records.mapped('holiday_status_id.name')}")
+        
         values = {
             'leave_records': leave_records,
         }
         return request.render('portal_attendance_artx.portal_my_leaves', values)
+        
+    # @http.route('/my/leaves', type='http', auth='user', website=True)
+    # def portal_my_leaves(self, **kwargs):
+    #     # Fetch leave requests for the logged-in user
+    #     employee = request.env['hr.employee'].search([('user_id', '=', request.env.user.id)], limit=1)
+    #     leave_records = request.env['hr.leave'].search([('employee_id', '=', employee.id)])
+
+    #     values = {
+    #         'leave_records': leave_records,
+    #     }
+    #     return request.render('portal_attendance_artx.portal_my_leaves', values)
  
 
 
