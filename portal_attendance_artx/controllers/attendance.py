@@ -180,6 +180,8 @@ class PortalLeaves(http.Controller):
             'type': 'server',
             'level': 'info',
             'message': f"Leave Types: {leave_types.mapped('name')}",
+            'path': 'portal.leave',  # تحديد مسار منطقي للسجل
+
         })
         return request.render('portal_attendance_artx.portal_new_leave_form', {
             'leave_types': leave_types,
