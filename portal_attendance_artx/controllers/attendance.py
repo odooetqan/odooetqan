@@ -168,19 +168,19 @@ class PortalLeaves(http.Controller):
     def portal_new_leave(self, **kw):
         leave_types = request.env['hr.leave.type'].sudo().search([])
         # Log the leave types for debugging
-        request.env['ir.logging'].sudo().create({
-            'name': 'Portal Leave Types Debug',
-            'type': 'server',
-            'level': 'info',
-            'message': f"Leave Types: {leave_types.mapped('name')}",
-            'path': 'portal.leave',  # تحديد مسار منطقي للسجل
-        })
         # request.env['ir.logging'].sudo().create({
         #     'name': 'Portal Leave Types Debug',
         #     'type': 'server',
         #     'level': 'info',
         #     'message': f"Leave Types: {leave_types.mapped('name')}",
+        #     'path': 'portal.leave',  # تحديد مسار منطقي للسجل
         # })
+        request.env['ir.logging'].sudo().create({
+            'name': 'Portal Leave Types Debug',
+            'type': 'server',
+            'level': 'info',
+            'message': f"Leave Types: {leave_types.mapped('name')}",
+        })
         return request.render('portal_attendance_artx.portal_new_leave_form', {
             'leave_types': leave_types,
         })
