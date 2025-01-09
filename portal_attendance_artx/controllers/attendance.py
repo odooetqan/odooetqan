@@ -157,7 +157,7 @@ class PortalLeaves(http.Controller):
         if leave_type_id and start_date and end_date:
             request.env['hr.leave'].sudo().create({
                 'employee_id': employee_id,
-                'holiday_status_id': leave_type_id,
+                'holiday_status_id': 1,
                 'request_date_from': start_date,
                 'request_date_to': end_date,
             })
