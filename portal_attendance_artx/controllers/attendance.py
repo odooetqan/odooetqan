@@ -142,24 +142,51 @@ class PortalLeaves(http.Controller):
         return request.render('portal_attendance_artx.portal_new_leave_form', {
             'leave_types': leave_types,
         })
-    
     @http.route(['/my/leave/submit'], type='http', auth='user', methods=['POST'], website=True)
     def portal_leave_submit(self, **post):
-        leave_type_id = int(post.get('leave_type', 0))
+        leave_type_id = post.get('leave_type')
         start_date = post.get('start_date')
         end_date = post.get('end_date')
-        employee_id = request.env.user.employee_id.id
 
-        if leave_type_id and start_date and end_date:
+        if not leave_type_id or not start_date or not end_date:
+            _logger.warning("Incomplete leave request data")
+            return request.redirect('/my/leave/new')
+
+        employee = _get_employee()
+        if not employee:
+            _logger.error("No employee associated with user")
+            return request.redirect('/my/leave/new')
+
+        try:
             request.env['hr.leave'].sudo().create({
-                'employee_id': employee_id,
-                'holiday_status_id': leave_type_id,
+                'employee_id': employee.id,
+                'holiday_status_id': int(leave_type_id),
                 'request_date_from': start_date,
                 'request_date_to': end_date,
             })
-            return request.redirect('/my/leave')  # Redirect to the user's leave requests
-        else:
-            return request.redirect('/my/leave/new')  # Redirect back to the form on error
+            return request.redirect('/my/leaves')
+        except Exception as e:
+            _logger.error(f"Error submitting leave request: {e}")
+            return request.redirect('/my/leave/new')
+
+
+    # @http.route(['/my/leave/submit'], type='http', auth='user', methods=['POST'], website=True)
+    # def portal_leave_submit(self, **post):
+    #     leave_type_id = int(post.get('leave_type', 0))
+    #     start_date = post.get('start_date')
+    #     end_date = post.get('end_date')
+    #     employee_id = request.env.user.employee_id.id
+
+    #     if leave_type_id and start_date and end_date:
+    #         request.env['hr.leave'].sudo().create({
+    #             'employee_id': employee_id,
+    #             'holiday_status_id': leave_type_id,
+    #             'request_date_from': start_date,
+    #             'request_date_to': end_date,
+    #         })
+    #         return request.redirect('/my/leave')  # Redirect to the user's leave requests
+    #     else:
+    #         return request.redirect('/my/leave/new')  # Redirect back to the form on error
         
 
         
