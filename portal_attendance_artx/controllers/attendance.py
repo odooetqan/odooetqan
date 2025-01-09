@@ -135,7 +135,7 @@ class PortalLeaves(http.Controller):
         leave_records = request.env['hr.leave'].search([('employee_id', '=', employee.id)])
         
         # Add logging here where it is contextually appropriate
-        _logger.info(f"Employee: {employee.name}, Leave Records: {leave_records.mapped('holiday_status_id.name')}")
+        # _logger.info(f"Employee: {employee.name}, Leave Records: {leave_records.mapped('holiday_status_id.name')}")
         
         values = {
             'leave_records': leave_records,
