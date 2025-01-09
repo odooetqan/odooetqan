@@ -154,7 +154,8 @@ class PortalLeaves(http.Controller):
             _logger.warning("Incomplete leave request data")
             return request.redirect('/my/leave/new')
 
-        employee = _get_employee()
+        employee = request.env['hr.employee'].search([('user_id', '=', request.env.user.id)], limit=1)
+#  _get_employee()
         if not employee:
             _logger.error("No employee associated with user")
             return request.redirect('/my/leave/new')
