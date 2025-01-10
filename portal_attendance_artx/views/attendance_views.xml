@@ -104,7 +104,7 @@
                                 <!-- <h1>Your Leave Requests</h1> -->
                                 <!-- Button to Create New Leave Request -->
                                 <h1>
-                                    <a href="/my/leave/new" class="btn btn-primary">
+                                    <a href="/my/leave/form"  class="btn btn-primary">
                                         <i class="fa fa-plus me-1"></i>                             
                                         <span id="btnText">  إنشاء طلب اجازة</span>
                                     </a>
