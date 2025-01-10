@@ -148,6 +148,7 @@ class PortalLeaves(http.Controller):
             end_date = post.get('end_date')
             employee_id = request.env.user.employee_id.id
 
+
             # Validate the leave type
             leave_type = request.env['hr.leave.type'].sudo().browse(leave_type_id)
             if not leave_type.exists():
