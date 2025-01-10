@@ -1,61 +1,20 @@
+    <?xml version="1.0" encoding="utf-8"?>
     <odoo>
         <data>
 
-<!-- POrtal Tree ttee attendance -->
-        <!-- <record id="portal_attendance_menu" model="ir.ui.menu">
-            <field name="name">My Attendance</field>
-            <field name="parent_id" ref="portal.portal_main_menu"/>
-            <field name="action" ref="action_portal_attendance"/>
-            <field name="sequence" eval="20"/>
-        </record> -->
-        <!-- <record id="portal_attendance_main_menu" model="ir.ui.menu">
-            <field name="name">Attendance</field>
-            <field name="parent_id" ref="portal.menu_my_home"/>
-            <field name="sequence" eval="10"/>
-        </record> -->
-
-        <!-- <record id="portal_attendance_menu" model="ir.ui.menu">
-            <field name="name">My Attendance</field>
-            <field name="parent_id" ref="portal_attendance_main_menu"/>
-            <field name="action" ref="action_portal_attendance"/>
-            <field name="sequence" eval="20"/>
-        </record> -->
-
-
-        <record id="action_portal_attendance" model="ir.actions.server">
-            <field name="name">My Attendance</field>
-            <field name="model_id" ref="hr.model_hr_employee"/>
-            <field name="binding_model_id" ref="hr.model_hr_employee"/>
-            <field name="state">code</field>
-            <field name="code">
-                action = {
-                    "type": "ir.actions.act_url",
-                    "url": "/my/attendance",
-                    "target": "self",
-                }
-            </field>
-        </record>
-
-        <template id="portal_my_home_attendance" name="Portal Home Attendance" inherit_id="portal.portal_breadcrumbs" priority="2">
-        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
-
-            <!-- <xpath expr="//div[@id='content']" position="inside"> -->
-                <a href="/my/attendance" class="btn btn-primary">حضوري </a>
-            </xpath>
-        </template>
-
-        <!-- <record id="portal_attendance_main_menu" model="ir.ui.menu">
-            <field name="name">Attendance</field>
-            <field name="parent_id" ref="portal.menu_my_home"/>
-            <field name="sequence" eval="10"/>
-        </record> -->
-
-        <!-- <record id="portal_attendance_menu" model="ir.ui.menu">
-            <field name="name">My Attendance</field>
-            <field name="parent_id" ref="portal_attendance_main_menu"/>
-            <field name="action" ref="action_portal_attendance"/>
-            <field name="sequence" eval="20"/>
-        </record> -->
+            <record id="action_portal_attendance" model="ir.actions.server">
+                <field name="name">My Attendance</field>
+                <field name="model_id" ref="hr.model_hr_employee"/>
+                <field name="binding_model_id" ref="hr.model_hr_employee"/>
+                <field name="state">code</field>
+                <field name="code">
+                    action = {
+                        "type": "ir.actions.act_url",
+                        "url": "/my/attendance",
+                        "target": "self",
+                    }
+                </field>
+            </record>
 
 <!-- POrtal Tree ttee attendance -->
 
@@ -89,35 +48,34 @@
                     </a>
                 </div>
             </xpath>
-        </template>
+    </template>
 
 
-<template id="portal_my_attendance" name="Portal Attendance">
-    <t t-call="portal.portal_layout">
-        <div class="container">
-            <h1>سجلات الحضور و الانصراف</h1>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <!-- <th>Date</th> -->
-                        <th>الحضور</th>
-                        <th>الانصراف</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <t t-foreach="attendance_records" t-as="record">
+    <template id="portal_my_attendance" name="Portal Attendance">
+        <t t-call="portal.portal_layout">
+            <div class="container">
+                <h1>سجلات الحضور و الانصراف</h1>
+                <table class="table table-striped">
+                    <thead>
                         <tr>
-                            <!-- <td><t t-esc="record.check_in_date"/></td> -->
-                            <td><t t-esc="record.check_in"/></td>
-                            <td><t t-esc="record.check_out"/></td>
+                            <!-- <th>Date</th> -->
+                            <th>الحضور</th>
+                            <th>الانصراف</th>
                         </tr>
-                    </t>
-                </tbody>
-            </table>
-        </div>
-    </t>
-</template> 
-
+                    </thead>
+                    <tbody>
+                        <t t-foreach="attendance_records" t-as="record">
+                            <tr>
+                                <!-- <td><t t-esc="record.check_in_date"/></td> -->
+                                <td><t t-esc="record.check_in"/></td>
+                                <td><t t-esc="record.check_out"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template> 
 
     <template id="portal_my_home_vendor_rfq" name="Show Vendor RFQs"
               customize_show="True" inherit_id="portal.portal_my_home"
@@ -130,7 +88,7 @@
             </t>
         </xpath>
     </template>
-<!--    Portal table views-->
+    <!--    Portal table views-->
 
             <template id="portal_my_home_sale" name="Show Quotations / Sales Orders" customize_show="True"
                     inherit_id="portal.portal_my_home" priority="1">
@@ -221,133 +179,51 @@
                 </div>
             </xpath>
         </template>
-
-        <!-- Template for Leave List -->
-<!--         <template id="portal_my_leaves" name="Portal Leave List">
-            <t t-call="portal.portal_layout">
-                <div class="container">
-                    <h1>Your Leave Requests</h1>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Leave Type</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <t t-foreach="leave_records" t-as="leave">
-                                <tr>
-                                    <td><t t-esc="leave.leave_type"/></td>
-                                    <td><t t-esc="leave.start_date"/></td>
-                                    <td><t t-esc="leave.end_date"/></td>
-                                    <td><t t-esc="leave.state"/></td>
-                                </tr>
-                            </t>
-                        </tbody>
-                    </table>
-                </div>
-            </t>
-        </template> -->
-
-
-<template id="portal_my_leaves" name="Portal Leave List">
-    <t t-call="portal.portal_layout">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h1>طلبات الاجازة</h1>
-                <!-- Button to Create New Leave Request -->
-                <h1>
-                    <a href="/my/leave/new" class="btn btn-primary">
-                        <i class="fa fa-plus me-1"></i>إنشاء طلب اجازة
-                    </a>
-                </h1>
-            </div>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>نوع الاجازة</th>
-                        <th>تاريخ البدء</th>
-                        <th>تاريخ الانتهاء</th>
-                        <th>الحالة</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <t t-foreach="leave_records" t-as="leave">
-                        <tr>
-                            <!-- Display the name of the leave type -->
-                            <td><t t-esc="leave.holiday_status_id.name"/></td>
-                            <td><t t-esc="leave.date_from"/></td>
-                            <td><t t-esc="leave.date_to"/></td>
-                            <td>
-                                <t t-if="leave.state == 'draft'">مسودة</t>
-                                <t t-if="leave.state == 'confirm'">في انتظار الموافقة</t>
-                                <t t-if="leave.state == 'validate1'">موافقة المدير</t>
-                                <t t-if="leave.state == 'validate'">موافقة كاملة</t>
-                                <t t-if="leave.state == 'refuse'">مرفوضة</t>
-                            </td>
-                        </tr>
-                    </t>
-                </tbody>
-            </table>
-        </div>
-    </t>
-</template>
-<!--             
             
-        <template id="portal_my_leaves" name="Portal Leave List">
-            <t t-call="portal.portal_layout">
-                <div class="container">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h1>طلبات الاجازة </h1>
-                        <!- - Button to Create New Leave Request - ->
-                        <h1>
+    <template id="portal_my_leaves" name="Portal Leave List">
+        <t t-call="portal.portal_layout">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h1>طلبات الاجازة</h1>
+                    <!-- Button to Create New Leave Request -->
+                    <h1>
                         <a href="/my/leave/new" class="btn btn-primary">
                             <i class="fa fa-plus me-1"></i>إنشاء طلب اجازة
-                        <h1>Your Leave Requests</h1>
-                        <!- - Button to Create New Leave Request - ->
-                        <h1>
-                        <a href="/my/leave/new" class="btn btn-primary">
-                            <i class="fa fa-plus me-1"></i>Create Leave Request
                         </a>
-                        </h1>
-                    </div>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>نوع الاجازة</th>
-                                <th>تاريخ البدء</th>
-                                <th>تاريخ الانتهاء</th>
-                                <th>الحالة</th>
-                                <th>Leave Type</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <t t-foreach="leave_records" t-as="leave">
-                                <tr>
-                                    <td><t t-esc="leave.holiday_status_id"/></td><!- -leave_type_id- ->
-                                    <td><t t-esc="leave.date_from"/></td>
-                                    <td><t t-esc="leave.date_to"/></td>
-                                    <td><t t-esc="leave.leave_type"/></td>
-                                    <td><t t-esc="leave.start_date"/></td>
-                                    <td><t t-esc="leave.end_date"/></td>
-                                    <td><t t-esc="leave.state"/></td>
-                                </tr>
-                            </t>
-                        </tbody>
-                    </table>
+                    </h1>
                 </div>
-            </t>
-        </template> -->
-
-        <!-- <odoo> -->
-
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>نوع الاجازة</th>
+                            <th>تاريخ البدء</th>
+                            <th>تاريخ الانتهاء</th>
+                            <th>الحالة</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="leave_records" t-as="leave">
+                            <tr>
+                                <!-- Display the name of the leave type -->
+                                <td><t t-esc="leave.holiday_status_id.name"/></td>
+                                <td><t t-esc="leave.date_from"/></td>
+                                <td><t t-esc="leave.date_to"/></td>
+                                <td>
+                                    <t t-if="leave.state == 'draft'">مسودة</t>
+                                    <t t-if="leave.state == 'confirm'">في انتظار الموافقة</t>
+                                    <t t-if="leave.state == 'validate1'">موافقة المدير</t>
+                                    <t t-if="leave.state == 'validate'">موافقة كاملة</t>
+                                    <t t-if="leave.state == 'refuse'">مرفوضة</t>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
         
-<!-- Template Form to create new Loan -->
+    <!-- Template Form to create new Loan -->
     <template id="portal_create_loan_form" name="Create Loan">
         <t t-call="portal.portal_layout">
             <div class="container">
@@ -369,71 +245,39 @@
     </template>
 
 
+            <template id="leave_form_template" name="Portal New Leave Form">
+                <t t-call="portal.portal_layout">
+                    <div class="container">
+                        <h1>إنشاء طلب اجازة</h1>    
+                        <form action="/my/leave/submit" method="POST">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="mb-3">
+                                <label for="leave_type" class="form-label">نوع الاجازة</label>
+                                <select id="leave_type" name="leave_type" class="form-select" required="true">
+                                    <t t-foreach="leave_types" t-as="leave_type">
+                                        <option t-att-value="leave_type.id">
+                                            <t t-esc="leave_type.name"/>
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="start_date" class="form-label">تاريخ البدء</label>
+                                <input type="date" id="start_date" name="start_date" class="form-control"  required="true" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="end_date" class="form-label">تاريخ الانتهاء</label>
+                                <input type="date" id="end_date" name="end_date" class="form-control"  required="true" />
+                            </div>
+                            <button type="submit" class="btn btn-success">اطلب</button>
+                        </form>
+                    </div>
+                </t>
+            </template> 
+        <!-- Leaves -->
+        </data>
+    </odoo>
 
-    <!-- <template id="leave_form_template" name="Leave Form" inherit_id="website.layout"> -->
-        <!-- <xpath expr="//main" position="inside">
-            <section class="leave-form-section"> -->
-        <!-- <t t-call="portal.portal_layout">
-                <div class="container">
-                    <h1>طلب اجازة</h1>
-                    <form action="/my/leave/submit" method="POST">
-                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                        <div class="mb-3">
-                            <label for="leave_type" class="form-label">نوع الاجازة</label>
-                            <select id="leave_type" name="leave_type" class="form-select">
-                                <t t-foreach="leave_types" t-as="leave_type">
-                                    <option t-att-value="leave_type.id">
-                                        <t t-esc="leave_type.name"/>
-                                    </option>
-                                </t>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="start_date" class="form-label">تاريخ البدء</label>
-                            <input type="date" id="start_date" name="start_date" class="form-control" required="true" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="end_date" class="form-label">تاريخ الانتهاء</label>
-                            <input type="date" id="end_date" name="end_date" class="form-control"  required="true"  />
-                        </div>
-                        <button type="submit" class="btn btn-success">اطلب</button>
-                    </form>
-                </div>
-        </t> -->
-            <!-- </section>
-        </xpath> -->
-    <!-- </template> -->
-<!-- </odoo> -->
-
-        <template id="leave_form_template" name="Portal New Leave Form">
-            <t t-call="portal.portal_layout">
-                <div class="container">
-                    <h1>إنشاء طلب اجازة</h1>    
-                    <form action="/my/leave/submit" method="POST">
-                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                        <div class="mb-3">
-                            <label for="leave_type" class="form-label">نوع الاجازة</label>
-                            <select id="leave_type" name="leave_type" class="form-select" required="true">
-                                <t t-foreach="leave_types" t-as="leave_type">
-                                    <option t-att-value="leave_type.id">
-                                        <t t-esc="leave_type.name"/>
-                                    </option>
-                                </t>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="start_date" class="form-label">تاريخ البدء</label>
-                            <input type="date" id="start_date" name="start_date" class="form-control"  required="true" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="end_date" class="form-label">تاريخ الانتهاء</label>
-                            <input type="date" id="end_date" name="end_date" class="form-control"  required="true" />
-                        </div>
-                        <button type="submit" class="btn btn-success">اطلب</button>
-                    </form>
-                </div>
-            </t>
-        </template> 
 
 
 
@@ -577,6 +421,171 @@
 
             
 
-        <!-- Leaves -->
-        </data>
-    </odoo>
+            
+
+
+    <!-- <template id="leave_form_template" name="Leave Form" inherit_id="website.layout"> -->
+        <!-- <xpath expr="//main" position="inside">
+            <section class="leave-form-section"> -->
+        <!-- <t t-call="portal.portal_layout">
+                <div class="container">
+                    <h1>طلب اجازة</h1>
+                    <form action="/my/leave/submit" method="POST">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <div class="mb-3">
+                            <label for="leave_type" class="form-label">نوع الاجازة</label>
+                            <select id="leave_type" name="leave_type" class="form-select">
+                                <t t-foreach="leave_types" t-as="leave_type">
+                                    <option t-att-value="leave_type.id">
+                                        <t t-esc="leave_type.name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="start_date" class="form-label">تاريخ البدء</label>
+                            <input type="date" id="start_date" name="start_date" class="form-control" required="true" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="end_date" class="form-label">تاريخ الانتهاء</label>
+                            <input type="date" id="end_date" name="end_date" class="form-control"  required="true"  />
+                        </div>
+                        <button type="submit" class="btn btn-success">اطلب</button>
+                    </form>
+                </div>
+        </t> -->
+            <!-- </section>
+        </xpath> -->
+    <!-- </template> -->
+<!-- </odoo> -->
+
+
+
+
+<!--             
+            
+        <template id="portal_my_leaves" name="Portal Leave List">
+            <t t-call="portal.portal_layout">
+                <div class="container">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h1>طلبات الاجازة </h1>
+                        <!- - Button to Create New Leave Request - ->
+                        <h1>
+                        <a href="/my/leave/new" class="btn btn-primary">
+                            <i class="fa fa-plus me-1"></i>إنشاء طلب اجازة
+                        <h1>Your Leave Requests</h1>
+                        <!- - Button to Create New Leave Request - ->
+                        <h1>
+                        <a href="/my/leave/new" class="btn btn-primary">
+                            <i class="fa fa-plus me-1"></i>Create Leave Request
+                        </a>
+                        </h1>
+                    </div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>نوع الاجازة</th>
+                                <th>تاريخ البدء</th>
+                                <th>تاريخ الانتهاء</th>
+                                <th>الحالة</th>
+                                <th>Leave Type</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="leave_records" t-as="leave">
+                                <tr>
+                                    <td><t t-esc="leave.holiday_status_id"/></td><!- -leave_type_id- ->
+                                    <td><t t-esc="leave.date_from"/></td>
+                                    <td><t t-esc="leave.date_to"/></td>
+                                    <td><t t-esc="leave.leave_type"/></td>
+                                    <td><t t-esc="leave.start_date"/></td>
+                                    <td><t t-esc="leave.end_date"/></td>
+                                    <td><t t-esc="leave.state"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </template> -->
+
+        <!-- <odoo> -->
+
+        <!-- Template for Leave List -->
+<!--         <template id="portal_my_leaves" name="Portal Leave List">
+            <t t-call="portal.portal_layout">
+                <div class="container">
+                    <h1>Your Leave Requests</h1>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Leave Type</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="leave_records" t-as="leave">
+                                <tr>
+                                    <td><t t-esc="leave.leave_type"/></td>
+                                    <td><t t-esc="leave.start_date"/></td>
+                                    <td><t t-esc="leave.end_date"/></td>
+                                    <td><t t-esc="leave.state"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </template> -->
+
+
+<!-- POrtal Tree ttee attendance -->
+        <!-- <record id="portal_attendance_menu" model="ir.ui.menu">
+            <field name="name">My Attendance</field>
+            <field name="parent_id" ref="portal.portal_main_menu"/>
+            <field name="action" ref="action_portal_attendance"/>
+            <field name="sequence" eval="20"/>
+        </record> -->
+        <!-- <record id="portal_attendance_main_menu" model="ir.ui.menu">
+            <field name="name">Attendance</field>
+            <field name="parent_id" ref="portal.menu_my_home"/>
+            <field name="sequence" eval="10"/>
+        </record> -->
+
+        <!-- <record id="portal_attendance_menu" model="ir.ui.menu">
+            <field name="name">My Attendance</field>
+            <field name="parent_id" ref="portal_attendance_main_menu"/>
+            <field name="action" ref="action_portal_attendance"/>
+            <field name="sequence" eval="20"/>
+        </record> -->
+
+        
+        <!-- <record id="portal_attendance_main_menu" model="ir.ui.menu">
+            <field name="name">Attendance</field>
+            <field name="parent_id" ref="portal.menu_my_home"/>
+            <field name="sequence" eval="10"/>
+        </record> -->
+
+        <!-- <record id="portal_attendance_menu" model="ir.ui.menu">
+            <field name="name">My Attendance</field>
+            <field name="parent_id" ref="portal_attendance_main_menu"/>
+            <field name="action" ref="action_portal_attendance"/>
+            <field name="sequence" eval="20"/>
+        </record> -->
+
+
+
+
+
+
+            <!-- <template id="portal_my_home_attendance" name="Portal Home Attendance" inherit_id="portal.portal_breadcrumbs" priority="2">
+                <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+                    <a href="/my/attendance" class="btn btn-primary">حضوري </a>
+                </xpath>
+            </template> -->
+                <!-- <xpath expr="//div[@id='content']" position="inside"> -->
