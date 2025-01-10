@@ -36,11 +36,7 @@
             </field>
         </record>
 
-        <template id="portal_my_home_attendance" 
-
-        
-              name="Portal Home Attendance "
-              inherit_id="portal.portal_breadcrumbs" priority="2">
+        <template id="portal_my_home_attendance" name="Portal Home Attendance" inherit_id="portal.portal_breadcrumbs" priority="2">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
 
             <!-- <xpath expr="//div[@id='content']" position="inside"> -->
