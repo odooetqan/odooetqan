@@ -3,7 +3,7 @@
     <data>
         <template id="portal_hr_loan_page" inherit_id="portal.portal_my_home" name="My Loans">
             <xpath expr="//div[@class='o_portal_my_home']" position="inside">
-                <a class="btn btn-primary" href="/my/loans">My Loan Requests</a>
+                <a class="btn btn-primary" href="/my/loans">طلباتي للسلف </a>
             </xpath>
         </template>
 
@@ -28,16 +28,16 @@
         <template id="portal_hr_loan_list" name="Loan List">
             <t t-call="portal.portal_layout">
                 <div class="container">
-                    <h1>My Loan Requests</h1>
+                    <h1>طلباتي للسلف </h1>
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Loan Name</th>
-                                <th>Loan Amount</th>
-                                <th>Installments</th>
-                                <th>Balance</th>
-                                <th>Status</th>
-                                <th>Date</th>
+                                <th>الاسم </th>
+                                <th>قيمة السلفة</th>
+                                <th>القســـــط</th>
+                                <th>الرصيد</th>
+                                <th>الحالة</th>
+                                <th>التاريخ</th>
                             </tr>
                         </thead>
                         <tbody>
