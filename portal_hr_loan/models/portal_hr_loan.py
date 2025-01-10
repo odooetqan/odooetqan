@@ -1,4 +1,4 @@
-from odoo import model
+from odoo import models
 
 class HrLoan(models.Model):
     _inherit = 'hr.loan'    
