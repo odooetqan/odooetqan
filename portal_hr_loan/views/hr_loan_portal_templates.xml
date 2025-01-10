@@ -8,7 +8,7 @@
         </template>
 
         <template id="portal_hr_loan_list" name="Loan List">
-            <t t-call="portal.layout">
+            <t t-call="portal.portal_layout">
                 <div class="container">
                     <h1>My Loan Requests</h1>
                     <table class="table table-striped">
