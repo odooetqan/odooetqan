@@ -1,7 +1,7 @@
 # from odoo import models, fields, api
 
-# class HrLoan(models.Model):
-#     _inherit = 'hr.loan'
+class HrLoan(models.Model):
+    _inherit = 'hr.loan'
 
 #     additional_notes = fields.Text(string="Additional Notes")
     
