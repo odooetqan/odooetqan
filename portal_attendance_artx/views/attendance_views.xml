@@ -345,9 +345,37 @@
         </template> -->
 
         <!-- <odoo> -->
+
+        
+<!-- Template Form to create new Loan -->
+    <template id="portal_create_loan_form" name="Create Loan">
+        <t t-call="portal.portal_layout">
+            <div class="container">
+                <h1>طلب سلفة جديدة</h1>
+                <form t-attf-action="/my/loans/save" method="post">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="form-group">
+                        <label>قيمة السلفة</label>
+                        <input type="number" name="loan_amount" class="form-control" required="true" />
+                    </div>
+                    <div class="form-group">
+                        <label>القســـــط</label>
+                        <input type="number" name="installment" class="form-control" required="true" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">تقديم الطلب</button>
+                </form>
+            </div>
+        </t>
+    </template>
+
+
+
     <template id="leave_form_template" name="Leave Form" inherit_id="website.layout">
-        <xpath expr="//main" position="inside">
-            <section class="leave-form-section">
+        <!-- <xpath expr="//main" position="inside">
+            <section class="leave-form-section"> -->
+            
+        <t t-call="portal.portal_layout">
+
                 <div class="container">
                     <h1>طلب اجازة</h1>
                     <form action="/my/leave/submit" method="POST">
@@ -373,8 +401,9 @@
                         <button type="submit" class="btn btn-success">اطلب</button>
                     </form>
                 </div>
-            </section>
-        </xpath>
+            <!-- </section>
+        </xpath> -->
+        </t>
     </template>
 <!-- </odoo> -->
 
