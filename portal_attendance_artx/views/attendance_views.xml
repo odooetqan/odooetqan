@@ -244,35 +244,35 @@
                 </t>
             </template>
 
-<template id="leave_form_template" name="Portal New Leave Form">
-    <t t-call="portal.portal_layout">
-        <div class="container">
-            <h1>إنشاء طلب اجازة</h1>
-            <form action="/my/leave/submit" method="POST">
-                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                <div class="mb-3">
-                    <label for="leave_type" class="form-label">نوع الاجازة</label>
-                    <select id="leave_type" name="leave_type" class="form-select" required="true">
-                        <t t-foreach="leave_types" t-as="leave_type">
-                            <option t-att-value="leave_type.id">
-                                <t t-esc="leave_type.name"/>
-                            </option>
-                        </t>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="start_date" class="form-label">تاريخ البدء</label>
-                    <input type="date" id="start_date" name="start_date" class="form-control" required="true" />
-                </div>
-                <div class="mb-3">
-                    <label for="end_date" class="form-label">تاريخ الانتهاء</label>
-                    <input type="date" id="end_date" name="end_date" class="form-control" required="true" />
-                </div>
-                <button type="submit" class="btn btn-success">اطلب</button>
-            </form>
-        </div>
-    </t>
-</template>
+            <template id="leave_form_template_new"     name="Portal New Leave Form">
+                <t t-call="portal.portal_layout">
+                    <div class="container">
+                        <h1>إنشاء طلب اجازة</h1>
+                        <form action="/my/leave/submit" method="POST">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="mb-3">
+                                <label for="leave_type" class="form-label">نوع الاجازة</label>
+                                <select id="leave_type" name="leave_type" class="form-select" required="true">
+                                    <t t-foreach="leave_types" t-as="leave_type">
+                                        <option t-att-value="leave_type.id">
+                                            <t t-esc="leave_type.name"/>
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="start_date" class="form-label">تاريخ البدء</label>
+                                <input type="date" id="start_date" name="start_date" class="form-control" required="true" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="end_date" class="form-label">تاريخ الانتهاء</label>
+                                <input type="date" id="end_date" name="end_date" class="form-control" required="true" />
+                            </div>
+                            <button type="submit" class="btn btn-success">اطلب</button>
+                        </form>
+                    </div>
+                </t>
+            </template>
 
 
                 <!-- <t t-call="web.layout">
