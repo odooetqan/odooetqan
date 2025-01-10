@@ -425,7 +425,7 @@
                                             <!-- Leave Type Selection -->
                                             <div class="mb-3">
                                                 <label for="leave_type" class="form-label">نوع الاجازة</label>
-                                                <select id="leave_type" name="leave_type" class="form-select" required>
+                                                <select id="leave_type" name="leave_type" class="form-select"   required="true" >
                                                     <t t-foreach="leave_types" t-as="leave_type">
                                                         <option t-att-value="leave_type.id">
                                                             <t t-esc="leave_type.name"/>
@@ -437,13 +437,13 @@
                                             <!-- Start Date -->
                                             <div class="mb-3">
                                                 <label for="start_date" class="form-label">تاريخ البدء</label>
-                                                <input type="date" id="start_date" name="start_date" class="form-control" required />
+                                                <input type="date" id="start_date" name="start_date" class="form-control"   required="true"  />
                                             </div>
 
                                             <!-- End Date -->
                                             <div class="mb-3">
                                                 <label for="end_date" class="form-label">تاريخ الانتهاء</label>
-                                                <input type="date" id="end_date" name="end_date" class="form-control" required />
+                                                <input type="date" id="end_date" name="end_date" class="form-control"   required="true"  />
                                             </div>
 
                                             <!-- Submit Button -->
