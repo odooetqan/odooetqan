@@ -431,6 +431,7 @@
                         </div>
                         <button type="submit" class="btn btn-success">اطلب</button>
                     </form>
+                </div>
             </t>
         </template> 
 
