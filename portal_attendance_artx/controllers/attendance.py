@@ -15,7 +15,7 @@ from odoo.http import request
     #     values = {
     #         'attendance_records': attendance_records,
     #     }
-    #     return request.render('your_module.portal_attendance_tree', values)
+    #     return request.render('portal_attendance_artx.portal_attendance_tree', values)
 #---- TO addd tree attendance  portal gate
 # from odoo import http
 # from odoo.http import request
@@ -29,7 +29,7 @@ class PortalAttendance(http.Controller):
         values = {
             'attendance_records': attendance_records
         }
-        # return request.render('your_module_name.portal_my_attendance', values)
+        # return request.render('portal_attendance_artx_name.portal_my_attendance', values)
         return request.render('portal_attendance_artx.portal_my_attendance', values)
 
         
@@ -138,7 +138,7 @@ class PortalLeaves(http.Controller):
     def portal_leave_form(self, **kwargs):
         # Fetch leave types from the database
         leave_types = request.env['hr.leave.type'].sudo().search([])
-        return request.render('your_module.leave_form_template', {'leave_types': leave_types})
+        return request.render('portal_attendance_artx.leave_form_template', {'leave_types': leave_types})
 
     @http.route(['/my/leave/submit'], type='http', auth='user', methods=['POST'], website=True)
     def portal_leave_submit(self, **post):
@@ -170,7 +170,7 @@ class PortalLeaves(http.Controller):
     # @http.route(['/my/leave/new'], type='http', auth='user', website=True)
     # def portal_leave_form(self, **kwargs):
     #     leave_types = request.env['hr.leave.type'].sudo().search([])
-    #     return request.render('your_module.leave_form_template', {'leave_types': leave_types})
+    #     return request.render('portal_attendance_artx.leave_form_template', {'leave_types': leave_types})
 
     # # class PortalLeave(http.Controller):
     #     @http.route(['/my/leave/new'], type='http', auth="user", website=True)
