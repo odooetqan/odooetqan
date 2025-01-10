@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="portal_hr_loan_page" inherit_id="portal.portal_my_home" name="My Loans">
+            <xpath expr="//div[@class='o_portal_my_home']" position="inside">
+                <a class="btn btn-primary" href="/my/loans">My Loan Requests</a>
+            </xpath>
+        </template>
+
+        <template id="portal_hr_loan_list" name="Loan List">
+            <t t-call="portal.layout">
+                <div class="container">
+                    <h1>My Loan Requests</h1>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Loan Name</th>
+                                <th>Loan Amount</th>
+                                <th>Installments</th>
+                                <th>Balance</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="loans" t-as="loan">
+                                <tr>
+                                    <td><t t-esc="loan.name"/></td>
+                                    <td><t t-esc="loan.loan_amount"/></td>
+                                    <td><t t-esc="loan.installment"/></td>
+                                    <td><t t-esc="loan.balance_amount"/></td>
+                                    <td><t t-esc="loan.state"/></td>
+                                    <td><t t-esc="loan.date"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>
