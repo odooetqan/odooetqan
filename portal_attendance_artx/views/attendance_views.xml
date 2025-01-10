@@ -353,11 +353,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="start_date" class="form-label">تاريخ البدء</label>
-                            <input type="date" id="start_date" name="start_date" class="form-control" required />
+                            <input type="date" id="start_date" name="start_date" class="form-control" required="true" />
                         </div>
                         <div class="mb-3">
                             <label for="end_date" class="form-label">تاريخ الانتهاء</label>
-                            <input type="date" id="end_date" name="end_date" class="form-control" required />
+                            <input type="date" id="end_date" name="end_date" class="form-control"  required="true"  />
                         </div>
                         <button type="submit" class="btn btn-success">اطلب</button>
                     </form>
