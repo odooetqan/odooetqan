@@ -162,7 +162,7 @@ class PortalLeaves(http.Controller):
                     'request_date_from': start_date,
                     'request_date_to': end_date,
                 })
-                return request.redirect('/my/leave')  # Redirect to the user's leave requests
+                return request.redirect('/my/leaves)  # Redirect to the user's leave requests
             else:
                 return request.redirect('/my/leave/new?error=missing_dates')
         except Exception as e:
@@ -202,7 +202,7 @@ class PortalLeaves(http.Controller):
     #             'request_date_from': start_date,
     #             'request_date_to': end_date,
     #         })
-    #         return request.redirect('/my/leave')  # Redirect to the user's leave requests
+    #         return request.redirect('/my/leaves)  # Redirect to the user's leave requests
     #     else:
     #         return request.redirect('/my/leave/new')  # Redirect back to the form on error
 
@@ -221,7 +221,7 @@ class PortalLeaves(http.Controller):
     #             'request_date_from': start_date,
     #             'request_date_to': end_date,
     #         })
-    #         return request.redirect('/my/leave')  # Redirect to the user's leave requests
+    #         return request.redirect('/my/leaves)  # Redirect to the user's leave requests
     #     else:
     #         return request.redirect('/my/leave/new')  # Redirect back to the form on error
 
@@ -291,7 +291,7 @@ class PortalLeaves(http.Controller):
     #                 'request_date_from': start_date,
     #                 'request_date_to': end_date,
     #             })
-    #             return request.redirect('/my/leave')  # Redirect to the user's leave requests
+    #             return request.redirect('/my/leaves)  # Redirect to the user's leave requests
     #         except Exception as e:
     #             # Handle any creation errors gracefully
     #             return request.redirect(f'/my/leave/new?error={str(e)}')
