@@ -1,54 +1,54 @@
-from odoo import models, fields, api
+# from odoo import models, fields, api
 
-class HrLoan(models.Model):
-    _inherit = 'hr.loan'
+# class HrLoan(models.Model):
+#     _inherit = 'hr.loan'
 
-    additional_notes = fields.Text(string="Additional Notes")
+#     additional_notes = fields.Text(string="Additional Notes")
     
-    # def approve_loan(self):
-    #     """Custom method to approve loans"""
-    #     for record in self:
-    #         record.state = 'approved'
-            # Add any additional logic here
+#     # def approve_loan(self):
+#     #     """Custom method to approve loans"""
+#     #     for record in self:
+#     #         record.state = 'approved'
+#             # Add any additional logic here
 
 
-class HrLoanLine(models.Model):
-    _inherit = 'hr.loan.line'
+# class HrLoanLine(models.Model):
+#     _inherit = 'hr.loan.line'
 
-    line_number = fields.Integer(string="Line Number")
-
-
-class HRPayrollStructure(models.Model):
-    _inherit = 'hr.payroll.structure'
-
-    bonus_percentage = fields.Float(string="Bonus Percentage", default=10.0)
+#     line_number = fields.Integer(string="Line Number")
 
 
-class HrPayslip(models.Model):
-    _inherit = 'hr.payslip'
+# class HRPayrollStructure(models.Model):
+#     _inherit = 'hr.payroll.structure'
 
-    # def compute_total_loan_deductions(self):
-    #     """Calculate total loan deductions for the payslip."""
-    #     total_deductions = sum(line.amount for line in self.input_line_ids if line.input_type_id.code == 'LOAN')
-    #     return total_deductions
+#     bonus_percentage = fields.Float(string="Bonus Percentage", default=10.0)
 
 
-class HRPayslipInputType(models.Model):
-    _inherit = 'hr.payslip.input.type'
+# class HrPayslip(models.Model):
+#     _inherit = 'hr.payslip'
 
-    is_loan_related = fields.Boolean(string="Is Loan Related", default=False)
-
-
-class HrPayslipInput(models.Model):
-    _inherit = 'hr.payslip.input'
-
-    description = fields.Text(string="Description")
+#     # def compute_total_loan_deductions(self):
+#     #     """Calculate total loan deductions for the payslip."""
+#     #     total_deductions = sum(line.amount for line in self.input_line_ids if line.input_type_id.code == 'LOAN')
+#     #     return total_deductions
 
 
-class HrSalaryRule(models.Model):
-    _inherit = 'hr.salary.rule'
+# class HRPayslipInputType(models.Model):
+#     _inherit = 'hr.payslip.input.type'
 
-    # def compute_bonus(self, employee):
-    #     """Compute bonus based on employee data"""
-    #     # Add bonus computation logic here
-    #     pass
+#     is_loan_related = fields.Boolean(string="Is Loan Related", default=False)
+
+
+# class HrPayslipInput(models.Model):
+#     _inherit = 'hr.payslip.input'
+
+#     description = fields.Text(string="Description")
+
+
+# class HrSalaryRule(models.Model):
+#     _inherit = 'hr.salary.rule'
+
+#     # def compute_bonus(self, employee):
+#     #     """Compute bonus based on employee data"""
+#     #     # Add bonus computation logic here
+#     #     pass
