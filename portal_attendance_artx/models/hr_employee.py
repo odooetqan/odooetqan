@@ -23,6 +23,10 @@ class LeaveInherit(models.Model):
 class LeaveTypeInherit(models.Model):
     _inherit = 'hr.leave.type'
 
+class EmployeePublicInherit(models.Model):
+    _inherit = 'hr.employee.public'
+
+
 class EmployeeInherit(models.Model):
     _inherit = 'hr.employee'
 
