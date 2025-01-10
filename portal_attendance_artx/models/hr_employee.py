@@ -26,6 +26,9 @@ class LeaveTypeInherit(models.Model):
 class EmployeePublicInherit(models.Model):
     _inherit = 'hr.employee.public'
 
+class ResPartner(models.Model):
+    _inherit = 'res.partner'
+
 
 class EmployeeInherit(models.Model):
     _inherit = 'hr.employee'
