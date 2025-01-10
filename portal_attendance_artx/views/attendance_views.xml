@@ -370,12 +370,10 @@
 
 
 
-    <template id="leave_form_template" name="Leave Form" inherit_id="website.layout">
+    <!-- <template id="leave_form_template" name="Leave Form" inherit_id="website.layout"> -->
         <!-- <xpath expr="//main" position="inside">
             <section class="leave-form-section"> -->
-            
-        <t t-call="portal.portal_layout">
-
+        <!-- <t t-call="portal.portal_layout">
                 <div class="container">
                     <h1>طلب اجازة</h1>
                     <form action="/my/leave/submit" method="POST">
@@ -401,20 +399,18 @@
                         <button type="submit" class="btn btn-success">اطلب</button>
                     </form>
                 </div>
+        </t> -->
             <!-- </section>
         </xpath> -->
-        </t>
-    </template>
+    <!-- </template> -->
 <!-- </odoo> -->
 
-        <!-- <template id="leave_form_template" name="Portal New Leave Form">
+        <template id="leave_form_template" name="Portal New Leave Form">
             <t t-call="portal.portal_layout">
                 <div class="container">
                     <h1>إنشاء طلب اجازة</h1>    
-
                     <form action="/my/leave/submit" method="POST">
                         <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-
                         <div class="mb-3">
                             <label for="leave_type" class="form-label">نوع الاجازة</label>
                             <select id="leave_type" name="leave_type" class="form-select" required="true">
@@ -425,20 +421,21 @@
                                 </t>
                             </select>
                         </div>
-
                         <div class="mb-3">
                             <label for="start_date" class="form-label">تاريخ البدء</label>
                             <input type="date" id="start_date" name="start_date" class="form-control"  required="true" />
                         </div>
-
                         <div class="mb-3">
                             <label for="end_date" class="form-label">تاريخ الانتهاء</label>
                             <input type="date" id="end_date" name="end_date" class="form-control"  required="true" />
                         </div>
-
                         <button type="submit" class="btn btn-success">اطلب</button>
-                    </form> -->
-                                            
+                    </form>
+            </t>
+        </template> 
+
+
+
                         <!-- <form action="/my/leave/submit" method="POST">
                             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                             
@@ -463,7 +460,7 @@
                             </div>
                             <button type="submit" class="btn btn-success">اطلب</button>
                         </form> -->
-<!-- 
+                        <!-- 
                                         <form action="/my/leave/submit" method="POST">
                                             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                                             <!- - Other form fields - ->
