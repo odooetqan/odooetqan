@@ -243,8 +243,15 @@
                     </div>
                 </t>
             </template>
-                        
+
+
             <template id="leave_form_template" name="Portal New Leave Form">
+            
+                <t t-call="web.layout">
+                    <div class="container">
+                        <h1>Debug Mode</h1>
+                    </div>
+                </t>
                 <t t-call="portal.portal_layout">
                     <div class="container">
                         <h1>إنشاء طلب اجازة</h1>
