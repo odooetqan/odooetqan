@@ -149,21 +149,44 @@ class PortalLeaves(http.Controller):
 # class PortalLeave(http.Controller):
     @http.route(['/my/leave/submit'], type='http', auth='user', methods=['POST'], website=True)
     def portal_leave_submit(self, **post):
-        leave_type_id = int(post.get('leave_type', 0))
+        leave_type_name = post.get('leave_type_name')  # Assuming the leave type is passed as a name
         start_date = post.get('start_date')
         end_date = post.get('end_date')
         employee_id = request.env.user.employee_id.id
 
+        # Search for the leave type ID by name
+        leave_type = request.env['hr.leave.type'].sudo().search([('name', '=', leave_type_name)], limit=1)
+        leave_type_id = leave_type.id if leave_type else None
+
         if leave_type_id and start_date and end_date:
             request.env['hr.leave'].sudo().create({
                 'employee_id': employee_id,
-                'holiday_status_id': 1,
+                'holiday_status_id': leave_type_id,
                 'request_date_from': start_date,
                 'request_date_to': end_date,
             })
             return request.redirect('/my/leave')  # Redirect to the user's leave requests
         else:
             return request.redirect('/my/leave/new')  # Redirect back to the form on error
+
+
+    # @http.route(['/my/leave/submit'], type='http', auth='user', methods=['POST'], website=True)
+    # def portal_leave_submit(self, **post):
+    #     leave_type_id = int(post.get('leave_type', 0))
+    #     start_date = post.get('start_date')
+    #     end_date = post.get('end_date')
+    #     employee_id = request.env.user.employee_id.id
+
+    #     if leave_type_id and start_date and end_date:
+    #         request.env['hr.leave'].sudo().create({
+    #             'employee_id': employee_id,
+    #             'holiday_status_id': 1,
+    #             'request_date_from': start_date,
+    #             'request_date_to': end_date,
+    #         })
+    #         return request.redirect('/my/leave')  # Redirect to the user's leave requests
+    #     else:
+    #         return request.redirect('/my/leave/new')  # Redirect back to the form on error
 
     # @http.route(['/my/leave/submit'], type='http', auth="user", methods=["POST"], website=True, csrf=True)
     # def portal_leave_submit(self, **post):
