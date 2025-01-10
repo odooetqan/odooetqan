@@ -14,7 +14,7 @@
     'price': '10.0',
     'currency': 'USD',
     'website': 'https://areterix.com',
-    'depends': ['hr_attendance', 'portal'],
+    'depends': ['hr_attendance', 'portal', 'ent_ohrms_loan'],
     'data': [
         'views/attendance_views.xml',
         'security/security.xml',
