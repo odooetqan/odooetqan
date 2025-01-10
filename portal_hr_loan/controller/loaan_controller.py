@@ -24,6 +24,16 @@ class PortalHrLoan(http.Controller):
     def portal_create_loan(self, **kwargs):
         return request.render('portal_hr_loan.portal_create_loan_form', {})
 
+    # @http.route('/my/loans/save', type='http', auth="user", methods=['POST'], website=True, csrf=True)
+    # def portal_save_loan(self, **kwargs):
+    #     request.env['hr.loan'].sudo().create({
+    #         'employee_id': request.env.user.employee_id.id,
+    #         'loan_amount': kwargs.get('loan_amount'),
+    #         'installment': kwargs.get('installment'),
+    #         'state': 'draft',
+    #     })
+    #     return request.redirect('/my/loans')
+    
     @http.route('/my/loans/save', type='http', auth="user", methods=['POST'], website=True, csrf=True)
     def portal_save_loan(self, **kwargs):
         request.env['hr.loan'].sudo().create({

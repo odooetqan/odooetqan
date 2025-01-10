@@ -114,24 +114,26 @@
 
 
 <!-- Template Form to create new Loan -->
-        <template id="portal_create_loan_form" name="Create Loan">
-            <t t-call="portal.portal_layout">
-                <div class="container">
-                    <h1>طلب سلفة جديدة</h1>
-                    <form action="/my/loans/save" method="post">
-                        <div class="form-group">
-                            <label>قيمة السلفة</label>
-                            <input type="number" name="loan_amount" class="form-control" required="true"/>
-                        </div>
-                        <div class="form-group">
-                            <label>القســـــط</label>
-                            <input type="number" name="installment" class="form-control"  required="true"/>
-                        </div>
-                        <button type="submit" class="btn btn-primary">تقديم الطلب</button>
-                    </form>
-                </div>
-            </t>
-        </template>
+    <template id="portal_create_loan_form" name="Create Loan">
+        <t t-call="portal.portal_layout">
+            <div class="container">
+                <h1>طلب سلفة جديدة</h1>
+                <form t-attf-action="/my/loans/save" method="post">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="form-group">
+                        <label>قيمة السلفة</label>
+                        <input type="number" name="loan_amount" class="form-control" required/>
+                    </div>
+                    <div class="form-group">
+                        <label>القســـــط</label>
+                        <input type="number" name="installment" class="form-control" required/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">تقديم الطلب</button>
+                </form>
+            </div>
+        </t>
+    </template>
+
 
 
     </data>
