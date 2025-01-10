@@ -133,12 +133,44 @@ class PortalLeaves(http.Controller):
             'leave_records': leave_records,
         }
         return request.render('portal_attendance_artx.portal_my_leaves', values)
- 
-
+    
     @http.route(['/my/leave/new'], type='http', auth='user', website=True)
     def portal_leave_form(self, **kwargs):
+        # Fetch leave types from the database
         leave_types = request.env['hr.leave.type'].sudo().search([])
         return request.render('your_module.leave_form_template', {'leave_types': leave_types})
+
+    @http.route(['/my/leave/submit'], type='http', auth='user', methods=['POST'], website=True)
+    def portal_leave_submit(self, **post):
+        try:
+            leave_type_id = int(post.get('leave_type', 0))  # Retrieve the leave type ID
+            start_date = post.get('start_date')
+            end_date = post.get('end_date')
+            employee_id = request.env.user.employee_id.id
+
+            # Validate the leave type
+            leave_type = request.env['hr.leave.type'].sudo().browse(leave_type_id)
+            if not leave_type.exists():
+                return request.redirect('/my/leave/new?error=invalid_leave_type')
+
+            # Create the leave request
+            if start_date and end_date:
+                request.env['hr.leave'].sudo().create({
+                    'employee_id': employee_id,
+                    'holiday_status_id': leave_type_id,
+                    'request_date_from': start_date,
+                    'request_date_to': end_date,
+                })
+                return request.redirect('/my/leave')  # Redirect to the user's leave requests
+            else:
+                return request.redirect('/my/leave/new?error=missing_dates')
+        except Exception as e:
+            return request.redirect(f'/my/leave/new?error={str(e)}')
+
+    # @http.route(['/my/leave/new'], type='http', auth='user', website=True)
+    # def portal_leave_form(self, **kwargs):
+    #     leave_types = request.env['hr.leave.type'].sudo().search([])
+    #     return request.render('your_module.leave_form_template', {'leave_types': leave_types})
 
     # # class PortalLeave(http.Controller):
     #     @http.route(['/my/leave/new'], type='http', auth="user", website=True)
@@ -236,34 +268,34 @@ class PortalLeaves(http.Controller):
     #     })
     #     return request.redirect('/my/leaves')
 
-    @http.route(['/my/leave/submit'], type='http', auth='user', methods=['POST'], website=True)
-    def portal_leave_submit(self, **post):
-        leave_type_id = int(post.get('leave_type', 0))  # Retrieve the leave type ID
-        start_date = post.get('start_date')
-        end_date = post.get('end_date')
-        employee_id = request.env.user.employee_id.id
+    # @http.route(['/my/leave/submit'], type='http', auth='user', methods=['POST'], website=True)
+    # def portal_leave_submit(self, **post):
+    #     leave_type_id = int(post.get('leave_type', 0))  # Retrieve the leave type ID
+    #     start_date = post.get('start_date')
+    #     end_date = post.get('end_date')
+    #     employee_id = request.env.user.employee_id.id
 
-        # Validate the leave type
-        leave_type = request.env['hr.leave.type'].sudo().browse(leave_type_id)
-        if not leave_type.exists():
-            return request.redirect('/my/leave/new?error=invalid_leave_type')
+    #     # Validate the leave type
+    #     leave_type = request.env['hr.leave.type'].sudo().browse(leave_type_id)
+    #     if not leave_type.exists():
+    #         return request.redirect('/my/leave/new?error=invalid_leave_type')
 
-        # Ensure all required fields are present
-        if start_date and end_date:
-            try:
-                # Create the leave request
-                request.env['hr.leave'].sudo().create({
-                    'employee_id': employee_id,
-                    'holiday_status_id': leave_type_id,
-                    'request_date_from': start_date,
-                    'request_date_to': end_date,
-                })
-                return request.redirect('/my/leave')  # Redirect to the user's leave requests
-            except Exception as e:
-                # Handle any creation errors gracefully
-                return request.redirect(f'/my/leave/new?error={str(e)}')
-        else:
-            return request.redirect('/my/leave/new?error=missing_dates')
+    #     # Ensure all required fields are present
+    #     if start_date and end_date:
+    #         try:
+    #             # Create the leave request
+    #             request.env['hr.leave'].sudo().create({
+    #                 'employee_id': employee_id,
+    #                 'holiday_status_id': leave_type_id,
+    #                 'request_date_from': start_date,
+    #                 'request_date_to': end_date,
+    #             })
+    #             return request.redirect('/my/leave')  # Redirect to the user's leave requests
+    #         except Exception as e:
+    #             # Handle any creation errors gracefully
+    #             return request.redirect(f'/my/leave/new?error={str(e)}')
+    #     else:
+    #         return request.redirect('/my/leave/new?error=missing_dates')
 
 
 
