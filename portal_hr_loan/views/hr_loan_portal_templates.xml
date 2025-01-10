@@ -122,11 +122,11 @@
                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                     <div class="form-group">
                         <label>قيمة السلفة</label>
-                        <input type="number" name="loan_amount" class="form-control" required/>
+                        <input type="number" name="loan_amount" class="form-control" required="true" />
                     </div>
                     <div class="form-group">
                         <label>القســـــط</label>
-                        <input type="number" name="installment" class="form-control" required/>
+                        <input type="number" name="installment" class="form-control" required="true" />
                     </div>
                     <button type="submit" class="btn btn-primary">تقديم الطلب</button>
                 </form>
