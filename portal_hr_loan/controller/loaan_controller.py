@@ -9,4 +9,4 @@ class PortalHrLoan(http.Controller):
         values = {
             'loans': loans,
         }
-        return request.render('your_module_name.portal_hr_loan_list', values)
+        return request.render('portal_hr_loan.portal_hr_loan_list', values)
