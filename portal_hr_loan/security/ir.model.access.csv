@@ -6,10 +6,3 @@ access_hr_payslip_input_type_portal,access_hr_payslip_input_type_portal,model_hr
 access_hr_payslip_input_portal,access_hr_payslip_input_portal,model_hr_payslip_input,base.group_portal,1,1,1,0
 access_hr_payslip_portal,access_hr_payslip_portal,model_hr_payslip,base.group_portal,1,1,1,0
 access_hr_salary_rule_portal,access_hr_salary_rule_portal,model_hr_salary_rule,base.group_portal,1,1,1,0
-access_hr_loan_portal,access_hr_loan_portal,model_hr_loan,base.group_portal,1,1,1,0
-access_hr_loan_portal,access_hr_loan_portal,model_hr_loan,base.group_portal,1,1,1,0
-
-access_hr_employee_public_portal,access_hr_employee_public_portal,model_hr_employee_public,base.group_portal,1,1,1,0
-
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_hr_loan_portal,access_hr_loan_portal,model_hr_loan,base.group_portal,1,1,1,0
