@@ -367,10 +367,10 @@
                                             <div class="mb-3">
                                                 <label for="leave_type" class="form-label">نوع الاجازة</label>
                                                 <select id="leave_type" name="leave_type" class="form-select">
-                                                    <option value=1>	أيام الإجازة المدفوعة  </option>
-                                                    <option value=2> 	الإجازة المرضية</option>
-                                                    <option value=3>	الأيام التعويضية</option>
-                                                    <option value=4>	غير مدفوعة</option>
+                                                    <option value="Paid Time Off">	أيام الإجازة المدفوعة  </option>
+                                                    <option value="Sick Time Off"> 	الإجازة المرضية</option>
+                                                    <option value="Compensatory Days">	الأيام التعويضية</option>
+                                                    <option value="Unpaid">	غير مدفوعة</option>
 
                                                     
                                     <t t-foreach="leave_types" t-as="leave_type">
