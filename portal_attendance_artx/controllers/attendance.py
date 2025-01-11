@@ -160,7 +160,7 @@ class PortalLeaves(http.Controller):
                 'request_date_from': start_date,
                 'request_date_to': end_date,
             })
-            return request.redirect('/my/leave')  # Redirect to leave requests
+            return request.redirect('/my/leaves')  # Redirect to leave requests
         return request.redirect('/my/leave/new')
 
 
