@@ -244,7 +244,7 @@
             </template>
 
             <!-- <template id="leave_form_template_new"     name="Portal New Leave Form"> -->
-            <template id="leave_form_template" name="Portal New Leave Form">
+            <template id="leave_form_template_new" name="Portal New Leave Form">
                <t t-call="portal.portal_layout">
                     <div class="container">
                         <h1>إنشاء طلب اجازة</h1>
@@ -694,3 +694,4 @@
                 </xpath>
             </template> -->
                 <!-- <xpath expr="//div[@id='content']" position="inside"> -->
+div[@id='content']" position="inside"> -->
