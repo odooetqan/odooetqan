@@ -17,7 +17,7 @@
                 'base',
                 'sale',
                 ],
-                                # 'contact',
+                                  # 'contact',
 
     'data':[
         'security/multi_company_security.xml',
