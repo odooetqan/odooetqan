@@ -313,7 +313,7 @@
 
 
 
-            <template id="leave_form_template" name="Leave Form" inherit_id="website.layout">
+            <!-- <template id="leave_form_template" name="Leave Form" inherit_id="website.layout">
                 <t t-call="portal.portal_layout">
                                     <xpath expr="//main" position="inside">
 
@@ -347,7 +347,7 @@
                     </xpath>
 
                 </t>
-            </template>
+            </template> -->
 
 
             <!-- <template id="leave_form_template" name="Portal New Leave Form">
