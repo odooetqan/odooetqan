@@ -14,8 +14,10 @@
     'price': '10.0',
     'currency': 'USD',
     'website': 'https://areterix.com',
-    'depends': ['hr_attendance', 'portal'],
+    'depends': ['hr_attendance', 'portal', 'website'],
     'data': [
+        'security/ir.model.access.csv',
+        'security/security.xml',
         'views/attendance_views.xml',
     ],
     'assets': {
