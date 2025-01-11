@@ -20,7 +20,6 @@ from odoo.http import request
 # from odoo import http
 # from odoo.http import request
 
-
 class PortalAttendance(http.Controller):
     @http.route(['/my/attendance'], type='http', auth='user', website=True)
     def portal_my_attendance(self, **kwargs):
@@ -133,57 +132,16 @@ class PortalLeaves(http.Controller):
         values = {
             'leave_records': leave_records,
         }
-        return request.render('portal_attendance_artx.portal_my_leaves_new', values)
+        return request.render('portal_attendance_artx.portal_my_leaves', values)
     
-    # @http.route(['/my/leave/new'], type='http', auth='user', website=True)
-    # def portal_leave_form(self, **kwargs):
-    #     # Fetch leave types from the database
-    #     leave_types = request.env['hr.leave.type'].sudo().search([])
-    #     return request.render('portal_attendance_artx.leave_form_template_new_1', {'leave_types': leave_types})
-    #     # return request.render('portal_attendance_artx.leave_form_template', {'leave_types': leave_types}) 
-   
-   
-    import logging
-    _logger = logging.getLogger(__name__)
-
     @http.route(['/my/leave/new'], type='http', auth='user', website=True)
     def portal_leave_form(self, **kwargs):
-        _logger.info("Route '/my/leave/new' accessed")
+        # Fetch leave types from the database
         leave_types = request.env['hr.leave.type'].sudo().search([])
-        if not leave_types:
-            _logger.warning("No leave types found!")
-        return request.render('portal_attendance_artx.leave_form_template_new', {'leave_types': leave_types})
-
-        #@http.route(['/my/leave/new'], type='http', auth='user', website=True)
-        # def portal_leave_form(self, **kwargs):
-        #     leave_types = request.env['hr.leave.type'].sudo().search([])
-        #     return request.render('portal_attendance_artx.leave_form_template_new', {'leave_types': leave_types})
-
-
-#--------- FROM this is good
-    # @http.route('/my/leave/form', type='http', auth="user", website=True)
-    # def portal_leave_form(self, **kwargs):
-    #     leave_types = request.env['hr.leave.type'].sudo().search([])  # Fetch leave types
-    #     # return request.render('portal_attendance_artx.leave_form_template', {
-    #     return request.render('portal_attendance_artx.leave_form_template_new', {
-    #         'leave_type':leave_types
-
-    #     })
-#----------------------------
-    # @http.route(['/my/leave/new'], type='http', auth='user', website=True)
-    # def portal_leave_form(self, **kwargs):
-    #     leave_types = request.env['hr.leave.type'].sudo().search([])
-    #     return request.render('portal_attendance_artx.leave_form_template', {'leave_types': leave_types})
-
-    @http.route('/my/leave/submit', type='http', auth="user", website=True, methods=['POST'])
-    # def submit_leave_request(self, **post):
-    def portal_leave_form(self, **kwargs):
-
-        leave_type = int(post.get('leave_type'))
-        start_date = post.get('start_date')
-        end_date = post.get('end_date')
-
-
+        return request.render('portal_attendance_artx.leave_form_template', {'leave_types': leave_types})
+    
+    @http.route(['/my/leave/submit'], type='http', auth='user', methods=['POST'], website=True)
+    def portal_leave_submit(self, **post):
         employee = request.env['hr.employee.public'].sudo().search([('user_id', '=', request.env.user.id)], limit=1)
         if not employee:
             return request.redirect('/my/leave/new')  # Redirect to leave form on error
@@ -195,14 +153,6 @@ class PortalLeaves(http.Controller):
         start_date = post.get('start_date')
         end_date = post.get('end_date')
 
-        # Create leave request
-        request.env['hr.leave'].sudo().create({
-            'holiday_status_id': leave_type,
-            'request_date_from': start_date,
-            'request_date_to': end_date,
-            'employee_id': request.env.user.employee_id.id,
-        })
-        
         if leave_type and start_date and end_date:
             request.env['hr.leave'].sudo().create({
                 'employee_id': employee.id,
@@ -210,33 +160,8 @@ class PortalLeaves(http.Controller):
                 'request_date_from': start_date,
                 'request_date_to': end_date,
             })
-            return request.redirect('/my/leaves') # Redirect to leave requests
+            return request.redirect('/my/leave')  # Redirect to leave requests
         return request.redirect('/my/leave/new')
-    
-        # return request.redirect('/my/leaves')
-
-    # @http.route(['/my/leave/submit'], type='http', auth='user', methods=['POST'], website=True)
-    # def portal_leave_submit(self, **post):
-    #     employee = request.env['hr.employee.public'].sudo().search([('user_id', '=', request.env.user.id)], limit=1)
-    #     if not employee:
-    #         return request.redirect('/my/leave/new')  # Redirect to leave form on error
-        
-    #     leave_type = request.env['hr.leave.type'].sudo().search([('id', '=', int(post.get('leave_type')))], limit=1)
-    #     if not leave_type:
-    #         return request.redirect('/my/leave/new')
-
-    #     start_date = post.get('start_date')
-    #     end_date = post.get('end_date')
-
-    #     if leave_type and start_date and end_date:
-    #         request.env['hr.leave'].sudo().create({
-    #             'employee_id': employee.id,
-    #             'holiday_status_id': leave_type.id,
-    #             'request_date_from': start_date,
-    #             'request_date_to': end_date,
-    #         })
-    #         return request.redirect('/my/leaves') # Redirect to leave requests
-    #     return request.redirect('/my/leave/new')
 
 
 
