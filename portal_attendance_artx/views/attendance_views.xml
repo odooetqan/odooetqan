@@ -693,5 +693,6 @@
                     <a href="/my/attendance" class="btn btn-primary">حضوري </a>
                 </xpath>
             </template> -->
-                <!-- <xpath expr="//div[@id='content']" position="inside"> -->
-div[@id='content']" position="inside"> -->
+            <!-- <xpath expr="//div[@id='content']" position="inside"> -->
+
+<!-- div[@id='content']" position="inside"> -->
