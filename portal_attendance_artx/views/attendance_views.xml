@@ -371,7 +371,7 @@
     
 <!-- Template Form to create new Loan -->
     <template id="leave_form_template" name="Leave Form" inherit_id="website.layout">
-        <t t-call="portal.portal_layout">
+<t t-call="portal.layout">
             <div class="container">
                 <h1>طلب إجازة جديدة</h1>
                 <form action="/my/leave/submit" method="POST">
