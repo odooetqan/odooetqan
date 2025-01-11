@@ -312,10 +312,11 @@
             </template> -->
 
 
-                <!-- <xpath expr="//main" position="inside"> -->
 
-            <!-- <template id="leave_form_template" name="Leave Form" inherit_id="website.layout">
+            <template id="leave_form_template" name="Leave Form" inherit_id="website.layout">
                 <t t-call="portal.portal_layout">
+                                    <xpath expr="//main" position="inside">
+
                     <section class="leave-form-section">
                         <div class="container">
                             <h1>طلب اجازة</h1>
@@ -342,11 +343,12 @@
                                 <button type="submit" class="btn btn-success">اطلب</button>
                             </form>
                         </div>
-                    </section>
-                </t>
-            </template> -->
+                    </section>               
+                    </xpath>
 
-                <!-- </xpath> -->
+                </t>
+            </template>
+
 
             <!-- <template id="leave_form_template" name="Portal New Leave Form">
                 <t t-call="portal.portal_layout">
