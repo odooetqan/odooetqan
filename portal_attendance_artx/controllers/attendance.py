@@ -133,7 +133,7 @@ class PortalLeaves(http.Controller):
         values = {
             'leave_records': leave_records,
         }
-        return request.render('portal_attendance_artx.portal_my_leaves', values)
+        return request.render('portal_attendance_artx.portal_my_leaves_new', values)
     
     @http.route(['/my/leave/new'], type='http', auth='user', website=True)
     def portal_leave_form(self, **kwargs):
