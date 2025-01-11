@@ -335,7 +335,7 @@
         </template> -->
 
         <!-- <odoo> -->
-    <!-- <template id="leave_form_template" name="Leave Form" inherit_id="website.layout">
+    <template id="leave_form_template" name="Leave Form" inherit_id="website.layout">
         <xpath expr="//main" position="inside">
             <section class="leave-form-section">
                 <div class="container">
@@ -365,13 +365,13 @@
                 </div>
             </section>
         </xpath>
-    </template> -->
+    </template>
     
 
     
 <!-- Template Form to create new Loan -->
-    <template id="leave_form_template" name="Leave Form" inherit_id="website.layout">
-<t t-call="portal.layout">
+    <!-- <template id="leave_form_template" name="Leave Form" inherit_id="website.layout">
+        <t t-call="website.layout"> 
             <div class="container">
                 <h1>طلب إجازة جديدة</h1>
                 <form action="/my/leave/submit" method="POST">
@@ -394,12 +394,11 @@
                             <label for="end_date" class="form-label">تاريخ الانتهاء</label>
                             <input type="date" id="end_date" name="end_date" class="form-control"  required="true"  />
                         </div>
-                        <!-- <button type="submit" class="btn btn-success">اطلب</button> -->
                     <button type="submit" class="btn btn-success">تقديم الطلب</button>
                 </form>
             </div>
         </t>
-    </template>
+    </template> -->
 
 
 <!-- </odoo> -->
