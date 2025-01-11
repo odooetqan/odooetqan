@@ -135,12 +135,24 @@ class PortalLeaves(http.Controller):
         }
         return request.render('portal_attendance_artx.portal_my_leaves_new', values)
     
+    # @http.route(['/my/leave/new'], type='http', auth='user', website=True)
+    # def portal_leave_form(self, **kwargs):
+    #     # Fetch leave types from the database
+    #     leave_types = request.env['hr.leave.type'].sudo().search([])
+    #     return request.render('portal_attendance_artx.leave_form_template_new_1', {'leave_types': leave_types})
+    #     # return request.render('portal_attendance_artx.leave_form_template', {'leave_types': leave_types}) 
+   
+   
+    import logging
+    _logger = logging.getLogger(__name__)
+
     @http.route(['/my/leave/new'], type='http', auth='user', website=True)
     def portal_leave_form(self, **kwargs):
-        # Fetch leave types from the database
+        _logger.info("Route '/my/leave/new' accessed")
         leave_types = request.env['hr.leave.type'].sudo().search([])
-        return request.render('portal_attendance_artx.leave_form_template_new_1', {'leave_types': leave_types})
-        # return request.render('portal_attendance_artx.leave_form_template', {'leave_types': leave_types}) 
+        if not leave_types:
+            _logger.warning("No leave types found!")
+        return request.render('portal_attendance_artx.leave_form_template_new', {'leave_types': leave_types})
 
         #@http.route(['/my/leave/new'], type='http', auth='user', website=True)
         # def portal_leave_form(self, **kwargs):
