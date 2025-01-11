@@ -337,7 +337,28 @@
         <!-- <odoo> -->
     <template id="leave_form_template" name="Leave Form" inherit_id="website.layout">
 
-
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
         <xpath expr="//main" position="after">
             <section class="leave-form-section">
                 <div class="container">
