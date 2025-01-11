@@ -246,7 +246,7 @@
             <template id="leave_form_template_new" name="Portal New Leave Form">
                <t t-call="portal.portal_layout">
                     <div class="container">
-                        <h1>إنشاء طلب اجازة</h1>
+                        <h1>إنشاء طلب اجازة جديد</h1>
                         <form action="/my/leave/submit" method="POST">
                             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                             <div class="mb-3">
