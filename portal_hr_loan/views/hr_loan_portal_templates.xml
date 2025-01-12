@@ -9,7 +9,7 @@
             <div class="oe_structure" position="inside">
                 <div class="container">
 
-                    <button id="leave_portal_request_main" class="btn btn-succes leave_portal_request_main">
+                    <button id="loan_portal_request_main" class="btn btn-succes">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <!-- Button to Create New Leave Request -->
                             <h1>
