@@ -43,3 +43,29 @@ class PortalHrLoan(http.Controller):
             'state': 'draft',
         })
         return request.redirect('/my/loans')
+    
+
+
+
+
+
+class PortalHrSalary(http.Controller):
+
+    @http.route('/my/salaries', type='http', auth="user", website=True)
+    def portal_salaries(self, **kwargs):
+        salaries = request.env['hr.salary'].sudo().search([('employee_id.user_id', '=', request.env.user.id)])
+        return request.render('portal_hr_salary.portal_hr_salary_list', {'salaries': salaries})
+
+    @http.route('/my/salaries/new', type='http', auth="user", website=True)
+    def portal_create_salary(self, **kwargs):
+        return request.render('portal_hr_salary.portal_create_salary_form', {})
+
+    @http.route('/my/salaries/save', type='http', auth="user", methods=['POST'], website=True, csrf=True)
+    def portal_save_salary(self, **kwargs):
+        request.env['hr.salary'].sudo().create({
+            'employee_id': request.env.user.employee_id.id,
+            'amount': kwargs.get('amount'),
+            'description': kwargs.get('description'),
+            'state': 'draft',
+        })
+        return request.redirect('/my/salaries')

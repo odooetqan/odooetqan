@@ -3,6 +3,27 @@ from odoo import models, fields, api
 class HrLoan(models.Model):
     _inherit = 'hr.loan'
 
+
+
+
+
+
+
+class HrSalary(models.Model):
+    _name = 'hr.salary'
+    _description = 'Employee Salary'
+
+    employee_id = fields.Many2one('hr.employee', string='Employee', required=True)
+    amount = fields.Float(string='Amount', required=True)
+    description = fields.Text(string='Description')
+    date = fields.Date(string='Salary Date', default=fields.Date.context_today)
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('confirmed', 'Confirmed'),
+    ], string='Status', default='draft')
+
+
+    
 #     additional_notes = fields.Text(string="Additional Notes")
     
 #     # def approve_loan(self):

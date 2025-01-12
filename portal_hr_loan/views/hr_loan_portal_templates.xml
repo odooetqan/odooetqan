@@ -135,6 +135,54 @@
     </template>
 
 
+<!-- Salary LISt -->
+        <template id="portal_hr_salary_list" name="Salaries List">
+    <t t-call="portal.portal_layout">
+        <div class="container">
+            <h1>مرتباتي</h1>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>الشهر</th>
+                        <th>المبلغ</th>
+                        <th>الوصف</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="salaries" t-as="salary">
+                        <tr>
+                            <td><t t-esc="salary.date" /></td>
+                            <td><t t-esc="salary.amount" /></td>
+                            <td><t t-esc="salary.description or ''" /></td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </div>
+    </t>
+</template>
+
+<template id="portal_create_salary_form" name="Create Salary">
+    <t t-call="portal.portal_layout">
+        <div class="container">
+            <h1>إضافة راتب جديد</h1>
+            <form t-attf-action="/my/salaries/save" method="post">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <div class="form-group">
+                    <label>المبلغ</label>
+                    <input type="number" name="amount" class="form-control" required="true" />
+                </div>
+                <div class="form-group">
+                    <label>الوصف</label>
+                    <input type="text" name="description" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-primary">حفظ</button>
+            </form>
+        </div>
+    </t>
+</template>
+
+
 
     </data>
 </odoo>
