@@ -136,6 +136,24 @@
 
 
 <!-- Salary LISt -->
+
+
+        <template id="portal_my_home_salary" inherit_id="portal.portal_my_home" priority="12">
+            <xpath expr="//div[@id='portal_client_category']" position="inside">
+                <div class="o_portal_index_card col-md-6">
+                    <a class="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
+                    href="/my/salaries" title="Salary">
+                        <img width="150px" src="/portal_hr_loan/static/description/loan.svg" loading="lazy"/>
+                        المرتبات
+                        <span class="badge text-bg-secondary rounded-pill">
+                            <i class="fa fa-sign-in"></i>
+                        </span>
+                    </a>
+                </div>
+            </xpath>
+        </template>
+
+
         <template id="portal_hr_salary_list" name="Salaries List">
             <t t-call="portal.portal_layout">
                 <div class="container">
