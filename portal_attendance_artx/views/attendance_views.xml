@@ -32,7 +32,7 @@
             <template id="portal_my_attendance_correction" name="Attendance Correction Requests">
                 <t t-call="portal.portal_layout">
                     <div class="container">
-                        <h2>My Attendance Correction Requests</h2>
+                        <h2>طلبات تصحيح الحضور</h2>
 
                         <table class="table">
                             <thead>
@@ -180,7 +180,7 @@
     </div>
     
     <div class="container">
-        <h2>My Attendance Correction Requests</h2>
+        <h2>طلبات تصحيح الحضور</h2>
 
         <table class="table">
             <thead>
