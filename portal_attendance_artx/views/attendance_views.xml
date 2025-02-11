@@ -18,8 +18,17 @@
                                 </group>
                 
                                 <footer>
+
+                                    <button name="action_approve" type="object" class="oe_highlight" string="Approve"
+                                        invisible="state != 'submitted'"/>
+                                    <button name="action_reject" type="object" class="btn btn-danger" string="Reject"
+                                        invisible="state != 'submitted'"/>
+
+
+                                <!--                                     
                                     <button name="action_approve" type="object" class="oe_highlight" string="Approve" attrs="{'invisible': [('state', '!=', 'submitted')]}"/>
-                                    <button name="action_reject" type="object" class="btn btn-danger" string="Reject" attrs="{'invisible': [('state', '!=', 'submitted')]}"/>
+                                    <button name="action_reject" type="object" class="btn btn-danger" string="Reject" attrs="{'invisible': [('state', '!=', 'submitted')]}"/> 
+                                    -->
                                 </footer>
                             </sheet>
                         </form>
