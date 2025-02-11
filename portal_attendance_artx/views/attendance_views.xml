@@ -2,6 +2,31 @@
         <data>
 
         <!-- Portal request correct attendance -->
+            <!-- Button to reques tcorrect attendance -->
+                <record id="view_hr_attendance_correction_form" model="ir.ui.view">
+                    <field name="name">hr.attendance.correction.form</field>
+                    <field name="model">hr.attendance.correction</field>
+                    <field name="arch" type="xml">
+                        <form string="Attendance Correction Request">
+                            <sheet>
+                                <group>
+                                    <field name="employee_id"/>
+                                    <field name="check_in"/>
+                                    <field name="check_out"/>
+                                    <field name="note"/>
+                                    <field name="state" readonly="1"/>
+                                </group>
+                
+                                <footer>
+                                    <button name="action_approve" type="object" class="oe_highlight" string="Approve" attrs="{'invisible': [('state', '!=', 'submitted')]}"/>
+                                    <button name="action_reject" type="object" class="btn btn-danger" string="Reject" attrs="{'invisible': [('state', '!=', 'submitted')]}"/>
+                                </footer>
+                            </sheet>
+                        </form>
+                    </field>
+                </record>
+
+            <!-- End  request to Correct attendance -->
                 <template id="portal_my_attendance_correction" name="Attendance Correction Requests">
                     <t t-call="portal.portal_layout">
                         <div class="container">
