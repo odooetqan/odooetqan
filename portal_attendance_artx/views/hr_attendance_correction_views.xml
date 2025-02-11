@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    
     <!-- Tree View -->
     <record id="view_hr_attendance_correction_tree" model="ir.ui.view">
         <field name="name">hr.attendance.correction.tree</field>
