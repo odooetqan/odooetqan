@@ -56,10 +56,10 @@
                             <h3>Request New Correction</h3>
                             <form action="/portal/request_attendance_correction" method="post">
                                 <label>Check In:</label>
-                                <input type="datetime-local" name="check_in" required class="form-control"/>
+                                <input type="datetime-local" name="check_in" required="true" class="form-control"/>
                 
                                 <label>Check Out:</label>
-                                <input type="datetime-local" name="check_out" required class="form-control"/>
+                                <input type="datetime-local" name="check_out" required="true" class="form-control"/>
                 
                                 <label>Reason:</label>
                                 <textarea name="note" class="form-control"></textarea>
