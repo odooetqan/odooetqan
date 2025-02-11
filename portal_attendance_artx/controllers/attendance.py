@@ -1,48 +1,41 @@
 from odoo import http
 from odoo.http import request
-from datetime import datetime
+from datetime import datetime, timedelta
+from odoo import http, fields
 import json
 
-#---- TO addd tree attendance  portal gate
-from odoo import http
-from odoo.http import request
-
-# class PortalAttendance(http.Controller):
-    # @http.route(['/my/attendance'], type='http', auth="user", website=True)
-    # def portal_attendance(self, **kwargs):
-    #     employee = request.env['hr.employee'].sudo().search([('user_id', '=', request.env.user.id)], limit=1)
-    #     attendance_records = request.env['hr.attendance'].sudo().search([('employee_id', '=', employee.id)])
-    #     values = {
-    #         'attendance_records': attendance_records,
-    #     }
-    #     return request.render('portal_attendance_artx.portal_attendance_tree', values)
-#---- TO addd tree attendance  portal gate
-# from odoo import http
-# from odoo.http import request
-
 class PortalAttendance(http.Controller):
+
     @http.route(['/my/attendance'], type='http', auth='user', website=True)
     def portal_my_attendance(self, **kwargs):
+        """
+        Show attendance records for the current user (employee) from the last 30 days only.
+        """
+        user = request.env.user
+        employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
+        if not employee:
+            # Optionally redirect or show an error if no employee is linked to this user
+            return request.redirect('/my/home')  
+
+        thirty_days_ago = fields.Datetime.now() - timedelta(days=30)
         attendance_records = request.env['hr.attendance'].sudo().search([
-            ('employee_id.user_id', '=', request.env.user.id)
+            ('employee_id', '=', employee.id),
+            ('check_in', '>=', thirty_days_ago)
         ])
+
         values = {
-            'attendance_records': attendance_records
+            'attendance_records': attendance_records,
         }
-        # return request.render('portal_attendance_artx_name.portal_my_attendance', values)
+        # Adjust the template name to match your actual template
         return request.render('portal_attendance_artx.portal_my_attendance', values)
-
-        
-#---- TO addd tree attendance  portal gate 2222222222222222
-
-
-
-
 class AttendanceController(http.Controller):
 
     @http.route('/portal/add_attendance', type='http', auth="user", methods=['POST'], csrf=False)
     def add_attendance(self, **kwargs):
-        # Get the current logged-in user
+        """
+        Allows adding a check-in. Does not allow check-outs.
+        Disallows creating a check-in that is older than 30 days from now.
+        """
         user = request.env.user
         employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
 
@@ -50,122 +43,201 @@ class AttendanceController(http.Controller):
             response_data = {'success': False, 'message': 'Employee not found for the logged-in user'}
             return request.make_response(json.dumps(response_data), headers=[('Content-Type', 'application/json')])
 
-        check_in = kwargs.get('check_in')
-        check_out = kwargs.get('check_out')
-
-        if check_in:
-            # Handle check-in logic
-            attendance = request.env['hr.attendance'].sudo().create({
-                'check_in': check_in,
-                'employee_id': employee.id,
-            })
-            response_data = {'success': True, 'message': 'Check-in recorded'}
-
-        elif check_out:
-            # Handle check-out logic (find the latest check-in and update the record)
-            attendance = request.env['hr.attendance'].sudo().search([
-                ('employee_id', '=', employee.id),
-                ('check_out', '=', False)
-            ], limit=1)
-
-            if attendance:
-                attendance.sudo().write({'check_out': check_out})
-                response_data = {'success': True, 'message': 'Check-out recorded'}
-            else:
-                response_data = {'success': False, 'message': 'No check-in found to check out from'}
-
-        return request.make_response(json.dumps(response_data), headers=[('Content-Type', 'application/json')])
-
-    @http.route('/portal/get_attendance_status', type='http', auth="user", methods=['GET'], csrf=False)
-    def get_attendance_status(self, **kwargs):
-        # Fetch the currently logged-in user
-        user = request.env.user
-        print('Logged-in user:', user.name, user.id)
-
-        # Fetch the employee associated with the user
-        employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
-        if not employee:
-            print('No employee found for user:', user.id)
-            response_data = {
-                'success': False,
-                'message': 'No employee associated with this user.'
-            }
+        # Retrieve check_in from the POST data
+        check_in_str = kwargs.get('check_in')
+        if not check_in_str:
+            response_data = {'success': False, 'message': 'No check_in date/time provided'}
             return request.make_response(json.dumps(response_data), headers=[('Content-Type', 'application/json')])
 
-        print('Employee found:', employee.name, employee.id)
+        # Convert the check_in string to a datetime object
+        try:
+            check_in_dt = fields.Datetime.from_string(check_in_str)
+        except Exception:
+            check_in_dt = False
 
-        # Search for attendance records where the user is checked in (check_out is False)
-        attendance = request.env['hr.attendance'].sudo().search([
-            ('employee_id', '=', employee.id),
-            ('check_out', '=', False)
-        ], limit=1)
+        if not check_in_dt:
+            response_data = {'success': False, 'message': 'Invalid check_in format'}
+            return request.make_response(json.dumps(response_data), headers=[('Content-Type', 'application/json')])
 
-        if attendance:
-            check_in_time = attendance.check_in
-            print('Attendance record found with check-in:', check_in_time)
-            response_data = {
-                'success': True,
-                'message': 'Currently checked in',
-                'check_in': check_in_time.strftime('%Y-%m-%d %H:%M:%S'),  # Convert datetime to string
-            }
-        else:
-            print('No active attendance (checked in) record found.')
-            response_data = {
-                'success': True,
-                'message': 'Currently checked out',
-            }
+        # Disallow check-in older than 30 days
+        thirty_days_ago = fields.Datetime.now() - timedelta(days=30)
+        if check_in_dt < thirty_days_ago:
+            response_data = {'success': False, 'message': 'Cannot create attendance older than 30 days'}
+            return request.make_response(json.dumps(response_data), headers=[('Content-Type', 'application/json')])
 
+        # Create new attendance record
+        attendance = request.env['hr.attendance'].sudo().create({
+            'employee_id': employee.id,
+            'check_in': check_in_dt,
+            # Note: No check_out is being set here
+        })
+
+        response_data = {'success': True, 'message': 'Check-in recorded'}
         return request.make_response(json.dumps(response_data), headers=[('Content-Type', 'application/json')])
 
-# --- leaves 
-# from odoo import http
-# from odoo.http import request
 
-class PortalLeaves(http.Controller):
+# #---- TO addd tree attendance  portal gate#######################################################################################################################
 
-    @http.route('/my/leaves', type='http', auth='user', website=True)
-    def portal_my_leaves(self, **kwargs):
-        # Fetch leave requests for the logged-in user
-        employee = request.env['hr.employee'].search([('user_id', '=', request.env.user.id)], limit=1)
-        leave_records = request.env['hr.leave'].search([('employee_id', '=', employee.id)])
 
-        values = {
-            'leave_records': leave_records,
-        }
-        return request.render('portal_attendance_artx.portal_my_leaves', values)
-    
-    @http.route(['/my/leave/new'], type='http', auth='user', website=True)
-    def portal_leave_form(self, **kwargs):
-        # Fetch leave types from the database
-        leave_types = request.env['hr.leave.type'].sudo().search([])
-        return request.render('portal_attendance_artx.leave_form_template', {'leave_types': leave_types})
-    
-    @http.route(['/my/leave/submit'], type='http', auth='user', methods=['POST'], website=True)
-    def portal_leave_submit(self, **post):
-        employee = request.env['hr.employee.public'].sudo().search([('user_id', '=', request.env.user.id)], limit=1)
-        if not employee:
-            return request.redirect('/my/leave/new')  # Redirect to leave form on error
+# # class PortalAttendance(http.Controller):
+#     # @http.route(['/my/attendance'], type='http', auth="user", website=True)
+#     # def portal_attendance(self, **kwargs):
+#     #     employee = request.env['hr.employee'].sudo().search([('user_id', '=', request.env.user.id)], limit=1)
+#     #     attendance_records = request.env['hr.attendance'].sudo().search([('employee_id', '=', employee.id)])
+#     #     values = {
+#     #         'attendance_records': attendance_records,
+#     #     }
+#     #     return request.render('portal_attendance_artx.portal_attendance_tree', values)
+# #---- TO addd tree attendance  portal gate
+# # from odoo import http
+# # from odoo.http import request
+
+# class PortalAttendance(http.Controller):
+#     @http.route(['/my/attendance'], type='http', auth='user', website=True)
+#     def portal_my_attendance(self, **kwargs):
+#         attendance_records = request.env['hr.attendance'].sudo().search([
+#             ('employee_id.user_id', '=', request.env.user.id)
+#         ])
+#         values = {
+#             'attendance_records': attendance_records
+#         }
+#         # return request.render('portal_attendance_artx_name.portal_my_attendance', values)
+#         return request.render('portal_attendance_artx.portal_my_attendance', values)
+
         
-        leave_type = request.env['hr.leave.type'].sudo().search([('id', '=', int(post.get('leave_type')))], limit=1)
-        if not leave_type:
-            return request.redirect('/my/leave/new')
-
-        start_date = post.get('start_date')
-        end_date = post.get('end_date')
-
-        if leave_type and start_date and end_date:
-            request.env['hr.leave'].sudo().create({
-                'employee_id': employee.id,
-                'holiday_status_id': leave_type.id,
-                'request_date_from': start_date,
-                'request_date_to': end_date,
-            })
-            return request.redirect('/my/leaves')  # Redirect to leave requests
-        return request.redirect('/my/leave/new')
+# #---- TO addd tree attendance  portal gate 2222222222222222
 
 
 
 
+# class AttendanceController(http.Controller):
+
+#     @http.route('/portal/add_attendance', type='http', auth="user", methods=['POST'], csrf=False)
+#     def add_attendance(self, **kwargs):
+#         # Get the current logged-in user
+#         user = request.env.user
+#         employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
+
+#         if not employee:
+#             response_data = {'success': False, 'message': 'Employee not found for the logged-in user'}
+#             return request.make_response(json.dumps(response_data), headers=[('Content-Type', 'application/json')])
+
+#         check_in = kwargs.get('check_in')
+#         check_out = kwargs.get('check_out')
+
+#         if check_in:
+#             # Handle check-in logic
+#             attendance = request.env['hr.attendance'].sudo().create({
+#                 'check_in': check_in,
+#                 'employee_id': employee.id,
+#             })
+#             response_data = {'success': True, 'message': 'Check-in recorded'}
+
+#         elif check_out:
+#             # Handle check-out logic (find the latest check-in and update the record)
+#             attendance = request.env['hr.attendance'].sudo().search([
+#                 ('employee_id', '=', employee.id),
+#                 ('check_out', '=', False)
+#             ], limit=1)
+
+#             if attendance:
+#                 attendance.sudo().write({'check_out': check_out})
+#                 response_data = {'success': True, 'message': 'Check-out recorded'}
+#             else:
+#                 response_data = {'success': False, 'message': 'No check-in found to check out from'}
+
+#         return request.make_response(json.dumps(response_data), headers=[('Content-Type', 'application/json')])
+
+#     @http.route('/portal/get_attendance_status', type='http', auth="user", methods=['GET'], csrf=False)
+#     def get_attendance_status(self, **kwargs):
+#         # Fetch the currently logged-in user
+#         user = request.env.user
+#         print('Logged-in user:', user.name, user.id)
+
+#         # Fetch the employee associated with the user
+#         employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
+#         if not employee:
+#             print('No employee found for user:', user.id)
+#             response_data = {
+#                 'success': False,
+#                 'message': 'No employee associated with this user.'
+#             }
+#             return request.make_response(json.dumps(response_data), headers=[('Content-Type', 'application/json')])
+
+#         print('Employee found:', employee.name, employee.id)
+
+#         # Search for attendance records where the user is checked in (check_out is False)
+#         attendance = request.env['hr.attendance'].sudo().search([
+#             ('employee_id', '=', employee.id),
+#             ('check_out', '=', False)
+#         ], limit=1)
+
+#         if attendance:
+#             check_in_time = attendance.check_in
+#             print('Attendance record found with check-in:', check_in_time)
+#             response_data = {
+#                 'success': True,
+#                 'message': 'Currently checked in',
+#                 'check_in': check_in_time.strftime('%Y-%m-%d %H:%M:%S'),  # Convert datetime to string
+#             }
+#         else:
+#             print('No active attendance (checked in) record found.')
+#             response_data = {
+#                 'success': True,
+#                 'message': 'Currently checked out',
+#             }
+
+#         return request.make_response(json.dumps(response_data), headers=[('Content-Type', 'application/json')])
+
+# # --- leaves 
+# # from odoo import http
+# # from odoo.http import request
+
+# class PortalLeaves(http.Controller):
+
+#     @http.route('/my/leaves', type='http', auth='user', website=True)
+#     def portal_my_leaves(self, **kwargs):
+#         # Fetch leave requests for the logged-in user
+#         employee = request.env['hr.employee'].search([('user_id', '=', request.env.user.id)], limit=1)
+#         leave_records = request.env['hr.leave'].search([('employee_id', '=', employee.id)])
+
+#         values = {
+#             'leave_records': leave_records,
+#         }
+#         return request.render('portal_attendance_artx.portal_my_leaves', values)
+    
+#     @http.route(['/my/leave/new'], type='http', auth='user', website=True)
+#     def portal_leave_form(self, **kwargs):
+#         # Fetch leave types from the database
+#         leave_types = request.env['hr.leave.type'].sudo().search([])
+#         return request.render('portal_attendance_artx.leave_form_template', {'leave_types': leave_types})
+    
+#     @http.route(['/my/leave/submit'], type='http', auth='user', methods=['POST'], website=True)
+#     def portal_leave_submit(self, **post):
+#         employee = request.env['hr.employee.public'].sudo().search([('user_id', '=', request.env.user.id)], limit=1)
+#         if not employee:
+#             return request.redirect('/my/leave/new')  # Redirect to leave form on error
+        
+#         leave_type = request.env['hr.leave.type'].sudo().search([('id', '=', int(post.get('leave_type')))], limit=1)
+#         if not leave_type:
+#             return request.redirect('/my/leave/new')
+
+#         start_date = post.get('start_date')
+#         end_date = post.get('end_date')
+
+#         if leave_type and start_date and end_date:
+#             request.env['hr.leave'].sudo().create({
+#                 'employee_id': employee.id,
+#                 'holiday_status_id': leave_type.id,
+#                 'request_date_from': start_date,
+#                 'request_date_to': end_date,
+#             })
+#             return request.redirect('/my/leaves')  # Redirect to leave requests
+#         return request.redirect('/my/leave/new')
+
+
+
+####################### End  portal Attendance ##########################################
 
 
 
