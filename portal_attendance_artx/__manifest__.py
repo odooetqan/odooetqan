@@ -19,6 +19,7 @@
         'security/ir.model.access.csv',
         'security/security.xml',
         'views/attendance_views.xml',
+        'views/hr_attendance_correction_views.xml',
     ],
     'assets': {
         'web.assets_frontend': [
