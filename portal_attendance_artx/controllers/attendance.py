@@ -4,30 +4,63 @@ from datetime import datetime, timedelta
 from odoo import http, fields
 import json
 
+# class PortalAttendance(http.Controller):
+
+#     @http.route(['/my/attendance'], type='http', auth='user', website=True)
+#     def portal_my_attendance(self, **kwargs):
+#         """
+#         Show attendance records for the current user (employee) from the last 30 days only.
+#         """
+#         user = request.env.user
+#         employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
+#         if not employee:
+#             # Optionally redirect or show an error if no employee is linked to this user
+#             return request.redirect('/my/home')  
+
+#         thirty_days_ago = fields.Datetime.now() - timedelta(days=30)
+#         attendance_records = request.env['hr.attendance'].sudo().search([
+#             ('employee_id', '=', employee.id),
+#             ('check_in', '>=', thirty_days_ago)
+#         ])
+
+#         values = {
+#             'attendance_records': attendance_records,
+#         }
+#         # Adjust the template name to match your actual template
+#         return request.render('portal_attendance_artx.portal_my_attendance', values)
+
 class PortalAttendance(http.Controller):
 
     @http.route(['/my/attendance'], type='http', auth='user', website=True)
     def portal_my_attendance(self, **kwargs):
         """
-        Show attendance records for the current user (employee) from the last 30 days only.
+        Display `hr.attendance` records as they are, filtered from the 15th of the previous month to today.
         """
         user = request.env.user
         employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
+        
         if not employee:
-            # Optionally redirect or show an error if no employee is linked to this user
-            return request.redirect('/my/home')  
+            return request.redirect('/my/home')  # Redirect if no employee is found
 
-        thirty_days_ago = fields.Datetime.now() - timedelta(days=30)
+        # Get today's date
+        today = fields.Date.today()
+
+        # Get the 15th of the previous month
+        first_day_of_current_month = today.replace(day=1)
+        fifteenth_previous_month = first_day_of_current_month - timedelta(days=15)
+
+        # Get attendance records within the date range
         attendance_records = request.env['hr.attendance'].sudo().search([
             ('employee_id', '=', employee.id),
-            ('check_in', '>=', thirty_days_ago)
+            ('check_in', '>=', fifteenth_previous_month),
+            ('check_in', '<=', today)
         ])
 
         values = {
             'attendance_records': attendance_records,
         }
-        # Adjust the template name to match your actual template
         return request.render('portal_attendance_artx.portal_my_attendance', values)
+
 class AttendanceController(http.Controller):
 
     @http.route('/portal/add_attendance', type='http', auth="user", methods=['POST'], csrf=False)
