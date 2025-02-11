@@ -55,7 +55,7 @@
                             </tbody>
                         </table>
             
-                        <h3>طلب تحيح الحضور</h3>
+                        <h3>طلب تصحيح الحضور</h3>
                         <form action="/portal/request_attendance_correction" method="post">
                             <label>الحضور :</label>
                             <input type="datetime-local" name="check_in" required="true" class="form-control"/>
@@ -203,7 +203,7 @@
             </tbody>
         </table>
 
-        <h3>طلب تحيح الحضور</h3>
+        <h3>طلب تصحيح الحضور</h3>
         <form action="/portal/request_attendance_correction" method="post">
             <label>الحضور :</label>
             <input type="datetime-local" name="check_in" required="true" class="form-control"/>
