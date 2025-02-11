@@ -4,6 +4,56 @@ from datetime import datetime, timedelta
 from odoo import http, fields
 import json
 
+
+
+
+############### PORTAL request to correct hr attendance 
+
+
+class PortalAttendanceCorrection(http.Controller):
+
+    @http.route(['/my/attendance_correction'], type='http', auth='user', website=True)
+    def portal_my_attendance_correction(self, **kwargs):
+        """ Display all correction requests for the logged-in employee. """
+        user = request.env.user
+        employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
+
+        if not employee:
+            return request.redirect('/my/home')
+
+        correction_requests = request.env['hr.attendance.correction'].sudo().search([
+            ('employee_id', '=', employee.id)
+        ])
+
+        values = {
+            'correction_requests': correction_requests,
+        }
+        return request.render('portal_attendance_artx.portal_my_attendance_correction', values)
+
+    @http.route(['/portal/request_attendance_correction'], type='http', auth="user", methods=['POST'], csrf=False)
+    def submit_attendance_correction(self, **kwargs):
+        """ Allow employees to submit a new attendance correction request. """
+        user = request.env.user
+        employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
+
+        if not employee:
+            return request.redirect('/my/home')
+
+        check_in = kwargs.get('check_in')
+        check_out = kwargs.get('check_out')
+        note = kwargs.get('note')
+
+        request.env['hr.attendance.correction'].sudo().create({
+            'employee_id': employee.id,
+            'check_in': check_in,
+            'check_out': check_out,
+            'note': note,
+            'state': 'draft',
+        })
+
+        return request.redirect('/my/attendance_correction')
+
+########################End POrtal Request ########################################################################################
 # class PortalAttendance(http.Controller):
 
 #     @http.route(['/my/attendance'], type='http', auth='user', website=True)
