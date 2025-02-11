@@ -57,6 +57,10 @@ class PortalAttendanceCorrection(http.Controller):
                 'note': note,
                 'state': 'draft',
             })
+            correction_request.message_post(
+                body=f"New Attendance Correction Request from {employee.name}.",
+                subtype_xmlid="mail.mt_comment"
+            )
 
             if correction_request:
                 return request.redirect('/my/home?success=request_created')
