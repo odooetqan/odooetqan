@@ -10,3 +10,5 @@ access_hr_employee_public_internal,access_hr_employee_public_internal,model_hr_e
 access_attendance_internal_employee,access_attendance_internal_employee,model_hr_employee,base.group_user,1,1,1,1
 access_leaves_internal,access_leaves_internal,model_hr_leave,base.group_user,1,1,1,1
 access_leaves_internal_type,access_leaves_internal_type,model_hr_leave_type,base.group_user,1,1,1,1
+access_hr_attendance_correction_user,Access HR Attendance Correction Request,model_hr_attendance_correction,base.group_user,1,1,1,0
+access_hr_attendance_correction_manager,Manager Access to HR Attendance Correction,model_hr_attendance_correction,hr.group_hr_manager,1,1,1,1
