@@ -10,7 +10,6 @@ import json
 ############### PORTAL request to correct hr attendance 
 
 class PortalAttendanceCorrection(http.Controller):
-
     @http.route(['/portal/request_attendance_correction'], type='http', auth="user", methods=['POST'], csrf=False)
     def submit_attendance_correction(self, **kwargs):
         """Allow employees to submit a new attendance correction request."""
@@ -29,19 +28,11 @@ class PortalAttendanceCorrection(http.Controller):
 
         if not check_in or not check_out:
             return request.redirect('/my/attendance_correction?error=missing_fields')
-        # from datetime import datetime
 
         try:
-            check_in_dt = datetime.strptime(check_in, '%Y-%m-%d %H:%M:%S')
-            check_out_dt = datetime.strptime(check_out, '%Y-%m-%d %H:%M:%S')
-            # #Case 2
-            # check_in_dt = datetime.strptime(check_in, '%Y-%m-%dT%H:%M')
-            # check_out_dt = datetime.strptime(check_out, '%Y-%m-%dT%H:%M')
-
-
-        # try:
-        #     check_in_dt = fields.Datetime.to_datetime(check_in)
-        #     check_out_dt = fields.Datetime.to_datetime(check_out)
+            # Auto-convert datetime format
+            check_in_dt = fields.Datetime.to_datetime(check_in)
+            check_out_dt = fields.Datetime.to_datetime(check_out)
 
             if check_in_dt >= check_out_dt:
                 return request.redirect('/my/attendance_correction?error=invalid_time')
