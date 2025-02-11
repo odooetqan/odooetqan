@@ -1,6 +1,54 @@
     <odoo>
         <data>
 
+        <!-- Portal request correct attendance -->
+                <template id="portal_my_attendance_correction" name="Attendance Correction Requests">
+                    <t t-call="portal.portal_layout">
+                        <div class="container">
+                            <h2>My Attendance Correction Requests</h2>
+                
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Check In</th>
+                                        <th>Check Out</th>
+                                        <th>Reason</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="correction_requests" t-as="request">
+                                        <tr>
+                                            <td><t t-esc="request.check_in"/></td>
+                                            <td><t t-esc="request.check_out"/></td>
+                                            <td><t t-esc="request.note"/></td>
+                                            <td><t t-esc="request.state"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                
+                            <h3>Request New Correction</h3>
+                            <form action="/portal/request_attendance_correction" method="post">
+                                <label>Check In:</label>
+                                <input type="datetime-local" name="check_in" required class="form-control"/>
+                
+                                <label>Check Out:</label>
+                                <input type="datetime-local" name="check_out" required class="form-control"/>
+                
+                                <label>Reason:</label>
+                                <textarea name="note" class="form-control"></textarea>
+                
+                                <br/>
+                                <button type="submit" class="btn btn-primary">Submit Request</button>
+                            </form>
+                        </div>
+                    </t>
+                </template>
+
+        <!-- Portal request correct attendance -->
+
+            
 <!-- POrtal Tree ttee attendance -->
         <!-- <record id="portal_attendance_menu" model="ir.ui.menu">
             <field name="name">My Attendance</field>
