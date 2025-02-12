@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_attendance_portal,access_attendance_portal,model_hr_attendance,base.group_portal,1,1,1,0
+access_hr_employee_public_portal,access_hr_employee_public_portal,model_hr_employee_public,base.group_portal,1,1,1,0
+access_attendance_portal_employee,access_attendance_portal_employee,model_hr_employee,base.group_portal,1,1,1,0
+access_leaves_portal,access_leaves_portal,model_hr_leave,base.group_portal,1,1,1,0
+access_leaves_portal_type,access_leaves_portal_type,model_hr_leave_type,base.group_portal,1,1,1,0
+access_res_partner,access__res_partner,model_res_partner,base.group_portal,1,1,1,0
+access_attendance_internal,access_attendance_internal,model_hr_attendance,base.group_user,1,1,1,1
+access_hr_employee_public_internal,access_hr_employee_public_internal,model_hr_employee_public,base.group_user,1,1,1,1
+access_attendance_internal_employee,access_attendance_internal_employee,model_hr_employee,base.group_user,1,1,1,1
+access_leaves_internal,access_leaves_internal,model_hr_leave,base.group_user,1,1,1,1
+access_leaves_internal_type,access_leaves_internal_type,model_hr_leave_type,base.group_user,1,1,1,1
+access_hr_attendance_correction_user,Access HR Attendance Correction Request,model_hr_attendance_correction,base.group_user,1,1,1,0
+access_hr_attendance_correction_manager,Manager Access to HR Attendance Correction,model_hr_attendance_correction,hr.group_hr_manager,1,1,1,1
