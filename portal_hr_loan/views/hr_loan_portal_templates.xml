@@ -24,7 +24,7 @@
         </template>  -->
 
         
-        <template id="portal_hr_loan_page" inherit_id="portal.portal_my_home" name="My Loans" priority="1">
+<!--         <template id="portal_hr_loan_page" inherit_id="portal.portal_my_home" name="My Loans" priority="1">
             <xpath expr="//div[@class='o_portal_my_home']" position="before">
                     <button id="loan_portal_request_main" class="btn btn-succes">
                         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -38,7 +38,7 @@
                         </div>
                     </button>
             </xpath>
-        </template>
+        </template> -->
 
         <template id="portal_my_home_loan" inherit_id="portal.portal_my_home" priority="12">
             <xpath expr="//div[@id='portal_client_category']" position="inside">
