@@ -234,21 +234,23 @@
     </xpath>
 </template>
 <!--    Portal table views-->
-
-        <template id="portal_my_home_sale" name="Show Quotations / Sales Orders" customize_show="True"
-                inherit_id="portal.portal_my_home" priority="1">
-            <div class="oe_structure" position="inside">
-                <div class="container">
-                    <!-- <button id="attendanceBtn" class="btn btn-warning attendanceBtn">
+        
+     <!-- <button id="attendanceBtn" class="btn btn-warning attendanceBtn">
                         <i class="fa fa-sign-in" aria-hidden="true"></i>
                         <span id="btnText">تسجيل الدخول  </span>
                     </button> -->
-
-                    <button id="leave_portal_request_main" class="btn btn-succes leave_portal_request_main">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
+        
                             <!-- <h1>Your Leave Requests</h1> -->
                             <!-- Button to Create New Leave Request -->
-                            <h1>
+                            
+<!--         <template id="portal_my_home_sale" name="Show Quotations / Sales Orders" customize_show="True"
+                inherit_id="portal.portal_my_home" priority="1">
+            <div class="oe_structure" position="inside">
+                <div class="container">
+               
+
+                    <button id="leave_portal_request_main" class="btn btn-succes leave_portal_request_main">
+                        <div class="d-flex justify-content-between align-items-center mb-3"><h1>
                                 <a href="/my/leave/new" class="btn btn-primary">
                                     <i class="fa fa-plus me-1"></i>                             
                                     <span id="btnText">  إنشاء طلب اجازة</span>
@@ -259,7 +261,7 @@
 
                 </div>
             </div>
-        </template>
+        </template> -->
 <!-- POrtal Tree ttee attendance  template -->
 
         <template id="portal_attendance_tree" name="Portal Attendance Tree">
