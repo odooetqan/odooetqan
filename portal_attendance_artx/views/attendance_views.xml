@@ -448,10 +448,14 @@
     </template> -->
 
     <!-- <odoo> -->
-<template id="leave_form_template" name="Leave Form" inherit_id="website.layout">
 
-
-    <xpath expr="//main" position="after">
+<!-- <template id="leave_form_template" name="Leave Form" inherit_id="website.layout"> -->
+ <template id="leave_form_template" name="Leave Form" inherit_id="portal_my_home_leaves">
+     
+    <!-- <xpath expr="//main" position="after"> -->
+    <xpath expr="//div[@id='portal_client_category']" position="inside">
+        
+        
         <section class="leave-form-section">
             <div class="container"  type="hidden" >
                 <h1>طلب اجازة</h1>
