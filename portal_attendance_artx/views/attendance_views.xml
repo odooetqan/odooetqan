@@ -165,6 +165,9 @@
                     <!-- <th>Date</th> -->
                     <th>الحضور</th>
                     <th>الانصراف</th>
+                    <th>ساعات العمل</th>
+                    <th>الوقت الاضافي</th>
+                    <th>تصحيح</th>
                 </tr>
             </thead>
             <tbody>
@@ -173,6 +176,8 @@
                         <!-- <td><t t-esc="record.check_in_date"/></td> -->
                         <td><t t-esc="record.check_in"/></td>
                         <td><t t-esc="record.check_out"/></td>
+                        <td><t t-esc="record.worked_hours"/></td>
+                        <td><t t-esc="record.overtime_hours"/></td>
                     </tr>
                 </t>
             </tbody>
