@@ -6,7 +6,8 @@ _logger = logging.getLogger(__name__)
 
 class PortalAttendance(http.Controller):
 
-    @http.route('/portal/request_attendance_correction', type='http', auth="user", methods=['POST'], website=True)
+    # @http.route('/portal/request_attendance_correction', type='http', auth="user", methods=['POST'], website=True)
+    @http.route('/portal/request_attendance_correction', type='http', auth="user", methods=['POST'], website=True, csrf=False)
     def request_attendance_correction(self, **kwargs):
         """ Handles attendance correction requests from the portal """
 
