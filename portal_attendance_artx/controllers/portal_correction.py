@@ -35,7 +35,7 @@ class PortalAttendance(http.Controller):
             return request.redirect('/my/attendance')
 
         # Ensure attendance record exists
-        attendance = request.env['hr.attendance
+        # attendance = request.env['hr.attendance
         #######################################################################################################################
         
         # Ensure attendance record exists
