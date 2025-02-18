@@ -11,6 +11,7 @@ class HrAttendanceCorrection(models.Model):
     original_check_out = fields.Datetime("Original Check Out", required=True)
     corrected_check_in = fields.Datetime("Corrected Check In", required=True)
     corrected_check_out = fields.Datetime("Corrected Check Out", required=True)
+    attachment = fields.Many2many('ir.attachment', string='Attachments')
 
     reason = fields.Text("Correction Reason", required=True)
     state = fields.Selection([
