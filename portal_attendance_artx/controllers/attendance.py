@@ -10,118 +10,9 @@ _logger = logging.getLogger(__name__)
 
 
 
-############### PORTAL request to correct hr attendance 
-class PortalAttendanceCorrection(http.Controller):
-
-    @http.route(['/portal/request_attendance_correction'], type='http', auth="user", methods=['POST'], csrf=False)
-    def submit_attendance_correction(self, **kwargs):
-        """Allow employees to submit a new attendance correction request."""
-        user = request.env.user
-        employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
-
-        if not employee:
-            return request.redirect('/my/home?error=no_employee')
-
-        check_in = kwargs.get('check_in')
-        check_out = kwargs.get('check_out')
-        note = kwargs.get('note')
-
-        # Log received data for debugging
-        _logger.info(f"Received data: check_in={check_in}, check_out={check_out}, note={note}")
-
-        if not check_in or not check_out:
-            return request.redirect('/my/home?error=missing_fields')
-
-        try:
-            # Try Odoo's default datetime conversion
-            check_in_dt = fields.Datetime.to_datetime(check_in)
-            check_out_dt = fields.Datetime.to_datetime(check_out)
-
-        except Exception:
-            try:
-                # Try converting HTML datetime-local format
-                check_in_dt = datetime.strptime(check_in, '%Y-%m-%dT%H:%M')
-                check_out_dt = datetime.strptime(check_out, '%Y-%m-%dT%H:%M')
-            except Exception as e:
-                _logger.error(f"Datetime conversion error: {e}")
-                return request.redirect('/my/home?error=datetime_format')
-
-        if check_in_dt >= check_out_dt:
-            return request.redirect('/my/home?error=invalid_time')
-
-        try:
-            correction_request = request.env['hr.attendance.correction'].sudo().create({
-                'employee_id': employee.id,
-                'check_in': check_in_dt,
-                'check_out': check_out_dt,
-                'note': note,
-                'state': 'draft',
-            })
-            correction_request.message_post(
-                body=f"New Attendance Correction Request from {employee.name}.",
-                subtype_xmlid="mail.mt_comment"
-            )
-
-            if correction_request:
-                return request.redirect('/my/home?success=request_created')
-            else:
-                return request.redirect('/my/home?error=creation_failed')
-
-        except Exception as e:
-            _logger.error(f"Error creating attendance correction: {e}")
-            return request.redirect(f'/my/home?error={str(e)}')
-
-
-    # @http.route(['/portal/request_attendance_correction'], type='http', auth="user", methods=['POST'], csrf=False)
-    # def submit_attendance_correction(self, **kwargs):
-    #     """Allow employees to submit a new attendance correction request."""
-    #     user = request.env.user
-    #     employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
-
-    #     if not employee:
-    #         return request.redirect('/my/home?error=no_employee')
-
-    #     check_in = kwargs.get('check_in')
-    #     check_out = kwargs.get('check_out')
-    #     note = kwargs.get('note')
-
-    #     # Log received data for debugging
-    #     _logger.info(f"Received data: check_in={check_in}, check_out={check_out}, note={note}")
-
-    #     if not check_in or not check_out:
-    #         return request.redirect('/my/attendance_correction?error=missing_fields')
-
-    #     try:
-    #         # Auto-convert datetime format
-    #         check_in_dt = fields.Datetime.to_datetime(check_in)
-    #         check_out_dt = fields.Datetime.to_datetime(check_out)
-
-    #         if check_in_dt >= check_out_dt:
-    #             return request.redirect('/my/attendance_correction?error=invalid_time')
-
-    #     except Exception as e:
-    #         _logger.error(f"Datetime conversion error: {e}")
-    #         return request.redirect('/my/attendance_correction?error=datetime_format')
-
-    #     try:
-    #         correction_request = request.env['hr.attendance.correction'].sudo().create({
-    #             'employee_id': employee.id,
-    #             'check_in': check_in_dt,
-    #             'check_out': check_out_dt,
-    #             'note': note,
-    #             'state': 'draft',
-    #         })
-
-    #         if correction_request:
-    #             return request.redirect('/my/attendance_correction?success=request_created')
-    #         else:
-    #             return request.redirect('/my/attendance_correction?error=creation_failed')
-
-    #     except Exception as e:
-    #         _logger.error(f"Error creating attendance correction: {e}")
-    #         return request.redirect(f'/my/attendance_correction?error={str(e)}')
-
+# ############### PORTAL request to correct hr attendance 
 # class PortalAttendanceCorrection(http.Controller):
+
 #     @http.route(['/portal/request_attendance_correction'], type='http', auth="user", methods=['POST'], csrf=False)
 #     def submit_attendance_correction(self, **kwargs):
 #         """Allow employees to submit a new attendance correction request."""
@@ -139,19 +30,24 @@ class PortalAttendanceCorrection(http.Controller):
 #         _logger.info(f"Received data: check_in={check_in}, check_out={check_out}, note={note}")
 
 #         if not check_in or not check_out:
-#             return request.redirect('/my/attendance_correction?error=missing_fields')
+#             return request.redirect('/my/home?error=missing_fields')
 
 #         try:
-#             # Auto-convert datetime format
+#             # Try Odoo's default datetime conversion
 #             check_in_dt = fields.Datetime.to_datetime(check_in)
 #             check_out_dt = fields.Datetime.to_datetime(check_out)
 
-#             if check_in_dt >= check_out_dt:
-#                 return request.redirect('/my/attendance_correction?error=invalid_time')
+#         except Exception:
+#             try:
+#                 # Try converting HTML datetime-local format
+#                 check_in_dt = datetime.strptime(check_in, '%Y-%m-%dT%H:%M')
+#                 check_out_dt = datetime.strptime(check_out, '%Y-%m-%dT%H:%M')
+#             except Exception as e:
+#                 _logger.error(f"Datetime conversion error: {e}")
+#                 return request.redirect('/my/home?error=datetime_format')
 
-#         except Exception as e:
-#             _logger.error(f"Datetime conversion error: {e}")
-#             return request.redirect('/my/attendance_correction?error=datetime_format')
+#         if check_in_dt >= check_out_dt:
+#             return request.redirect('/my/home?error=invalid_time')
 
 #         try:
 #             correction_request = request.env['hr.attendance.correction'].sudo().create({
@@ -161,154 +57,258 @@ class PortalAttendanceCorrection(http.Controller):
 #                 'note': note,
 #                 'state': 'draft',
 #             })
+#             correction_request.message_post(
+#                 body=f"New Attendance Correction Request from {employee.name}.",
+#                 subtype_xmlid="mail.mt_comment"
+#             )
 
 #             if correction_request:
-#                 return request.redirect('/my/attendance_correction?success=request_created')
+#                 return request.redirect('/my/home?success=request_created')
 #             else:
-#                 return request.redirect('/my/attendance_correction?error=creation_failed')
+#                 return request.redirect('/my/home?error=creation_failed')
 
 #         except Exception as e:
 #             _logger.error(f"Error creating attendance correction: {e}")
-#             return request.redirect(f'/my/attendance_correction?error={str(e)}')
+#             return request.redirect(f'/my/home?error={str(e)}')
 
-    # @http.route(['/portal/request_attendance_correction'], type='http', auth="user", methods=['POST'], csrf=False)
-    # def submit_attendance_correction(self, **kwargs):
-    #     """Allow employees to submit a new attendance correction request."""
-    #     user = request.env.user
-    #     employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
 
-    #     if not employee:
-    #         return request.redirect('/my/home?error=no_employee')
+#     # @http.route(['/portal/request_attendance_correction'], type='http', auth="user", methods=['POST'], csrf=False)
+#     # def submit_attendance_correction(self, **kwargs):
+#     #     """Allow employees to submit a new attendance correction request."""
+#     #     user = request.env.user
+#     #     employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
 
-    #     check_in = kwargs.get('check_in')
-    #     check_out = kwargs.get('check_out')
-    #     note = kwargs.get('note')
+#     #     if not employee:
+#     #         return request.redirect('/my/home?error=no_employee')
 
-    #     if not check_in or not check_out:
-    #         return request.redirect('/my/attendance_correction?error=missing_fields')
+#     #     check_in = kwargs.get('check_in')
+#     #     check_out = kwargs.get('check_out')
+#     #     note = kwargs.get('note')
 
-    #     try:
-    #         check_in_dt = fields.Datetime.to_datetime(check_in)
-    #         check_out_dt = fields.Datetime.to_datetime(check_out)
+#     #     # Log received data for debugging
+#     #     _logger.info(f"Received data: check_in={check_in}, check_out={check_out}, note={note}")
 
-    #         if check_in_dt >= check_out_dt:
-    #             return request.redirect('/my/attendance_correction?error=invalid_time')
+#     #     if not check_in or not check_out:
+#     #         return request.redirect('/my/attendance_correction?error=missing_fields')
+
+#     #     try:
+#     #         # Auto-convert datetime format
+#     #         check_in_dt = fields.Datetime.to_datetime(check_in)
+#     #         check_out_dt = fields.Datetime.to_datetime(check_out)
+
+#     #         if check_in_dt >= check_out_dt:
+#     #             return request.redirect('/my/attendance_correction?error=invalid_time')
+
+#     #     except Exception as e:
+#     #         _logger.error(f"Datetime conversion error: {e}")
+#     #         return request.redirect('/my/attendance_correction?error=datetime_format')
+
+#     #     try:
+#     #         correction_request = request.env['hr.attendance.correction'].sudo().create({
+#     #             'employee_id': employee.id,
+#     #             'check_in': check_in_dt,
+#     #             'check_out': check_out_dt,
+#     #             'note': note,
+#     #             'state': 'draft',
+#     #         })
+
+#     #         if correction_request:
+#     #             return request.redirect('/my/attendance_correction?success=request_created')
+#     #         else:
+#     #             return request.redirect('/my/attendance_correction?error=creation_failed')
+
+#     #     except Exception as e:
+#     #         _logger.error(f"Error creating attendance correction: {e}")
+#     #         return request.redirect(f'/my/attendance_correction?error={str(e)}')
+
+# # class PortalAttendanceCorrection(http.Controller):
+# #     @http.route(['/portal/request_attendance_correction'], type='http', auth="user", methods=['POST'], csrf=False)
+# #     def submit_attendance_correction(self, **kwargs):
+# #         """Allow employees to submit a new attendance correction request."""
+# #         user = request.env.user
+# #         employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
+
+# #         if not employee:
+# #             return request.redirect('/my/home?error=no_employee')
+
+# #         check_in = kwargs.get('check_in')
+# #         check_out = kwargs.get('check_out')
+# #         note = kwargs.get('note')
+
+# #         # Log received data for debugging
+# #         _logger.info(f"Received data: check_in={check_in}, check_out={check_out}, note={note}")
+
+# #         if not check_in or not check_out:
+# #             return request.redirect('/my/attendance_correction?error=missing_fields')
+
+# #         try:
+# #             # Auto-convert datetime format
+# #             check_in_dt = fields.Datetime.to_datetime(check_in)
+# #             check_out_dt = fields.Datetime.to_datetime(check_out)
+
+# #             if check_in_dt >= check_out_dt:
+# #                 return request.redirect('/my/attendance_correction?error=invalid_time')
+
+# #         except Exception as e:
+# #             _logger.error(f"Datetime conversion error: {e}")
+# #             return request.redirect('/my/attendance_correction?error=datetime_format')
+
+# #         try:
+# #             correction_request = request.env['hr.attendance.correction'].sudo().create({
+# #                 'employee_id': employee.id,
+# #                 'check_in': check_in_dt,
+# #                 'check_out': check_out_dt,
+# #                 'note': note,
+# #                 'state': 'draft',
+# #             })
+
+# #             if correction_request:
+# #                 return request.redirect('/my/attendance_correction?success=request_created')
+# #             else:
+# #                 return request.redirect('/my/attendance_correction?error=creation_failed')
+
+# #         except Exception as e:
+# #             _logger.error(f"Error creating attendance correction: {e}")
+# #             return request.redirect(f'/my/attendance_correction?error={str(e)}')
+
+#     # @http.route(['/portal/request_attendance_correction'], type='http', auth="user", methods=['POST'], csrf=False)
+#     # def submit_attendance_correction(self, **kwargs):
+#     #     """Allow employees to submit a new attendance correction request."""
+#     #     user = request.env.user
+#     #     employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
+
+#     #     if not employee:
+#     #         return request.redirect('/my/home?error=no_employee')
+
+#     #     check_in = kwargs.get('check_in')
+#     #     check_out = kwargs.get('check_out')
+#     #     note = kwargs.get('note')
+
+#     #     if not check_in or not check_out:
+#     #         return request.redirect('/my/attendance_correction?error=missing_fields')
+
+#     #     try:
+#     #         check_in_dt = fields.Datetime.to_datetime(check_in)
+#     #         check_out_dt = fields.Datetime.to_datetime(check_out)
+
+#     #         if check_in_dt >= check_out_dt:
+#     #             return request.redirect('/my/attendance_correction?error=invalid_time')
         
-    #     except Exception:
-    #         return request.redirect('/my/attendance_correction?error=datetime_format')
+#     #     except Exception:
+#     #         return request.redirect('/my/attendance_correction?error=datetime_format')
 
-    #     try:
-    #         correction_request = request.env['hr.attendance.correction'].sudo().create({
-    #             'employee_id': employee.id,
-    #             'check_in': check_in_dt,
-    #             'check_out': check_out_dt,
-    #             'note': note,
-    #             'state': 'draft',
-    #         })
+#     #     try:
+#     #         correction_request = request.env['hr.attendance.correction'].sudo().create({
+#     #             'employee_id': employee.id,
+#     #             'check_in': check_in_dt,
+#     #             'check_out': check_out_dt,
+#     #             'note': note,
+#     #             'state': 'draft',
+#     #         })
 
-    #         if correction_request:
-    #             return request.redirect('/my/attendance_correction?success=request_created')
-    #         else:
-    #             return request.redirect('/my/attendance_correction?error=creation_failed')
+#     #         if correction_request:
+#     #             return request.redirect('/my/attendance_correction?success=request_created')
+#     #         else:
+#     #             return request.redirect('/my/attendance_correction?error=creation_failed')
 
-    #     except Exception as e:
-    #         return request.redirect(f'/my/attendance_correction?error={str(e)}')
+#     #     except Exception as e:
+#     #         return request.redirect(f'/my/attendance_correction?error={str(e)}')
 
 
-    # @http.route(['/my/attendance_correction'], type='http', auth='user', website=True)
-    # def portal_my_attendance_correction(self, **kwargs):
-    #     """ Display all correction requests for the logged-in employee. """
-    #     user = request.env.user
-    #     employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
+#     # @http.route(['/my/attendance_correction'], type='http', auth='user', website=True)
+#     # def portal_my_attendance_correction(self, **kwargs):
+#     #     """ Display all correction requests for the logged-in employee. """
+#     #     user = request.env.user
+#     #     employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
 
-    #     if not employee:
-    #         return request.redirect('/my/home')
+#     #     if not employee:
+#     #         return request.redirect('/my/home')
 
-    #     correction_requests = request.env['hr.attendance.correction'].sudo().search([
-    #         ('employee_id', '=', employee.id)
-    #     ])
+#     #     correction_requests = request.env['hr.attendance.correction'].sudo().search([
+#     #         ('employee_id', '=', employee.id)
+#     #     ])
 
-    #     values = {
-    #         'correction_requests': correction_requests,
-    #     }
-    #     return request.render('portal_attendance_artx.portal_my_attendance_correction', values)
+#     #     values = {
+#     #         'correction_requests': correction_requests,
+#     #     }
+#     #     return request.render('portal_attendance_artx.portal_my_attendance_correction', values)
 
-    # @http.route(['/portal/request_attendance_correction'], type='http', auth="user", methods=['POST'], csrf=False)
-    # def submit_attendance_correction(self, **kwargs):
-    #     user = request.env.user
-    #     employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
+#     # @http.route(['/portal/request_attendance_correction'], type='http', auth="user", methods=['POST'], csrf=False)
+#     # def submit_attendance_correction(self, **kwargs):
+#     #     user = request.env.user
+#     #     employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
     
-    #     if not employee:
-    #         return request.redirect('/my/home')
+#     #     if not employee:
+#     #         return request.redirect('/my/home')
     
-    #     check_in = kwargs.get('check_in')
-    #     check_out = kwargs.get('check_out')
-    #     note = kwargs.get('note')
+#     #     check_in = kwargs.get('check_in')
+#     #     check_out = kwargs.get('check_out')
+#     #     note = kwargs.get('note')
     
-    #     try:
-    #         check_in_dt = fields.Datetime.to_datetime(check_in) if check_in else False
-    #         check_out_dt = fields.Datetime.to_datetime(check_out) if check_out else False
-    #     except Exception as e:
-    #         return request.redirect('/my/attendance_correction?error=datetime_format')
+#     #     try:
+#     #         check_in_dt = fields.Datetime.to_datetime(check_in) if check_in else False
+#     #         check_out_dt = fields.Datetime.to_datetime(check_out) if check_out else False
+#     #     except Exception as e:
+#     #         return request.redirect('/my/attendance_correction?error=datetime_format')
     
-    #     request.env['hr.attendance.correction'].sudo().create({
-    #         'employee_id': employee.id,
-    #         'check_in': check_in_dt,
-    #         'check_out': check_out_dt,
-    #         'note': note,
-    #         'state': 'draft',
-    #     })
+#     #     request.env['hr.attendance.correction'].sudo().create({
+#     #         'employee_id': employee.id,
+#     #         'check_in': check_in_dt,
+#     #         'check_out': check_out_dt,
+#     #         'note': note,
+#     #         'state': 'draft',
+#     #     })
     
-    #     return request.redirect('/my/attendance_correction')
+#     #     return request.redirect('/my/attendance_correction')
 
-    # @http.route(['/portal/request_attendance_correction'], type='http', auth="user", methods=['POST'], csrf=False)
-    # def submit_attendance_correction(self, **kwargs):
-    #     """ Allow employees to submit a new attendance correction request. """
-    #     user = request.env.user
-    #     employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
+#     # @http.route(['/portal/request_attendance_correction'], type='http', auth="user", methods=['POST'], csrf=False)
+#     # def submit_attendance_correction(self, **kwargs):
+#     #     """ Allow employees to submit a new attendance correction request. """
+#     #     user = request.env.user
+#     #     employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
 
-    #     if not employee:
-    #         return request.redirect('/my/home')
+#     #     if not employee:
+#     #         return request.redirect('/my/home')
 
-    #     check_in = kwargs.get('check_in')
-    #     check_out = kwargs.get('check_out')
-    #     note = kwargs.get('note')
+#     #     check_in = kwargs.get('check_in')
+#     #     check_out = kwargs.get('check_out')
+#     #     note = kwargs.get('note')
 
-    #     request.env['hr.attendance.correction'].sudo().create({
-    #         'employee_id': employee.id,
-    #         'check_in': check_in,
-    #         'check_out': check_out,
-    #         'note': note,
-    #         'state': 'draft',
-    #     })
+#     #     request.env['hr.attendance.correction'].sudo().create({
+#     #         'employee_id': employee.id,
+#     #         'check_in': check_in,
+#     #         'check_out': check_out,
+#     #         'note': note,
+#     #         'state': 'draft',
+#     #     })
 
-    #     return request.redirect('/my/attendance_correction')
+#     #     return request.redirect('/my/attendance_correction')
 
-########################End POrtal Request ########################################################################################
-# class PortalAttendance(http.Controller):
+# ########################End POrtal Request ########################################################################################
+# # class PortalAttendance(http.Controller):
 
-#     @http.route(['/my/attendance'], type='http', auth='user', website=True)
-#     def portal_my_attendance(self, **kwargs):
-#         """
-#         Show attendance records for the current user (employee) from the last 30 days only.
-#         """
-#         user = request.env.user
-#         employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
-#         if not employee:
-#             # Optionally redirect or show an error if no employee is linked to this user
-#             return request.redirect('/my/home')  
+# #     @http.route(['/my/attendance'], type='http', auth='user', website=True)
+# #     def portal_my_attendance(self, **kwargs):
+# #         """
+# #         Show attendance records for the current user (employee) from the last 30 days only.
+# #         """
+# #         user = request.env.user
+# #         employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
+# #         if not employee:
+# #             # Optionally redirect or show an error if no employee is linked to this user
+# #             return request.redirect('/my/home')  
 
-#         thirty_days_ago = fields.Datetime.now() - timedelta(days=30)
-#         attendance_records = request.env['hr.attendance'].sudo().search([
-#             ('employee_id', '=', employee.id),
-#             ('check_in', '>=', thirty_days_ago)
-#         ])
+# #         thirty_days_ago = fields.Datetime.now() - timedelta(days=30)
+# #         attendance_records = request.env['hr.attendance'].sudo().search([
+# #             ('employee_id', '=', employee.id),
+# #             ('check_in', '>=', thirty_days_ago)
+# #         ])
 
-#         values = {
-#             'attendance_records': attendance_records,
-#         }
-#         # Adjust the template name to match your actual template
-#         return request.render('portal_attendance_artx.portal_my_attendance', values)
+# #         values = {
+# #             'attendance_records': attendance_records,
+# #         }
+# #         # Adjust the template name to match your actual template
+# #         return request.render('portal_attendance_artx.portal_my_attendance', values)
 
 class PortalAttendance(http.Controller):
 
