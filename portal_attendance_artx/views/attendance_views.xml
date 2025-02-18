@@ -11,8 +11,15 @@
                         <sheet>
                             <group>
                                 <field name="employee_id"/>
-                                <field name="check_in"/>
-                                <field name="check_out"/>
+<!--                                 <field name="check_in"/>
+                                <field name="check_out"/> -->
+                                        
+                                <field name="attendance_id"/>
+                                <field name="original_check_in"/>
+                                <field name="original_check_out"/>
+                                <field name="corrected_check_in"/>
+                                <field name="corrected_check_out"/>
+                                
                                 <field name="note"/>
                                 <field name="state" readonly="1"/>
                             </group>
