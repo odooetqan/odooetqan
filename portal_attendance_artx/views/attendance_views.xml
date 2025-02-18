@@ -20,7 +20,7 @@
                                 <field name="corrected_check_in"/>
                                 <field name="corrected_check_out"/>
                                 
-                                <field name="note"/>
+                                <field name="reason"/>
                                 <field name="state" readonly="1"/>
                             </group>
 
