@@ -24,6 +24,20 @@ class PortalAttendance(http.Controller):
         corrected_check_out = kwargs.get('corrected_check_out')
         correction_reason = kwargs.get('correction_reason')
 
+
+        #######################################################################################################################
+        # Convert datetime format from HTML5 datetime-local input (2025-01-27T18:26) to Odoo format (2025-01-27 18:26:00)
+        try:
+            corrected_check_in = datetime.strptime(corrected_check_in, "%Y-%m-%dT%H:%M").strftime("%Y-%m-%d %H:%M:%S")
+            corrected_check_out = datetime.strptime(corrected_check_out, "%Y-%m-%dT%H:%M").strftime("%Y-%m-%d %H:%M:%S")
+        except ValueError as e:
+            _logger.error("❌ Date conversion error: %s", e)
+            return request.redirect('/my/attendance')
+
+        # Ensure attendance record exists
+        attendance = request.env['hr.attendance
+        #######################################################################################################################
+        
         # Ensure attendance record exists
         attendance = request.env['hr.attendance'].sudo().browse(attendance_id)
         if not attendance.exists():
