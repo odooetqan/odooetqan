@@ -28,12 +28,12 @@
             <form string="Attendance Correction Request">
                 <sheet>
                     <header>
-                        <button name="action_submit" type="object" string="Submit" class="oe_highlight"
-                                attrs="{'invisible': [('state', '!=', 'draft')]}"/>
-                        <button name="action_approve" type="object" string="Approve" class="btn-primary"
-                                attrs="{'invisible': [('state', '!=', 'pending')]}"/>
-                        <button name="action_reject" type="object" string="Reject" class="btn-danger"
-                                attrs="{'invisible': [('state', '!=', 'pending')]}"/>
+                        <button name="action_submit" type="object" string="Submit" class="oe_highlight"/>
+<!--                                 attrs="{'invisible': [('state', '!=', 'draft')]}"/> -->
+                        <button name="action_approve" type="object" string="Approve" class="btn-primary"/>
+<!--                                 attrs="{'invisible': [('state', '!=', 'pending')]}"/> -->
+                        <button name="action_reject" type="object" string="Reject" class="btn-danger"/>
+<!--                                 attrs="{'invisible': [('state', '!=', 'pending')]}"/> -->
                         <field name="state" widget="statusbar" readonly="1"/>
                     </header>
                     <group>
