@@ -64,6 +64,10 @@
             
                         <h3>طلب تصحيح الحضور</h3>
                         <form action="/portal/request_attendance_correction" method="post">
+                            <!-- CSRF Token Required for Secure Submission -->
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+
                             <label>الحضور :</label>
                             <input type="datetime-local" name="check_in" required="true" class="form-control"/>
             
@@ -202,6 +206,8 @@
                                         </div>
                                         <form action="/portal/request_attendance_correction" method="post">
                                             <div class="modal-body">
+                                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
                                                 <input type="hidden" name="attendance_id" t-att-value="record.id"/>
                                                 
                                                 <label>الحضور (المسجل):</label>
@@ -261,6 +267,8 @@
 
         <h3>طلب تصحيح الحضور</h3>
         <form action="/portal/request_attendance_correction" method="post">
+            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
             <label>الحضور :</label>
             <input type="datetime-local" name="check_in" required="true" class="form-control"/>
 
