@@ -19,6 +19,11 @@ class HrAttendanceCorrection(models.Model):
         ('rejected', 'Rejected')
     ], default='pending', string="Status", required=True)
 
+    def action_submit(self):
+        """Submit the correction request for approval."""
+        self.write({'state': 'pending'})
+        self.message_post(body="🟡 Attendance correction request submitted for approval.", subtype_xmlid="mail.mt_comment")
+
     def action_approve(self):
         """ Approve the correction and update hr.attendance record """
         for record in self:
