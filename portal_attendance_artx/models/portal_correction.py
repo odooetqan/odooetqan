@@ -2,6 +2,8 @@ from odoo import models, fields
 
 class HrAttendanceCorrection(models.Model):
     _name = 'hr.attendance.correction'
+    _inherit = ['mail.thread', 'mail.activity.mixin']  # ✅ Enables chatter
+
     _description = "Attendance Correction Request"
 
     employee_id = fields.Many2one('hr.employee', string="Employee", required=True)
