@@ -7,9 +7,15 @@
         <field name="model">hr.attendance.correction</field>
         <field name="arch" type="xml">
             <tree string="Attendance Correction Requests">
-                <field name="employee_id"/>
-                <field name="check_in"/>
-                <field name="check_out"/>
+                <field name="employee_id"/>                                    
+                <field name="original_check_in"/>
+                <field name="original_check_out"/>
+                <field name="corrected_check_in"/>
+                <field name="corrected_check_out"/>
+<!--                         
+                        <field name="check_in"/>
+                        <field name="check_out"/> -->
+                        <field name="reason"/>                
                 <field name="state"/>
                 <field name="approver_id"/>
             </tree>
