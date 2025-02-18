@@ -38,7 +38,7 @@
 <!--                         
                         <field name="check_in"/>
                         <field name="check_out"/> -->
-                        <field name="note"/>
+                        <field name="reason"/>
                         <field name="approver_id"/>
                         <field name="attachment" widget="many2many_binary"/>
                     </group>
