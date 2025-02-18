@@ -30,9 +30,14 @@
                         <field name="state" widget="statusbar" readonly="1"/>
                     </header>
                     <group>
-                        <field name="employee_id" readonly="1"/>
+                        <field name="employee_id" readonly="1"/>                                
+                        <field name="original_check_in"/>
+                        <field name="original_check_out"/>
+                        <field name="corrected_check_in"/>
+                        <field name="corrected_check_out"/>
+<!--                         
                         <field name="check_in"/>
-                        <field name="check_out"/>
+                        <field name="check_out"/> -->
                         <field name="note"/>
                         <field name="approver_id"/>
                         <field name="attachment" widget="many2many_binary"/>
