@@ -276,7 +276,8 @@ class MachineAttendance(models.Model):
                 employee_attendance[employee_id][punch_date] = []
 
             employee_attendance[employee_id][punch_date].append(record.punching_time)
-
+            
+        ksa_tz = timezone('Asia/Riyadh')  # ✅ Define the KSA timezone
         for employee_id, dates in employee_attendance.items():
             employee = self.env['hr.employee'].search([('device_id_num', '=', employee_id)], limit=1)
             if not employee:
@@ -292,13 +293,30 @@ class MachineAttendance(models.Model):
                 shift_intervals = []
                 for att in shift.attendance_ids:
                     if att.dayofweek == str(punch_date.weekday()):
-                        shift_start = datetime.combine(punch_date, datetime.min.time()).replace(
+
+                            
+                        # ✅ Convert Shift Time from KSA to UTC
+                        shift_start_ksa = datetime.combine(punch_date, datetime.min.time()).replace(
                             hour=int(att.hour_from), minute=int((att.hour_from % 1) * 60), second=0
                         )
-                        shift_end = datetime.combine(punch_date, datetime.min.time()).replace(
+                        shift_end_ksa = datetime.combine(punch_date, datetime.min.time()).replace(
                             hour=int(att.hour_to), minute=int((att.hour_to % 1) * 60), second=0
                         )
-                        shift_intervals.append((shift_start, shift_end))
+    
+                        shift_start_utc = ksa_tz.localize(shift_start_ksa).astimezone(utc)
+                        shift_end_utc = ksa_tz.localize(shift_end_ksa).astimezone(utc)
+    
+                        shift_intervals.append((shift_start_utc, shift_end_utc))
+
+
+                    
+                        # shift_start = datetime.combine(punch_date, datetime.min.time()).replace(
+                        #     hour=int(att.hour_from), minute=int((att.hour_from % 1) * 60), second=0
+                        # )
+                        # shift_end = datetime.combine(punch_date, datetime.min.time()).replace(
+                        #     hour=int(att.hour_to), minute=int((att.hour_to % 1) * 60), second=0
+                        # )
+                        # shift_intervals.append((shift_start, shift_end))
 
                 if not shift_intervals:
                     _logger.warning(f"⚠️ No Shift Timings for Employee {employee.name} on {punch_date}")
