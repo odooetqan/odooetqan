@@ -361,7 +361,9 @@ class MachineAttendance(models.Model):
                         continue
 
                     # Ensure check-out is after check-in
-                    if check_out_time < check_in_time:
+                    # if check_out_time < check_in_time:
+                    if check_out_time.replace(tzinfo=None) < check_in_time.replace(tzinfo=None):
+
                         _logger.warning(f"❌ Error: Check-Out time {check_out_time} is before Check-In {check_in_time}, correcting...")
                         check_out_time = check_in_time + timedelta(minutes=1)  # Force valid checkout
 
