@@ -340,7 +340,11 @@ class MachineAttendance(models.Model):
                     elif len(shift_punches) == 1:
                         # 🔹 Single Punch: Determine check-in or check-out based on proximity
                         punch_time = shift_punches[0]
-                        if abs((punch_time - shift_start).total_seconds()) <= abs((punch_time - shift_end).total_seconds()):
+                        # if abs((punch_time - shift_start).total_seconds()) <= abs((punch_time - shift_end).total_seconds()):
+                        if abs((punch_time.replace(tzinfo=None) - shift_start.replace(tzinfo=None)).total_seconds()) <= \
+                           abs((punch_time.replace(tzinfo=None) - shift_end.replace(tzinfo=None)).total_seconds()):
+
+       
                             # Punch is closer to shift start, consider it a check-in
                             check_in_time = punch_time
                             check_out_time = shift_end - timedelta(hours=1)  # Early check-out
