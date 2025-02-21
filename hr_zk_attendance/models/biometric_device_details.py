@@ -328,7 +328,8 @@ class MachineAttendance(models.Model):
                 punch_times.sort()  # Ensure punches are in chronological order
 
                 for shift_start, shift_end in shift_intervals:
-                    shift_punches = [p for p in punch_times if shift_start <= p <= shift_end]
+                    # shift_punches = [p for p in punch_times if shift_start <= p <= shift_end]
+                    shift_punches = [  p for p in punch_times   if shift_start.replace(tzinfo=None) <= p.replace(tzinfo=None) <= shift_end.replace(tzinfo=None)]
 
                     if len(shift_punches) > 1:
                         # 🔹 Multiple Check-Ins and Check-Outs in a Shift: Use first check-in and last check-out
