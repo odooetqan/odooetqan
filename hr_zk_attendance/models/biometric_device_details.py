@@ -381,8 +381,8 @@ class MachineAttendance(models.Model):
                     # ✅ Create attendance record
                     hr_attendance_obj.create({
                         'employee_id': employee.id,
-                        'check_in': check_in_time,
-                        'check_out': check_out_time
+                        'check_in': check_in_time.replace(tzinfo=None),
+                        'check_out': check_out_time.replace(tzinfo=None)
                     })
                     _logger.info(f"✅ Attendance Recorded for {employee.name} on {punch_date}: IN {check_in_time}, OUT {check_out_time}")
 
