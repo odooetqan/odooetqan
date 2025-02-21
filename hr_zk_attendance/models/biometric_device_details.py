@@ -21,6 +21,9 @@ import pytz
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 from datetime import datetime, timedelta  # ✅ Ensure timedelta is imported
+from pytz import timezone, utc  # ✅ Import timezone functions
+
+_logger = logging.getLogger(__name__)
 
 _logger = logging.getLogger(__name__)
 try:
