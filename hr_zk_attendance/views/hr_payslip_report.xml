@@ -1,4 +1,4 @@
-<xpath expr="//table[@class='o_payslip_lines']" position="inside">
+<!-- <xpath expr="//table[@class='o_payslip_lines']" position="inside">
     <tr>
         <td><strong>Total Lateness:</strong></td>
         <td t-esc="format_amount(payslip.total_late_minutes, 'Minutes')" />
@@ -7,4 +7,4 @@
         <td><strong>Total Overtime:</strong></td>
         <td t-esc="format_amount(payslip.total_overtime_minutes, 'Minutes')" />
     </tr>
-</xpath>
+</xpath> -->
