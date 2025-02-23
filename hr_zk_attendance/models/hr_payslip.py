@@ -1,3 +1,13 @@
+
+import datetime
+import logging
+import pytz
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError, ValidationError
+from datetime import datetime, timedelta  # ✅ Ensure timedelta is imported
+from pytz import timezone, utc  # ✅ Import timezone functions
+
+
 class HrPayslip(models.Model):
     _inherit = 'hr.payslip'
 
