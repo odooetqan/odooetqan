@@ -20,11 +20,11 @@
             <xpath expr="//page[@name='salary_computation']" position="inside">
                 <tr>
                     <td><strong>Total Lateness:</strong></td>
-                    <td t-esc="format_amount(payslip.total_late_minutes, 'Minutes')" />
+                    <td t-field="format_amount(payslip.total_late_minutes, 'Minutes')" />
                 </tr>
                 <tr>
                     <td><strong>Total Overtime:</strong></td>
-                    <td t-esc="format_amount(payslip.total_overtime_minutes, 'Minutes')" />
+                    <td t-field="format_amount(payslip.total_overtime_minutes, 'Minutes')" />
                 </tr>
             </xpath>
 
