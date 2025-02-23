@@ -17,7 +17,7 @@
                 </tr>
             </xpath> -->
            
-            <xpath expr="//table[@class='salary_computation']" position="inside">
+            <xpath expr="//page[@name='salary_computation']" position="inside">
                 <tr>
                     <td><strong>Total Lateness:</strong></td>
                     <td t-esc="format_amount(payslip.total_late_minutes, 'Minutes')" />
