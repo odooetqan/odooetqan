@@ -5,7 +5,8 @@
         <field name="model">hr.payslip</field>
         <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form" />
         <field name="arch" type="xml">
-            <xpath expr="//table[@class='o_payslip_lines']" position="inside">
+           
+            <xpath expr="//table[@class='line_ids']" position="inside">
                 <tr>
                     <td><strong>Total Lateness:</strong></td>
                     <td t-esc="format_amount(payslip.total_late_minutes, 'Minutes')" />
@@ -15,6 +16,19 @@
                     <td t-esc="format_amount(payslip.total_overtime_minutes, 'Minutes')" />
                 </tr>
             </xpath>
+           
+            <xpath expr="//table[@class='salary_computation']" position="inside">
+                <tr>
+                    <td><strong>Total Lateness:</strong></td>
+                    <td t-esc="format_amount(payslip.total_late_minutes, 'Minutes')" />
+                </tr>
+                <tr>
+                    <td><strong>Total Overtime:</strong></td>
+                    <td t-esc="format_amount(payslip.total_overtime_minutes, 'Minutes')" />
+                </tr>
+            </xpath>
+
+            
         </field>
     </record>
 </odoo>
