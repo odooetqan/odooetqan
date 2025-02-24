@@ -8,7 +8,15 @@ import logging
 _logger = logging.getLogger(__name__)
 
 import pytz 
+# from odoo import http
+# from odoo.http import request
+# from datetime import datetime, timedelta
+# from odoo import http, fields
+# import json
+# import logging
+# import pytz
 
+_logger = logging.getLogger(__name__)
 
 class PortalAttendance(http.Controller):
     @http.route(['/my/attendance'], type='http', auth='user', website=True)
@@ -39,20 +47,24 @@ class PortalAttendance(http.Controller):
                 dt_utc = dt.replace(tzinfo=utc_tz) if dt.tzinfo is None else dt.astimezone(utc_tz)
                 return dt_utc.astimezone(user_tz).replace(tzinfo=None)  # Convert to Riyadh and remove tzinfo
             return None
+        
+        def convert_datetime_to_str(dt):
+            if dt:
+                return dt.strftime("%Y-%m-%d %H:%M:%S")  # Format datetime to string
+            return None
     
         converted_attendance = []
         for record in attendance_records:
             converted_attendance.append({
-                'check_in': convert_to_tz(record.check_in),
-                'check_out': convert_to_tz(record.check_out) if record.check_out else None,
+                'check_in': convert_datetime_to_str(convert_to_tz(record.check_in)),
+                'check_out': convert_datetime_to_str(convert_to_tz(record.check_out)) if record.check_out else None,
                 'worked_hours': record.worked_hours,  # Keep `worked_hours` intact
             })
     
-        # Return JSON for debugging
+        # Return JSON response
         return json.dumps({
             'attendance_records': converted_attendance,
         })
-
 
 
     
