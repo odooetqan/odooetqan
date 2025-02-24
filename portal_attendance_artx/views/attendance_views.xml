@@ -203,7 +203,7 @@
                         
                         
 <!--                         <td><t t-esc="'{:.2f}'.format(record.worked_hours)"/></td> -->
-                        <td><t t-esc="'{:.2f}'.format(record.overtime_hours)"/></td>
+<!--                         <td><t t-esc="'{:.2f}'.format(record.overtime_hours)"/></td> -->
                         <td>
                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" t-att-data-bs-target="'#correctAttendanceModal-%s' % record.id">
                                 تصحيح
