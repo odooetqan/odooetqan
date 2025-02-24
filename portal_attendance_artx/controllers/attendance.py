@@ -52,9 +52,11 @@ class PortalAttendance(http.Controller):
             })
     
         # Return JSON response
-        return json.dumps({
-            'attendance_records': converted_attendance,
-        })
+        # return json.dumps({
+        #     'attendance_records': converted_attendance,
+        # })
+        return request.render('portal_attendance_artx.portal_my_attendance', values)
+
 
 # from odoo import http
 # from odoo.http import request
