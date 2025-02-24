@@ -194,8 +194,11 @@
                         <t t-esc="record['check_out']"/>
 <!--                         <t t-esc="record['worked_hours']"/> -->
 
- 
-               <td><t t-esc="record.worked_hours" /></td> <!-- No need to format here -->
+                         <t t-if="'worked_hours' in record">
+                            <t t-esc="record['worked_hours']"/>
+                        </t>
+
+<!--                <td><t t-esc="record.worked_hours" /></td>  -->     <!-- No need to format here -->
 
 <!--         <td><t t-esc="\'{:.2f}\'.format(record['worked_hours'])" /></td>--> <!-- Ensure dictionary access --> 
  
