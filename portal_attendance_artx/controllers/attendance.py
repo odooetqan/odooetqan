@@ -7,8 +7,136 @@ import json
 import logging
 _logger = logging.getLogger(__name__)
 
+import pytz
 
+class PortalAttendance(http.Controller):
 
+    @http.route(['/my/attendance'], type='http', auth='user', website=True)
+    def portal_my_attendance(self, **kwargs):
+        """
+        Display `hr.attendance` records converted from UTC to Asia/Riyadh timezone.
+        """
+        user = request.env.user
+        employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
+        
+        if not employee:
+            return request.redirect('/my/home')  # Redirect if no employee is found
+
+        today = fields.Date.today()
+        first_day_of_current_month = today.replace(day=1)
+        fifteenth_previous_month = first_day_of_current_month - timedelta(days=15)
+
+        # Get attendance records within the date range
+        attendance_records = request.env['hr.attendance'].sudo().search([
+            ('employee_id', '=', employee.id),
+            ('check_in', '>=', fifteenth_previous_month),
+            ('check_in', '<=', today)
+        ])
+
+        # Convert check-in and check-out times from UTC to Asia/Riyadh
+        user_tz = pytz.timezone('Asia/Riyadh')  # Set to Riyadh timezone
+        utc_tz = pytz.UTC
+
+        def convert_to_tz(dt):
+            if dt:
+                dt_utc = dt.replace(tzinfo=utc_tz)
+                return dt_utc.astimezone(user_tz)
+            return None
+
+        converted_attendance = []
+        for record in attendance_records:
+            converted_attendance.append({
+                'check_in': convert_to_tz(record.check_in),
+                'check_out': convert_to_tz(record.check_out) if record.check_out else None,
+                'worked_hours': record.worked_hours,
+            })
+
+        values = {
+            'attendance_records': converted_attendance,
+        }
+        return request.render('portal_attendance_artx.portal_my_attendance', values)
+# #_________________________________________________________________________________________________________________________________
+
+# class PortalAttendance(http.Controller):
+
+#     @http.route(['/my/attendance'], type='http', auth='user', website=True)
+#     def portal_my_attendance(self, **kwargs):
+#         """
+#         Display `hr.attendance` records as they are, filtered from the 15th of the previous month to today.
+#         """
+#         user = request.env.user
+#         employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
+        
+#         if not employee:
+#             return request.redirect('/my/home')  # Redirect if no employee is found
+
+#         # Get today's date
+#         today = fields.Date.today()
+
+#         # Get the 15th of the previous month
+#         first_day_of_current_month = today.replace(day=1)
+#         fifteenth_previous_month = first_day_of_current_month - timedelta(days=15)
+
+#         # Get attendance records within the date range
+#         attendance_records = request.env['hr.attendance'].sudo().search([
+#             ('employee_id', '=', employee.id),
+#             ('check_in', '>=', fifteenth_previous_month),
+#             ('check_in', '<=', today)
+#         ])
+
+#         values = {
+#             'attendance_records': attendance_records,
+#         }
+#         return request.render('portal_attendance_artx.portal_my_attendance', values)
+
+# class AttendanceController(http.Controller):
+
+#     @http.route('/portal/add_attendance', type='http', auth="user", methods=['POST'], csrf=False)
+#     def add_attendance(self, **kwargs):
+#         """
+#         Allows adding a check-in. Does not allow check-outs.
+#         Disallows creating a check-in that is older than 30 days from now.
+#         """
+#         user = request.env.user
+#         employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
+
+#         if not employee:
+#             response_data = {'success': False, 'message': 'Employee not found for the logged-in user'}
+#             return request.make_response(json.dumps(response_data), headers=[('Content-Type', 'application/json')])
+
+#         # Retrieve check_in from the POST data
+#         check_in_str = kwargs.get('check_in')
+#         if not check_in_str:
+#             response_data = {'success': False, 'message': 'No check_in date/time provided'}
+#             return request.make_response(json.dumps(response_data), headers=[('Content-Type', 'application/json')])
+
+#         # Convert the check_in string to a datetime object
+#         try:
+#             check_in_dt = fields.Datetime.from_string(check_in_str)
+#         except Exception:
+#             check_in_dt = False
+
+#         if not check_in_dt:
+#             response_data = {'success': False, 'message': 'Invalid check_in format'}
+#             return request.make_response(json.dumps(response_data), headers=[('Content-Type', 'application/json')])
+
+#         # Disallow check-in older than 30 days
+#         thirty_days_ago = fields.Datetime.now() - timedelta(days=30)
+#         if check_in_dt < thirty_days_ago:
+#             response_data = {'success': False, 'message': 'Cannot create attendance older than 30 days'}
+#             return request.make_response(json.dumps(response_data), headers=[('Content-Type', 'application/json')])
+
+#         # Create new attendance record
+#         attendance = request.env['hr.attendance'].sudo().create({
+#             'employee_id': employee.id,
+#             'check_in': check_in_dt,
+#             # Note: No check_out is being set here
+#         })
+
+#         response_data = {'success': True, 'message': 'Check-in recorded'}
+#         return request.make_response(json.dumps(response_data), headers=[('Content-Type', 'application/json')])
+
+# #________________________________________________________________________________________________________________________________
 
 # ############### PORTAL request to correct hr attendance 
 # class PortalAttendanceCorrection(http.Controller):
@@ -309,86 +437,6 @@ _logger = logging.getLogger(__name__)
 # #         }
 # #         # Adjust the template name to match your actual template
 # #         return request.render('portal_attendance_artx.portal_my_attendance', values)
-
-class PortalAttendance(http.Controller):
-
-    @http.route(['/my/attendance'], type='http', auth='user', website=True)
-    def portal_my_attendance(self, **kwargs):
-        """
-        Display `hr.attendance` records as they are, filtered from the 15th of the previous month to today.
-        """
-        user = request.env.user
-        employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
-        
-        if not employee:
-            return request.redirect('/my/home')  # Redirect if no employee is found
-
-        # Get today's date
-        today = fields.Date.today()
-
-        # Get the 15th of the previous month
-        first_day_of_current_month = today.replace(day=1)
-        fifteenth_previous_month = first_day_of_current_month - timedelta(days=15)
-
-        # Get attendance records within the date range
-        attendance_records = request.env['hr.attendance'].sudo().search([
-            ('employee_id', '=', employee.id),
-            ('check_in', '>=', fifteenth_previous_month),
-            ('check_in', '<=', today)
-        ])
-
-        values = {
-            'attendance_records': attendance_records,
-        }
-        return request.render('portal_attendance_artx.portal_my_attendance', values)
-
-class AttendanceController(http.Controller):
-
-    @http.route('/portal/add_attendance', type='http', auth="user", methods=['POST'], csrf=False)
-    def add_attendance(self, **kwargs):
-        """
-        Allows adding a check-in. Does not allow check-outs.
-        Disallows creating a check-in that is older than 30 days from now.
-        """
-        user = request.env.user
-        employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
-
-        if not employee:
-            response_data = {'success': False, 'message': 'Employee not found for the logged-in user'}
-            return request.make_response(json.dumps(response_data), headers=[('Content-Type', 'application/json')])
-
-        # Retrieve check_in from the POST data
-        check_in_str = kwargs.get('check_in')
-        if not check_in_str:
-            response_data = {'success': False, 'message': 'No check_in date/time provided'}
-            return request.make_response(json.dumps(response_data), headers=[('Content-Type', 'application/json')])
-
-        # Convert the check_in string to a datetime object
-        try:
-            check_in_dt = fields.Datetime.from_string(check_in_str)
-        except Exception:
-            check_in_dt = False
-
-        if not check_in_dt:
-            response_data = {'success': False, 'message': 'Invalid check_in format'}
-            return request.make_response(json.dumps(response_data), headers=[('Content-Type', 'application/json')])
-
-        # Disallow check-in older than 30 days
-        thirty_days_ago = fields.Datetime.now() - timedelta(days=30)
-        if check_in_dt < thirty_days_ago:
-            response_data = {'success': False, 'message': 'Cannot create attendance older than 30 days'}
-            return request.make_response(json.dumps(response_data), headers=[('Content-Type', 'application/json')])
-
-        # Create new attendance record
-        attendance = request.env['hr.attendance'].sudo().create({
-            'employee_id': employee.id,
-            'check_in': check_in_dt,
-            # Note: No check_out is being set here
-        })
-
-        response_data = {'success': True, 'message': 'Check-in recorded'}
-        return request.make_response(json.dumps(response_data), headers=[('Content-Type', 'application/json')])
-
 
 # #---- TO addd tree attendance  portal gate#######################################################################################################################
 
