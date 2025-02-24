@@ -188,7 +188,16 @@
                     <tr>
                         <td><t t-esc="record.get('check_in', '')"/></td>
                         <td><t t-esc="record.get('check_out', '')"/></td>
-                        <td><t t-if="'worked_hours' in record"><t t-esc="record.get('worked_hours', '')"/></t></td>
+<!--                         <td><t t-if="'worked_hours' in record"><t t-esc="record.get('worked_hours', '')"/></t></td> -->
+                        <td>
+                            <t t-if="'worked_hours' in record">
+                                <t t-set="total_minutes" t-value="int(record['worked_hours'] * 60)"/>
+                                <t t-set="hours" t-value="total_minutes // 60"/>
+                                <t t-set="minutes" t-value="total_minutes % 60"/>
+                                <t t-esc="('%02d:%02d' % (hours, minutes))"/>
+                            </t>
+                        </td>
+
                         <td><t t-esc="record.get('overtime_hours', '')"/></td>
                         <td>
                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" t-att-data-bs-target="'#correctAttendanceModal-%s' % record['id']">
