@@ -46,6 +46,7 @@ class PortalAttendance(http.Controller):
         converted_attendance = []
         for record in attendance_records:
             converted_attendance.append({
+                'id': record.id,  # Add this line
                 'check_in': convert_datetime_to_str(convert_to_tz(record.check_in)),
                 'check_out': convert_datetime_to_str(convert_to_tz(record.check_out)) if record.check_out else None,
                 # 'worked_hours': record.worked_hours,  # Keep `worked_hours` intact
