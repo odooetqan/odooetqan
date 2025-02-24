@@ -55,6 +55,14 @@ class PortalAttendance(http.Controller):
         # return json.dumps({
         #     'attendance_records': converted_attendance,
         # })
+        
+
+        # Define the values dictionary
+        values = {
+            'attendance_records': converted_attendance,
+            'employee_name': employee.name,  # Add employee name for display
+        }
+        
         return request.render('portal_attendance_artx.portal_my_attendance', values)
 
 
