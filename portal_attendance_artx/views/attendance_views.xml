@@ -186,39 +186,17 @@
             <tbody>
                 <t t-foreach="attendance_records" t-as="record">
                     <tr>
-                        <!-- <td><t t-esc="record.check_in_date"/></td> -->
-<!--                         <td><t t-esc="record.check_in"/></td>
-                        <td><t t-esc="record.check_out"/></td> -->
-
-                        <t t-esc="record['check_in']"/>
-                        <t t-esc="record['check_out']"/>
-<!--                         <t t-esc="record['worked_hours']"/> -->
-
-                        <t t-if="'worked_hours' in record">
-                            <t t-esc="record['worked_hours']"/>
-                        </t>
-
-
-<!--                <td><t t-esc="record.worked_hours" /></td>  -->     <!-- No need to format here -->
-
-<!--         <td><t t-esc="\'{:.2f}\'.format(record['worked_hours'])" /></td>--> <!-- Ensure dictionary access --> 
- 
-
-                        
-                        
-<!--                         <td><t t-esc="'{:.2f}'.format(record.worked_hours)"/></td> -->
-<!--                         <td><t t-esc="'{:.2f}'.format(record.overtime_hours)"/></td> -->
+                        <td><t t-esc="record.get('check_in', '')"/></td>
+                        <td><t t-esc="record.get('check_out', '')"/></td>
+                        <td><t t-if="'worked_hours' in record"><t t-esc="record.get('worked_hours', '')"/></t></td>
+                        <td><t t-esc="record.get('overtime_hours', '')"/></td>
                         <td>
-<!--                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" t-att-data-bs-target="'#correctAttendanceModal-%s' % record.id"> -->
                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" t-att-data-bs-target="'#correctAttendanceModal-%s' % record['id']">
-
                                 تصحيح
                             </button>
-                        
+            
                             <!-- Modal (Popup Form) -->
-<!--                             <div class="modal fade" t-att-id="'correctAttendanceModal-%s' % record.id" tabindex="-1" aria-hidden="true"> -->
-                                <div class="modal fade" t-att-id="'correctAttendanceModal-%s' % record['id']">
-
+                            <div class="modal fade" t-att-id="'correctAttendanceModal-%s' % record['id']" tabindex="-1" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -228,25 +206,20 @@
                                         <form action="/portal/request_attendance_correction" method="post">
                                             <div class="modal-body">
                                                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-
-<!--                                                 <input type="hidden" name="attendance_id" t-att-value="record.id"/> -->
-<!--                                                 <input type="hidden" name="attendance_id" t-att-value="record.get('id', '')"/> -->
                                                 <input type="hidden" name="attendance_id" t-att-value="record['id']"/>
-
+            
                                                 <label>الحضور (المسجل):</label>
-<!--                                                 <input type="datetime-local" name="original_check_in" t-att-value="record.check_in" class="form-control" readonly="1"/> -->
                                                 <input type="datetime-local" name="original_check_in" t-att-value="record.get('check_in', '')" class="form-control" readonly="1"/>
-
+            
                                                 <label>الخروج (المسجل):</label>
-<!--                                                 <input type="datetime-local" name="original_check_out" t-att-value="record.check_out" class="form-control" readonly="1"/> -->
                                                 <input type="datetime-local" name="original_check_out" t-att-value="record.get('check_out', '')" class="form-control" readonly="1"/>
-
+            
                                                 <label>تصحيح الحضور:</label>
                                                 <input type="datetime-local" name="corrected_check_in" class="form-control" required="true"/>
-                        
+                            
                                                 <label>تصحيح الانصراف:</label>
                                                 <input type="datetime-local" name="corrected_check_out" class="form-control" required="true"/>
-                        
+                            
                                                 <label>سبب التصحيح:</label>
                                                 <textarea name="correction_reason" class="form-control"></textarea>
                                             </div>
@@ -259,10 +232,11 @@
                                 </div>
                             </div>
                         </td>
-
                     </tr>
                 </t>
             </tbody>
+
+                
         </table>
     </div>
     
