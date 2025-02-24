@@ -3,19 +3,9 @@ from odoo.http import request
 from datetime import datetime, timedelta
 from odoo import http, fields
 import json
+import pytz 
 
 import logging
-_logger = logging.getLogger(__name__)
-
-import pytz 
-# from odoo import http
-# from odoo.http import request
-# from datetime import datetime, timedelta
-# from odoo import http, fields
-# import json
-# import logging
-# import pytz
-
 _logger = logging.getLogger(__name__)
 
 class PortalAttendance(http.Controller):
@@ -65,6 +55,65 @@ class PortalAttendance(http.Controller):
         return json.dumps({
             'attendance_records': converted_attendance,
         })
+
+# from odoo import http
+# from odoo.http import request
+# from datetime import datetime, timedelta
+# from odoo import http, fields
+# import json
+# import logging
+# import pytz
+
+# _logger = logging.getLogger(__name__)
+
+
+# class PortalAttendance(http.Controller):
+#     @http.route(['/my/attendance'], type='http', auth='user', website=True)
+#     def portal_my_attendance(self, **kwargs):
+#         user = request.env.user
+#         employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
+    
+#         if not employee:
+#             return request.redirect('/my/home')  # Redirect if no employee is found
+    
+#         today = fields.Date.today()
+#         first_day_of_current_month = today.replace(day=1)
+#         fifteenth_previous_month = first_day_of_current_month - timedelta(days=15)
+    
+#         # Get attendance records within the date range
+#         attendance_records = request.env['hr.attendance'].sudo().search([
+#             ('employee_id', '=', employee.id),
+#             ('check_in', '>=', fifteenth_previous_month),
+#             ('check_in', '<=', today)
+#         ])
+    
+#         # Convert check-in and check-out times from UTC to Asia/Riyadh
+#         user_tz = pytz.timezone('Asia/Riyadh')  # Set to Riyadh timezone
+#         utc_tz = pytz.UTC
+    
+#         def convert_to_tz(dt):
+#             if dt:
+#                 dt_utc = dt.replace(tzinfo=utc_tz) if dt.tzinfo is None else dt.astimezone(utc_tz)
+#                 return dt_utc.astimezone(user_tz).replace(tzinfo=None)  # Convert to Riyadh and remove tzinfo
+#             return None
+        
+#         def convert_datetime_to_str(dt):
+#             if dt:
+#                 return dt.strftime("%Y-%m-%d %H:%M:%S")  # Format datetime to string
+#             return None
+    
+#         converted_attendance = []
+#         for record in attendance_records:
+#             converted_attendance.append({
+#                 'check_in': convert_datetime_to_str(convert_to_tz(record.check_in)),
+#                 'check_out': convert_datetime_to_str(convert_to_tz(record.check_out)) if record.check_out else None,
+#                 'worked_hours': record.worked_hours,  # Keep `worked_hours` intact
+#             })
+    
+#         # Return JSON response
+#         return json.dumps({
+#             'attendance_records': converted_attendance,
+#         })
 
 
     
