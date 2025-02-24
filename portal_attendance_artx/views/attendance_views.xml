@@ -230,7 +230,8 @@
                                                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
 
 <!--                                                 <input type="hidden" name="attendance_id" t-att-value="record.id"/> -->
-                                                <input type="hidden" name="attendance_id" t-att-value="record.get('id', '')"/>
+<!--                                                 <input type="hidden" name="attendance_id" t-att-value="record.get('id', '')"/> -->
+                                                <input type="hidden" name="attendance_id" t-att-value="record['id']"/>
 
                                                 <label>الحضور (المسجل):</label>
                                                 <input type="datetime-local" name="original_check_in" t-att-value="record.check_in" class="form-control" readonly="1"/>
