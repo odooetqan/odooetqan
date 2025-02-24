@@ -44,17 +44,31 @@ class PortalAttendance(http.Controller):
             return None
 
         converted_attendance = []
+        #for record in attendance_records:
+                    
+            #record.check_in = convert_to_tz(record.check_in)
+            #record.check_out = convert_to_tz(record.check_out) if record.check_out else None
+            
+            #converted_attendance.append({
+            #    'check_in': convert_to_tz(record.check_in),
+            #    'check_out': convert_to_tz(record.check_out) if record.check_out else None,
+             #   'worked_hours': record.worked_hours,
+           # })
+
         for record in attendance_records:
-            converted_attendance.append({
-                'check_in': convert_to_tz(record.check_in),
-                'check_out': convert_to_tz(record.check_out) if record.check_out else None,
-                'worked_hours': record.worked_hours,
-            })
+            record.check_in = convert_to_tz(record.check_in)
+            record.check_out = convert_to_tz(record.check_out) if record.check_out else None
 
         values = {
-            'attendance_records': converted_attendance,
+            'attendance_records': attendance_records,  # Pass ORM objects instead of dicts
         }
         return request.render('portal_attendance_artx.portal_my_attendance', values)
+
+        
+       # values = {
+       #     'attendance_records': converted_attendance,
+      #  }
+      #  return request.render('portal_attendance_artx.portal_my_attendance', values)
 # #_________________________________________________________________________________________________________________________________
 
 # class PortalAttendance(http.Controller):
