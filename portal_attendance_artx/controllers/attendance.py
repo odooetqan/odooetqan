@@ -49,6 +49,8 @@ class PortalAttendance(http.Controller):
                 'check_in': convert_datetime_to_str(convert_to_tz(record.check_in)),
                 'check_out': convert_datetime_to_str(convert_to_tz(record.check_out)) if record.check_out else None,
                 'worked_hours': record.worked_hours,  # Keep `worked_hours` intact
+                'worked_hours': record.worked_hours or 0.0,  # Keep `worked_hours` intact & Never NONE
+
             })
     
         # Return JSON response
