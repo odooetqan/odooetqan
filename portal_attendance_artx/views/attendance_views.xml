@@ -197,7 +197,7 @@
  
                <td><t t-esc="record.worked_hours" /></td> <!-- No need to format here -->
 
-<!--         <td><t t-esc="\'{:.2f}\'.format(record['worked_hours'])" /></td> <!-- Ensure dictionary access --> 
+<!--         <td><t t-esc="\'{:.2f}\'.format(record['worked_hours'])" /></td>--> <!-- Ensure dictionary access --> 
  
 
                         
