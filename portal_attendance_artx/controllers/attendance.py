@@ -7,7 +7,9 @@ import json
 import logging
 _logger = logging.getLogger(__name__)
 
-import pytz
+import pytz 
+
+from odoo.http import request
 
 class PortalAttendance(http.Controller):
 
@@ -39,20 +41,68 @@ class PortalAttendance(http.Controller):
 
         def convert_to_tz(dt):
             if dt:
-                dt_utc = dt.replace(tzinfo=utc_tz)
-                return dt_utc.astimezone(user_tz)
+                dt_utc = dt.replace(tzinfo=utc_tz) if dt.tzinfo is None else dt.astimezone(utc_tz)
+                return dt_utc.astimezone(user_tz).replace(tzinfo=None)  # Convert to Riyadh and remove tzinfo
             return None
 
+        converted_attendance = []
         for record in attendance_records:
-            if record.check_in:
-                record.check_in = convert_to_tz(record.check_in).replace(tzinfo=None)
-            if record.check_out:
-                record.check_out = convert_to_tz(record.check_out).replace(tzinfo=None)
+            converted_attendance.append({
+                'check_in': convert_to_tz(record.check_in),
+                'check_out': convert_to_tz(record.check_out) if record.check_out else None,
+                'worked_hours': record.worked_hours,
+            })
 
         values = {
-            'attendance_records': attendance_records,  # Pass ORM objects
+            'attendance_records': converted_attendance,
         }
         return request.render('portal_attendance_artx.portal_my_attendance', values)
+
+
+# class PortalAttendance(http.Controller):
+
+#     @http.route(['/my/attendance'], type='http', auth='user', website=True)
+#     def portal_my_attendance(self, **kwargs):
+#         """
+#         Display `hr.attendance` records converted from UTC to Asia/Riyadh timezone.
+#         """
+#         user = request.env.user
+#         employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
+        
+#         if not employee:
+#             return request.redirect('/my/home')  # Redirect if no employee is found
+
+#         today = fields.Date.today()
+#         first_day_of_current_month = today.replace(day=1)
+#         fifteenth_previous_month = first_day_of_current_month - timedelta(days=15)
+
+#         # Get attendance records within the date range
+#         attendance_records = request.env['hr.attendance'].sudo().search([
+#             ('employee_id', '=', employee.id),
+#             ('check_in', '>=', fifteenth_previous_month),
+#             ('check_in', '<=', today)
+#         ])
+
+#         # Convert check-in and check-out times from UTC to Asia/Riyadh
+#         user_tz = pytz.timezone('Asia/Riyadh')  # Set to Riyadh timezone
+#         utc_tz = pytz.UTC
+
+#         def convert_to_tz(dt):
+#             if dt:
+#                 dt_utc = dt.replace(tzinfo=utc_tz)
+#                 return dt_utc.astimezone(user_tz)
+#             return None
+
+#         for record in attendance_records:
+#             if record.check_in:
+#                 record.check_in = convert_to_tz(record.check_in).replace(tzinfo=None)
+#             if record.check_out:
+#                 record.check_out = convert_to_tz(record.check_out).replace(tzinfo=None)
+
+#         values = {
+#             'attendance_records': attendance_records,  # Pass ORM objects
+#         }
+#         return request.render('portal_attendance_artx.portal_my_attendance', values)
 
 
 # class PortalAttendance(http.Controller):
