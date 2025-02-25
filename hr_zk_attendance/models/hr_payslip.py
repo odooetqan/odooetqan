@@ -13,6 +13,33 @@ class HrPayslip(models.Model):
     total_late_minutes = fields.Float(string="Total Lateness (Minutes)", compute="_compute_attendance_data", store=True)
     total_overtime_minutes = fields.Float(string="Total Overtime (Minutes)", compute="_compute_attendance_data", store=True)
 
+    lateness_deduction = fields.Float(string="Lateness Deduction", compute="_compute_lateness_deduction", store=True)
+
+    @api.depends('employee_id', 'date_from', 'date_to')
+    def _compute_lateness_deduction(self):
+        """Calculate total lateness deduction for the payslip period."""
+        for payslip in self:
+            if not payslip.employee_id:
+                payslip.lateness_deduction = 0
+                continue
+
+            # Fetch all attendance records within the payslip period
+            attendances = self.env['hr.attendance'].search([
+                ('employee_id', '=', payslip.employee_id.id),
+                ('check_in', '>=', payslip.date_from),
+                ('check_in', '<=', payslip.date_to)
+            ])
+
+            total_late_minutes = sum(att.late_minutes for att in attendances)
+
+            # Fetch penalty rate per minute from employee contract (or set a default)
+            contract = payslip.contract_id
+            penalty_per_minute = contract.penalty_per_minute if contract and contract.penalty_per_minute else 0  
+
+            payslip.lateness_deduction = total_late_minutes * penalty_per_minute
+
+
+    
     @api.depends('employee_id', 'date_from', 'date_to')
     def _compute_attendance_data(self):
         """Calculate total lateness and overtime for the payslip period."""
