@@ -42,8 +42,8 @@
         <field name="model">hr.payslip</field>
         <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
         <field name="arch" type="xml">
-            <notebook position="inside">
-                <page string="معلومات إضافية">
+            <notebook position="before">
+                <!-- <page string="معلومات إضافية"> -->
                     <group col="2">
 <!--                         <field name="extra_info_id" nolabel="1">
                             <tree editable="bottom"> -->
@@ -54,10 +54,6 @@
                                 <field name="total_overtime_minutes"/>
                                 <field name="total_late_minutes"/>
 
-                                
-                                
-                                
-                                
 <!--                             </tree> -->
                             <form string="معلومات إضافية">
                                 <group col="2">
@@ -69,7 +65,7 @@
                             </form>
 <!--                         </field> -->
                     </group>
-                </page>
+                <!-- </page> -->
             </notebook>
         </field>
     </record>
