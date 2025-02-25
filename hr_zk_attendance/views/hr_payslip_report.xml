@@ -45,8 +45,8 @@
             <notebook position="inside">
                 <page string="معلومات إضافية">
                     <group col="2">
-                        <field name="extra_info_id" nolabel="1">
-                            <tree editable="bottom">
+<!--                         <field name="extra_info_id" nolabel="1">
+                            <tree editable="bottom"> -->
                                 <field name="total_allowances"/>
                                 <field name="total_deductions"/>
                                 <field name="bank_account"/>
@@ -58,7 +58,7 @@
                                 
                                 
                                 
-                            </tree>
+<!--                             </tree> -->
                             <form string="معلومات إضافية">
                                 <group col="2">
                                     <field name="total_allowances"/>
@@ -67,7 +67,7 @@
                                     <field name="tax_id"/>
                                 </group>
                             </form>
-                        </field>
+<!--                         </field> -->
                     </group>
                 </page>
             </notebook>
