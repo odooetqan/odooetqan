@@ -22,7 +22,38 @@ class HrPayslip(models.Model):
     total_overtime_minutes = fields.Float(string="Total Overtime (Minutes)", compute="_compute_attendance_data", store=True)
 
     lateness_deduction = fields.Float(string="Lateness Deduction", compute="_compute_lateness_deduction", store=True)
+# class HrPayslip(models.Model):
+#     _inherit = 'hr.payslip'
 
+    # lateness_deduction = fields.Float(string="Lateness Deduction", compute="_compute_lateness_deduction", store=True)
+
+    # @api.depends('employee_id', 'date_from', 'date_to')
+    # def _compute_lateness_deduction(self):
+    #     """Calculate total lateness deduction for each shift in the payslip period."""
+    #     for payslip in self:
+    #         if not payslip.employee_id:
+    #             payslip.lateness_deduction = 0
+    #             continue
+
+    #         # Fetch all attendance records within the payslip period
+    #         attendances = self.env['hr.attendance'].search([
+    #             ('employee_id', '=', payslip.employee_id.id),
+    #             ('check_in', '>=', payslip.date_from),
+    #             ('check_in', '<=', payslip.date_to)
+    #         ])
+
+    #         total_deduction = 0
+    #         contract = payslip.contract_id
+    #         penalty_per_minute = contract.penalty_per_minute if contract and contract.penalty_per_minute else 0
+
+    #         for att in attendances:
+    #             # Calculate lateness deduction per shift
+    #             shift_deduction = att.late_minutes * penalty_per_minute
+    #             total_deduction += shift_deduction
+
+    #         payslip.lateness_deduction = total_deduction
+
+    
     @api.depends('employee_id', 'date_from', 'date_to')
     def _compute_lateness_deduction(self):
         """Calculate total lateness deduction for the payslip period."""
