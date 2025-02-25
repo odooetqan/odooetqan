@@ -7,6 +7,14 @@ from odoo.exceptions import UserError, ValidationError
 from datetime import datetime, timedelta  # ✅ Ensure timedelta is imported
 from pytz import timezone, utc  # ✅ Import timezone functions
 
+
+class HrContract(models.Model):
+    _inherit = 'hr.contract'
+
+    penalty_per_minute = fields.Float(string="Penalty Per Minute", help="Amount deducted per minute of lateness")
+
+
+
 class HrPayslip(models.Model):
     _inherit = 'hr.payslip'
 
