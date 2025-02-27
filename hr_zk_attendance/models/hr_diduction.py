@@ -41,7 +41,7 @@ class HrAttendance(models.Model):
     def _compute_attendance_deductions(self):
         hr_managers = self.env['res.users'].search([('groups_id', 'in', self.env.ref('hr.group_hr_manager').id)])
         attendances = self.search([])
-        # Attendance Record
+        # Attendance instead of record
         for attendance in attendances:
             employee = attendance.employee_id
             shift_start = employee.contract_id.resource_calendar_id.attendance_ids.filtered(
