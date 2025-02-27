@@ -31,7 +31,8 @@
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.cybrosys.com",
-    'depends': ['base_setup', 'hr_attendance'],
+    'depends': ['base_setup', 'hr_attendance','hr_payroll'],
+    
     'external_dependencies': {
         'python': ['pyzk'], },
     'data': [
@@ -40,6 +41,7 @@
         'views/hr_employee_views.xml',
         'views/daily_attendance_views.xml',
         'views/biometric_device_attendance_menus.xml',
+        'views/hr_payslip_report.xml',
         'data/download_data.xml'
     ],
     'images': ['static/description/banner.png'],

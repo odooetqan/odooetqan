@@ -21,6 +21,9 @@ import pytz
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 from datetime import datetime, timedelta  # ✅ Ensure timedelta is imported
+from pytz import timezone, utc  # ✅ Import timezone functions
+
+_logger = logging.getLogger(__name__)
 
 _logger = logging.getLogger(__name__)
 try:
@@ -276,7 +279,8 @@ class MachineAttendance(models.Model):
                 employee_attendance[employee_id][punch_date] = []
 
             employee_attendance[employee_id][punch_date].append(record.punching_time)
-
+            
+        ksa_tz = timezone('Asia/Riyadh')  # ✅ Define the KSA timezone
         for employee_id, dates in employee_attendance.items():
             employee = self.env['hr.employee'].search([('device_id_num', '=', employee_id)], limit=1)
             if not employee:
@@ -292,13 +296,30 @@ class MachineAttendance(models.Model):
                 shift_intervals = []
                 for att in shift.attendance_ids:
                     if att.dayofweek == str(punch_date.weekday()):
-                        shift_start = datetime.combine(punch_date, datetime.min.time()).replace(
+
+                            
+                        # ✅ Convert Shift Time from KSA to UTC
+                        shift_start_ksa = datetime.combine(punch_date, datetime.min.time()).replace(
                             hour=int(att.hour_from), minute=int((att.hour_from % 1) * 60), second=0
                         )
-                        shift_end = datetime.combine(punch_date, datetime.min.time()).replace(
+                        shift_end_ksa = datetime.combine(punch_date, datetime.min.time()).replace(
                             hour=int(att.hour_to), minute=int((att.hour_to % 1) * 60), second=0
                         )
-                        shift_intervals.append((shift_start, shift_end))
+    
+                        shift_start_utc = ksa_tz.localize(shift_start_ksa).astimezone(utc)
+                        shift_end_utc = ksa_tz.localize(shift_end_ksa).astimezone(utc)
+    
+                        shift_intervals.append((shift_start_utc, shift_end_utc))
+
+
+                    
+                        # shift_start = datetime.combine(punch_date, datetime.min.time()).replace(
+                        #     hour=int(att.hour_from), minute=int((att.hour_from % 1) * 60), second=0
+                        # )
+                        # shift_end = datetime.combine(punch_date, datetime.min.time()).replace(
+                        #     hour=int(att.hour_to), minute=int((att.hour_to % 1) * 60), second=0
+                        # )
+                        # shift_intervals.append((shift_start, shift_end))
 
                 if not shift_intervals:
                     _logger.warning(f"⚠️ No Shift Timings for Employee {employee.name} on {punch_date}")
@@ -307,7 +328,8 @@ class MachineAttendance(models.Model):
                 punch_times.sort()  # Ensure punches are in chronological order
 
                 for shift_start, shift_end in shift_intervals:
-                    shift_punches = [p for p in punch_times if shift_start <= p <= shift_end]
+                    # shift_punches = [p for p in punch_times if shift_start <= p <= shift_end]
+                    shift_punches = [  p for p in punch_times   if shift_start.replace(tzinfo=None) <= p.replace(tzinfo=None) <= shift_end.replace(tzinfo=None)]
 
                     if len(shift_punches) > 1:
                         # 🔹 Multiple Check-Ins and Check-Outs in a Shift: Use first check-in and last check-out
@@ -318,7 +340,11 @@ class MachineAttendance(models.Model):
                     elif len(shift_punches) == 1:
                         # 🔹 Single Punch: Determine check-in or check-out based on proximity
                         punch_time = shift_punches[0]
-                        if abs((punch_time - shift_start).total_seconds()) <= abs((punch_time - shift_end).total_seconds()):
+                        # if abs((punch_time - shift_start).total_seconds()) <= abs((punch_time - shift_end).total_seconds()):
+                        if abs((punch_time.replace(tzinfo=None) - shift_start.replace(tzinfo=None)).total_seconds()) <= \
+                           abs((punch_time.replace(tzinfo=None) - shift_end.replace(tzinfo=None)).total_seconds()):
+
+       
                             # Punch is closer to shift start, consider it a check-in
                             check_in_time = punch_time
                             check_out_time = shift_end - timedelta(hours=1)  # Early check-out
@@ -335,7 +361,9 @@ class MachineAttendance(models.Model):
                         continue
 
                     # Ensure check-out is after check-in
-                    if check_out_time < check_in_time:
+                    # if check_out_time < check_in_time:
+                    if check_out_time.replace(tzinfo=None) < check_in_time.replace(tzinfo=None):
+
                         _logger.warning(f"❌ Error: Check-Out time {check_out_time} is before Check-In {check_in_time}, correcting...")
                         check_out_time = check_in_time + timedelta(minutes=1)  # Force valid checkout
 
@@ -353,8 +381,8 @@ class MachineAttendance(models.Model):
                     # ✅ Create attendance record
                     hr_attendance_obj.create({
                         'employee_id': employee.id,
-                        'check_in': check_in_time,
-                        'check_out': check_out_time
+                        'check_in': check_in_time.replace(tzinfo=None),
+                        'check_out': check_out_time.replace(tzinfo=None)
                     })
                     _logger.info(f"✅ Attendance Recorded for {employee.name} on {punch_date}: IN {check_in_time}, OUT {check_out_time}")
 

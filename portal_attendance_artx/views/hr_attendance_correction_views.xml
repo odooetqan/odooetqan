@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    
-    <!-- Tree View -->
+
+    <!-- ✅ Tree View -->
     <record id="view_hr_attendance_correction_tree" model="ir.ui.view">
         <field name="name">hr.attendance.correction.tree</field>
         <field name="model">hr.attendance.correction</field>
         <field name="arch" type="xml">
             <tree string="Attendance Correction Requests">
-                <field name="employee_id"/>
-                <field name="check_in"/>
-                <field name="check_out"/>
+                <field name="employee_id"/>                                    
+                <field name="original_check_in"/>
+                <field name="original_check_out"/>
+                <field name="corrected_check_in"/>
+                <field name="corrected_check_out"/>
+                <field name="reason"/>                
                 <field name="state"/>
-                <field name="approver_id"/>
+                <field name="create_uid" string="Requested By"/>
+                <field name="create_date" string="Request Date"/>
             </tree>
         </field>
     </record>
 
-    <!-- Form View -->
+    <!-- ✅ Form View -->
     <record id="view_hr_attendance_correction_form" model="ir.ui.view">
         <field name="name">hr.attendance.correction.form</field>
         <field name="model">hr.attendance.correction</field>
@@ -24,39 +28,44 @@
             <form string="Attendance Correction Request">
                 <sheet>
                     <header>
-                        <button name="action_submit" type="object" string="Submit" class="oe_highlight" invisible="state != 'draft'"/>
-                        <button name="action_approve" type="object" string="Approve" class="btn-primary" invisible="state != 'submitted'"/>
-                        <button name="action_reject" type="object" string="Reject" class="btn-danger" invisible="state != 'submitted'"/>
+                        <button name="action_submit" type="object" string="Submit" class="oe_highlight"/>
+<!--                                 attrs="{'invisible': [('state', '!=', 'draft')]}"/> -->
+                        <button name="action_approve" type="object" string="Approve" class="btn-primary"/>
+<!--                                 attrs="{'invisible': [('state', '!=', 'pending')]}"/> -->
+                        <button name="action_reject" type="object" string="Reject" class="btn-danger"/>
+<!--                                 attrs="{'invisible': [('state', '!=', 'pending')]}"/> -->
                         <field name="state" widget="statusbar" readonly="1"/>
                     </header>
                     <group>
-                        <field name="employee_id" readonly="1"/>
-                        <field name="check_in"/>
-                        <field name="check_out"/>
-                        <field name="note"/>
-                        <field name="approver_id"/>
-                        <field name="attachment" widget="many2many_binary"/>
+                        <field name="employee_id"/>
+                        <field name="attendance_id"/>
+                        <field name="original_check_in"/>
+                        <field name="original_check_out"/>
+                        <field name="corrected_check_in"/>
+                        <field name="corrected_check_out"/>
+                        <field name="reason"/>
+                        <field name="state" readonly="1"/>
                     </group>
+                    <!-- ✅ Add Chatter for better tracking -->
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
                 </sheet>
-                <!-- ✅ Add Chatter Below -->
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers"/>
-                    <field name="message_ids" widget="mail_thread"/>
-                </div>
             </form>
         </field>
     </record>
 
-    
-    <!-- Action -->
+    <!-- ✅ Action to Show the View -->
     <record id="action_hr_attendance_correction" model="ir.actions.act_window">
         <field name="name">Attendance Correction Requests</field>
         <field name="res_model">hr.attendance.correction</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- Menu Item -->
+    <!-- ✅ Menu Item to Access the View -->
     <menuitem id="menu_hr_attendance_correction" name="Attendance Correction Requests"
         parent="hr_attendance.menu_hr_attendance_root"
         action="action_hr_attendance_correction"/>
+    
 </odoo>
