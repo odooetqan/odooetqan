@@ -82,5 +82,6 @@ class HrAttendance(models.Model):
                 for manager in hr_managers:
                     mail_template.send_mail(manager.id, force_send=True)
 
+
     def _cron_compute_attendance_deductions(self):
         self._compute_attendance_deductions()
