@@ -29,8 +29,16 @@ class HrAttendance(models.Model):
                     lambda a: a.dayofweek == str(record.check_in.weekday())
                 )
                 if shift_start:
-                    shift_start_time = datetime.combine(record.check_in.date(),
-                                                         timedelta(hours=shift_start[0].hour_from).seconds // 3600)
+                    from datetime import datetime, timedelta
+
+                    shift_start_time = datetime.combine(
+                        record.check_in.date(), 
+                        (datetime.min + timedelta(hours=int(shift_start[0].hour_from), minutes=(shift_start[0].hour_from % 1) * 60)).time()
+                    )
+
+
+                    # shift_start_time = datetime.combine(record.check_in.date(),
+                    #                                      timedelta(hours=shift_start[0].hour_from).seconds // 3600)
                     record.shift_start = shift_start_time
                     lateness = (record.check_in - shift_start_time).total_seconds() / 60
                     record.lateness = lateness if lateness > 0 else 0
