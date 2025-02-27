@@ -305,8 +305,6 @@
         </t>
     </xpath>
 </template>
-<!--    Portal table views-->
-         
 <!-- POrtal Tree ttee attendance  template -->
 
         <template id="portal_attendance_tree" name="Portal Attendance Tree">
@@ -404,19 +402,8 @@
                         <td>
                             <t t-if="leave.state == 'draft'">مسودة</t>
                             <t t-if="leave.state == 'confirm'">في انتظار الموافقة</t>
-                            <t t-if="leave.state == 'validate1'">موافقة المدير</t>
-                            <t t-if="leave.state == 'validate'">موافقة كاملة</t>
-                            <t t-if="leave.state == 'refuse'">مرفوضة</t>
-                        </td>
-                    </tr>
-                </t>
-            </tbody>
-        </table>
-    </div>
-</t>
-</template> 
-
-<!-- <template id="leave_form_template" name="Leave Form" inherit_id="website.layout"> -->
+                            
+<!-- <template id="leave_frm_template" name="Leave Form" inherit_id="website.layout"> -->
  <template id="leave_form_template" name="Leave Form" inherit_id="portal_my_home_leaves">
      
     <!-- <xpath expr="//main" position="after"> -->
