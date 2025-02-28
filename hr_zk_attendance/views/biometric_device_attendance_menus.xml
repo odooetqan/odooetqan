@@ -72,7 +72,6 @@
         <field name="arch" type="xml">
             <tree string="Attendance" create="false" delete="false">
                 <!-- <field name="punching_day"/> -->
-                <field name="id"/>
                 <field name="employee_id"/>
                 <field name="punch_type"/>
                 <field name="attendance_type"/>
