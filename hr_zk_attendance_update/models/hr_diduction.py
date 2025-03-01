@@ -32,7 +32,7 @@ class HrAttendance(models.Model):
                     from datetime import datetime, timedelta
 
                     shift_start_time = datetime.combine(
-                        record.check_in.date(), 
+                        record.check_in.date(),
                         (datetime.min + timedelta(hours=int(shift_start[0].hour_from), minutes=(shift_start[0].hour_from % 1) * 60)).time()
                     )
 
@@ -46,30 +46,32 @@ class HrAttendance(models.Model):
     def _compute_attendance_deductions(self):
         hr_managers = self.env['res.users'].search([('groups_id', 'in', self.env.ref('hr.group_hr_manager').id)])
         attendances = self.search([])
-        
+
         for attendance in attendances:
             employee = attendance.employee_id
             shift_start = employee.contract_id.resource_calendar_id.attendance_ids.filtered(lambda a: a.dayofweek == str(attendance.check_in.weekday()))
             shift_end = shift_start.mapped('hour_to')
-            
+
             if not shift_start or not shift_end:
                 continue
-            
+
             # shift_start_time = datetime.combine(attendance.check_in.date(), timedelta(hours=shift_start[0].hour_from).seconds // 3600)
             shift_start_time = datetime.combine(
-                    record.check_in.date(), 
+                    record.check_in.date(),
                     datetime.min.time()
                 ) + timedelta(hours=shift_start[0].hour_from)
 
+
+
             shift_end_time = datetime.combine(attendance.check_in.date(), timedelta(hours=shift_end[0]).seconds // 3600)
-            
+
             attendance.shift_start = shift_start_time
             attendance.shift_end = shift_end_time
-            
+
             lateness = attendance.lateness
             early_checkout = (shift_end_time - attendance.check_out).total_seconds() / 60 if attendance.check_out else None
             missing_checkout = attendance.check_out is None and (datetime.now() - shift_end_time).total_seconds() / 3600 >= 3
-            
+
             deduction_amount = 0
             if lateness > 20:
                 deduction_amount += (lateness - 20) * employee.per_minute_rate * employee.deduction_multiplier
@@ -77,9 +79,9 @@ class HrAttendance(models.Model):
                 deduction_amount += (early_checkout - 5) * employee.per_minute_rate * employee.deduction_multiplier
             if missing_checkout:
                 deduction_amount += (shift_end_time.hour * 60) * employee.per_minute_rate * employee.deduction_multiplier
-            
+
             attendance.deduction_amount = deduction_amount
-            
+
             if deduction_amount > 0:
                 mail_template = self.env.ref('your_module.attendance_deduction_email_template')
                 for manager in hr_managers:
