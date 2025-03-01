@@ -57,7 +57,7 @@ class HrAttendance(models.Model):
 
             # shift_start_time = datetime.combine(attendance.check_in.date(), timedelta(hours=shift_start[0].hour_from).seconds // 3600)
             shift_start_time = datetime.combine(
-                    record.check_in.date(),
+                    attendance.check_in.date(),
                     datetime.min.time()
                 ) + timedelta(hours=shift_start[0].hour_from)
 
