@@ -97,17 +97,3 @@ class HrAttendance(models.Model):
 
     def _cron_compute_attendance_deductions(self):
         self._compute_attendance_deductions()
-
-# Add a scheduled action in the XML file to run this cron job daily at midnight
-# <record id="ir_cron_attendance_deductions" model="ir.cron">
-#     <field name="name">Compute Attendance Deductions</field>
-#     <field name="model_id" ref="model_hr_attendance"/>
-#     <field name="state">code</field>
-#     <field name="code">model._cron_compute_attendance_deductions()</field>
-#     <field name="interval_number">1</field>
-#     <field name="interval_type">days</field>
-#     <field name="numbercall">-1</field>
-#     <field name="doall">False</field>
-#     <field name="active" eval="True"/>
-# </record>
-

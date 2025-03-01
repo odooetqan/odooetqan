@@ -16,8 +16,40 @@
               parent="biometric_device_details_menu"
               /><!--              groups="hr_attendance.group_hr_attendance_officer"-->
 
-              <!-- parent="biometric_device_details_menu" -->
 
+
+    <!-- Template to mail check in & out  -->
+        <record id="attendance_deduction_email_template" model="mail.template">
+            <field name="name">Attendance Deduction Email Template</field>
+            <field name="model_id" ref="hr.model_hr_attendance"/>
+            <field name="subject">Attendance Deduction Notification</field>
+            <field name="email_from">${(user.email or '')|safe}</field>
+            <field name="body_html"><![CDATA[
+                <p>Dear Manager,</p>
+                <p>An attendance deduction has been applied. Please see the details below:</p>
+                <p><strong>Check In:</strong> ${object.check_in or 'N/A'}</p>
+                <p><strong>Check Out:</strong> ${object.check_out or 'N/A'}</p>
+                <p>Thank you.</p>
+                <p>Regards,<br/>Your Company</p>
+            ]]></field>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang" eval="False"/>
+        </record>
+
+        <!-- Add a scheduled action in the XML file to run this cron job daily at midnight -->
+        <record id="ir_cron_attendance_deductions" model="ir.cron">
+            <field name="name">Compute Attendance Deductions</field>
+            <field name="model_id" ref="model_hr_attendance"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_compute_attendance_deductions()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall">False</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- parent="biometric_device_details_menu" -->
         <record id="zk_machine_attendance_form_view" model="ir.ui.view">
             <field name="name">zk.machine.attendance.form</field>
             <field name="model">zk.machine.attendance</field>
@@ -40,9 +72,9 @@
                     </sheet>
                 </form>
             </field>
-        </record> 
-        
-        
+        </record>
+
+
         <menuitem id="menu_biometric_attendance" name="Biometric Attendance" parent="hr.menu_hr_root"/>
 
         <record id="action_zk_machine_attendance" model="ir.actions.act_window">

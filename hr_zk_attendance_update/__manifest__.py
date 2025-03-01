@@ -32,7 +32,7 @@
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.cybrosys.com",
     'depends': ['base_setup', 'hr_attendance','hr_payroll'],
-    
+
     'external_dependencies': {
         'python': ['pyzk'], },
     'data': [
