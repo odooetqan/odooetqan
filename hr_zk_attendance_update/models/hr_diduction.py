@@ -1,6 +1,14 @@
 from odoo import api, fields, models, tools
 from datetime import datetime, timedelta
 
+# حساب الوقت عن طريق إضافة الفارق إلى أدنى قيمة زمنية
+shift_delta = timedelta(hours=shift_end[0])
+shift_time = (datetime.min + shift_delta).time()
+
+shift_end_time = datetime.combine(attendance.check_in.date(), shift_time)
+
+
+
 class HrEmployee(models.Model):
     _inherit = 'hr.employee'
 
