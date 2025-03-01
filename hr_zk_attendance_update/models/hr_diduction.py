@@ -51,48 +51,48 @@ class HrAttendance(models.Model):
 
     @api.depends('check_in', 'check_out', 'employee_id', 'employee_id.contract_id', 'employee_id.contract_id.resource_calendar_id.attendance_ids')
     def _compute_attendance_deductions(self):
-    hr_managers = self.env['res.users'].search([('groups_id', 'in', self.env.ref('hr.group_hr_manager').id)])
+        hr_managers = self.env['res.users'].search([('groups_id', 'in', self.env.ref('hr.group_hr_manager').id)])
 
-    for attendance in self:
-        employee = attendance.employee_id
-        shift_start_rec = employee.contract_id.resource_calendar_id.attendance_ids.filtered(
-            lambda a: a.dayofweek == str(attendance.check_in.weekday())
-        )
-        shift_end_values = shift_start_rec.mapped('hour_to')
-        if not shift_start_rec or not shift_end_values:
-            continue
+        for attendance in self:
+            employee = attendance.employee_id
+            shift_start_rec = employee.contract_id.resource_calendar_id.attendance_ids.filtered(
+                lambda a: a.dayofweek == str(attendance.check_in.weekday())
+            )
+            shift_end_values = shift_start_rec.mapped('hour_to')
+            if not shift_start_rec or not shift_end_values:
+                continue
 
-        # Calculate shift start time
-        shift_start_time = datetime.combine(attendance.check_in.date(), datetime.min.time()) \
-                           + timedelta(hours=shift_start_rec[0].hour_from)
-        # Calculate shift end time using the improved method:
-        shift_delta = timedelta(hours=shift_end_values[0])
-        shift_time = (datetime.min + shift_delta).time()
-        shift_end_time = datetime.combine(attendance.check_in.date(), shift_time)
+            # Calculate shift start time
+            shift_start_time = datetime.combine(attendance.check_in.date(), datetime.min.time()) \
+                            + timedelta(hours=shift_start_rec[0].hour_from)
+            # Calculate shift end time using the improved method:
+            shift_delta = timedelta(hours=shift_end_values[0])
+            shift_time = (datetime.min + shift_delta).time()
+            shift_end_time = datetime.combine(attendance.check_in.date(), shift_time)
 
-        attendance.shift_start = shift_start_time
-        attendance.shift_end = shift_end_time
+            attendance.shift_start = shift_start_time
+            attendance.shift_end = shift_end_time
 
-        # Calculate lateness, early checkout, and missing checkout
-        lateness = attendance.lateness
-        early_checkout = (shift_end_time - attendance.check_out).total_seconds() / 60 if attendance.check_out else None
-        missing_checkout = attendance.check_out is None and (datetime.now() - shift_end_time).total_seconds() / 3600 >= 3
+            # Calculate lateness, early checkout, and missing checkout
+            lateness = attendance.lateness
+            early_checkout = (shift_end_time - attendance.check_out).total_seconds() / 60 if attendance.check_out else None
+            missing_checkout = attendance.check_out is None and (datetime.now() - shift_end_time).total_seconds() / 3600 >= 3
 
-        deduction_amount = 0
-        if lateness > 20:
-            deduction_amount += (lateness - 20) * employee.per_minute_rate * employee.deduction_multiplier
-        if early_checkout and early_checkout > 5:
-            deduction_amount += (early_checkout - 5) * employee.per_minute_rate * employee.deduction_multiplier
-        if missing_checkout:
-            deduction_amount += (shift_end_time.hour * 60) * employee.per_minute_rate * employee.deduction_multiplier
+            deduction_amount = 0
+            if lateness > 20:
+                deduction_amount += (lateness - 20) * employee.per_minute_rate * employee.deduction_multiplier
+            if early_checkout and early_checkout > 5:
+                deduction_amount += (early_checkout - 5) * employee.per_minute_rate * employee.deduction_multiplier
+            if missing_checkout:
+                deduction_amount += (shift_end_time.hour * 60) * employee.per_minute_rate * employee.deduction_multiplier
 
-        attendance.deduction_amount = deduction_amount
+            attendance.deduction_amount = deduction_amount
 
-        # Consider moving email sending to a separate method
-        if deduction_amount > 0:
-            mail_template = self.env.ref('your_module.attendance_deduction_email_template')
-            for manager in hr_managers:
-                mail_template.send_mail(manager.id, force_send=True)
+            # Consider moving email sending to a separate method
+            if deduction_amount > 0:
+                mail_template = self.env.ref('your_module.attendance_deduction_email_template')
+                for manager in hr_managers:
+                    mail_template.send_mail(manager.id, force_send=True)
 
 
     def _cron_compute_attendance_deductions(self):
