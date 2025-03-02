@@ -76,6 +76,12 @@ class HrAttendance(models.Model):
             # Calculate lateness, early checkout, and missing checkout
             lateness = attendance.lateness
             early_checkout = (shift_end_time - attendance.check_out).total_seconds() / 60 if attendance.check_out else None
+
+
+            # Ensure per_minute_rate and deduction_multiplier have default values
+            per_minute_rate = employee.per_minute_rate or 0
+            deduction_multiplier = employee.deduction_multiplier or 1
+
             missing_checkout = attendance.check_out is None and (datetime.now() - shift_end_time).total_seconds() / 3600 >= 3
 
             deduction_amount = 0
