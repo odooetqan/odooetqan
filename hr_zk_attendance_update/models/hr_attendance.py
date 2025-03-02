@@ -20,12 +20,6 @@ class HrAttendance(models.Model):
     late_minutes = fields.Float(string="Lateness (Minutes)", compute="_compute_lateness", store=True)
     overtime_minutes = fields.Float(string="Overtime (Minutes)", compute="_compute_overtime", store=True)
 
-
-# class HrAttendance(models.Model):
-#     _inherit = 'hr.attendance'
-
-    late_minutes = fields.Float(string="Lateness (Minutes)", compute="_compute_lateness", store=True)
-
     @api.depends('employee_id', 'check_in')
     def _compute_lateness(self):
         """Calculate lateness per shift in minutes."""
@@ -178,10 +172,10 @@ class HrAttendance(models.Model):
             attendance.deduction_amount = deduction_amount
 
             # Consider moving email sending to a separate method
-            if deduction_amount > 0:
-                mail_template = self.env.ref('hr_zk_attendance_update.attendance_deduction_email_template')
-                for manager in hr_managers:
-                    mail_template.send_mail(manager.id, force_send=True)
+            # if deduction_amount > 0:
+            #     mail_template = self.env.ref('hr_zk_attendance_update.attendance_deduction_email_template')
+            #     for manager in hr_managers:
+            #         mail_template.send_mail(manager.id, force_send=True)
 
 
     def _cron_compute_attendance_deductions(self):
