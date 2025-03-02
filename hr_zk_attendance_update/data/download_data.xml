@@ -26,7 +26,7 @@
                 <p><strong>Check In:</strong> ${object.check_in or 'N/A'}</p>
                 <p><strong>Check Out:</strong> ${object.check_out or 'N/A'}</p>
                 <p>Thank you.</p>
-                <p>Regards,<br/>Your Company</p>
+                <p>Regards,<br/>Etqan Ltd</p>
             ]]></field>
             <field name="auto_delete" eval="True"/>
             <field name="lang" eval="False"/>
