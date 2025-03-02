@@ -17,25 +17,6 @@
               /><!--              groups="hr_attendance.group_hr_attendance_officer"-->
 
 
-
-    <!-- Template to mail check in & out  -->
-        <record id="attendance_deduction_email_template" model="mail.template">
-            <field name="name">Attendance Deduction Email Template</field>
-            <field name="model_id" ref="hr.model_hr_attendance"/>
-            <field name="subject">Attendance Deduction Notification</field>
-            <field name="email_from">${(user.email or '')|safe}</field>
-            <field name="body_html"><![CDATA[
-                <p>Dear Manager,</p>
-                <p>An attendance deduction has been applied. Please see the details below:</p>
-                <p><strong>Check In:</strong> ${object.check_in or 'N/A'}</p>
-                <p><strong>Check Out:</strong> ${object.check_out or 'N/A'}</p>
-                <p>Thank you.</p>
-                <p>Regards,<br/>Your Company</p>
-            ]]></field>
-            <field name="auto_delete" eval="True"/>
-            <field name="lang" eval="False"/>
-        </record>
-
         <!-- Add a scheduled action in the XML file to run this cron job daily at midnight -->
         <record id="ir_cron_attendance_deductions" model="ir.cron">
             <field name="name">Compute Attendance Deductions</field>
