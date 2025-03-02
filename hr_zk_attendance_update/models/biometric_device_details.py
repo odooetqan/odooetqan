@@ -31,11 +31,6 @@ try:
 except ImportError:
     _logger.error("Please Install pyzk library.")
 
-class HrAttendance(models.Model):
-    _inherit = 'hr.attendance'
-
-    notes = fields.Char('Notes')
-
 
 class BiometricDeviceDetails(models.Model):
     """Model for configuring and connecting the biometric device with Odoo"""
@@ -244,7 +239,7 @@ class MachineAttendance(models.Model):
     attendance_type = fields.Selection([('0', 'Check In'), ('1', 'Check Out')], string="Attendance Type", required=True)
     punch_type = fields.Char(string="Punch Type")
 
-    
+
     @api.model
     def _default_address_id(self):
         """Fetch the partner associated with the default company."""
@@ -252,7 +247,7 @@ class MachineAttendance(models.Model):
         return company.partner_id.id if company.partner_id else False
 
 
-        
+
     def action_process_attendance_manual(self):
         """Manual button action to process attendance"""
         self.action_process_attendance()
@@ -279,7 +274,7 @@ class MachineAttendance(models.Model):
                 employee_attendance[employee_id][punch_date] = []
 
             employee_attendance[employee_id][punch_date].append(record.punching_time)
-            
+
         ksa_tz = timezone('Asia/Riyadh')  # ✅ Define the KSA timezone
         for employee_id, dates in employee_attendance.items():
             employee = self.env['hr.employee'].search([('device_id_num', '=', employee_id)], limit=1)
@@ -297,7 +292,7 @@ class MachineAttendance(models.Model):
                 for att in shift.attendance_ids:
                     if att.dayofweek == str(punch_date.weekday()):
 
-                            
+
                         # ✅ Convert Shift Time from KSA to UTC
                         shift_start_ksa = datetime.combine(punch_date, datetime.min.time()).replace(
                             hour=int(att.hour_from), minute=int((att.hour_from % 1) * 60), second=0
@@ -305,14 +300,14 @@ class MachineAttendance(models.Model):
                         shift_end_ksa = datetime.combine(punch_date, datetime.min.time()).replace(
                             hour=int(att.hour_to), minute=int((att.hour_to % 1) * 60), second=0
                         )
-    
+
                         shift_start_utc = ksa_tz.localize(shift_start_ksa).astimezone(utc)
                         shift_end_utc = ksa_tz.localize(shift_end_ksa).astimezone(utc)
-    
+
                         shift_intervals.append((shift_start_utc, shift_end_utc))
 
 
-                    
+
                         # shift_start = datetime.combine(punch_date, datetime.min.time()).replace(
                         #     hour=int(att.hour_from), minute=int((att.hour_from % 1) * 60), second=0
                         # )
@@ -344,7 +339,7 @@ class MachineAttendance(models.Model):
                         if abs((punch_time.replace(tzinfo=None) - shift_start.replace(tzinfo=None)).total_seconds()) <= \
                            abs((punch_time.replace(tzinfo=None) - shift_end.replace(tzinfo=None)).total_seconds()):
 
-       
+
                             # Punch is closer to shift start, consider it a check-in
                             check_in_time = punch_time
                             check_out_time = shift_end - timedelta(hours=1)  # Early check-out
@@ -757,8 +752,8 @@ class MachineAttendance(models.Model):
     #         }
     #     }
 
-############3 BEST one 
-    
+############3 BEST one
+
     # def action_process_attendance(self):
     #     """Process attendance by correctly handling check-in and check-out based on shift timings."""
     #     hr_attendance_obj = self.env['hr.attendance']
@@ -1100,13 +1095,13 @@ class MachineAttendance(models.Model):
 #     processed = fields.Boolean(string="Processed", default=False)
 
 
-    
+
 #     @api.model
 #     def _default_address_id(self):
 #         """Fetch the partner associated with the default company."""
 #         company = self.env.company  # Get the current user's default company
 #         return company.partner_id.id if company.partner_id else False
-        
+
 #     def action_process_attendance(self):
 #         """Automatically process attendance based on time ranges without using punch type."""
 #         hr_attendance_obj = self.env['hr.attendance']
@@ -1117,7 +1112,7 @@ class MachineAttendance(models.Model):
 
 #         for record in unprocessed_attendance:
 #             employee = self.env['hr.employee'].search([('device_id_num', '=', record.device_id_num)], limit=1)
-            
+
 #             if not employee:
 #                 _logger.warning(f"⚠️ No Employee Found for Device ID: {record.device_id_num}")
 #                 continue
@@ -1189,7 +1184,7 @@ class MachineAttendance(models.Model):
 
 
 
-    
+
     # def action_process_attendance(self):
     #     """Automatically process attendance based on time ranges without using punch type."""
     #     hr_attendance_obj = self.env['hr.attendance']
@@ -1199,7 +1194,7 @@ class MachineAttendance(models.Model):
 
     #     for record in unprocessed_attendance:
     #         employee = self.env['hr.employee'].search([('device_id_num', '=', record.device_id_num)], limit=1)
-            
+
     #         if not employee:
     #             _logger.warning(f"⚠️ No Employee Found for Device ID: {record.device_id_num}")
     #             continue
@@ -1266,7 +1261,6 @@ class MachineAttendance(models.Model):
     #         }
     #     }
 
-    
 
 
 
@@ -1279,7 +1273,8 @@ class MachineAttendance(models.Model):
 
 
 
-        
+
+
     # def action_process_attendance(self):
     #     """Process all unprocessed biometric attendance records and transfer to `hr.attendance`."""
     #     hr_attendance_obj = self.env['hr.attendance']
@@ -1289,7 +1284,7 @@ class MachineAttendance(models.Model):
 
     #     for record in unprocessed_attendance:
     #         employee = self.env['hr.employee'].search([('device_id_num', '=', record.device_id_num)], limit=1)
-            
+
     #         if not employee:
     #             _logger.warning(f"⚠️ No Employee Found for Device ID: {record.device_id_num}")
     #             continue
@@ -1401,14 +1396,14 @@ class MachineAttendance(models.Model):
 
 #             # Find the employee using device_id_num
 #             employee = self.env['hr.employee'].search([('device_id_num', '=', record.device_id_num)], limit=1)
-            
+
 #             if employee:
 #                 # Find an existing open attendance (check-in without check-out) using device_id_num
 #                 open_attendance = hr_attendance_obj.search([
 #                     ('employee_id', '=', employee.id),
 #                     ('check_out', '=', False)
 #                 ], limit=1)
-            
+
 #                 if record.attendance_type == '0':  # ✅ Check-In
 #                     if open_attendance:
 #                         # If a previous check-in exists without a check-out, auto-check-out after 3 hours
@@ -1416,11 +1411,11 @@ class MachineAttendance(models.Model):
 #                         if atten_time >= check_in_time + timedelta(hours=3):
 #                             open_attendance.write({'check_out': check_in_time + timedelta(hours=3)})
 #                             _logger.info(f"⏳ Auto Check-Out after 3 hours for Employee {employee.name} at {check_in_time + timedelta(hours=3)}")
-            
+
 #                     # Create a new Check-In record
 #                     hr_attendance_obj.create({'employee_id': employee.id, 'check_in': atten_time})
 #                     _logger.info(f"✅ Check-In Recorded: {employee.name} at {atten_time}")
-            
+
 #                 elif record.attendance_type == '1':  # ✅ Check-Out
 #                     if open_attendance:
 #                         open_attendance.write({'check_out': atten_time})
@@ -1433,14 +1428,14 @@ class MachineAttendance(models.Model):
 #                             'check_out': atten_time
 #                         })
 #                         _logger.warning(f"⚠️ No Check-In Found! Creating a fallback entry for {employee.name}.")
-            
+
 #                 # ✅ Mark as processed to avoid duplication
 #                 record.write({'processed': True})
 #             else:
 #                 _logger.warning(f"⚠️ No Employee Found for Device ID: {record.device_id_num}")
-            
-            
-            
+
+
+
 
 #             # if record.attendance_type == '0':  # ✅ Check-In
 #             #     if open_attendance:
@@ -1488,7 +1483,7 @@ class MachineAttendance(models.Model):
 #                 'sticky': False
 #             }
 #         }
-        
+
     # @api.model
     # def action_process_attendance(self):
     #     """Move validated attendance records from `zk.machine.attendance` to `hr.attendance`."""
@@ -1898,7 +1893,7 @@ class MachineAttendance(models.Model):
     #                     utc_str = utc_dt.strftime("%Y-%m-%d %H:%M:%S")
     #                     # Convert string back to datetime for Odoo
     #                     atten_time = fields.Datetime.to_string(datetime.datetime.strptime(utc_str, "%Y-%m-%d %H:%M:%S"))
-                        
+
     #                     # Find the corresponding user info from the device
     #                     for uid in users:
     #                         if uid.user_id == each.user_id:
