@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
     <odoo>
         <data noupdate="1">
+
             <record id="attendance_deduction_email_template" model="mail.template">
                 <field name="name">Attendance Deduction Email</field>
                 <field name="email_from">${(object.company_id.email or 'noreply@yourcompany.com')}</field>
@@ -12,5 +13,6 @@
                     <p>Regards,<br/>Your Company</p>
                 ]]></field>
             </record>
+
         </data>
     </odoo>
