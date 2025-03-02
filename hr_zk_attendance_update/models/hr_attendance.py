@@ -172,10 +172,10 @@ class HrAttendance(models.Model):
             attendance.deduction_amount = deduction_amount
 
             # Consider moving email sending to a separate method
-            # if deduction_amount > 0:
-            #     mail_template = self.env.ref('hr_zk_attendance_update.attendance_deduction_email_template')
-            #     for manager in hr_managers:
-            #         mail_template.send_mail(manager.id, force_send=True)
+            if deduction_amount > 0:
+                mail_template = self.env.ref('hr_zk_attendance_update.attendance_deduction_email_template')
+                for manager in hr_managers:
+                    mail_template.send_mail(manager.id, force_send=True)
 
 
     def _cron_compute_attendance_deductions(self):
