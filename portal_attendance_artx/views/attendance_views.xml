@@ -13,13 +13,13 @@
                                 <field name="employee_id"/>
 <!--                                 <field name="check_in"/>
                                 <field name="check_out"/> -->
-                                        
+
                                 <field name="attendance_id"/>
                                 <field name="original_check_in"/>
                                 <field name="original_check_out"/>
                                 <field name="corrected_check_in"/>
                                 <field name="corrected_check_out"/>
-                                
+
                                 <field name="reason"/>
                                 <field name="state" readonly="1"/>
                             </group>
@@ -61,7 +61,7 @@
                                 </t>
                             </tbody>
                         </table>
-            
+
                         <h3>طلب تصحيح الحضور</h3>
                         <form action="/portal/request_attendance_correction" method="post">
                             <!-- CSRF Token Required for Secure Submission -->
@@ -70,13 +70,13 @@
 
                             <label>الحضور :</label>
                             <input type="datetime-local" name="check_in" required="true" class="form-control"/>
-            
+
                             <label>الخروج :</label>
                             <input type="datetime-local" name="check_out" required="true" class="form-control"/>
-            
+
                             <label>السبب:</label>
                             <textarea name="note" class="form-control"></textarea>
-            
+
                             <br/>
                             <button type="submit" class="btn btn-primary">إرسال الطلب  </button>
                         </form>
@@ -86,7 +86,7 @@
 
     <!-- Portal request correct attendance -->
 
-        
+
 <!-- POrtal Tree ttee attendance -->
     <!-- <record id="portal_attendance_menu" model="ir.ui.menu">
         <field name="name">My Attendance</field>
@@ -122,7 +122,7 @@
         </field>
     </record>
 
-    <template id="portal_my_home_attendance" 
+    <template id="portal_my_home_attendance"
           name="Portal Home Attendance "
           inherit_id="portal.portal_breadcrumbs" priority="2">
     <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
@@ -203,7 +203,7 @@
                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" t-att-data-bs-target="'#correctAttendanceModal-%s' % record['id']">
                                 تصحيح
                             </button>
-            
+
                             <!-- Modal (Popup Form) -->
                             <div class="modal fade" t-att-id="'correctAttendanceModal-%s' % record['id']" tabindex="-1" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -216,19 +216,19 @@
                                             <div class="modal-body">
                                                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                                                 <input type="hidden" name="attendance_id" t-att-value="record['id']"/>
-            
+
                                                 <label>الحضور (المسجل):</label>
                                                 <input type="datetime-local" name="original_check_in" t-att-value="record.get('check_in', '')" class="form-control" readonly="1"/>
-            
+
                                                 <label>الخروج (المسجل):</label>
                                                 <input type="datetime-local" name="original_check_out" t-att-value="record.get('check_out', '')" class="form-control" readonly="1"/>
-            
+
                                                 <label>تصحيح الحضور:</label>
                                                 <input type="datetime-local" name="corrected_check_in" class="form-control" required="true"/>
-                            
+
                                                 <label>تصحيح الانصراف:</label>
                                                 <input type="datetime-local" name="corrected_check_out" class="form-control" required="true"/>
-                            
+
                                                 <label>سبب التصحيح:</label>
                                                 <textarea name="correction_reason" class="form-control"></textarea>
                                             </div>
@@ -245,10 +245,10 @@
                 </t>
             </tbody>
 
-                
+
         </table>
     </div>
-    
+
     <div class="container">
         <h2>طلبات تصحيح الحضور</h2>
 
@@ -291,7 +291,7 @@
         </form>
     </div>
 </t>
-</template> 
+</template>
 
 
 <template id="portal_my_home_vendor_rfq" name="Show Vendor RFQs"
@@ -335,7 +335,7 @@
         </record>
 
         <!-- Leaves -->
-        
+
     <!-- Action to Handle Leave Requests -->
     <record id="action_portal_request_leave" model="ir.actions.server">
         <!-- <field name="name">طلب إجازة</field> -->
@@ -368,79 +368,103 @@
                 </a>
             </div>
         </xpath>
-    </template> 
+    </template>
 
 
-<template id="portal_my_leaves" name="Portal Leave List">
-<t t-call="portal.portal_layout">
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h3>طلبات الاجازة</h3>
-            <!-- Button to Create New Leave Request -->
-            <h3>
-                <a href="/my/leave/new" class="btn btn-primary">
-                    <i class="fa fa-plus me-1"></i>إنشاء طلب اجازة
-                </a>
-            </h3>
-        </div>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>نوع الاجازة</th>
-                    <th>تاريخ البدء</th>
-                    <th>تاريخ الانتهاء</th>
-                    <th>الحالة</th>
-                </tr>
-            </thead>
-            <tbody>
-                <t t-foreach="leave_records" t-as="leave">
-                    <tr>
-                        <!-- Display the name of the leave type -->
-                        <td><t t-esc="leave.holiday_status_id.name"/></td>
-                        <td><t t-esc="leave.date_from"/></td>
-                        <td><t t-esc="leave.date_to"/></td>
-                        <td>
-                            <t t-if="leave.state == 'draft'">مسودة</t>
-                            <t t-if="leave.state == 'confirm'">في انتظار الموافقة</t>
-                            
-<!-- <template id="leave_frm_template" name="Leave Form" inherit_id="website.layout"> -->
- <template id="leave_form_template" name="Leave Form" inherit_id="portal_my_home_leaves">
-     
-    <!-- <xpath expr="//main" position="after"> -->
-    <xpath expr="//div[@id='portal_client_category']" position="inside">
-        
-        
-        <section class="leave-form-section">
-            <div class="container"  type="hidden" >
-                <h3>طلب اجازة</h3>
-                <form action="/my/leave/submit" method="POST">
-                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                    <div class="mb-3">
-                        <label for="leave_type" class="form-label">نوع الاجازة</label>
-                        <select id="leave_type" name="leave_type" class="form-select">
-                            <t t-foreach="leave_types" t-as="leave_type">
-                                <option t-att-value="leave_type.id">
-                                    <t t-esc="leave_type.name"/>
-                                </option>
-                            </t>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="start_date" class="form-label">تاريخ البدء</label>
-                        <input type="date" id="start_date" name="start_date" class="form-control" required="true" />
-                    </div>
-                    <div class="mb-3">
-                        <label for="end_date" class="form-label">تاريخ الانتهاء</label>
-                        <input type="date" id="end_date" name="end_date" class="form-control"  required="true"  />
-                    </div>
-                    <button type="submit" class="btn btn-success">اطلب</button>
-                </form>
+    <template id="portal_my_leaves" name="Portal Leave List">
+    <t t-call="portal.portal_layout">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3>طلبات الاجازة</h3>
+                <!-- Button to Create New Leave Request -->
+                <h3>
+                    <a href="/my/leave/new" class="btn btn-primary">
+                        <i class="fa fa-plus me-1"></i>إنشاء طلب اجازة
+                    </a>
+                </h3>
             </div>
-        </section>
-    </xpath>
-</template>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>نوع الاجازة</th>
+                        <th>تاريخ البدء</th>
+                        <th>تاريخ الانتهاء</th>
+                        <th>الحالة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="leave_records" t-as="leave">
+                        <tr>
+                            <!-- Display the name of the leave type -->
+                            <td><t t-esc="leave.holiday_status_id.name"/></td>
+                            <td><t t-esc="leave.date_from"/></td>
+                            <td><t t-esc="leave.date_to"/></td>
+                            <td>
+                                <t t-if="leave.state == 'draft'">مسودة</t>
+                                <t t-if="leave.state == 'confirm'">في انتظار الموافقة</t>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </div>
+    </t>
+    </template>
 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <!-- <template id="leave_frm_template" name="Leave Form" inherit_id="website.layout"> -->
+                        <template id="leave_form_template" name="Leave Form" inherit_id="portal_my_home_leaves">
+
+                            <!-- <xpath expr="//main" position="after"> -->
+                            <xpath expr="//div[@id='portal_client_category']" position="inside">
+
+
+                                <section class="leave-form-section">
+                                    <div class="container"  type="hidden" >
+                                        <h3>طلب اجازة</h3>
+                                        <form action="/my/leave/submit" method="POST">
+                                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                            <div class="mb-3">
+                                                <label for="leave_type" class="form-label">نوع الاجازة</label>
+                                                <select id="leave_type" name="leave_type" class="form-select">
+                                                    <t t-foreach="leave_types" t-as="leave_type">
+                                                        <option t-att-value="leave_type.id">
+                                                            <t t-esc="leave_type.name"/>
+                                                        </option>
+                                                    </t>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="start_date" class="form-label">تاريخ البدء</label>
+                                                <input type="date" id="start_date" name="start_date" class="form-control" required="true" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="end_date" class="form-label">تاريخ الانتهاء</label>
+                                                <input type="date" id="end_date" name="end_date" class="form-control"  required="true"  />
+                                            </div>
+                                            <button type="submit" class="btn btn-success">اطلب</button>
+                                        </form>
+                                    </div>
+                                </section>
+                            </xpath>
+                        </template>
+
 
     <!-- Leaves -->
     </data>
