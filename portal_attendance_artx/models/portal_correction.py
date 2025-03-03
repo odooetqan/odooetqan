@@ -8,7 +8,7 @@ class HrAttendanceCorrection(models.Model):
 
     employee_id = fields.Many2one('hr.employee', string="Employee", required=True)
     attendance_id = fields.Many2one('hr.attendance', string="Attendance", required=True)
-    
+
     original_check_in = fields.Datetime("Original Check In", required=True)
     original_check_out = fields.Datetime("Original Check Out", required=True)
     corrected_check_in = fields.Datetime("Corrected Check In", required=True)
@@ -31,11 +31,35 @@ class HrAttendanceCorrection(models.Model):
         """ Approve the correction and update hr.attendance record """
         for record in self:
             if record.state == 'pending':
-                record.attendance_id.write({
-                    'check_in': record.corrected_check_in,
-                    'check_out': record.corrected_check_out,
-                })
+                attendance = record.attendance_id
+
+                # Ensure there's no conflict in attendance records
+                if attendance and attendance.check_in and not attendance.check_out:
+                    # Allow correction even if check_out is missing
+                    attendance.write({
+                        'check_in': record.corrected_check_in,
+                        'check_out': record.corrected_check_out or False,  # Keep check_out empty if not provided
+                    })
+                else:
+                    attendance.write({
+                        'check_in': record.corrected_check_in,
+                        'check_out': record.corrected_check_out,
+                    })
+
                 record.state = 'approved'
+
+
+
+
+    # def action_approve(self):
+    #     """ Approve the correction and update hr.attendance record """
+    #     for record in self:
+    #         if record.state == 'pending':
+    #             record.attendance_id.write({
+    #                 'check_in': record.corrected_check_in,
+    #                 'check_out': record.corrected_check_out,
+    #             })
+    #             record.state = 'approved'
 
     def action_reject(self):
         """ Reject the correction request """
