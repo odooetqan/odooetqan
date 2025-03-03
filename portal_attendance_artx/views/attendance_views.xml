@@ -200,7 +200,10 @@
                             </t>
                         </td>
 
-                        <td><t t-esc="record.get('overtime_hours', '')"/></td>
+
+
+
+                        <td><t t-esc="record.get('overtime_minutes', '')"/></td>
                         <td><t t-esc="record.get('lateness', '')"/></td>
                         <td><t t-esc="record.get('deduction_amount', '')"/></td>
 
