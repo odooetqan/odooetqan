@@ -56,8 +56,29 @@ class HrAttendance(models.Model):
             if contract and contract.resource_calendar_id:
                 shift = contract.resource_calendar_id.attendance_ids.filtered(lambda a: a.dayofweek == str(record.check_in.weekday()))
                 if shift:
-                    shift_start = datetime.combine(record.check_in.date(), timedelta(hours=shift[0].hour_from).seconds // 3600)
-                    shift_end = datetime.combine(record.check_in.date(), timedelta(hours=shift[0].hour_to).seconds // 3600)
+                    # shift_start = datetime.combine(record.check_in.date(), timedelta(hours=shift[0].hour_from).seconds // 3600)
+                    # shift_end = datetime.combine(record.check_in.date(), timedelta(hours=shift[0].hour_to).seconds // 3600)
+
+
+                    shift_start = datetime.combine(
+                        record.check_in.date(),
+                        datetime.min.time().replace(
+                            hour=int(shift[0].hour_from),
+                            minute=int((shift[0].hour_from % 1) * 60),
+                            second=0
+                        )
+                    )
+
+                    shift_end = datetime.combine(
+                        record.check_in.date(),
+                        datetime.min.time().replace(
+                            hour=int(shift[0].hour_to),
+                            minute=int((shift[0].hour_to % 1) * 60),
+                            second=0
+                        )
+                    )
+
+
 
             if shift_start:
                 record.lateness = max((record.check_in - shift_start).total_seconds() / 60, 0)
@@ -105,33 +126,33 @@ class HrAttendance(models.Model):
 
     #         record.attendance_gap = record.shift_duration - record.attended_duration
 
-    @api.depends('employee_id', 'check_in')
-    def _compute_lateness(self):
-        """Calculate lateness per shift in minutes."""
-        for record in self:
-            if not record.employee_id or not record.check_in:
-                record.late_minutes = 0
-                continue
+    # @api.depends('employee_id', 'check_in')
+    # def _compute_lateness(self):
+    #     """Calculate lateness per shift in minutes."""
+    #     for record in self:
+    #         if not record.employee_id or not record.check_in:
+    #             record.late_minutes = 0
+    #             continue
 
-            shift = record.employee_id.resource_calendar_id
-            if not shift:
-                record.late_minutes = 0
-                continue
+    #         shift = record.employee_id.resource_calendar_id
+    #         if not shift:
+    #             record.late_minutes = 0
+    #             continue
 
-            check_in_time = record.check_in
-            punch_date = check_in_time.date()
-            ksa_tz = timezone('Asia/Riyadh')
+    #         check_in_time = record.check_in
+    #         punch_date = check_in_time.date()
+    #         ksa_tz = timezone('Asia/Riyadh')
 
-            for att in shift.attendance_ids:
-                if att.dayofweek == str(punch_date.weekday()):
-                    shift_start = datetime.combine(punch_date, datetime.min.time()).replace(
-                        hour=int(att.hour_from), minute=int((att.hour_from % 1) * 60)
-                    )
-                    shift_start_utc = ksa_tz.localize(shift_start).astimezone(utc)
+    #         for att in shift.attendance_ids:
+    #             if att.dayofweek == str(punch_date.weekday()):
+    #                 shift_start = datetime.combine(punch_date, datetime.min.time()).replace(
+    #                     hour=int(att.hour_from), minute=int((att.hour_from % 1) * 60)
+    #                 )
+    #                 shift_start_utc = ksa_tz.localize(shift_start).astimezone(utc)
 
-                    # Calculate lateness per shift
-                    late_duration = (check_in_time.replace(tzinfo=None) - shift_start_utc.replace(tzinfo=None)).total_seconds() / 60
-                    record.late_minutes = max(0, late_duration)  # Ensure non-negative value
+    #                 # Calculate lateness per shift
+    #                 late_duration = (check_in_time.replace(tzinfo=None) - shift_start_utc.replace(tzinfo=None)).total_seconds() / 60
+    #                 record.late_minutes = max(0, late_duration)  # Ensure non-negative value
 
 
 
@@ -190,26 +211,26 @@ class HrAttendance(models.Model):
                     record.overtime_minutes = max(0, overtime_duration)
 
 
-    def _compute_lateness(self):
-        for record in self:
-            if record.employee_id and record.check_in:
-                shift_start = record.employee_id.contract_id.resource_calendar_id.attendance_ids.filtered(
-                    lambda a: a.dayofweek == str(record.check_in.weekday())
-                )
-                if shift_start:
-                    from datetime import datetime, timedelta
+    # def _compute_lateness(self):
+    #     for record in self:
+    #         if record.employee_id and record.check_in:
+    #             shift_start = record.employee_id.contract_id.resource_calendar_id.attendance_ids.filtered(
+    #                 lambda a: a.dayofweek == str(record.check_in.weekday())
+    #             )
+    #             if shift_start:
+    #                 from datetime import datetime, timedelta
 
-                    shift_start_time = datetime.combine(
-                        record.check_in.date(),
-                        (datetime.min + timedelta(hours=int(shift_start[0].hour_from), minutes=(shift_start[0].hour_from % 1) * 60)).time()
-                    )
+    #                 shift_start_time = datetime.combine(
+    #                     record.check_in.date(),
+    #                     (datetime.min + timedelta(hours=int(shift_start[0].hour_from), minutes=(shift_start[0].hour_from % 1) * 60)).time()
+    #                 )
 
 
-                    # shift_start_time = datetime.combine(record.check_in.date(),
-                    #                                      timedelta(hours=shift_start[0].hour_from).seconds // 3600)
-                    record.shift_start = shift_start_time
-                    lateness = (record.check_in - shift_start_time).total_seconds() / 60
-                    record.lateness = lateness if lateness > 0 else 0
+    #                 # shift_start_time = datetime.combine(record.check_in.date(),
+    #                 #                                      timedelta(hours=shift_start[0].hour_from).seconds // 3600)
+    #                 record.shift_start = shift_start_time
+    #                 lateness = (record.check_in - shift_start_time).total_seconds() / 60
+    #                 record.lateness = lateness if lateness > 0 else 0
 
     @api.depends('check_in', 'check_out', 'employee_id', 'employee_id.contract_id', 'employee_id.contract_id.resource_calendar_id.attendance_ids')
     def _compute_attendance_deductions(self):
