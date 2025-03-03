@@ -36,7 +36,8 @@
             <field name="model">hr.attendance</field>
             <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='overtime_hours']" position="after">
+                <!-- <xpath expr="//field[@name='overtime_hours']" position="after"> -->
+                <xpath expr="//tree" position="inside">
                     <header>
                         <field name="shift_start" />
                         <field name="shift_end" />
