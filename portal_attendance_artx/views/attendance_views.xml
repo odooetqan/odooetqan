@@ -180,6 +180,7 @@
                     <th>الانصراف</th>
                     <th>ساعات العمل</th>
                     <th>الوقت الاضافي</th>
+                    <th>التاخير</th>
                     <th>الخصم</th>
                     <th>تصحيح</th>
                 </tr>
@@ -199,9 +200,10 @@
                             </t>
                         </td>
 
-                        <td><t t-esc="record.get('overtime_hours', '')"/></td>
-                        <td><t t-esc="record.get('lateness', '')"/></td>
-                        <td><t t-esc="record.get('deduction_amount', '')"/></td>
+                        <td><t t-esc="record.get('overtime_hours'"/></td>
+
+                        <td><t t-esc="record.lateness"/></td>
+                        <td><t t-esc="record.deduction_amount"/></td>
 
 
 
