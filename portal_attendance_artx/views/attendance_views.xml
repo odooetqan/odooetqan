@@ -44,10 +44,10 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Check In</th>
-                                    <th>Check Out</th>
-                                    <th>Reason</th>
-                                    <th>Status</th>
+                                    <th>الدخول</th>
+                                    <th>الخروج</th>
+                                    <th>السبب</th>
+                                    <th>الحالة</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -180,6 +180,7 @@
                     <th>الانصراف</th>
                     <th>ساعات العمل</th>
                     <th>الوقت الاضافي</th>
+                    <th>الخصم</th>
                     <th>تصحيح</th>
                 </tr>
             </thead>
@@ -199,6 +200,7 @@
                         </td>
 
                         <td><t t-esc="record.get('overtime_hours', '')"/></td>
+                        <td><t t-esc="record.get('deduction_amount', '')"/></td>
                         <td>
                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" t-att-data-bs-target="'#correctAttendanceModal-%s' % record['id']">
                                 تصحيح
@@ -255,10 +257,10 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Check In</th>
-                    <th>Check Out</th>
-                    <th>Reason</th>
-                    <th>Status</th>
+                    <th>الدخول</th>
+                    <th>الخروج</th>
+                    <th>السبب</th>
+                    <th>الحالة</th>
                 </tr>
             </thead>
             <tbody>
@@ -371,45 +373,45 @@
     </template>
 
 
-    <template id="portal_my_leaves" name="Portal Leave List">
-    <t t-call="portal.portal_layout">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h3>طلبات الاجازة</h3>
-                <!-- Button to Create New Leave Request -->
-                <h3>
-                    <a href="/my/leave/new" class="btn btn-primary">
-                        <i class="fa fa-plus me-1"></i>إنشاء طلب اجازة
-                    </a>
-                </h3>
-            </div>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>نوع الاجازة</th>
-                        <th>تاريخ البدء</th>
-                        <th>تاريخ الانتهاء</th>
-                        <th>الحالة</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <t t-foreach="leave_records" t-as="leave">
-                        <tr>
-                            <!-- Display the name of the leave type -->
-                            <td><t t-esc="leave.holiday_status_id.name"/></td>
-                            <td><t t-esc="leave.date_from"/></td>
-                            <td><t t-esc="leave.date_to"/></td>
-                            <td>
-                                <t t-if="leave.state == 'draft'">مسودة</t>
-                                <t t-if="leave.state == 'confirm'">في انتظار الموافقة</t>
-                            </td>
-                        </tr>
-                    </t>
-                </tbody>
-            </table>
+<template id="portal_my_leaves" name="Portal Leave List">
+<t t-call="portal.portal_layout">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3>طلبات الاجازة</h3>
+            <!-- Button to Create New Leave Request -->
+            <h3>
+                <a href="/my/leave/new" class="btn btn-primary">
+                    <i class="fa fa-plus me-1"></i>إنشاء طلب اجازة
+                </a>
+            </h3>
         </div>
-    </t>
-    </template>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>نوع الاجازة</th>
+                    <th>تاريخ البدء</th>
+                    <th>تاريخ الانتهاء</th>
+                    <th>الحالة</th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="leave_records" t-as="leave">
+                    <tr>
+                        <!-- Display the name of the leave type -->
+                        <td><t t-esc="leave.holiday_status_id.name"/></td>
+                        <td><t t-esc="leave.date_from"/></td>
+                        <td><t t-esc="leave.date_to"/></td>
+                        <td>
+                            <t t-if="leave.state == 'draft'">مسودة</t>
+                            <t t-if="leave.state == 'confirm'">في انتظار الموافقة</t>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+    </div>
+</t>
+</template>
 
 
 
