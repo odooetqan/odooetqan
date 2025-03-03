@@ -10,7 +10,7 @@ class HrEmployee(models.Model):
     deduction_multiplier = fields.Float(string='Deduction Multiplier', default=1.0)
     allowance_multiplier = fields.Float(string='Allowance Multiplier', default=1.0)
     per_minute_rate = fields.Float(string='Per Minute Rate', compute='_compute_per_minute_rate')
-
+    total_wage = fields.Float(string='Total Wage')
 
     @api.depends('contract_id', 'contract_id.wage', 'contract_id.resource_calendar_id.hours_per_day')
     def _compute_per_minute_rate(self):
