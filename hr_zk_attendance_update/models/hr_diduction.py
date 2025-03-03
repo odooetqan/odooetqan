@@ -17,6 +17,6 @@ class HrEmployee(models.Model):
         for employee in self:
             if employee.contract_id and employee.contract_id.resource_calendar_id:
                 daily_minutes = employee.contract_id.resource_calendar_id.hours_per_day * 60
-                employee.per_minute_rate = employee.contract_id.wage /(30*8*60)
+                employee.per_minute_rate = employee.total_wage /(30*8*60)
                 #  / daily_minutes if daily_minutes else 0.0
 
