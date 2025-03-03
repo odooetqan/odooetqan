@@ -6,19 +6,104 @@ from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 from datetime import datetime, timedelta  # ✅ Ensure timedelta is imported
 from pytz import timezone, utc  # ✅ Import timezone functions
-
+from odoo import api, fields, models
+from datetime import datetime, timedelta
 
 class HrAttendance(models.Model):
     _inherit = 'hr.attendance'
 
-
-    lateness = fields.Float(string='Lateness (minutes)', compute='_compute_lateness', store=True)
+    # lateness = fields.Float(string='Lateness (minutes)', compute='_compute_lateness', store=True)
     shift_start = fields.Datetime(string='Shift Start')
     shift_end = fields.Datetime(string='Shift End')
     deduction_amount = fields.Float(string='Deduction Amount', compute='_compute_attendance_deductions', store=True)
     notes = fields.Char('Notes')
     late_minutes = fields.Float(string="Lateness (Minutes)", compute="_compute_lateness", store=True)
     overtime_minutes = fields.Float(string="Overtime (Minutes)", compute="_compute_overtime", store=True)
+
+    lateness = fields.Float(string="Lateness (minutes)", compute="_compute_attendance_metrics", store=True)
+    early_checkout = fields.Float(string="Early Check-Out (minutes)", compute="_compute_attendance_metrics", store=True)
+    shift_duration = fields.Float(string="Shift Duration (minutes)", compute="_compute_attendance_metrics", store=True)
+    attended_duration = fields.Float(string="Attended Duration (minutes)", compute="_compute_attendance_metrics", store=True)
+    attendance_gap = fields.Float(string="Attendance Gap (minutes)", compute="_compute_attendance_metrics", store=True)
+
+
+# from odoo import api, fields, models
+# from datetime import datetime, timedelta
+
+# class HrAttendance(models.Model):
+#     _inherit = 'hr.attendance'
+
+#     lateness = fields.Float(string="Lateness (minutes)", compute="_compute_attendance_metrics", store=True)
+#     early_checkout = fields.Float(string="Early Check-Out (minutes)", compute="_compute_attendance_metrics", store=True)
+#     shift_duration = fields.Float(string="Shift Duration (minutes)", compute="_compute_attendance_metrics", store=True)
+#     attended_duration = fields.Float(string="Attended Duration (minutes)", compute="_compute_attendance_metrics", store=True)
+#     attendance_gap = fields.Float(string="Attendance Gap (minutes)", compute="_compute_attendance_metrics", store=True)
+
+    def action_recompute_attendance(self):
+        """ Manually trigger the computation of attendance metrics """
+        for record in self:
+            record._compute_attendance_metrics()
+
+    @api.depends('check_in', 'check_out', 'employee_id')
+    def _compute_attendance_metrics(self):
+        """ Compute lateness, early check-out, and durations """
+        for record in self:
+            if not record.check_in or not record.employee_id:
+                continue
+
+            shift_start = shift_end = None
+            contract = record.employee_id.contract_id
+            if contract and contract.resource_calendar_id:
+                shift = contract.resource_calendar_id.attendance_ids.filtered(lambda a: a.dayofweek == str(record.check_in.weekday()))
+                if shift:
+                    shift_start = datetime.combine(record.check_in.date(), timedelta(hours=shift[0].hour_from).seconds // 3600)
+                    shift_end = datetime.combine(record.check_in.date(), timedelta(hours=shift[0].hour_to).seconds // 3600)
+
+            if shift_start:
+                record.lateness = max((record.check_in - shift_start).total_seconds() / 60, 0)
+                record.shift_duration = (shift_end - shift_start).total_seconds() / 60 if shift_end else 0
+            else:
+                record.lateness = 0
+                record.shift_duration = 0
+
+            if record.check_out and shift_end:
+                record.early_checkout = max((shift_end - record.check_out).total_seconds() / 60, 0)
+                record.attended_duration = (record.check_out - record.check_in).total_seconds() / 60
+            else:
+                record.early_checkout = 0
+                record.attended_duration = 0
+
+            record.attendance_gap = record.shift_duration - record.attended_duration
+
+    # @api.depends('check_in', 'check_out', 'employee_id')
+    # def _compute_attendance_metrics(self):
+    #     for record in self:
+    #         if not record.check_in or not record.employee_id:
+    #             continue
+
+    #         shift_start = shift_end = None
+    #         contract = record.employee_id.contract_id
+    #         if contract and contract.resource_calendar_id:
+    #             shift = contract.resource_calendar_id.attendance_ids.filtered(lambda a: a.dayofweek == str(record.check_in.weekday()))
+    #             if shift:
+    #                 shift_start = datetime.combine(record.check_in.date(), timedelta(hours=shift[0].hour_from).seconds // 3600)
+    #                 shift_end = datetime.combine(record.check_in.date(), timedelta(hours=shift[0].hour_to).seconds // 3600)
+
+    #         if shift_start:
+    #             record.lateness = max((record.check_in - shift_start).total_seconds() / 60, 0)
+    #             record.shift_duration = (shift_end - shift_start).total_seconds() / 60 if shift_end else 0
+    #         else:
+    #             record.lateness = 0
+    #             record.shift_duration = 0
+
+    #         if record.check_out and shift_end:
+    #             record.early_checkout = max((shift_end - record.check_out).total_seconds() / 60, 0)
+    #             record.attended_duration = (record.check_out - record.check_in).total_seconds() / 60
+    #         else:
+    #             record.early_checkout = 0
+    #             record.attended_duration = 0
+
+    #         record.attendance_gap = record.shift_duration - record.attended_duration
 
     @api.depends('employee_id', 'check_in')
     def _compute_lateness(self):

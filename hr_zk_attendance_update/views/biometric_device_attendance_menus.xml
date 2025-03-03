@@ -17,6 +17,20 @@
               /><!--              groups="hr_attendance.group_hr_attendance_officer"-->
 
 
+     <record id="view_hr_attendance_form" model="ir.ui.view">
+        <field name="name">hr.attendance.form.view</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.view_hr_attendance_form"/>
+        <field name="arch" type="xml">
+            <header>
+                <button name="action_recompute_attendance" type="object" string="Recalculate Attendance" class="oe_highlight"/>
+            </header>
+        </field>
+    </record>
+
+
+
+
         <!-- Add a scheduled action in the XML file to run this cron job daily at midnight -->
         <record id="ir_cron_attendance_deductions" model="ir.cron">
             <field name="name">Compute Attendance Deductions</field>
