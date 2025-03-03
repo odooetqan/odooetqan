@@ -31,26 +31,24 @@
             </field>
         </record>
 
-        <record id="view_hr_attendance_tree_interit" model="ir.ui.view">
+
+        <record id="view_hr_attendance_tree_inherit" model="ir.ui.view">
             <field name="name">hr.attendance.tree.view</field>
             <field name="model">hr.attendance</field>
             <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
             <field name="arch" type="xml">
-                <!-- <xpath expr="//field[@name='overtime_hours']" position="after"> -->
                 <xpath expr="//tree" position="inside">
-                    <header>
-                        <field name="shift_start" />
-                        <field name="shift_end" />
-                        <field name="deduction_amount" />
-                        <field name="notes" />
-                        <field name="late_minutes" />
-                        <field name="lateness" />
-                        <field name="overtime_minutes" />
-                        <field name="early_checkout" />
-                        <field name="shift_duration" />
-                        <field name="attended_duration" />
-                        <field name="attendance_gap" />
-                    </header>
+                    <field name="shift_start"/>
+                    <field name="shift_end"/>
+                    <field name="deduction_amount"/>
+                    <field name="notes"/>
+                    <field name="late_minutes"/>
+                    <field name="lateness"/>
+                    <field name="overtime_minutes"/>
+                    <field name="early_checkout"/>
+                    <field name="shift_duration"/>
+                    <field name="attended_duration"/>
+                    <field name="attendance_gap"/>
                 </xpath>
             </field>
         </record>
