@@ -30,49 +30,49 @@ class HrAttendanceCorrection(models.Model):
         self.message_post(body="🟡 Attendance correction request submitted for approval.", subtype_xmlid="mail.mt_comment")
 
 
-    def action_approve(self):
-        """Approve the correction and update hr.attendance record"""
-        for record in self:
-            if record.state == 'pending':
-                attendance = record.attendance_id
-
-                if not attendance:
-                    raise ValidationError("No existing attendance record found.")
-
-                # Check if there's already a check-in without a check-out
-                if attendance.check_in and not attendance.check_out:
-                    # Try to find a historical check_out for this check_in
-                    last_attendance = self.env['hr.attendance'].search([
-                        ('employee_id', '=', attendance.employee_id.id),
-                        ('check_in', '<', attendance.check_in),
-                        ('check_out', '!=', False)
-                    ], order='check_out desc', limit=1)
-
-                    if last_attendance:
-                        raise ValidationError(f"Cannot correct attendance. The employee already has a previous check_out at {last_attendance.check_out}.")
-
-                    # If no previous check_out, create one automatically
-                    attendance.write({
-                        'check_out': record.corrected_check_out or fields.Datetime.now(),
-                    })
-
-                # Now apply the correction
-                attendance.write({
-                    'check_in': record.corrected_check_in,
-                    'check_out': record.corrected_check_out or attendance.check_out,  # Keep the auto-created check_out
-                })
-
-                record.state = 'approved'
-
     # def action_approve(self):
-    #     """ Approve the correction and update hr.attendance record """
+    #     """Approve the correction and update hr.attendance record"""
     #     for record in self:
     #         if record.state == 'pending':
-    #             record.attendance_id.write({
-    #                 'check_in': record.corrected_check_in,
-    #                 'check_out': record.corrected_check_out,
+    #             attendance = record.attendance_id
+
+    #             if not attendance:
+    #                 raise ValidationError("No existing attendance record found.")
+
+    #             # Check if there's already a check-in without a check-out
+    #             if attendance.check_in and not attendance.check_out:
+    #                 # Try to find a historical check_out for this check_in
+    #                 last_attendance = self.env['hr.attendance'].search([
+    #                     ('employee_id', '=', attendance.employee_id.id),
+    #                     ('check_in', '<', attendance.check_in),
+    #                     ('check_out', '!=', False)
+    #                 ], order='check_out desc', limit=1)
+
+    #                 if last_attendance:
+    #                     raise ValidationError(f"Cannot correct attendance. The employee already has a previous check_out at {last_attendance.check_out}.")
+
+    #                 # If no previous check_out, create one automatically
+    #                 attendance.write({
+    #                     'check_out': record.corrected_check_out or fields.Datetime.now(),
+    #                 })
+
+    #             # Now apply the correction
+    #             attendance.write({
+    #                 # 'check_in': record.corrected_check_in,
+    #                 'check_out': record.corrected_check_out or attendance.check_out,  # Keep the auto-created check_out
     #             })
+
     #             record.state = 'approved'
+
+    def action_approve(self):
+        """ Approve the correction and update hr.attendance record """
+        for record in self:
+            if record.state == 'pending':
+                record.attendance_id.write({
+                    # 'check_in': record.corrected_check_in,
+                    'check_out': record.corrected_check_out,
+                })
+                record.state = 'approved'
 
     def action_reject(self):
         """ Reject the correction request """
