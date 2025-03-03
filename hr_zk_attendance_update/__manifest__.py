@@ -33,9 +33,7 @@
     'website': "https://www.cybrosys.com",
     'depends': ['base_setup', 'hr_attendance','hr_payroll','hr', 'base', 'mail',],
 
-'depends': [
-    # other dependencies
-],
+
 
 
     'external_dependencies': {
