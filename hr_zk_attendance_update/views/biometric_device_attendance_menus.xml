@@ -38,17 +38,18 @@
             <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
             <field name="arch" type="xml">
                 <xpath expr="//tree" position="inside">
-                    <field name="shift_start"/>
-                    <field name="shift_end"/>
-                    <field name="deduction_amount"/>
-                    <field name="notes"/>
-                    <field name="late_minutes"/>
-                    <field name="lateness"/>
-                    <field name="overtime_minutes"/>
-                    <field name="early_checkout"/>
-                    <field name="shift_duration"/>
-                    <field name="attended_duration"/>
-                    <field name="attendance_gap"/>
+                    <field name="shift_start" optional="hide"/>
+                    <field name="shift_end" optional="hide"/>
+                    <field name="deduction_amount" optional="hide"/>
+                    <field name="late_minutes" optional="hide"/>
+                    <field name="lateness" optional="hide"/>
+                    <field name="overtime_minutes" optional="hide"/>
+                    <field name="early_checkout" optional="hide"/>
+                    <field name="shift_duration" optional="show"/>
+                    <field name="attended_duration" optional="show"/>
+                    <field name="attendance_gap" optional="show"/>
+                    <field name="notes" optional="hide"/>
+
                 </xpath>
             </field>
         </record>
