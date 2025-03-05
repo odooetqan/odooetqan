@@ -177,7 +177,7 @@
 									</td>
 									<td style="border-right:1pt solid grey;text-align:right;padding:3pt">
 										<!-- Calculate the total with price_subtotal and tax added -->
-										<span t-esc="l.price_subtotal + (l.price_subtotal * line_tax_total / 100)" 
+										<span t-esc="l.price_subtotal + line_tax_total" 
 											t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
 									</td>
 							 	</tr>
