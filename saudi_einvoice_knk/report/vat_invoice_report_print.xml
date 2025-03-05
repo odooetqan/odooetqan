@@ -176,29 +176,29 @@
 							<thead>
 								<t t-set="discount_before_total" t-value="doc.amount_untaxed + discount_total"/>
 								<tr class="text-center">
-									<td class="text-end arabic" style="border-right:1pt solid grey;text-align:right;padding:3pt">الإجمالي (غير شامل ضريبة القيمة المضافة)</td>
+									<td class="text-end arabic" style="border-right:1pt solid grey;text-align:left;padding:3pt">الإجمالي (غير شامل ضريبة القيمة المضافة)</td>
 									<td class=""  style="font-weight: bold;border-right:1pt solid grey;text-align:left;padding:3pt">Total (Excluding VAT)</td>
-									<td style="border-right:1pt solid grey;text-align:right;padding:3pt" class="text-end"><span t-esc="discount_before_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
+									<td style="border-right:1pt solid grey;text-align:left;padding:3pt" class="text-end"><span t-esc="discount_before_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
 								</tr>
 								<tr class="text-center">
-									<td class="text-end arabic" style="border-right:1pt solid grey;text-align:right;padding:3pt">مجموع الخصم</td>
+									<td class="text-end arabic" style="border-right:1pt solid grey;text-align:left;padding:3pt">مجموع الخصم</td>
 									<td class="" style="font-weight: bold;border-right:1pt solid grey;text-align:left;padding:3pt" >Discount</td>
-									<td style="border-right:1pt solid grey;text-align:right;padding:3pt" class="text-end"><span t-esc="discount_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
+									<td style="border-right:1pt solid grey;text-align:left;padding:3pt" class="text-end"><span t-esc="discount_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
 								</tr>
 								<tr>
-									<td class="text-end arabic" style="border-right:1pt solid grey;text-align:right;padding:3pt">إجمالي المبلغ الخاضع للضريبة (غير شامل ضريبة القيمة المضافة)</td>
+									<td class="text-end arabic" style="border-right:1pt solid grey;text-align:left;padding:3pt">إجمالي المبلغ الخاضع للضريبة (غير شامل ضريبة القيمة المضافة)</td>
 									<td class="" style="font-weight: bold;border-right:1pt solid grey;text-align:left;padding:3pt">Total Taxable Amount (Excluding VAT)</td>
-									<td style="border-right:1pt solid grey;text-align:right;padding:3pt" class="text-end"><span t-esc="doc.amount_untaxed" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
+									<td style="border-right:1pt solid grey;text-align:left;padding:3pt" class="text-end"><span t-esc="doc.amount_untaxed" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
 								</tr>
 								<tr>
-									<td class="text-end arabic" style="border-right:1pt solid grey;text-align:right;padding:3pt">إجمالي ضريبة القيمة المضافة</td>
+									<td class="text-end arabic" style="border-right:1pt solid grey;text-align:left;padding:3pt">إجمالي ضريبة القيمة المضافة</td>
 									<td class="" style="font-weight: bold;border-right:1pt solid grey;text-align:left;padding:3pt">Total VAT</td>
-									<td style="border-right:1pt solid grey;text-align:right;padding:3pt" class="text-end"><span t-esc="tax_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
+									<td style="border-right:1pt solid grey;text-align:left;padding:3pt" class="text-end"><span t-esc="tax_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
 								</tr>
 								<tr>
-									<td class="text-end arabic" style="border-right:1pt solid grey;text-align:right;padding:3pt">إجمالي المبلغ المستحق</td>
+									<td class="text-end arabic" style="border-right:1pt solid grey;text-align:left;padding:3pt">إجمالي المبلغ المستحق</td>
 									<td class="" style="font-weight: bold;border-right:1pt solid grey;text-align:left;padding:3pt">Total Amount Due</td>
-									<td style="border-right:1pt solid grey;text-align:right;padding:3pt" class="text-end"><span t-esc="doc.amount_residual" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
+									<td style="border-right:1pt solid grey;text-align:left;padding:3pt" class="text-end"><span t-esc="doc.amount_residual" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
 								</tr>
 							</thead>
 						</table>
