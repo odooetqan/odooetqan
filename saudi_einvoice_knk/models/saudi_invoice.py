@@ -71,8 +71,8 @@ class AccountMove(models.Model):
             language = language_id.iso_code
         amount_str = str('{:2f}'.format(amount))
         amount_str_splt = amount_str.split('.')
-        before_point_value = amount_str_splt[0]
-        after_point_value = amount_str_splt[1][:2]
+        before_point_value = amount_str_splt[0] + 'ريال'
+        after_point_value = amount_str_splt[1][:2] + 'هلله'
         before_amount_words = num2words(int(before_point_value), lang=language)
         after_amount_words = num2words(int(after_point_value), lang=language)
         amount = before_amount_words + ' ' + after_amount_words
