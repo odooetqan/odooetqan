@@ -167,6 +167,7 @@ class ResCompany(models.Model):
     arabic_state = fields.Char('Arabic State')
     arabic_country = fields.Char('Arabic Country')
     arabic_zip = fields.Char('Arabic Zip')
+    invoice_note = fields.Char('Invoice Notes')
 
 
 class AccountMoveSend(models.TransientModel):
