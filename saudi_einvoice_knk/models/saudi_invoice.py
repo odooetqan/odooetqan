@@ -75,7 +75,7 @@ class AccountMove(models.Model):
         after_point_value = amount_str_splt[1][:2]
         before_amount_words = num2words(int(before_point_value), lang=language) 
         after_amount_words = num2words(int(after_point_value), lang=language) 
-        amount = before_amount_words + 'ريال' + ' و' + after_amount_words + 'هلله'
+        amount = before_amount_words+' ' + 'ريال' + ' و ' + after_amount_words + '  ' +  'هلله'
         return amount
 
     def _amount_total_words(self, amount):

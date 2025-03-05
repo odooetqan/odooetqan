@@ -162,13 +162,24 @@
 						 				</t>
 						 				<span t-if="not l.tax_ids">0.0 %</span>
 							 		</td>
-							 		<td style="padding:3pt;border-right:1pt solid grey;text-align:right;">
+							 		<!-- <td style="padding:3pt;border-right:1pt solid grey;text-align:right;">
 							 			<t t-set="line_tax_total" t-value="l.price_subtotal*line_tax_total/100"/>
 							 			<sapn t-esc="line_tax_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
 							 		</td>
 							 		<td style="border-right:1pt solid grey;text-align:right;padding:3pt" >
 				                        <span t-field="l.price_subtotal" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-				                    </td>
+				                    </td> -->
+									<td style="padding:3pt;border-right:1pt solid grey;text-align:right;">
+										<!-- Calculate line_tax_total -->
+										<t t-set="line_tax_total" t-value="l.price_subtotal * line_tax_total / 100"/>
+										<!-- Display the line tax total -->
+										<span t-esc="line_tax_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+									</td>
+									<td style="border-right:1pt solid grey;text-align:right;padding:3pt">
+										<!-- Calculate the total with price_subtotal and tax added -->
+										<span t-esc="l.price_subtotal + (l.price_subtotal * line_tax_total / 100)" 
+											t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+									</td>
 							 	</tr>
 			               	</tbody>
 						</table>
