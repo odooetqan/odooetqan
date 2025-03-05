@@ -54,11 +54,6 @@
             </field>
         </record>
 
-
-
-
-
-
         <!-- Add a scheduled action in the XML file to run this cron job daily at midnight -->
         <record id="ir_cron_attendance_deductions" model="ir.cron">
             <field name="name">Compute Attendance Deductions</field>
