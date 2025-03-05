@@ -210,7 +210,14 @@
 								</tr>
 							</thead>
 						</table>
-						<h6><span style="font-weight:bold;">Note:</span>Payment against all cash invoices will be valid only if customer have cash receipt voucher proof of payment. otherwise it will be considered as a credit invoice. لن يكون الدفع مقابل جميع الفواتير النقديةصالحًا إلا إذا كان لدىالعميل قسيمة إيصالنقدي تثبت الدفع. وإلافسيتم اعتبارها بمثابةفاتورة ائتمان.</h6>
+						<h6><span style="font-weight:bold;">Note:</span>
+						<span class="text-center arabic" t-field="company.invoice_note"/> 
+
+						<!-- Payment against all cash invoices will be valid only if customer have cash receipt voucher proof of payment.
+						 otherwise it will be considered as a credit invoice.
+						  لن يكون الدفع مقابل جميع الفواتير النقديةصالحًا إلا إذا كان لدىالعميل قسيمة إيصالنقدي تثبت الدفع. وإلافسيتم اعتبارها بمثابةفاتورة ائتمان. -->
+
+						  </h6>
 						<div class="col-9" style="color:black; margin-top:20pt;">
 		                	<!-- <div class="row">
 								<div class="col-9" style=" font-weight:bold;">Received By:</div>
