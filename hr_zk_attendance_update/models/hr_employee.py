@@ -33,15 +33,14 @@ class HrEmployee(models.Model):
     allowance_multiplier = fields.Float(string='Allowance Multiplier', default=1.0)
     per_minute_rate = fields.Float(string='Per Minute Rate', compute='_compute_per_minute_rate')
 
-
     @api.depends('contract_id', 'contract_id.wage', 'contract_id.resource_calendar_id.hours_per_day')
     def _compute_per_minute_rate(self):
         for employee in self:
+            daily_minutes = 0
             if employee.contract_id and employee.contract_id.resource_calendar_id:
-                daily_minutes = employee.contract_id.resource_calendar_id.hours_per_day * 60
-                employee.per_minute_rate = employee.contract_id.wage / daily_minutes if daily_minutes else 0.0
-            else:
-                employee.per_minute_rate = 0
+                daily_minutes = employee.contract_id.resource_calendar_id.hours_per_day * 60 or 1   
+            
+            employee.per_minute_rate = (employee.contract_id.wage / daily_minutes) if employee.contract_id and daily_minutes else 0.0
 
 
 class HrContractHistory(models.Model):
