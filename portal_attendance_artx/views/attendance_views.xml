@@ -176,7 +176,7 @@
                                     <td>
                                         <t t-esc="record.get('check_out', '')"/>
                                     </td>
-                                    <!--                         <td><t t-if="'worked_hours' in record"><t t-esc="record.get('worked_hours', '')"/></t></td> -->
+                                    <!-- <td><t t-if="'worked_hours' in record"><t t-esc="record.get('worked_hours', '')"/></t></td> -->
                                     <td>
                                         <t t-if="'worked_hours' in record">
                                             <t t-set="total_minutes" t-value="int(record['worked_hours'] * 60)"/>
@@ -237,7 +237,7 @@
                 </div>
                 <div class="container">
                     <h2>طلبات تصحيح الحضور</h2>
-                    <table class="table">
+                        <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>الدخول</th>
