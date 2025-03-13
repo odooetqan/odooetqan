@@ -1,7 +1,7 @@
 <odoo>
     <template id="portal_account_template" name="Custom Portal Account Page">
         <t t-call="portal.portal_layout">
-            <t t-set="title">حسابي</t-set>
+            <t t-set="title" t-value="'حسابي'"/>
             <div class="container mt-4">
                 <div class="row">
                     <!-- Sidebar Navigation -->
