@@ -153,8 +153,8 @@
             <t t-call="portal.portal_layout">
                 <div class="container">
                     <h3>سجلات الحضور و الانصراف</h3>
-                    <!--         <table class="table table-striped"> -->
-                    <table class="table table-bordered">
+                            <table class="table table-striped">
+                    <!-- <table class="table table-bordered"> -->
                         <thead>
                             <tr>
                                 <!-- <th>Date</th> -->
