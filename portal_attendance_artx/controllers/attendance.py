@@ -9,9 +9,6 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-from odoo import http, fields
-from odoo.http import request
-
 class PortalAttendance(http.Controller):
 
     @http.route('/portal/add_attendance', type='json', auth='user', methods=['POST'])
@@ -20,9 +17,9 @@ class PortalAttendance(http.Controller):
         employee = user.employee_id
 
         if not employee:
-            return {'error': 'Employee not found'}
+            return {'error': 'الموظف غير موجود'}
 
-        # التحقق من وجود تسجيل خروج قبل تسجيل الحضور الجديد
+        # البحث عن آخر تسجيل حضور
         last_attendance = request.env['hr.attendance'].sudo().search([
             ('employee_id', '=', employee.id)
         ], order="check_in desc", limit=1)
@@ -30,19 +27,23 @@ class PortalAttendance(http.Controller):
         if last_attendance and not last_attendance.check_out:
             return {'error': 'يجب تسجيل الخروج قبل تسجيل حضور جديد'}
 
-        # إنشاء الحضور مع sudo() لمنع تعارض التحديثات
-        attendance = request.env['hr.attendance'].sudo().create({
-            'employee_id': employee.id,
-            'check_in': fields.Datetime.now(),
-        })
+        try:
+            # إنشاء الحضور
+            attendance = request.env['hr.attendance'].sudo().create({
+                'employee_id': employee.id,
+                'check_in': fields.Datetime.now(),
+            })
 
-        # تحديث بيانات الموظف
-        employee.sudo().write({
-            'last_attendance_id': attendance.id,
-            'last_check_in': attendance.check_in,
-        })
+            # تحديث بيانات الموظف
+            employee.sudo().write({
+                'last_attendance_id': attendance.id,
+                'last_check_in': attendance.check_in,
+            })
 
-        return {'success': True, 'attendance_id': attendance.id}
+            return {'success': True, 'attendance_id': attendance.id}
+
+        except Exception as e:
+            return {'error': f'خطأ أثناء إنشاء الحضور: {str(e)}'}
 
 class PortalAttendance(http.Controller):
     @http.route(['/my/attendance'], type='http', auth='user', website=True)
