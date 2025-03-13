@@ -7,10 +7,10 @@
         <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='check_in']" position="after">
-                <field name="check_in_url" widget="url" t-if="record.check_in.value"/>
+                <field name="check_in_url" widget="url" />
             </xpath>
             <xpath expr="//field[@name='check_out']" position="after">
-                <field name="check_out_url" widget="url" t-if="record.check_out.value"/>
+                <field name="check_out_url" widget="url" />
             </xpath>
         </field>
     </record>
