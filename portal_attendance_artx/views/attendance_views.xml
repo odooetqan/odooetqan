@@ -135,6 +135,12 @@
                <span class="badge text-bg-secondary rounded-pill">
                <i class="fa fa-sign-in"></i>
                </span>
+               
+                  <div>
+                     <h5 class="mt-0 mb-1"> سجلات الحضور </h5>
+                     <p class="m-0 text-600">  تتبع الحضور و الانصراف و التاخير و الخصومات من هنا   </p>
+                  </div>
+
                </a>
             </div>
          </xpath>
@@ -332,7 +338,7 @@
             <div class="o_portal_index_card col-md-6" >
                <a href="/my/leaves" title="Leaves" class="d-flex justify-content-start gap-2 align-items-center py-3 px-3 rounded text-decoration-none text-reset text-bg-light text-bg-danger">
                   <div class="o_portal_icon">
-                     <img width="150px" src="/portal_attendance_artx/static/src/images/sun-bath-svgrepo-com.svg" loading="lazy"/>
+                     <img width="100px" src="/portal_attendance_artx/static/src/images/sun-bath-svgrepo-com.svg" loading="lazy"/>
                   </div>
                   <div>
                      <h5 class="mt-0 mb-1">طلبات الاجازة </h5>
