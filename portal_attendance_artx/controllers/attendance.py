@@ -63,7 +63,7 @@ class PortalAttendance(http.Controller):
             ('employee_id', '=', employee.id),
             ('check_in', '>=', fifteenth_previous_month),
             ('check_in', '<=', today)
-        ], ['check_in', 'check_out', 'worked_hours', 'overtime_minutes', 'lateness', 'deduction_amount'])
+        ])
     
 
     
