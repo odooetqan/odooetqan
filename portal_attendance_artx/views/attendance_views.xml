@@ -5,9 +5,9 @@
                   inherit_id="portal.portal_my_home" priority="20">
             <div class="oe_structure" position="inside">
                 <div class="container">
-                    <button id="attendanceBtn" class="btn btn-warning attendanceBtn">
+                    <button id="attendanceBtn" class="btn btn-success attendanceBtn">
                         <i class="fa fa-sign-in" aria-hidden="true"></i>
-                        <span id="btnText">Click to Check In</span>
+                        <span id="btnText">سجل الدخول</span>
                     </button>
                 </div>
             </div>
