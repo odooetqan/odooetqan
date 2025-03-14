@@ -1,6 +1,10 @@
 from odoo import http
 from odoo.http import request
 
+import logging
+_logger = logging.getLogger(__name__)
+
+
 # class PortalHrLoan(http.Controller):
 #     @http.route(['/my/loans'], type='http', auth="user", website=True)
 #     def portal_my_loans(self, **kwargs):
@@ -45,21 +49,21 @@ class PortalHrLoan(http.Controller):
         return request.redirect('/my/loans')
 
 
-@http.route('/my/salaries', type='http', auth="user", website=True)
-def portal_salaries(self, **kwargs):
-    employee = request.env['hr.employee'].sudo().search([('user_id', '=', request.env.user.id)], limit=1)
-    
-    _logger.info("User ID: %s", request.env.user.id)
-    _logger.info("Employee ID: %s", employee.id if employee else "No employee found")
-    
-    if not employee:
-        return request.render('portal_hr_loan.portal_hr_salary_list', {'salaries': []})
-    
-    salaries = request.env['hr.salary'].sudo().search([('employee_id', '=', employee.id)])
+    @http.route('/my/salaries', type='http', auth="user", website=True)
+    def portal_salaries(self, **kwargs):
+        employee = request.env['hr.employee'].sudo().search([('user_id', '=', request.env.user.id)], limit=1)
+        
+        _logger.info("User ID: %s", request.env.user.id)
+        _logger.info("Employee ID: %s", employee.id if employee else "No employee found")
+        
+        if not employee:
+            return request.render('portal_hr_loan.portal_hr_salary_list', {'salaries': []})
+        
+        salaries = request.env['hr.salary'].sudo().search([('employee_id', '=', employee.id)])
 
-    _logger.info("Salaries: %s", salaries)
+        _logger.info("Salaries: %s", salaries)
 
-    return request.render('portal_hr_loan.portal_hr_salary_list', {'salaries': salaries})
+        return request.render('portal_hr_loan.portal_hr_salary_list', {'salaries': salaries})
 
 
 
