@@ -58,13 +58,22 @@ class PortalAttendance(http.Controller):
         first_day_of_current_month = today.replace(day=1)
         fifteenth_previous_month = first_day_of_current_month - timedelta(days=15)
     
-        # Get attendance records within the date range
-        attendance_records = request.env['hr.attendance'].sudo().search([
-            ('employee_id', '=', employee.id),
+        # # Get attendance records within the date range
+        # attendance_records = request.env['hr.attendance'].sudo().search([
+        #     ('employee_id', '=', employee.id),
+        #     ('check_in', '>=', fifteenth_previous_month),
+        #     ('check_in', '<=', today)
+        # ])
+    
+
+    
+        attendance_records = request.env['hr.attendance'].sudo().search_read([
+            ('employee_id', '=', request.env.user.employee_id.id),
             ('check_in', '>=', fifteenth_previous_month),
             ('check_in', '<=', today)
-        ])
-    
+        ], ['check_in', 'check_out', 'worked_hours', 'overtime_minutes', 'lateness', 'deduction_amount'])
+
+
         # Convert check-in and check-out times from UTC to Asia/Riyadh
         user_tz = pytz.timezone('Asia/Riyadh')  # Set to Riyadh timezone
         utc_tz = pytz.UTC
