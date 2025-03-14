@@ -1,0 +1,26 @@
+<odoo>
+    <data>
+        <template id="portal_my_home_sale" name="Show Quotations / Sales Orders" customize_show="True"
+                  inherit_id="portal.portal_my_home" priority="20">
+            <div class="oe_structure" position="inside">
+                <div class="container">
+                    <button id="attendanceBtn" class="btn btn-warning attendanceBtn">
+                        <i class="fa fa-sign-in" aria-hidden="true"></i>
+                        <span id="btnText">Click to Check In</span>
+                    </button>
+                </div>
+            </div>
+        </template>
+        <record id="action_hr_employee_create_portal_user" model="ir.actions.server">
+            <field name="name">Create Portal User</field>
+            <field name="model_id" ref="hr.model_hr_employee"/>
+            <field name="binding_model_id" ref="hr.model_hr_employee"/>
+            <field name="binding_view_types">form</field>
+            <field name="groups_id" eval="[(4, ref('base.group_erp_manager'))]"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = records.action_create_portal_user()
+            </field>
+        </record>
+    </data>
+</odoo>
