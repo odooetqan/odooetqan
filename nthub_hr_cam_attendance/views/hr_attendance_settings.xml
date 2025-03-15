@@ -1,0 +1,64 @@
+<odoo>
+    <record id="hr_attendance_config_settings_view_form_inherit" model="ir.ui.view">
+        <field name="name">res.config_.settings.attendance.view.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="90"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//app[@name='hr_attendance']" position="inside">
+                <block title="Face Recognition" name="face_recognition_settings">
+                        <setting title="Activate the face recognition settings." string="Activate the face recognition settings" company_dependent="1" help="Activate the face recognition settings">
+                            <field name="hr_attendance_face_rec"/>
+                            <div class="mt16" invisible="not hr_attendance_face_rec" required="hr_attendance_face_rec">
+                                <div class="mt16 row" title="Company Longitude.">
+                                    <label for="long" string="Company Longitude" class="col-3 col-lg-3 o_light_label"/>
+                                    <field name="long" class="col-lg-3 p-0"
+                                          required="hr_attendance_face_rec" />
+                                </div>
+                                <br/>
+                                <div class="mt16 row" title="latitude." invisible="not hr_attendance_face_rec" required="hr_attendance_face_rec">
+                                    <label for="lat" string="Company Latitude" class="col-3 col-lg-3 o_light_label"/>
+                                    <field name="lat" class="col-lg-3 p-0"
+                                           required="hr_attendance_face_rec"/>
+                                </div>
+                                <br/>
+                                <div class="mt16 row" title="work_to." invisible="not hr_attendance_face_rec" required="hr_attendance_face_rec">
+                                    <label for="max_distance" string="Maximum Allowed Distance"
+                                           class="col-3 col-lg-3 o_light_label"/>
+                                    <field name="max_distance" class="col-lg-3 p-0"
+                                           required="hr_attendance_face_rec"/>
+                                </div>
+                                <br/>
+                                <div class="mt16 row" title="work_from." invisible="not hr_attendance_face_rec" required="hr_attendance_face_rec">
+                                    <label for="working_from" string="Working From"
+                                           class="col-3 col-lg-3 o_light_label"/>
+                                    <field name="working_from" widget="float_time" class="col-lg-3 p-0"
+                                           required="hr_attendance_face_rec"/>
+                                </div>
+                                <br/>
+                                <div class="mt16 row" title="work_to." invisible="not hr_attendance_face_rec" required="hr_attendance_face_rec">
+                                    <label for="working_to" string="Working To" class="col-3 col-lg-3 o_light_label"/>
+                                    <field name="working_to" widget="float_time" class="col-lg-3 p-0"
+                                           required="hr_attendance_face_rec"/>
+                                </div>
+                                <br/>
+                                <div invisible="not hr_attendance_face_rec" required="hr_attendance_face_rec" class="text-muted">Manage Admin to check scenario of to options if user check in
+                                    after check out time and he didn't record check in you can choose (None) this
+                                    selection will not record any thing in attendance sheet and the second selection
+                                    will record checkin and checkout at the same time
+                                </div>
+                                <div class="mt16 row" title="behavior." invisible="not hr_attendance_face_rec" required="hr_attendance_face_rec">
+                                    <label for="behavior" string="Behavior" class="col-3 col-lg-3 o_light_label"/>
+                                    <field name="behavior" class="col-lg-3 p-0"
+                                           required="hr_attendance_face_rec"/>
+                                </div>
+
+                            </div>
+                        </setting>
+
+                    </block>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

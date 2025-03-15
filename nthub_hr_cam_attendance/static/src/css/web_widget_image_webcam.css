@@ -1,0 +1,49 @@
+
+/* Media Query for Mobile Devices */
+@media (max-width: 580px){
+    #live_webcam {
+        width: 220px;
+        height: 340px;
+        border: 5px solid;
+        display:none;
+    }
+
+}
+
+@media (min-width: 1025px) and (max-width: 1700px){
+    #live_webcam {
+        width: 320px;
+        height: 240px;
+        border: 5px solid;
+        display:none;
+    }
+
+}
+
+.live_webcam_outer_div,
+.webcam_result_outer_div {
+    padding-left: 20px;
+
+}
+
+#webcam_result img {
+    max-width: 320px;
+    max-height: 240px;
+}
+
+
+.btn-link-attend {
+    margin: auto;
+    width: 20%;
+    padding: 10px;
+}
+.container-cam {
+    width: 350px;
+    height: 250px;
+    padding: 10px;
+    margin: auto;
+}
+
+.direction_icon {
+    text-align: center;
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_home_prs" name="Portal My Home : PR Requests"   customize_show="True" inherit_id="portal.portal_my_home" priority="45">
+        <xpath  expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/portal/static/src/img/portal-addresses.svg'"/>
+                <t t-set="title">Attendance</t>
+                <t t-set="url" t-value="'/my/attendance/checkin'"/>
+                <t t-set="placeholder_count" t-value="'attendance_count'"/>
+
+
+            </t>
+        </xpath>
+    </template>
+
+<!--          <record id="menu_attendance" model="website.menu">-->
+<!--        <field name="name">Attendance</field>-->
+<!--        <field name="url">/my/attendance/checkin</field>-->
+<!--        <field name="parent_id" ref="website.main_menu"/>-->
+<!--        <field name="sequence" type="int">10</field>-->
+<!--    </record>-->
+
+</odoo>

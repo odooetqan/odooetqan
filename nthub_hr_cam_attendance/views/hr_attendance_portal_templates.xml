@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="attendance_done_template" name="Done">
+        <t t-call="portal.portal_layout">
+            <div id="wrap">
+                <div class="oe_structure">
+                    <div class="container">
+                        <div class="card">
+                            <div class="card-header">
+                                <div id="wrap">
+                                    <div class="container">
+                                        <h1>Thanks!</h1>
+                                        <div class="row">
+                                            <div class="col-lg-8">
+                                                <div class="alert alert-success" role="status">
+                                                    You are Checked successfully.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="attendance_check_out_done_template" name="Done">
+        <t t-call="portal.portal_layout">
+            <div class="oe_structure">
+            <div class="container-fluid">
+                <div class="alert alert-success" id="info_message_attendance_success" style="display:none;">Success. you are register attendance </div>
+                <div class="alert alert-warning" id="info_message_attendance_warning" style="display:none;">Warning.failed please try again </div>
+                    <div class="container-cam">
+                        <div class="row live_webcam_outer_div">
+
+                            <div id="live_webcam" class="live_webcam">
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <a class="btn btn-link-attend fa fa-7x omni_hr_attendance_sign_in_out_icon fa-sign-in btn-secondary"
+                               aria-label="Sign in" title="Sign in/out"/>
+                            <h3 class="mt0 mb0 text-muted text_low">Click to
+                            <t>
+                                <b>Sign In/Out</b>
+                            </t>
+                        </h3>
+
+                        </div>
+                    </div>
+            </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="attendance_fail_template" name="Fail">
+<t t-call="portal.portal_layout">
+    <div id="wrap">
+        <div class="oe_structure">
+            <div class="container">
+                <div class="card">
+                    <div class="card-header">
+                        <div id="wrap">
+                            <div class="container">
+                                <h1>Sorry!</h1>
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <div class="alert alert-success" role="status">
+                                            Something Going Wrong check your profile image or try again.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</t>
+</template>
+</odoo>
