@@ -4,7 +4,7 @@ import base64
 # from base64 import b64encode
 
 from odoo import models, fields, api, _
-from odoo.exceptions import UserError, Warning
+from odoo.exceptions import ValidationError, Warning
 
 
 def generate_tlv_hex(*args):
@@ -90,9 +90,9 @@ class AccountMove(models.Model):
         for record in self:
             if record.country_code == 'SA' and record.move_type in ('out_invoice', 'out_refund'):
                 if not record.einv_sa_show_delivery_date:
-                    raise UserError(_('Delivery Date cannot be empty'))
+                    raise ValidationError(_('Delivery Date cannot be empty'))
                 if record.einv_sa_delivery_date < record.invoice_date:
-                    raise UserError(_('Delivery Date cannot be before Invoice Date'))
+                    raise ValidationError(_('Delivery Date cannot be before Invoice Date'))
                 self.write({
                     'einv_sa_confirmation_datetime': fields.Datetime.now()
                 })
