@@ -91,13 +91,12 @@
          -->
 
         <!-- Template Form to create new Leave -->
-        <template id="leave_form_template" name="Create Leave">
+        <!-- <template id="leave_form_template" name="Create Leave">
             <t t-call="portal.portal_layout">
                 <div class="container">
                     <h3>طلب إجازة</h3>
                 <form t-attf-action="/my/leave/submit" method="post"  id="leaveRequestForm">
                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                    
                         <div class="mb-3">
                             <label for="leave_type" class="form-label">نوع الإجازة</label>
                             <select id="leave_type" name="leave_type" class="form-select" required="true">
@@ -120,7 +119,38 @@
                 </form>
                 </div>
             </t>
-        </template>
+        </template> -->
+
+      <!-- Template Form to create new Leave -->
+        <template id="leave_form_template" name="Create Leave">
+         <t t-call="portal.portal_layout">
+            <div class="container">
+                <h3>طلب إجازة</h3>
+               <form t-attf-action="/my/leave/submit" method="post">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/> 
+                    <div class="mb-3">
+                        <label for="leave_type" class="form-label">نوع الإجازة</label>
+                        <select id="leave_type" name="leave_type" class="form-select" required="true">
+                            <t t-foreach="leave_types" t-as="leave_type">
+                                <option t-att-value="leave_type.id">
+                                    <t t-esc="leave_type.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="start_date" class="form-label">تاريخ البدء</label>
+                        <input type="date" id="start_date" name="start_date" class="form-control" required="true" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="end_date" class="form-label">تاريخ الانتهاء</label>
+                        <input type="date" id="end_date" name="end_date" class="form-control" required="true" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">تقديم الطلب</button>
+               </form>
+            </div>
+         </t>
+      </template>
 
 
             <record id="action_hr_employee_create_portal_user" model="ir.actions.server">
