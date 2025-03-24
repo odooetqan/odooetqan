@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    
+    <template id="custom_external_layout">
+        <!-- header -->
+        <div class="header">
+            <img src='/web/binary/company_logo' style="width:10%"/>
+        </div>
+        <!-- body -->
+        <t t-if="not o and doc">
+            <t t-set="o" t-value="doc"/>
+        </t>
+        <t t-if="o and 'company_id' in o">
+            <t t-set="company" t-value="o.company_id"></t>
+        </t>
+        <t t-if="not o or not 'company_id' in o">
+            <t t-set="company" t-value="res_company"></t>
+        </t>
+        <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-raw="0"/>
+        </div>
+        <!-- footer -->
+        <div class="footer">
+            <p style="border-style:solid;text-align:center;background-color: lightgrey;">
+                <span><t t-esc="docs.company_id.phone"/></span>&amp;nbsp;<span><t t-esc="docs.company_id.email"/></span>&amp;nbsp; 
+                <span><t t-esc="docs.company_id.website"/></span>
+                <br/>
+                <span>Tax ID:<t t-esc="docs.company_id.vat"/></span>
+            </p>
+        </div>
+    </template>
+
+    <!-- main template -->
+    <template id='report_ksa_qrcode_card'>
+        <t t-call="web.html_container">
+            <t t-call="electronic_invoice_qr_saudi_invoice_app.custom_external_layout">
+                <t t-set="company" t-value="res_company" />
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+                    <p style="border-style:solid;text-align:center;background-color: lightgrey;"><b>فاتورة ضريبية<br></br>TAX INVOICE</b></p>
+                    <div>
+                        <table class="table" style="width:100%">
+                            <tr>
+                                <td style="border:1px solid black;text-align:left;padding:5px;width:40%;" class="table-secondary">
+                                    <t t-esc="doc.company_id.name"/>
+                                    <br></br>
+                                    <t t-esc="doc.company_id.street"/>
+                                    <br></br>
+                                    <t t-esc="doc.company_id.street2"/>
+                                    <br></br>
+                                    <t t-esc="doc.company_id.zip"/>
+                                    <br></br>
+                                    <t t-esc="doc.company_id.state_id.name"/>
+                                    <br></br>
+                                    <t t-esc="doc.company_id.country_id.name"/>
+                                </td>
+                                <td align="center" style="border:1px solid black;width:20%;">
+                                    <img t-att-src="'/web/image?model=account.move&amp;id=%s&amp;field=qr_image'%(doc.id)" style="height:160px;margin-top:5px;" />
+                                </td>
+                                <td style="border:1px solid black; ;text-align:right;padding:5px;width:40%;" class="table-secondary">
+                                    <t t-esc="doc.company_id.company_name"/>
+                                    <br></br>
+                                    <t t-esc="doc.company_id.street1"/>
+                                    <br></br>
+                                    <t t-esc="doc.company_id.street2"/>
+                                    <br></br>
+                                    <t t-esc="doc.company_id.zip1"/>
+                                    <br></br>
+                                    <t t-esc="doc.company_id.state_id1.name"/>
+                                    <br></br>
+                                    <t t-esc="doc.company_id.country_id1.name"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br/>
+                    <table class="table table-sm o_main_table">
+                        <thead class="table-secondary">
+                            <tr>
+                                <th style="text-align:center;">رقم الفاتورة<br></br>Invoice Number</th>
+                                <th style="text-align:center;">تاريخ الفاتورة<br></br>Invoice Date</th>
+                                <th style="text-align:center;">تاريخ الاستحقاق<br></br>Due Date</th>
+                                <th style="text-align:center;">شروط الدفع<br></br>Payment Terms</th>
+                                <th style="text-align:center;">رقم كر<br></br>CR No</th>
+                                <th style="text-align:center;">ضريبة القيمة المضافة لا<br></br>VAT No</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td align="center">
+                                    <t t-esc="doc.name"/>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="doc.invoice_date"/>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="doc.invoice_date_due"/>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="doc.invoice_payment_term_id.name"/>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="doc.company_id.company_registry"/>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="doc.company_id.vat"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <p style="border-style:solid;text-align:center;background-color: lightgrey;"><b>تاجر<br></br>Seller</b></p>
+                    <table class="table table-sm o_main_table">
+                        <thead class="table-secondary">
+                            <tr>
+                                <th style="text-align:center;">اسم<br></br>Name</th>
+                                <th style="text-align:center;">لا للبناء<br></br>Building No</th>
+                                <th style="text-align:center;">يصرف<br></br>District</th>
+                                <th style="text-align:center;">مدينة<br></br>City</th>
+                                <th style="text-align:center;">دولة<br></br>Country</th>
+                                <th style="text-align:center;">رمز بريدي<br></br>Postal Code</th>
+                                <th style="text-align:center;">لا إضافي<br></br>Additional No</th>
+                                <th style="text-align:center;">ضريبة القيمة المضافة لا<br></br>VAT No</th>
+                                <th style="text-align:center;">معرف البائع الآخر<br></br>Other Seller Id</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td align="center">
+                                    <t t-esc="doc.company_id.name"/>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="doc.company_id.street"/>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="doc.company_id.state_id.name"/>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="doc.company_id.city"/>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="doc.company_id.country_id.name"/>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="doc.company_id.zip"/>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="doc.company_id.additional_on"/>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="doc.company_id.vat"/>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="doc.company_id.sellername"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <p style="border-style:solid;text-align:center;background-color: lightgrey;"><b>مشتر<br></br>Buyer</b></p>
+                    <table class="table table-sm o_main_table">
+                        <thead class="table-secondary">
+                            <tr>
+                                <th style="text-align:center;">اسم<br></br>Name</th>
+                                <th style="text-align:center;">لا للبناء<br></br>Building No</th>
+                                <th style="text-align:center;">يصرف<br></br>District</th>
+                                <th style="text-align:center;">مدينة<br></br>City</th>
+                                <th style="text-align:center;">دولة<br></br>Country</th>
+                                <th style="text-align:center;">رمز بريدي<br></br>Postal Code</th>
+                                <th style="text-align:center;">لا إضافي<br></br>Additional No</th>
+                                <th style="text-align:center;">ضريبة القيمة المضافة لا<br></br>VAT No</th>
+                                <th style="text-align:center;">معرف البائع الآخر<br></br>Other Seller Id</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td align="center">
+                                    <t t-esc="doc.partner_id.name"/>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="doc.partner_id.street"/>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="doc.partner_id.state_id.name"/>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="doc.partner_id.city"/>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="doc.partner_id.country_id.name"/>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="doc.partner_id.zip"/>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="doc.partner_id.additional_on"/>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="doc.partner_id.vat"/>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="doc.partner_id.sellername"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <p style="border-style:solid;text-align:center;background-color: lightgrey;"><b>البنود<br></br>Line Items</b></p>
+                    <style>
+                        table,th,td{border:1px solid black;border-collapse:collapse;}
+                    </style>
+                    <table class="table table-sm o_main_table">
+                        <thead class="table-secondary">
+                            <tr>
+                                <th style="text-align:center;">NO</th>
+                                <th style="text-align:center;">وصف المنتج<br></br>item Description</th>
+                                <th style="text-align:center;">الكمية<br></br>Quantity</th>
+                                <th style="text-align:center;">سعر الوحدة<br></br>Unit Price</th>
+                                <th style="text-align:center;">خصم<br></br>Discount</th>
+                                <th style="text-align:center;">معدل الضريبة<br></br>Tax Rate</th>
+                                <th style="text-align:center;">المجموع<br></br>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="i" t-value="1"/>
+                            <t t-set="dic" t-value="0.0"/>
+                            <tr  t-foreach="doc.invoice_line_ids" t-as="line">
+                                <td align="center">
+                                    <t t-esc="i"/>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="line.name"></t>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="line.quantity"></t>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="line.price_unit"></t>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="line.discount"></t>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="line.tax_ids.name"></t>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="line.price_subtotal"></t>
+                                </td>
+                                <t t-set="i" t-value="i+1"/>
+                                <t t-set="dic" t-value="dic+(line.price_unit*line.discount)/100"/>
+                            </tr>
+                            <tr>
+                                <td colspan="6"></td>
+                            </tr>
+                            <tr>
+                                <th colspan="4" style="text-align:right;"><b>المجموع الفرعي</b></th>
+                                <td colspan="2" align="center"><b>Sub-Total</b></td>
+                                <td align="center">
+                                    <t t-esc="doc.amount_total-doc.amount_tax"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" align="right"><b>خصم</b></td>
+                                <td colspan="2" align="center"><b>Discount</b></td>
+                                <td align="center">
+                                    <t t-esc="dic"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" align="right"><b>ضريبة القيمة المضافة</b></td>
+                                <td colspan="2" align="center"><b>VAT</b></td>
+                                <td align="center">
+                                    <t t-esc="doc.amount_tax"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" align="right"><b>مجموع</b></td>
+                                <td colspan="2" align="center"><b>Total</b></td>
+                                <td align="center">
+                                    <t t-esc="doc.amount_total"/>
+                                </td>
+                            </tr>
+                            <t t-set="total_word" t-value="doc.amount_to_text(doc.amount_total)"/>
+                            <t t-set="total_words" t-value="doc.amount_to_world(doc.amount_total)"/>
+                            <tr>
+                                <td colspan="6" align="right">
+                                    <t t-esc="total_words"/>
+                                </td>
+                                <td align="center">
+                                    <t t-esc="total_word"/>
+                                </td>
+                            </tr>   
+                        </tbody>
+                    </table>
+                    <p style="page-break-after:always;"/>
+
+                    </div>                        
+                </t>
+            </t>
+        </t>
+    </template>
+
+
+    <record id="report_ksa_invoice" model="ir.actions.report">
+        <field name="name">KSA invoice</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">electronic_invoice_qr_saudi_invoice_app.report_ksa_qrcode_card</field>
+        <field name="report_file">electronic_invoice_qr_saudi_invoice_app.report_ksa_qrcode_card</field>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">(object._get_report_base_filename())</field>
+        <field name="binding_model_id" ref="model_account_move"/>
+    </record>
+
+</odoo>

@@ -1,0 +1,142 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Header Styles */
+.company-header {
+    text-align: center;
+    background-color: #405466;
+    color: white;
+    padding: 30px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.company-logo {
+    width: 100px;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px;
+}
+
+.company-header h1 {
+    font-size: 2.5em;
+}
+
+.company-header p {
+    font-size: 1.2em;
+}
+
+/* Content Wrapper */
+.content-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Section Styles */
+section {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+section h1, section h2 {
+    color: #5A9BD5;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #5A9BD5;
+    padding-bottom: 5px;
+}
+
+section p {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    line-height: 1.8;
+}
+
+ul {
+    list-style-type: square;
+    padding-left: 20px;
+    font-size: 1.1em;
+    color: #555;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+/* Footer Styles */
+.company-footer {
+    background-color: #405466;
+    color: white;
+    text-align: center;
+    padding: 30px 0;
+    border-radius: 8px;
+    margin-top: 40px;
+}
+
+.footer-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.footer-logo {
+    width: 80px;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px;
+}
+
+.company-footer p {
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+
+.company-footer a {
+    color: #5A9BD5;
+    text-decoration: none;
+}
+
+.company-footer a:hover {
+    text-decoration: underline;
+}
+/* Screenshot Section */
+.module-screenshot {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+/* Video Section */
+.video-container {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.video-container video {
+    width: 100%;
+    max-width: 800px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+

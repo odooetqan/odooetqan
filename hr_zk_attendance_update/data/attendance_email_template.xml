@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+    <odoo>
+        <data noupdate="1">
+
+
+            <record id="attendance_deduction_email_template" model="mail.template">
+                <field name="name">Attendance Deduction Email</field>
+                <field name="email_from">${(object.company_id.email or 'noreply@yourcompany.com')}</field>
+                <field name="subject">Attendance Deduction Notification</field>
+                <field name="model_id" ref="hr_zk_attendance_update.model_hr_attendance"/>
+                <field name="body_html"><![CDATA[
+                    <p>Hello ${object.employee_id.name},</p>
+                    <p>You have an attendance deduction of ${object.deduction_amount} for the date ${object.deduction_date}.</p>
+                    <p>Regards,<br/>Your Company</p>
+                ]]></field>
+            </record>
+
+
+
+<!--
+            <record id="attendance_deduction_email_template" model="mail.template">
+                <field name="name">Attendance Deduction Email</field>
+                <field name="email_from">${(object.company_id.email or 'noreply@yourcompany.com')}</field>
+                <field name="subject">Attendance Deduction Notification</field>
+                <field name="model_id" ref="hr_zk_attendance_update.model_hr_attendance"/>
+                <field name="body_html"><![CDATA[
+                    <p>Hello ${object.name},</p>
+                    <p>You have an attendance deduction of ${object.deduction_amount} for ${object.deduction_date}.</p>
+                    <p>Regards,<br/>Your Company</p>
+                ]]></field>
+            </record> -->
+
+        </data>
+    </odoo>

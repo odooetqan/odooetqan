@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<odoo noupdate="1">
+
+	<record forcecreate="True" id="cron_download_data" model="ir.cron">
+		<field name="name">Download Data</field>
+		<field eval="True" name="active"/>
+		<field name="user_id" ref="base.user_admin"/>
+		<field name="interval_number">10</field>
+		<field name="interval_type">minutes</field>
+            <!-- <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field> -->
+		<!-- <field name="numbercall">-1</field> -->
+		<field name="model_id" ref="hr_zk_attendance_update.model_biometric_device_details"/>
+		<field name="state">code</field>
+		<field name="code">model.cron_download()</field>
+	</record>
+
+<!-- Template to mail check in & out  -->
+    <record id="attendance_deduction_email_template" model="mail.template">
+        <field name="name">Attendance Deduction Email Template</field>
+        <field name="model_id" ref="model_hr_attendance"/>
+        <field name="subject">Attendance Deduction Notification</field>
+        <field name="email_from">${(user.email or '')|safe}</field>
+        <field name="body_html"><![CDATA[
+            <p>Dear Manager,</p>
+            <p>An attendance deduction has been applied. Please see the details below:</p>
+            <p><strong>Check In:</strong> ${object.check_in or 'N/A'}</p>
+            <p><strong>Check Out:</strong> ${object.check_out or 'N/A'}</p>
+            <p>Thank you.</p>
+            <p>Regards,<br/>Etqan Ltd</p>
+        ]]></field>
+        <field name="auto_delete" eval="True"/>
+        <field name="lang" eval="False"/>
+    </record>
+
+
+</odoo>

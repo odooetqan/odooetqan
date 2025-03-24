@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <record id="account_invoice_form_view" model="ir.ui.view">
+        <field name="name">account.invoice.form.view</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <field name="payment_reference" position="after">
+                <field  name="qr_image" widget="image" style="width:100px;height:100px;"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="partner_view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form.view</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="vat" position="after">
+                <field  name="additional_on"/>
+                <field name="sellername"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="company_view_company_form" model="ir.ui.view">
+        <field name="name">res.company.form.view</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <field name="color" position="after">
+                <field  name="additional_on"/>
+                <field name="sellername"/>
+                <label for="company_name" string="Company Name"/>
+                    <div class="o_address_format">
+                        <field name="company_name" placeholder="Company..." class="o_address_company"/>
+                    </div>
+                <label for="street1" string="Address"/>
+                    <div class="o_address_format">
+                        <field name="street1" placeholder="Street..." class="o_address_street"/>
+                        <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                        <field name="city1" placeholder="City" class="o_address_city"/>
+                        <field name="state_id1" class="o_address_state" placeholder="State" options="{&quot;no_open&quot;: True}"/>
+                        <field name="zip1" placeholder="ZIP" class="o_address_zip"/>
+                        <field name="country_id1" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True}"/>
+                    </div>
+            </field>
+        </field>
+    </record>
+
+</odoo>

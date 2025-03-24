@@ -1,0 +1,52 @@
+<odoo>
+    <template id="portal_account_template" name="Custom Portal Account Page">
+        <t t-call="portal.portal_layout">
+            <t t-set="title" t-value="'حسابي'"/>
+            <div class="container mt-4">
+                <div class="row">
+                    <!-- Sidebar Navigation -->
+                    <aside class="col-md-3 bg-primary text-white p-3">
+                        <ul class="list-unstyled">
+                            <li><a class="text-white" href="/my/home">صفحتي</a></li>
+                            <li><a class="text-white" href="/my/students">قوائم الطلاب</a></li>
+                            <li><a class="text-white" href="/my/approve_list">الموافقات</a></li>
+                            <li><a class="text-white" href="/my/leave_list">الإجازات</a></li>
+                        </ul>
+                    </aside>
+
+                    <!-- Main Content -->
+                    <section class="col-md-9">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h3>معلومات الحساب</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4 text-center">
+                                        <img t-if="user.image_1920" t-att-src="'/web/image/res.users/%s/image_1920' % user.id" class="rounded-circle" width="150"/>
+                                        <h4 class="mt-3"><t t-esc="user.name"/></h4>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p><strong>البريد الإلكتروني:</strong> <t t-esc="user.email or '-'"/></p>
+                                        <p><strong>رقم الهاتف:</strong> <t t-esc="employee.mobile_phone or '-'"/></p>
+                                        <p><strong>الوظيفة:</strong> <t t-esc="employee.job_title or '-'"/></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Attendance Correction & Logout -->
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <a href="/my/attendance_correcting" class="btn btn-primary btn-lg w-100">تصحيح الحضور</a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="/web/session/logout?redirect=/" class="btn btn-danger btn-lg w-100">تسجيل الخروج</a>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

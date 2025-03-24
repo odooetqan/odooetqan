@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_location" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.hr.attendance.location</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="82"/>
+        <field name="inherit_id" ref="hr_attendance.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@name='overtime_settings']" position="after">
+                <div class="app_settings_block" data-string="Attendances Location" groups="base.group_no_one">
+                    <!-- <h2>Company Location</h2> -->
+                    <block title="Company Location" name="company_location">
+                        <setting string="Company latitude" company_dependent="1" help="Define accurate company location by setting latitude and longitude from maps.">
+                            <field name="company_latitude"/>
+                        </setting>
+                        <setting string="Company longitude" company_dependent="1" help="Define accurate company location by setting latitude and longitude from maps.">
+                            <field name="company_longitude"/>
+                        </setting>
+                        <setting string="Allowed Distance" company_dependent="1" help="Define the allowed distance from the company location in kilometers.">
+                            <field name="allowed_distance"/>
+                            <span>Meters</span>
+                        </setting>
+                    </block>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+
+
+<!-- 
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+   <record id="res_config_settings_view_form" model="ir.ui.view">
+       <field name="name">
+           res.config.settings.view.form.inherit.bg.whatsdiv
+       </field>
+       <field name="model">res.config.settings</field>
+       <field name="inherit_id"
+              ref="sale.res_config_settings_view_form"/>
+       <field name="arch" type="xml">
+           <xpath expr="//setting[@id='discount_sale_order_lines']"
+                  position="after">
+               <setting id="sale_discount_limit"                    
+            documentation="https://www.odoo.com/documentation/17.0" 
+            title="User can limit the discount amount in the 
+                    sale order line."
+		invisible="not group_discount_per_so_line"
+                 help="User can limit the discount amount">
+                   <field name="is_discount_limit"/>
+                   <div class="content-group"
+                        invisible="not is_discount_limit">
+                       <div class="mt16">
+                           <label for="discount_limit"/>
+                           <field name="discount_limit"/>
+                       </div>
+                   </div>
+               </setting>
+           </xpath>
+       </field>
+   </record>
+</odoo> -->

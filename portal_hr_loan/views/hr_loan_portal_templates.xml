@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <data>
+      <template id="portal_my_home_loan" inherit_id="portal.portal_my_home" priority="10">
+         <xpath expr="//div[@id='portal_client_category']" position="inside">
+            <div class="o_portal_index_card col-md-6">
+               <a class="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
+                  href="/my/loans" title="Loan">
+               <img width="100px" src="/portal_hr_loan/static/description/loan.svg" loading="lazy"/>
+               السلف
+               <span class="badge text-bg-secondary rounded-pill">
+               <i class="fa fa-sign-in"></i>
+               </span>
+               </a>
+            </div>
+         </xpath>
+      </template>
+      <template id="portal_hr_loan_list" name="Loan List">
+         <t t-call="portal.portal_layout">
+            <div class="container">
+               <h1> السلف </h1>
+               <a class="btn btn-success mb-3" href="/my/loans/new">طلب سلفة جديدة</a>
+               <table class="table table-striped">
+                  <thead>
+                     <tr>
+                        <th>الاسم </th>
+                        <th>قيمة السلفة</th>
+                        <th>القســـــط</th>
+                        <th>الرصيد</th>
+                        <th>الحالة</th>
+                        <th>التاريخ</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <t t-foreach="loans" t-as="loan">
+                        <tr>
+                           <td>
+                              <t t-esc="loan.name"/>
+                           </td>
+                           <td>
+                              <t t-esc="loan.loan_amount"/>
+                           </td>
+                           <td>
+                              <t t-esc="loan.installment"/>
+                           </td>
+                           <td>
+                              <t t-esc="loan.balance_amount"/>
+                           </td>
+                           <td>
+                              <t t-esc="loan.state"/>
+                           </td>
+                           <td>
+                              <t t-esc="loan.date"/>
+                           </td>
+                        </tr>
+                     </t>
+                  </tbody>
+               </table>
+            </div>
+         </t>
+      </template>
+      <!-- Template Form to create new Loan -->
+      <template id="portal_create_loan_form" name="Create Loan">
+         <t t-call="portal.portal_layout">
+            <div class="container">
+               <h1>طلب سلفة جديدة</h1>
+               <form t-attf-action="/my/loans/save" method="post">
+                  <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                  <div class="form-group">
+                     <label>قيمة السلفة</label>
+                     <input type="number" name="loan_amount" class="form-control" required="true" />
+                  </div>
+                  <div class="form-group">
+                     <label>القســـــط</label>
+                     <input type="number" name="installment" class="form-control" required="true" />
+                  </div>
+                  <button type="submit" class="btn btn-primary">تقديم الطلب</button>
+               </form>
+            </div>
+         </t>
+      </template>
+      <!-- Salary LISt -->
+      <template id="portal_my_home_salary" inherit_id="portal.portal_my_home" priority="10">
+         <xpath expr="//div[@id='portal_client_category']" position="inside">
+            <div class="o_portal_index_card col-md-6">
+               <a class="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
+                  href="/my/salaries" title="Salary">
+               <img width="100px" src="/portal_hr_loan/static/description/salary.svg" loading="lazy"/>
+               المرتبات
+               <span class="badge text-bg-secondary rounded-pill">
+               <i class="fa fa-sign-in"></i>
+               </span>
+               </a>
+            </div>
+         </xpath>
+      </template>
+      <template id="portal_hr_salary_list" name="Salaries List">
+         <t t-call="portal.portal_layout">
+            <div class="container">
+               <h1>مرتباتي</h1>
+               <table class="table table-striped">
+                  <thead>
+                     <tr>
+                        <th>الاسم</th>
+                        <th>الراتب الاساسي</th>
+                        <th>الاجمالي</th>
+                        <th>صافي الراتب</th>
+                        <th>الوصف</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <t t-foreach="salaries" t-as="salary">
+                        <tr>
+                           <td>
+                              <t t-esc="salary.payslip_run_id.name" />
+                           </td>
+                           <td>
+                              <t t-esc="salary.basic_wage" />
+                           </td>
+                           <td>
+                              <t t-esc="salary.gross_wage" />
+                           </td>
+                           <td>
+                              <t t-esc="salary.net_wage" />
+                           </td>
+                           <td>
+                              <!-- <t t-esc="salary.description or ''" /> -->
+                           </td>
+                        </tr>
+                     </t>
+                  </tbody>
+               </table>
+            </div>
+         </t>
+      </template>
+      <template id="portal_create_salary_form" name="Create Salary">
+         <t t-call="portal.portal_layout">
+            <div class="container">
+               <h1>إضافة راتب جديد</h1>
+               <form t-attf-action="/my/salaries/save" method="post">
+                  <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                  <div class="form-group">
+                     <label>المبلغ</label>
+                     <input type="number" name="amount" class="form-control" required="true" />
+                  </div>
+                  <div class="form-group">
+                     <label>الوصف</label>
+                     <input type="text" name="description" class="form-control" />
+                  </div>
+                  <button type="submit" class="btn btn-primary">حفظ</button>
+               </form>
+            </div>
+         </t>
+      </template>
+   </data>
+</odoo>
