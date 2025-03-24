@@ -4,7 +4,8 @@ import base64
 # from base64 import b64encode
 
 from odoo import models, fields, api, _
-from odoo.exceptions import ValidationError, Warning
+from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError
 
 
 def generate_tlv_hex(*args):
