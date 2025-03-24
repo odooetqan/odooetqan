@@ -126,7 +126,7 @@
          <t t-call="portal.portal_layout">
             <div class="container">
                 <h3>طلب إجازة</h3>
-               <form t-attf-action="/my/leave/submit" method="post">
+                <form t-attf-action="/my/leave/submit" method="post"  id="leaveRequestForm">
                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/> 
                     <div class="mb-3">
                         <label for="leave_type" class="form-label">نوع الإجازة</label>
@@ -151,8 +151,6 @@
             </div>
          </t>
       </template>
-
-
             <record id="action_hr_employee_create_portal_user" model="ir.actions.server">
                 <field name="name">Create Portal User</field>
                 <field name="model_id" ref="hr.model_hr_employee"/>
@@ -165,7 +163,6 @@
                 </field>
             </record>
             <!-- End  Original View check in & out &  create portal user from employee -->
-
             <!-- Portal request correct attendance -->
             <!-- Button to reques tcorrect attendance -->
             <record id="view_hr_attendance_correction_form" model="ir.ui.view">
@@ -366,12 +363,10 @@
                     </div>
                 </t>
             </template>
-
-
-                        <!-- <table class="table table-bordered"> -->
-                                    <!-- <th>Date</th> -->
-                                        <!-- <td><t t-if="'worked_hours' in record"><t t-esc="record.get('worked_hours', '')"/></t></td> -->
-                                            <!-- Modal (Popup Form) -->
+            <!-- <table class="table table-bordered"> -->
+                    <!-- <th>Date</th> -->
+                        <!-- <td><t t-if="'worked_hours' in record"><t t-esc="record.get('worked_hours', '')"/></t></td> -->
+                            <!-- Modal (Popup Form) -->
 
 
             <!-- <template id="portal_my_attendance" name="Portal Attendance">
@@ -573,7 +568,6 @@
                 </div>
             </xpath>
         </template>
-
 
         <template id="portal_my_leaves" name="Portal Leave tree">
             <t t-call="portal.portal_layout">
