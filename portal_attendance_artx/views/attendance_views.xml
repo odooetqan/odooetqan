@@ -90,6 +90,39 @@
             </script>
          -->
 
+        <!-- Template Form to create new Leave -->
+        <template id="leave_form_template" name="Create Leave">
+            <t t-call="portal.portal_layout">
+                <div class="container">
+                    <h3>طلب إجازة</h3>
+                <form t-attf-action="/my/leave/submit" method="post"  id="leaveRequestForm">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    
+                        <div class="mb-3">
+                            <label for="leave_type" class="form-label">نوع الإجازة</label>
+                            <select id="leave_type" name="leave_type" class="form-select" required="true">
+                                <t t-foreach="leave_types" t-as="leave_type">
+                                    <option t-att-value="leave_type.id">
+                                        <t t-esc="leave_type.name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="start_date" class="form-label">تاريخ البدء</label>
+                            <input type="date" id="start_date" name="start_date" class="form-control" required="true" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="end_date" class="form-label">تاريخ الانتهاء</label>
+                            <input type="date" id="end_date" name="end_date" class="form-control" required="true" />
+                        </div>
+                    <button type="submit" class="btn btn-primary">تقديم الطلب</button>
+                </form>
+                </div>
+            </t>
+        </template>
+
+
             <record id="action_hr_employee_create_portal_user" model="ir.actions.server">
                 <field name="name">Create Portal User</field>
                 <field name="model_id" ref="hr.model_hr_employee"/>
@@ -494,101 +527,69 @@
                     }
                 </field>
             </record>
-            <!-- Add "Request Leave" Card to Portal -->
-            <template id="portal_my_home_leaves" inherit_id="portal.portal_my_home" priority="11">
-                <xpath expr="//div[@id='portal_client_category']" position="inside">
-                    <div class="o_portal_index_card col-md-6" >
-                        <a href="/my/leaves" title="Leaves" class="d-flex justify-content-start gap-2 align-items-center py-3 px-3 rounded text-decoration-none text-reset text-bg-light text-bg-danger">
-                            <div class="o_portal_icon">
-                                <img width="100px" src="/portal_attendance_artx/static/src/images/sun-bath-svgrepo-com.svg" loading="lazy"/>
-                            </div>
-                            <div>
-                                <h5 class="mt-0 mb-1">طلبات الاجازة </h5>
-                                <p class="m-0 text-600">اطلب و تتبع اجازاتك من هنا </p>
-                            </div>
-                        </a>
-                    </div>
-                </xpath>
-            </template>
-
-        <!-- Template Form to create new Leave -->
-        <template id="leave_form_template" name="Create Leave">
-            <t t-call="portal.portal_layout">
-                <div class="container">
-                    <h3>طلب إجازة</h3>
-                <form t-attf-action="/my/leave/submit" method="post"  id="leaveRequestForm">
-                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                    
-                        <div class="mb-3">
-                            <label for="leave_type" class="form-label">نوع الإجازة</label>
-                            <select id="leave_type" name="leave_type" class="form-select" required="true">
-                                <t t-foreach="leave_types" t-as="leave_type">
-                                    <option t-att-value="leave_type.id">
-                                        <t t-esc="leave_type.name"/>
-                                    </option>
-                                </t>
-                            </select>
+        <!-- Add "Request Leave" Card to Portal -->
+        <template id="portal_my_home_leaves" inherit_id="portal.portal_my_home" priority="11">
+            <xpath expr="//div[@id='portal_client_category']" position="inside">
+                <div class="o_portal_index_card col-md-6" >
+                    <a href="/my/leaves" title="Leaves" class="d-flex justify-content-start gap-2 align-items-center py-3 px-3 rounded text-decoration-none text-reset text-bg-light text-bg-danger">
+                        <div class="o_portal_icon">
+                            <img width="100px" src="/portal_attendance_artx/static/src/images/sun-bath-svgrepo-com.svg" loading="lazy"/>
                         </div>
-                        <div class="mb-3">
-                            <label for="start_date" class="form-label">تاريخ البدء</label>
-                            <input type="date" id="start_date" name="start_date" class="form-control" required="true" />
+                        <div>
+                            <h5 class="mt-0 mb-1">طلبات الاجازة </h5>
+                            <p class="m-0 text-600">اطلب و تتبع اجازاتك من هنا </p>
                         </div>
-                        <div class="mb-3">
-                            <label for="end_date" class="form-label">تاريخ الانتهاء</label>
-                            <input type="date" id="end_date" name="end_date" class="form-control" required="true" />
-                        </div>
-                    <button type="submit" class="btn btn-primary">تقديم الطلب</button>
-                </form>
+                    </a>
                 </div>
-            </t>
+            </xpath>
         </template>
 
 
-            <template id="portal_my_leaves" name="Portal Leave tree">
-                <t t-call="portal.portal_layout">
-                    <div class="container">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h3>طلبات الاجازة</h3>
-                            <!-- Button to Create New Leave Request -->
-                            <h3>
-                                <a href="/my/leave/new" class="btn btn-primary">
-                                <i class="fa fa-plus me-1"></i>إنشاء طلب اجازة
-                                </a>
-                            </h3>
-                        </div>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>نوع الاجازة</th>
-                                    <th>تاريخ البدء</th>
-                                    <th>تاريخ الانتهاء</th>
-                                    <th>الحالة</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <t t-foreach="leave_records" t-as="leave">
-                                    <tr>
-                                        <!-- Display the name of the leave type -->
-                                        <td>
-                                            <t t-esc="leave.holiday_status_id.name"/>
-                                        </td>
-                                        <td>
-                                            <t t-esc="leave.date_from"/>
-                                        </td>
-                                        <td>
-                                            <t t-esc="leave.date_to"/>
-                                        </td>
-                                        <td>
-                                            <t t-if="leave.state == 'draft'">مسودة</t>
-                                            <t t-if="leave.state == 'confirm'">في انتظار الموافقة</t>
-                                        </td>
-                                    </tr>
-                                </t>
-                            </tbody>
-                        </table>
+        <template id="portal_my_leaves" name="Portal Leave tree">
+            <t t-call="portal.portal_layout">
+                <div class="container">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h3>طلبات الاجازة</h3>
+                        <!-- Button to Create New Leave Request -->
+                        <h3>
+                            <a href="/my/leave/new" class="btn btn-primary">
+                            <i class="fa fa-plus me-1"></i>إنشاء طلب اجازة
+                            </a>
+                        </h3>
                     </div>
-                </t>
-            </template>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>نوع الاجازة</th>
+                                <th>تاريخ البدء</th>
+                                <th>تاريخ الانتهاء</th>
+                                <th>الحالة</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="leave_records" t-as="leave">
+                                <tr>
+                                    <!-- Display the name of the leave type -->
+                                    <td>
+                                        <t t-esc="leave.holiday_status_id.name"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="leave.date_from"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="leave.date_to"/>
+                                    </td>
+                                    <td>
+                                        <t t-if="leave.state == 'draft'">مسودة</t>
+                                        <t t-if="leave.state == 'confirm'">في انتظار الموافقة</t>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </template>
 
         </data>
     </odoo>

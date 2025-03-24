@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="assets_backend" name="Real Estate Assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/real_estate/static/src/css/report_styling.css"/>
+                <link rel="stylesheet" href="/real_estate/static/src/css/hoverbox.css"/>
+                <script type="text/javascript" src="/real_estate/static/library/lightbox/js/jquery.lightbox.js"></script>
+                <script type="text/javascript" src="/real_estate/static/src/js/multi_image.js"></script>
+            </xpath>
+        </template>
+    </data>
+</openerp>
+
+
+

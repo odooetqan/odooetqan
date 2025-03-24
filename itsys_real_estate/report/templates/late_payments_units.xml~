@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="your_custom_layout_header">
+    <div class="header">
+        <div class="row">
+            <div class="col-xs-3">
+            <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 45px;"/>
+		HEADERRRRRRRRRRRR
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="row">
+		FOOOOOOOOOOOOOTER
+        </div>
+    </div>
+
+</template>
+<template id="report_late_payments_units">
+    <t t-call="report.html_container">
+        <t t-call="report.external_layout">
+            <div class="page">
+		<style type="text/css"> 
+		table.gridtable td, th {    
+		    border: 1px solid #ddd;
+		    text-align: left;
+		}
+
+		table.gridtable {
+		    border-collapse: collapse;
+		    width: 100%;
+		}
+
+		table.gridtable th, td {
+		    padding: 5px;
+		}
+		table.report_table {
+		    font-size: 14px !important;
+		    border-collapse: collapse !important;
+		    width: 100% !important;
+		}
+
+		table.report_table th, table.report_table td {
+		    padding: 8px !important;
+		    text-align: center !important;
+		}
+
+		table.report_table tr:nth-child(even){background-color: #f2f2f2 !important;}
+
+		table.report_table th {
+		    background-color: #000080 !important;
+		    color: white !important;
+		}
+
+		</style>
+                <h2>Units Late Payments</h2>
+		    <table class="gridtable">
+		        <tr>
+			    <th align="center">Date From:</th>
+			    <th align="center">Date To:</th>
+		        </tr>
+		        <tr>
+			    <td align="center"><span t-esc="formatLang(data['form']['date_start'],date=True)"/></td>
+			    <td align="center"><span t-esc="formatLang(data['form']['date_end'],date=True)"/></td>
+		        </tr>
+		     </table>  
+		    <br/>
+		    <table class="report_table">
+		            <tr>
+		                <th>Customer</th>
+		                <th>Installment</th>
+		                <th>Due Date</th>
+		                <th>Contract Ref</th>
+		                <th>Country</th>
+		                <th>City</th>
+		                <th>Region</th>
+		                <th>Building</th>
+		                <th>Unit</th>
+		            </tr>
+                           <tr t-foreach="get_lines(data['form']['date_start'],data['form']['date_end'],data['form']['building_unit'])" t-as="line">
+				   <td><span t-esc="line['loan_id'].partner_id.name"/></td>   
+				   <td><span t-esc="line['amount']"/></td>                                      
+				   <td><span t-esc="line['date']"/></td>                                      
+				   <td><span t-esc="line['loan_id'].name"/></td>                                      
+				   <td><span t-esc="line['loan_id'].country.name"/></td>                                      
+				   <td><span t-esc="line['loan_id'].city.name"/></td>                                      
+				   <td><span t-esc="line['loan_id'].building.code"/></td>                                      
+				   <td><span t-esc="line['loan_id'].building_unit.code"/></td>                                      
+				   <td><span t-esc="line['loan_id'].building_unit.floor"/></td>                                                                                                                                                                                       
+			   </tr>				
+		            <tr>
+				<th colspan="6" style="text-align:right">Total</th>                                     
+		                <th colspan="3"><t t-esc="get_total(data['form']['date_start'],data['form']['date_end'],data['form']['building_unit'])" /></th>
+		            </tr>
+		     </table> 
+            </div>
+        </t>
+    </t>
+</template>
+<template id="late_payments_units_doc">
+    <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+            <t t-raw="translate_doc(doc_id, doc_model, 'env.user.partner_id.lang', 'real_estate.report_late_payments_units')"/>
+        </t>
+    </t>
+</template>
+</data>
+</openerp>
+
+

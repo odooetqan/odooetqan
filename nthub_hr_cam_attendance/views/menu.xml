@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="action_open_check_in_page" model="ir.actions.act_url">
+            <field name="name">Web Cam Attendance</field>
+            <field name="url">/my/attendance/checkin</field>
+            <field name="target">self</field>
+
+        </record>
+
+        <menuitem id="menu_main_web_cam" name="Face Recognition Attendance"
+         action="action_open_check_in_page" web_icon="nthub_hr_cam_attendance,static/description/icon.png"/>
+
+    </data>
+</odoo>
