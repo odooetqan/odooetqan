@@ -450,7 +450,7 @@ class PortalLeaves(http.Controller):
     @http.route(['/my/leave/new'], type='http', auth="user", website=True)
     def portal_leave_request_form(self, **kw):
         leave_types = request.env['hr.leave.type'].sudo().search([])
-        return request.render('portal_attendance_artx.leave_form_template',{
+        return request.render('portal_attendance_artx.leave_form_template_new',{
             'leave_types': leave_types
         })
     

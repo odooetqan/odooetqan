@@ -2,7 +2,7 @@
     <data>
 
         <!-- Clean and standalone Leave Request Form Template -->
-        <template id="leave_form_template" name="Create Leave Form">
+        <template id="leave_form_template_new" name="Create Leave Form">
             <t t-call="portal.portal_layout">
                 <div class="container">
                     <h3>طلب إجازة</h3>
@@ -167,7 +167,7 @@
                 <a href="/my/attendance" class="btn btn-primary">حضوري </a>
             </xpath>
         </template> 
-        
+
         <template id="portal_my_home_attendance" inherit_id="portal.portal_my_home" priority="10">
             <!--     <xpath expr="//div[@class='o_portal_docs list-group']" position="after"> -->
             <xpath expr="//div[@id='portal_client_category']" position="inside">
