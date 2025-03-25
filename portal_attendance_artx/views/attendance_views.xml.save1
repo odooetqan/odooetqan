@@ -81,6 +81,8 @@
         </div>
     </xpath>
 </template>
+
+
 <template id="portal_my_attendance" name="Portal Attendance">
     <t t-call="portal.portal_layout">
         <div class="container">
@@ -161,6 +163,7 @@
                     </div>
                 </t>
             </template>
+
 <!-- POrtal Tree ttee attendance template -->
 
             <record id="action_hr_employee_create_portal_user" model="ir.actions.server">
