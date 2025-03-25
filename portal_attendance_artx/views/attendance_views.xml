@@ -1,106 +1,5 @@
 <odoo>
     <data>
-        <!-- <template id="leave_frm_template" name="Leave Form" inherit_id="website.layout"> -->
-        <!-- <xpath expr="//main" position="after"> -->
-        <!-- <template id="leave_form_template" name="Leave Form" inherit_id="portal_my_home_leaves">
-            <xpath expr="//div[@id='portal_client_category']" position="inside">
-                <section class="leave-form-section">
-                    <div class="container"  type="hidden" >
-                        <h3>طلب اجازة</h3>
-                        <form action="/my/leave/submit" method="POST">
-                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                            <div class="mb-3">
-                                <label for="leave_type" class="form-label">نوع الاجازة</label>
-                                <select id="leave_type" name="leave_type" class="form-select">
-                                    <t t-foreach="leave_types" t-as="leave_type">
-                                        <option t-att-value="leave_type.id">
-                                            <t t-esc="leave_type.name"/>
-                                        </option>
-                                    </t>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="start_date" class="form-label">تاريخ البدء</label>
-                                <input type="date" id="start_date" name="start_date" class="form-control" required="true" />
-                            </div>
-                            <div class="mb-3">
-                                <label for="end_date" class="form-label">تاريخ الانتهاء</label>
-                                <input type="date" id="end_date" name="end_date" class="form-control"  required="true"  />
-                            </div>
-                            <button type="submit" class="btn btn-success">اطلب</button>
-                        </form>
-                    </div>
-                </section>
-            </xpath>
-        </template> -->
-
-            
-        <!-- Template Form to create new Loan -->
-        
-        <!-- Template Form to create new Leave -->
-        <!-- <template id="leave_form_template" name="Create Leave">
-            <t t-call="portal.portal_layout">
-                <div class="container">
-                    <h3>طلب إجازة</h3>
-                <form t-attf-action="/my/leave/submit" method="post"  id="leaveRequestForm">
-                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                    
-                        <div class="mb-3">
-                            <label for="leave_type" class="form-label">نوع الإجازة</label>
-                            <select id="leave_type" name="leave_type" class="form-select" required="true">
-                                <t t-foreach="leave_types" t-as="leave_type">
-                                    <option t-att-value="leave_type.id">
-                                        <t t-esc="leave_type.name"/>
-                                    </option>
-                                </t>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="start_date" class="form-label">تاريخ البدء</label>
-                            <input type="date" id="start_date" name="start_date" class="form-control" required="true" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="end_date" class="form-label">تاريخ الانتهاء</label>
-                            <input type="date" id="end_date" name="end_date" class="form-control" required="true" />
-                        </div>
-                    <button type="submit" class="btn btn-primary">تقديم الطلب</button>
-                </form>
-                </div>
-            </t>
-        </template> -->
-
-        <!-- Template Form to create new Leave -->
-        <!-- <template id="leave_form_template" name="Create Leave">
-            <t t-call="portal.portal_layout">
-                <div class="container">
-                    <h3>طلب إجازة</h3>
-                    <form t-attf-action="/my/leave/submit" method="post"  id="leaveRequestForm">
-                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                        
-                            <div class="mb-3">
-                                <label for="leave_type" class="form-label">نوع الإجازة</label>
-                                <select id="leave_type" name="leave_type" class="form-select" required="true">
-                                    <t t-foreach="leave_types" t-as="leave_type">
-                                        <option t-att-value="leave_type.id">
-                                            <t t-esc="leave_type.name"/>
-                                        </option>
-                                    </t>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="start_date" class="form-label">تاريخ البدء</label>
-                                <input type="date" id="start_date" name="start_date" class="form-control" required="true" />
-                            </div>
-                            <div class="mb-3">
-                                <label for="end_date" class="form-label">تاريخ الانتهاء</label>
-                                <input type="date" id="end_date" name="end_date" class="form-control" required="true" />
-                            </div>
-                        <button type="submit" class="btn btn-primary">تقديم الطلب</button>
-                    </form>
-                </div>
-            </t>
-        </template> -->
-        
 
         <!-- Clean and standalone Leave Request Form Template -->
         <template id="leave_form_template" name="Create Leave Form">
@@ -150,7 +49,6 @@
             </xpath>
         </template> -->
 
-        
 
         <!-- Start Original View check in & out &  create portal user from employee -->
         <template id="portal_my_home_sale" name="Show Quotations / Sales Orders" customize_show="True"
@@ -268,19 +166,8 @@
                 <!-- <xpath expr="//div[@id='content']" position="inside"> -->
                 <a href="/my/attendance" class="btn btn-primary">حضوري </a>
             </xpath>
-        </template>
-        <!-- <record id="portal_attendance_main_menu" model="ir.ui.menu">
-            <field name="name">Attendance</field>
-            <field name="parent_id" ref="portal.menu_my_home"/>
-            <field name="sequence" eval="10"/>
-            </record> -->
-        <!-- <record id="portal_attendance_menu" model="ir.ui.menu">
-            <field name="name">My Attendance</field>
-            <field name="parent_id" ref="portal_attendance_main_menu"/>
-            <field name="action" ref="action_portal_attendance"/>
-            <field name="sequence" eval="20"/>
-            </record> -->
-        <!-- POrtal Tree ttee attendance -->
+        </template> 
+        
         <template id="portal_my_home_attendance" inherit_id="portal.portal_my_home" priority="10">
             <!--     <xpath expr="//div[@class='o_portal_docs list-group']" position="after"> -->
             <xpath expr="//div[@id='portal_client_category']" position="inside">
