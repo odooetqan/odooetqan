@@ -98,7 +98,7 @@
          <t t-call="portal.portal_layout">
             <div class="container">
                <h1>مرتباتي</h1>
-               <table class="table table-bordered">
+               <table class="table table-striped">
                   <thead>
                      <tr>
                         <th>الشهر</th>
