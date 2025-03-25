@@ -1,5 +1,43 @@
 <odoo>
     <data>
+
+
+    
+        <!-- <template id="leave_frm_template" name="Leave Form" inherit_id="website.layout"> -->
+        <template id="leave_form_template" name="Leave Form" inherit_id="portal_my_home_leaves">
+            <!-- <xpath expr="//main" position="after"> -->
+            <xpath expr="//div[@id='portal_client_category']" position="inside">
+                <section class="leave-form-section">
+                    <div class="container"  type="hidden" >
+                        <h3>طلب اجازة</h3>
+                        <form action="/my/leave/submit" method="POST">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="mb-3">
+                                <label for="leave_type" class="form-label">نوع الاجازة</label>
+                                <select id="leave_type" name="leave_type" class="form-select">
+                                    <t t-foreach="leave_types" t-as="leave_type">
+                                        <option t-att-value="leave_type.id">
+                                            <t t-esc="leave_type.name"/>
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="start_date" class="form-label">تاريخ البدء</label>
+                                <input type="date" id="start_date" name="start_date" class="form-control" required="true" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="end_date" class="form-label">تاريخ الانتهاء</label>
+                                <input type="date" id="end_date" name="end_date" class="form-control"  required="true"  />
+                            </div>
+                            <button type="submit" class="btn btn-success">اطلب</button>
+                        </form>
+                    </div>
+                </section>
+            </xpath>
+        </template>
+
+        
         <!-- Start Original View check in & out &  create portal user from employee -->
         <template id="portal_my_home_sale" name="Show Quotations / Sales Orders" customize_show="True"
                   inherit_id="portal.portal_my_home" priority="20">
@@ -396,39 +434,6 @@
                     </table>
                 </div>
             </t>
-        </template>
-        <!-- <template id="leave_frm_template" name="Leave Form" inherit_id="website.layout"> -->
-        <template id="leave_form_template" name="Leave Form" inherit_id="portal_my_home_leaves">
-            <!-- <xpath expr="//main" position="after"> -->
-            <xpath expr="//div[@id='portal_client_category']" position="inside">
-                <section class="leave-form-section">
-                    <div class="container"  type="hidden" >
-                        <h3>طلب اجازة</h3>
-                        <form action="/my/leave/submit" method="POST">
-                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                            <div class="mb-3">
-                                <label for="leave_type" class="form-label">نوع الاجازة</label>
-                                <select id="leave_type" name="leave_type" class="form-select">
-                                    <t t-foreach="leave_types" t-as="leave_type">
-                                        <option t-att-value="leave_type.id">
-                                            <t t-esc="leave_type.name"/>
-                                        </option>
-                                    </t>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="start_date" class="form-label">تاريخ البدء</label>
-                                <input type="date" id="start_date" name="start_date" class="form-control" required="true" />
-                            </div>
-                            <div class="mb-3">
-                                <label for="end_date" class="form-label">تاريخ الانتهاء</label>
-                                <input type="date" id="end_date" name="end_date" class="form-control"  required="true"  />
-                            </div>
-                            <button type="submit" class="btn btn-success">اطلب</button>
-                        </form>
-                    </div>
-                </section>
-            </xpath>
         </template>
         <!-- Leaves -->
     </data>
