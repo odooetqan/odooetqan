@@ -7,7 +7,7 @@ import pytz
 
 import logging
 _logger = logging.getLogger(__name__)
-
+    
 class PortalAttendance(http.Controller):
     @http.route(['/my/attendance'], type='http', auth='user', website=True)
     def portal_my_attendance(self, **kwargs):
@@ -849,11 +849,31 @@ class PortalLeaves(http.Controller):
         }
         return request.render('portal_attendance_artx.portal_my_leaves', values)
     
-    @http.route(['/my/leave/new'], type='http', auth='user', website=True)
-    def portal_leave_form(self, **kwargs):
-        # Fetch leave types from the database
+
+    @http.route(['/my/leave/new'], type='http', auth="user", website=True)
+    def portal_leave_request_form(self, **kw):
         leave_types = request.env['hr.leave.type'].sudo().search([])
-        return request.render('portal_attendance_artx.leave_form_template', {'leave_types': leave_types})
+        return request.render("portal_attendance_artx.leave_form_template", {
+            'leave_types': leave_types
+        })
+
+    # @http.route(['/my/leave/submit'], type='http', auth="user", website=True, csrf=True)
+    # def portal_leave_submit(self, **post):
+    #     request.env['hr.leave'].sudo().create({
+    #         'employee_id': request.env.user.employee_id.id,
+    #         'holiday_status_id': int(post.get('leave_type')),
+    #         'date_from': post.get('start_date'),
+    #         'date_to': post.get('end_date'),
+    #         'state': 'draft',
+    #     })
+    #     return request.redirect('/my/leaves')
+
+
+    # @http.route(['/my/leave/new'], type='http', auth='user', website=True)
+    # def portal_leave_form(self, **kwargs):
+    #     # Fetch leave types from the database
+    #     leave_types = request.env['hr.leave.type'].sudo().search([])
+    #     return request.render('portal_attendance_artx.leave_form_template', {'leave_types': leave_types})
     
     @http.route(['/my/leave/submit'], type='http', auth='user', methods=['POST'], website=True)
     def portal_leave_submit(self, **post):
