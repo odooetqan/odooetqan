@@ -55,13 +55,23 @@ class PortalAttendance(http.Controller):
         converted_attendance = []
         for record in attendance_records:
             converted_attendance.append({
-                'id': record.id,  # Add this line
+                'id': record.id,
                 'check_in': convert_datetime_to_str(convert_to_tz(record.check_in)),
                 'check_out': convert_datetime_to_str(convert_to_tz(record.check_out)) if record.check_out else None,
-                # 'worked_hours': record.worked_hours,  # Keep `worked_hours` intact
-                'worked_hours': record.worked_hours or 0.0,  # Keep `worked_hours` intact & Never NONE
-
+                'worked_hours': record.worked_hours or 0.0,
+                'lateness': record.lateness or 0.0,
+                'overtime_minutes': record.overtime_minutes or 0.0,
+                'deduction_amount': record.deduction_amount or 0.0,
             })
+
+            # converted_attendance.append({
+            #     'id': record.id,  # Add this line
+            #     'check_in': convert_datetime_to_str(convert_to_tz(record.check_in)),
+            #     'check_out': convert_datetime_to_str(convert_to_tz(record.check_out)) if record.check_out else None,
+            #     # 'worked_hours': record.worked_hours,  # Keep `worked_hours` intact
+            #     'worked_hours': record.worked_hours or 0.0,  # Keep `worked_hours` intact & Never NONE
+
+            # })
     
         # Return JSON response
         # return json.dumps({
