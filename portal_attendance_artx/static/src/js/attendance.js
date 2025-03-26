@@ -10,17 +10,11 @@ odoo.define('portal_attendance_artx.attendance', function (require) {
             'click': '_onButtonClick',
         },
 
-        /**
-         * Runs on page load
-         */
         start: function () {
             this._super.apply(this, arguments);
             this.updateButtonStatus();
         },
 
-        /**
-         * Check attendance status and update the button text
-         */
         updateButtonStatus: function () {
             var self = this;
             ajax.jsonRpc('/portal/get_attendance_status', 'call', {})
@@ -39,13 +33,9 @@ odoo.define('portal_attendance_artx.attendance', function (require) {
                 });
         },
 
-        /**
-         * Handle check-in/check-out click
-         */
         _onButtonClick: function () {
             var self = this;
             var currentTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
-
             var requestData = this.isCheckIn
                 ? { check_in: currentTime }
                 : { check_out: currentTime };
