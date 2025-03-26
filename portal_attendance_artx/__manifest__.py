@@ -23,9 +23,21 @@
     ],
     'assets': {
         'web.assets_frontend': [
+            # Required Odoo modules
+            'web.public.widget',
+            'web.ajax',
+            'web.assets_frontend',
+
+            # Your custom JS file
             'portal_attendance_artx/static/src/js/attendance.js',
         ],
     },
+
+    # 'assets': {
+    #     'web.assets_frontend': [
+    #         'portal_attendance_artx/static/src/js/attendance.js',
+    #     ],
+    # },
                 # 'portal_attendance_artx/static/src/js/portal_attendance.js',
 
     'license': 'LGPL-3',
