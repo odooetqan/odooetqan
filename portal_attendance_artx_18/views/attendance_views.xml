@@ -1,6 +1,6 @@
 <odoo>
     <data>
-        <template id="portal_my_home_sale" name="Show Quotations / Sales Orders" customize_show="True"
+        <!-- <template id="portal_my_home_sale" name="Show Quotations / Sales Orders" customize_show="True"
                   inherit_id="portal.portal_my_home" priority="20">
             <div class="oe_structure" position="inside">
                 <div class="container">
@@ -21,6 +21,6 @@
             <field name="code">
                 action = records.action_create_portal_user()
             </field>
-        </record>
+        </record> -->
     </data>
 </odoo>
