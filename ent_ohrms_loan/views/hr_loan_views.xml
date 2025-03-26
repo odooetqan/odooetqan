@@ -111,6 +111,7 @@
         <field name="name">Request for Loan</field>
         <field name="res_model">hr.loan</field>
         <field name="view_mode">list,form</field>
+        <field name="view_id" ref="ent_ohrms_loan.hr_loan_view_list"/>  <!-- ⬅️ هذا هو المفتاح -->
         <field name="context">{'search_default_myrequest': 1}</field>
         <field name="search_view_id" ref="hr_loan_view_search"/>
          <field name="help" type="html">
