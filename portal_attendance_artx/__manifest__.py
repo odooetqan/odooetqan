@@ -23,15 +23,29 @@
     ],
     'assets': {
         'web.assets_frontend': [
-            # Required Odoo modules
-            'web.public.widget',
-            'web.ajax',
-            'web.assets_frontend',
+            'web/static/src/js/public/public_widget.js',
+            'web/static/src/js/public/public_root.js',
+            'web/static/src/js/core/assets.js',
+            'web/static/lib/jquery/jquery.js',
+            'web/static/src/js/core/ajax.js',
 
-            # Your custom JS file
+            # Your custom JS (correct path)
             'portal_attendance_artx/static/src/js/attendance.js',
         ],
     },
+
+
+    # 'assets': {
+    #     'web.assets_frontend': [
+    #         # Required Odoo modules
+    #         'web.public.widget',
+    #         'web.ajax',
+    #         'web.assets_frontend',
+
+    #         # Your custom JS file
+    #         'portal_attendance_artx/static/src/js/attendance.js',
+    #     ],
+    # },
 
     # 'assets': {
     #     'web.assets_frontend': [
