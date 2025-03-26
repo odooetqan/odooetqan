@@ -5,40 +5,74 @@ import json
 
 
 class AttendanceController(http.Controller):
+    
+    # @http.route('/portal/add_attendance', type='http', auth="user", methods=['POST'], csrf=False)
+    # def add_attendance(self, **kwargs):
+    #     # Get the current logged-in user
+    #     user = request.env.user
+    #     employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
 
+    #     if not employee:
+    #         response_data = {'success': False, 'message': 'Employee not found for the logged-in user'}
+    #         return request.make_response(json.dumps(response_data), headers=[('Content-Type', 'application/json')])
+
+    #     check_in = kwargs.get('check_in')
+    #     check_out = kwargs.get('check_out')
+
+    #     if check_in:
+    #         # Handle check-in logic
+    #         attendance = request.env['hr.attendance'].sudo().create({
+    #             'check_in': check_in,
+    #             'employee_id': employee.id,
+    #         })
+    #         response_data = {'success': True, 'message': 'Check-in recorded'}
+
+    #     elif check_out:
+    #         # Handle check-out logic (find the latest check-in and update the record)
+    #         attendance = request.env['hr.attendance'].sudo().search([
+    #             ('employee_id', '=', employee.id),
+    #             ('check_out', '=', False)
+    #         ], limit=1)
+
+    #         if attendance:
+    #             attendance.sudo().write({'check_out': check_out})
+    #             response_data = {'success': True, 'message': 'Check-out recorded'}
+    #         else:
+    #             response_data = {'success': False, 'message': 'No check-in found to check out from'}
+
+    #     return request.make_response(json.dumps(response_data), headers=[('Content-Type', 'application/json')])
+
+    
     @http.route('/portal/add_attendance', type='http', auth="user", methods=['POST'], csrf=False)
     def add_attendance(self, **kwargs):
-        # Get the current logged-in user
         user = request.env.user
         employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
 
         if not employee:
-            response_data = {'success': False, 'message': 'Employee not found for the logged-in user'}
+            response_data = {'success': False, 'message': 'Employee not found'}
             return request.make_response(json.dumps(response_data), headers=[('Content-Type', 'application/json')])
 
-        check_in = kwargs.get('check_in')
-        check_out = kwargs.get('check_out')
-
-        if check_in:
-            # Handle check-in logic
-            attendance = request.env['hr.attendance'].sudo().create({
-                'check_in': check_in,
+        # Form button sends "check_in" = "1"
+        if kwargs.get('check_in'):
+            request.env['hr.attendance'].sudo().create({
                 'employee_id': employee.id,
+                'check_in': fields.Datetime.now()
             })
             response_data = {'success': True, 'message': 'Check-in recorded'}
 
-        elif check_out:
-            # Handle check-out logic (find the latest check-in and update the record)
+        elif kwargs.get('check_out'):
             attendance = request.env['hr.attendance'].sudo().search([
                 ('employee_id', '=', employee.id),
                 ('check_out', '=', False)
-            ], limit=1)
-
+            ], order='check_in desc', limit=1)
             if attendance:
-                attendance.sudo().write({'check_out': check_out})
+                attendance.sudo().write({'check_out': fields.Datetime.now()})
                 response_data = {'success': True, 'message': 'Check-out recorded'}
             else:
-                response_data = {'success': False, 'message': 'No check-in found to check out from'}
+                response_data = {'success': False, 'message': 'No check-in to check out from'}
+
+        else:
+            response_data = {'success': False, 'message': 'Invalid request'}
 
         return request.make_response(json.dumps(response_data), headers=[('Content-Type', 'application/json')])
 
