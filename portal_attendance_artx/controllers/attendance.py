@@ -16,22 +16,93 @@ class PortalAttendance(http.Controller):
         employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
 
         if not employee:
-            return request.redirect('/my/home')  # Redirect if no employee is found
+            return request.redirect('/my/home')
 
         today = fields.Date.today()
         first_day_of_current_month = today.replace(day=1)
         fifteenth_previous_month = first_day_of_current_month - timedelta(days=15)
 
-        # Fetch attendance records
         attendance_records = request.env['hr.attendance'].sudo().search([
             ('employee_id', '=', employee.id),
             ('check_in', '>=', fifteenth_previous_month),
             ('check_in', '<=', today)
         ])
 
-        return request.render('portal_attendance_artx.portal_my_attendance', {
-            'attendance_records': attendance_records  # Pass ORM records
-        })
+        # Get the active attendance (if exists)
+        active_attendance = request.env['hr.attendance'].sudo().search([
+            ('employee_id', '=', employee.id),
+            ('check_out', '=', False)
+        ], order='check_in desc', limit=1)
+
+        values = {
+            'attendance_records': attendance_records,
+            'active_attendance': active_attendance,
+        }
+        return request.render('portal_attendance_artx.portal_my_attendance', values)
+    
+    # @http.route(['/my/attendance'], type='http', auth='user', website=True)
+    # def portal_my_attendance(self, **kwargs):
+    #     user = request.env.user
+    #     employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
+
+    #     if not employee:
+    #         return request.redirect('/my/home')
+
+    #     active_attendance = request.env['hr.attendance'].sudo().search([
+    #         ('employee_id', '=', employee.id),
+    #         ('check_out', '=', False)
+    #     ], limit=1)
+
+    #     return request.render('portal_attendance_artx.portal_my_attendance', {
+    #         'attendance_records': ...,  # your records
+    #         'active_attendance': active_attendance
+    #     })
+
+    @http.route('/portal/add_attendance', type='http', auth='user', methods=['POST'], csrf=False)
+    def add_attendance(self, **kwargs):
+        user = request.env.user
+        employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
+
+        if not employee:
+            return request.redirect('/my/attendance')
+
+        if kwargs.get('check_in'):
+            request.env['hr.attendance'].sudo().create({
+                'employee_id': employee.id,
+                'check_in': fields.Datetime.now(),
+            })
+        elif kwargs.get('check_out'):
+            open_attendance = request.env['hr.attendance'].sudo().search([
+                ('employee_id', '=', employee.id),
+                ('check_out', '=', False)
+            ], order="check_in desc", limit=1)
+            if open_attendance:
+                open_attendance.write({'check_out': fields.Datetime.now()})
+
+        return request.redirect('/my/attendance')
+
+    # @http.route(['/my/attendance'], type='http', auth='user', website=True)
+    # def portal_my_attendance(self, **kwargs):
+    #     user = request.env.user
+    #     employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
+
+    #     if not employee:
+    #         return request.redirect('/my/home')  # Redirect if no employee is found
+
+    #     today = fields.Date.today()
+    #     first_day_of_current_month = today.replace(day=1)
+    #     fifteenth_previous_month = first_day_of_current_month - timedelta(days=15)
+
+    #     # Fetch attendance records
+    #     attendance_records = request.env['hr.attendance'].sudo().search([
+    #         ('employee_id', '=', employee.id),
+    #         ('check_in', '>=', fifteenth_previous_month),
+    #         ('check_in', '<=', today)
+    #     ])
+
+    #     return request.render('portal_attendance_artx.portal_my_attendance', {
+    #         'attendance_records': attendance_records  # Pass ORM records
+    #     })
 
     # @http.route(['/my/attendance'], type='http', auth='user', website=True)
     # def portal_my_attendance(self, **kwargs):
@@ -103,12 +174,6 @@ class PortalLeaves(http.Controller):
 
 
 ####################### End  portal Attendance ##########################################
-
-
-
-
-
-
 
     @http.route(['/my/leave/submit'], type='http', auth='user', methods=['POST'], website=True)
     def portal_leave_submit(self, **post):
