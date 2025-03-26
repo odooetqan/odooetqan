@@ -23,11 +23,11 @@
     ],
     'assets': {
         'web.assets_frontend': [
-            'web/static/src/js/public/public_widget.js',
-            'web/static/src/js/public/public_root.js',
-            'web/static/src/js/core/assets.js',
-            'web/static/lib/jquery/jquery.js',
-            'web/static/src/js/core/ajax.js',
+            # 'web/static/src/js/public/public_widget.js',
+            # 'web/static/src/js/public/public_root.js',
+            # 'web/static/src/js/core/assets.js',
+            # 'web/static/lib/jquery/jquery.js',
+            # 'web/static/src/js/core/ajax.js',
 
             # Your custom JS (correct path)
             'portal_attendance_artx/static/src/js/attendance.js',
