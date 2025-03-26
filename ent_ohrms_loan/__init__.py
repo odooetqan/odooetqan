@@ -3,7 +3,7 @@
 #
 #    A part of OpenHRMS Project <https://www.openhrms.com>
 #
-#    Copyright (C) 2024-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
+#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
 #    Author: Cybrosys Techno Solutions (odoo@cybrosys.com)
 #
 #    This program is under the terms of the Odoo Proprietary License v1.0

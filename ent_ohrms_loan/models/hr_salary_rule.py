@@ -3,7 +3,7 @@
 #
 #    A part of OpenHRMS Project <https://www.openhrms.com>
 #
-#    Copyright (C) 2024-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
+#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
 #    Author: Cybrosys Techno Solutions (odoo@cybrosys.com)
 #
 #    This program is under the terms of the Odoo Proprietary License v1.0
@@ -24,7 +24,8 @@ from odoo import fields, models
 
 
 class HrSalaryRule(models.Model):
-    """New field company_id on salary rule model"""
+    """Inherits the model hr.salary.rule to add new field company_id on salary
+    rule model"""
     _inherit = 'hr.salary.rule'
 
     company_id = fields.Many2one(comodel_name='res.company', string='Company',

@@ -3,7 +3,7 @@
 #
 #    A part of OpenHRMS Project <https://www.openhrms.com>
 #
-#    Copyright (C) 2024-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
+#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
 #    Author: Cybrosys Techno Solutions (odoo@cybrosys.com)
 #
 #    This program is under the terms of the Odoo Proprietary License v1.0
@@ -24,20 +24,18 @@ from odoo import fields, models
 
 
 class HrLoanLine(models.Model):
-    """
-        Class for creating installment details
-    """
+    """Inherits the model hr.loan.line for creating installment details"""
     _name = "hr.loan.line"
     _description = "Installment Line"
 
     date = fields.Date(string="Payment Date", required=True,
                        help="Date of the payment")
     employee_id = fields.Many2one(comodel_name='hr.employee', string="Employee",
-                                  help="Employee")
-    amount = fields.Float(string="Amount", required=True, help="Amount")
-    paid = fields.Boolean(string="Paid", help="Paid")
+                                  help="Employee of Loan Line")
+    amount = fields.Float(string="Amount", required=True, help="Loan Amount")
+    paid = fields.Boolean(string="Paid", help="Loan is Paid")
     loan_id = fields.Many2one(comodel_name='hr.loan', string="Loan Ref.",
-                              help="Loan")
+                              help="Loan Reference")
     payslip_id = fields.Many2one(comodel_name='hr.payslip',
                                  string="Payslip Ref.",
-                                 help="Payslip")
+                                 help="Payslip Reference")

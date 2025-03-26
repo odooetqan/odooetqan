@@ -3,7 +3,7 @@
 #
 #    A part of OpenHRMS Project <https://www.openhrms.com>
 #
-#    Copyright (C) 2024-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
+#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
 #    Author: Cybrosys Techno Solutions (odoo@cybrosys.com)
 #
 #    This program is under the terms of the Odoo Proprietary License v1.0
@@ -27,15 +27,14 @@ class HrEmployee(models.Model):
     """ Inheriting hr employee for computing number of loans for employees """
     _inherit = "hr.employee"
 
+    loan_count = fields.Integer(string="Loan Count", help="Count of Loans.",
+                                compute='_compute_loan_count')
+
     def _compute_loan_count(self):
         """ Compute the number of loans associated with the employee. """
         for record in self:
             record.loan_count = self.env['hr.loan'].search_count(
                 [('employee_id', '=', self.id)])
-
-    loan_count = fields.Integer(string="Loan Count", help="Count of Loans.",
-                                compute='_compute_loan_count')
-
 
     def action_loans(self):
         """ Get the list of loans associated with the current employee.

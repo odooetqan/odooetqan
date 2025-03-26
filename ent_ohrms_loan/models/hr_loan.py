@@ -3,7 +3,7 @@
 #
 #    A part of OpenHRMS Project <https://www.openhrms.com>
 #
-#    Copyright (C) 2024-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
+#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
 #    Author: Cybrosys Techno Solutions (odoo@cybrosys.com)
 #
 #    This program is under the terms of the Odoo Proprietary License v1.0
@@ -32,6 +32,55 @@ class HrLoan(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Loan Request"
 
+    name = fields.Char(string="Loan Name", default="/", readonly=True,
+                       help="Name of the loan")
+    date = fields.Date(string="Date", default=fields.Date.today(),
+                       readonly=True, help="Date of the loan")
+    employee_id = fields.Many2one(comodel_name='hr.employee', string="Employee",
+                                  required=True, help="Employee for the loan")
+    department_id = fields.Many2one(comodel_name='hr.department',
+                                    related="employee_id.department_id",
+                                    readonly=True,
+                                    string="Department",
+                                    help="Department of employee")
+    installment = fields.Integer(string="No Of Installments", default=1,
+                                 help="Number of installments")
+    payment_date = fields.Date(string="Payment Start Date", required=True,
+                               default=fields.Date.today(),
+                               help="Date of the payment")
+    loan_line_ids = fields.One2many(comodel_name='hr.loan.line',
+                                    help="Details of the Loan Repayment",
+                                    inverse_name='loan_id', string="Loan Line",
+                                    index=True)
+    company_id = fields.Many2one(comodel_name='res.company', string='Company',
+                                 help="Company",
+                                 default=lambda self: self.env.user.company_id)
+    currency_id = fields.Many2one(comodel_name='res.currency',
+                                  string='Currency', required=True,
+                                  help="Currency",
+                                  default=lambda self:
+                                  self.env.user.company_id.currency_id)
+    job_position_id = fields.Many2one(comodel_name='hr.job',
+                                      related="employee_id.job_id",
+                                      readonly=True, string="Job Position",
+                                      help="Job position of employee")
+    loan_amount = fields.Float(string="Loan Amount", required=True,
+                               help="Loan amount")
+    total_amount = fields.Float(string="Total Amount", store=True,
+                                readonly=True, compute='_compute_loan_amount',
+                                help="Total loan amount")
+    balance_amount = fields.Float(string="Balance Amount", store=True,
+                                  compute='_compute_loan_amount',
+                                  help="Balance amount")
+    total_paid_amount = fields.Float(string="Total Paid Amount", store=True,
+                                     compute='_compute_loan_amount',
+                                     help="Total paid amount")
+    state = fields.Selection([
+        ('draft', 'Draft'), ('waiting_approval_1', 'Submitted'),
+        ('approve', 'Approved'), ('refuse', 'Refused'), ('cancel', 'Canceled'),
+    ], string="State", help="State of loan request", default='draft',
+        tracking=True, copy=False, )
+
     @api.model
     def default_get(self, field_list):
         """ Retrieve default values for specified fields. """
@@ -55,62 +104,10 @@ class HrLoan(models.Model):
             loan.total_amount = loan.loan_amount
             loan.balance_amount = balance_amount
             loan.total_paid_amount = total_paid
-            loan.paid  = total_paid
-
-    name = fields.Char(string="Loan Name", default="/", readonly=True,
-                       help="Name of the loan")
-    date = fields.Date(string="Date", default=fields.Date.today(),
-                       readonly=True, help="Date")
-    employee_id = fields.Many2one(comodel_name='hr.employee', string="Employee",
-                                  required=True, help="Employee")
-    department_id = fields.Many2one(comodel_name='hr.department',
-                                    related="employee_id.department_id",
-                                    readonly=True,
-                                    string="Department", help="Employee")
-    installment = fields.Integer(string="No Of Installments", default=1,
-                                 help="Number of installments")
-    payment_date = fields.Date(string="Payment Start Date", required=True,
-                               default=fields.Date.today(),
-                               help="Date of the payment")
-    loan_line_ids = fields.One2many(comodel_name='hr.loan.line',
-                                    help="Loan lines",
-                                    inverse_name='loan_id', string="Loan Line",
-                                    index=True)
-    company_id = fields.Many2one(comodel_name='res.company', string='Company',
-                                 help="Company",
-                                 default=lambda self: self.env.user.company_id)
-    currency_id = fields.Many2one(comodel_name='res.currency',
-                                  string='Currency', required=True,
-                                  help="Currency",
-                                  default=lambda self:
-                                  self.env.user.company_id.currency_id)
-    job_position_id = fields.Many2one(comodel_name='hr.job',
-                                      related="employee_id.job_id",
-                                      readonly=True, string="Job Position",
-                                      help="Job position")
-    loan_amount = fields.Float(string="Loan Amount", required=True,
-                               help="Loan amount")
-    amount = fields.Float(string="Amount", related="loan_amount")
-    total_amount = fields.Float(string="Total Amount", store=True,
-                                readonly=True, compute='_compute_loan_amount',
-                                help="Total loan amount")
-    balance_amount = fields.Float(string="Balance Amount", store=True,
-                                  compute='_compute_loan_amount',
-                                  help="Balance amount")
-    total_paid_amount = fields.Float(string="Total Paid Amount", store=True,
-                                     compute='_compute_loan_amount',
-                                     help="Total paid amount")
-    paid = fields.Float(string="Paid", store=True,
-                                     compute='_compute_loan_amount')
-    state = fields.Selection([
-        ('draft', 'Draft'), ('waiting_approval_1', 'Submitted'),
-        ('approve', 'Approved'), ('refuse', 'Refused'), ('cancel', 'Canceled'),
-    ], string="State", help="states of loan request", default='draft',
-        tracking=True, copy=False, )
 
     @api.model
     def create(self, values):
-        """creates a new HR loan record with the provided values."""
+        """Creates a new HR loan record with the provided values."""
         loan_count = self.env['hr.loan'].search_count(
             [('employee_id', '=', values['employee_id']),
              ('state', '=', 'approve'),

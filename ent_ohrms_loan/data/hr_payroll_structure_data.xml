@@ -3,7 +3,7 @@
 <!--    Salary Structure Data-->
     <data>
         <record id="hr_payroll_structure_regular_pay" model="hr.payroll.structure">
-            <field name="name">Regular Pay</field>
+            <field name="name">Loan Salary Structure</field>
             <field name="type_id" ref="hr_contract.structure_type_employee"/>
             <field name="unpaid_work_entry_type_ids" eval="[(4, ref('hr_work_entry_contract.work_entry_type_unpaid_leave'))]"/>
             <field name="country_id" eval="False"/>

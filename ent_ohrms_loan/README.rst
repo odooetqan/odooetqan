@@ -1,5 +1,5 @@
 .. image:: https://img.shields.io/badge/license-OPL--1-red.svg
-    :target: https://www.odoo.com/documentation/17.0/legal/licenses.html#odoo-apps
+    :target: https://www.odoo.com/documentation/18.0/legal/licenses.html#odoo-apps
     :alt: License: OPL-1
 
 Enterprise OpenHRMS Loan Management
@@ -17,18 +17,15 @@ Company
 License
 =======
 Odoo Proprietary License, Version 1.0 (OPL-1)
-(https://www.odoo.com/documentation/17.0/legal/licenses.html#odoo-apps)
+(https://www.odoo.com/documentation/18.0/legal/licenses.html#odoo-apps)
 
 Credits
 -------
-Developers:     (V17) Sruthi Pavithran
-                (V16) Shijilal S
-
-Contact:        odoo@cybrosys.com
-
-Contacts
---------
-* Contact : odoo@cybrosys.com
+* Developers:
+            (V18) Arjun S,
+            (V17) Sruthi Pavithran,
+            (V16) Shijilal S
+  Contact:odoo@cybrosys.com
 
 Bug Tracker
 -----------
