@@ -40,8 +40,9 @@ class PortalAttendance(http.Controller):
         }
         return request.render('portal_attendance_artx.portal_my_attendance', values)
     
-    
-    @http.route('/portal/add_attendance', type='http', auth="user", methods=['POST'], csrf=False)
+    # @http.route('/portal/add_attendance', type='http', auth='user', methods=['POST'], csrf=False)
+
+    @http.route('/portal/add_attendance', type='json', auth="user", methods=['POST'], csrf=False)
     def add_attendance(self, **kwargs):
         # Get the current logged-in user
         user = request.env.user
