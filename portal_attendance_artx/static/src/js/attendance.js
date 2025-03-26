@@ -1,17 +1,17 @@
-'use strict';
-
 odoo.define('portal_attendance_artx.attendance', function (require) {
+    'use strict';
+
     var publicWidget = require('web.public.widget');
     var ajax = require('web.ajax');
 
-    publicWidget.registry.AttendanceButton = publicWidget.Widget.extend({
+    var AttendanceButton = publicWidget.Widget.extend({
         selector: '#attendanceBtn',
         events: {
             'click': '_onButtonClick',
         },
 
         /**
-         * Start function that runs on page load
+         * Runs on page load
          */
         start: function () {
             this._super.apply(this, arguments);
@@ -19,20 +19,15 @@ odoo.define('portal_attendance_artx.attendance', function (require) {
         },
 
         /**
-         * Fetch the current attendance status and update the button text accordingly
+         * Check attendance status and update the button text
          */
         updateButtonStatus: function () {
             var self = this;
             ajax.jsonRpc('/portal/get_attendance_status', 'call', {})
                 .then(function (response) {
-                    if (response.success) {
-                        if (response.message === 'Currently checked in') {
-                            $('#btnText').text('Click to Check Out');
-                            self.isCheckIn = false; // Set to false, meaning next action will be check-out
-                        } else {
-                            $('#btnText').text('Click to Check In');
-                            self.isCheckIn = true; // Set to true, meaning next action will be check-in
-                        }
+                    if (response.success && response.message === 'Currently checked in') {
+                        $('#btnText').text('Click to Check Out');
+                        self.isCheckIn = false;
                     } else {
                         $('#btnText').text('Click to Check In');
                         self.isCheckIn = true;
@@ -40,43 +35,39 @@ odoo.define('portal_attendance_artx.attendance', function (require) {
                 }).fail(function () {
                     console.error('Error fetching attendance status');
                     $('#btnText').text('Click to Check In');
-                    self.isCheckIn = true; // Assume check-in if there's an error
+                    self.isCheckIn = true;
                 });
         },
 
         /**
-         * Handles the click event for check-in/check-out
+         * Handle check-in/check-out click
          */
-        _onButtonClick: function (event) {
+        _onButtonClick: function () {
             var self = this;
             var currentTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
-            var requestData = {};
-            if (this.isCheckIn) {
-                requestData['check_in'] = currentTime;
-            } else {
-                requestData['check_out'] = currentTime;
-            }
+            var requestData = this.isCheckIn
+                ? { check_in: currentTime }
+                : { check_out: currentTime };
 
-            // Disable button to prevent multiple clicks
             $('#attendanceBtn').prop('disabled', true);
 
             ajax.jsonRpc('/portal/add_attendance', 'call', requestData)
                 .then(function (response) {
                     if (response.success) {
                         $('#btnText').text(self.isCheckIn ? 'Click to Check Out' : 'Click to Check In');
-                        self.isCheckIn = !self.isCheckIn; // Toggle the check-in/check-out state
+                        self.isCheckIn = !self.isCheckIn;
                     } else {
-                        alert('Failed to record attendance: ' + response.message);
+                        alert('Failed: ' + response.message);
                     }
                 }).fail(function () {
-                    alert('An error occurred while recording attendance');
+                    alert('Error occurred while recording attendance.');
                 }).always(function () {
-                    // Re-enable button after request completion
                     $('#attendanceBtn').prop('disabled', false);
                 });
         }
     });
 
-    publicWidget.registry.AttendanceButton;
+    publicWidget.registry.AttendanceButton = AttendanceButton;
+    return AttendanceButton;
 });
