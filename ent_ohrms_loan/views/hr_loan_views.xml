@@ -18,6 +18,7 @@
 <record id="hr_loan_view_list" model="ir.ui.view">
     <field name="name">hr.loan.list</field>
     <field name="model">hr.loan</field>
+        <field name="priority" eval="10"/>  
     <field name="arch" type="xml">
         <list string="Loan Requests">
             <field name="name"/>
