@@ -36,6 +36,7 @@ class HrEmployee(models.Model):
     loan_count = fields.Integer(string="Loan Count", help="Count of Loans.",
                                 compute='_compute_loan_count')
 
+
     def action_loans(self):
         """ Get the list of loans associated with the current employee.
            This method returns an action that opens a window displaying a tree
@@ -44,7 +45,7 @@ class HrEmployee(models.Model):
         return {
             'type': 'ir.actions.act_window',
             'name': 'Loans',
-            'view_mode': 'tree,form',
+            'view_mode': 'list,form',
             'res_model': 'hr.loan',
             'domain': [('employee_id', '=', self.id)],
             'context': "{'create': False}"
