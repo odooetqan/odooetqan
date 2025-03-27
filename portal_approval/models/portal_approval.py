@@ -36,6 +36,7 @@ class PortalApprovalCategory(models.Model):
 class PortalApprovalRequest(models.Model):
     _inherit = "approval.request"
 
+    description = fields.Text(string="الوصف")
     date_from = fields.Datetime(string="من")
     date_to = fields.Datetime(string="إلى")
     document = fields.Binary(string="المستند")
