@@ -2,7 +2,35 @@ from odoo import http
 from odoo.http import request
 
 
+# from odoo import http
+# from odoo.http import request
+
 class PortalApproval(http.Controller):
+    @http.route(['/my/approval'], type='http', auth='user', website=True)
+    def portal_approval_list(self, **kwargs):
+        approval_requests = request.env['approval.request'].sudo().search([('request_owner_id', '=', request.env.user.id)])
+        categories = request.env['approval.category'].sudo().search([])
+        return request.render('your_module.portal_approval_list', {
+            'approval_requests': approval_requests,
+            'categories': categories,
+        })
+
+    @http.route(['/my/approval/new'], type='http', auth='user', website=True)
+    def portal_approval_request_form(self, **kwargs):
+        categories = request.env['approval.category'].sudo().search([])
+        return request.render('your_module.portal_approval_form', {
+            'categories': categories,
+        })
+
+    # @http.route(['/my/approval/submit'], type='http', auth='user', website=True, methods=['POST'])
+    # def portal_approval_submit(self, **post):
+    #     # Process the form data here
+    #     # Create a new approval request record, etc.
+    #     # Then redirect to success page:
+    #     return request.render('your_module.portal_approval_success')
+
+
+# class PortalApproval(http.Controller):
     @http.route(['/my/approval/submit'], type='http', auth='user', website=True, csrf=True)
     def submit_approval_request(self, **post):
         category_id = int(post.get('category_id', 0))
@@ -26,12 +54,12 @@ class PortalApproval(http.Controller):
         return request.render('portal_approval_success', {})
 
 
-    @http.route(['/my/approval'], type='http', auth="user", website=True)
-    def portal_approval(self, **kwargs):
-        categories = request.env['approval.category'].sudo().search([])
-        return request.render('portal_approval.portal_approval_form', {
-            'categories': categories,
-        })
+    # @http.route(['/my/approval'], type='http', auth="user", website=True)
+    # def portal_approval(self, **kwargs):
+    #     categories = request.env['approval.category'].sudo().search([])
+    #     return request.render('portal_approval.portal_approval_form', {
+    #         'categories': categories,
+    #     })
 
     # @http.route(['/my/approval/submit'], type='http', auth="user", website=True, methods=['POST'])
     # def portal_approval_submit(self, **post):

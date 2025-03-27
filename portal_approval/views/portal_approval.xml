@@ -1,72 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-   <data>
-   
-        <template id="portal_approval_success" name="Approval Submission Success">
-            <t t-call="portal.portal_layout">
-                <div class="container my-5 text-center">
-                    <h3>تم إرسال الطلب بنجاح!</h3>
-                    <p>تم تقديم طلب الموارد البشرية الخاص بك بنجاح. سيتم مراجعته قريبًا.</p>
-                    <a href="/my/home" class="btn btn-primary">العودة إلى الصفحة الرئيسية</a>
-                </div>
-            </t>
-        </template>
-        
-        <template id="portal_approval_form" name="Approval Portal Form">
-            <t t-call="portal.portal_layout">
-                <div class="container my-5">
-                    <h2 class="text-center">طلبات الموارد البشرية</h2>
-                    <form action="/my/approval/submit" method="post" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label for="category_id">الفئة: *</label>
-                            <select name="category_id" id="category_id" class="form-control" required="true">
-                                <option value="1" selected="selected">اختر الفئة</option>
-                                <t t-foreach="categories" t-as="category">
-                                    <option t-att-value="category.id" t-esc="category.name"></option>
-                                </t>
-                            </select>
-                        </div>
+  <data>
 
-                        <div id="dynamic_fields"></div>
+    <!-- 1. Approval Portal Home Card -->
+    <template id="portal_approval_home" inherit_id="portal.portal_my_home" priority="10">
+      <xpath expr="//div[@id='portal_client_category']" position="inside">
+        <div class="o_portal_index_card col-md-6">
+          <a href="/my/approval" class="d-flex align-items-center justify-content-between text-reset text-decoration-none">
+            <img src="/your_module/static/src/img/approval-icon.svg" width="100px" alt="Approval Icon"/>
+            <div>
+              <h5>طلبات الموافقات</h5>
+              <p>اطلب وتابع طلبات الموافقات هنا</p>
+            </div>
+          </a>
+        </div>
+      </xpath>
+    </template>
 
-                        <div class="form-group">
-                            <label for="description">الوصف *</label>
-                            <textarea name="description" class="form-control" required="true"></textarea>
-                        </div>
+    <!-- 2. Approval List Template -->
+    <template id="portal_approval_list" name="Approval List">
+      <t t-call="portal.portal_layout">
+        <div class="container my-5">
+          <h3 class="mb-4 text-center">قائمة طلبات الموافقات</h3>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>رقم الطلب</th>
+                <th>الفئة</th>
+                <th>الوصف</th>
+                <th>التاريخ</th>
+                <th>الحالة</th>
+              </tr>
+            </thead>
+            <tbody>
+              <t t-foreach="approval_requests" t-as="req">
+                <tr>
+                  <td><t t-esc="req.name"/></td>
+                  <td><t t-esc="req.category_id.name"/></td>
+                  <td><t t-esc="req.description"/></td>
+                  <td><t t-esc="req.date"/></td>
+                  <td><t t-esc="req.request_status"/></td>
+                </tr>
+              </t>
+            </tbody>
+          </table>
+          <div class="text-center mt-4">
+            <a href="/my/approval/new" class="btn btn-primary">إنشاء طلب جديد</a>
+          </div>
+        </div>
+      </t>
+    </template>
 
-                        <button type="submit" class="btn btn-primary mt-3">إرسال</button>
-                    </form>
-                </div>
-            </t>
-        </template>
+    <!-- 3. Approval Form Template -->
+    <template id="portal_approval_form" name="Approval Portal Form">
+      <t t-call="portal.portal_layout">
+        <div class="container my-5">
+          <h2 class="text-center">طلبات الموافقات</h2>
+          <form action="/my/approval/submit" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="category_id">الفئة: *</label>
+              <select name="category_id" id="category_id" class="form-control" required="true">
+                <option value="" selected="selected">اختر الفئة</option>
+                <t t-foreach="categories" t-as="category">
+                  <option t-att-value="category.id">
+                    <t t-esc="category.name"/>
+                  </option>
+                </t>
+              </select>
+            </div>
+            <!-- Dynamic fields (if any) will be injected here via JavaScript -->
+            <div id="dynamic_fields"></div>
+            <div class="form-group">
+              <label for="description">الوصف *</label>
+              <textarea name="description" class="form-control" required="true"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">إرسال</button>
+          </form>
+        </div>
+      </t>
+    </template>
 
+    <!-- 4. Approval Submission Success Template -->
+    <template id="portal_approval_success" name="Approval Submission Success">
+      <t t-call="portal.portal_layout">
+        <div class="container my-5 text-center">
+          <h3>تم إرسال الطلب بنجاح!</h3>
+          <p>تم تقديم طلب الموافقة الخاص بك بنجاح. سيتم مراجعته قريبًا.</p>
+          <a href="/my/home" class="btn btn-primary">العودة إلى الصفحة الرئيسية</a>
+        </div>
+      </t>
+    </template>
 
-        <!-- <template id="portal_approval_form" name="Approval Portal Form">
-            <t t-call="portal.portal_layout">
-                <div class="container my-5">
-                    <h2 class="text-center">طلبات الموارد البشرية</h2>
-                    <form action="/my/approval/submit" method="post" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label for="category_id">الفئة: *</label>
-                            <select name="category_id" id="category_id" class="form-control" required="true">
-                                <option value="1" selected="selected">اختر الفئة</option>
-                                <t t-foreach="categories" t-as="category">
-                                    <option t-att-value="category.id" t-esc="category.name"></option>
-                                </t>
-                            </select>
-                        </div>
-
-                        <div id="dynamic_fields"></div>
-
-                        <div class="form-group">
-                            <label for="description">الوصف *</label>
-                            <textarea name="description" class="form-control" required="true"></textarea>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary mt-3">إرسال</button>
-                    </form>
-                </div>
-            </t>
-        </template> -->
-    </data>
+  </data>
 </odoo>
