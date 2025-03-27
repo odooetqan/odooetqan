@@ -50,8 +50,9 @@ class PortalApproval(http.Controller):
             'document': document,
             'request_owner_id': request.env.user.id,
         })
+        return request.render('portal_approval.portal_approval_success')
 
-        return request.render('portal_approval_success', {})
+        # return request.render('portal_approval_success', {})
 
 
     # @http.route(['/my/approval'], type='http', auth="user", website=True)
