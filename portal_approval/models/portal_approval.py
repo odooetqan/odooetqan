@@ -1,42 +1,41 @@
 from odoo import models, fields, api
 
+
 class PortalApprovalCategory(models.Model):
     _inherit = "approval.category"
 
     has_date = fields.Selection(
-                                string="يحتوي على التاريخ",
-                                selection_add=[
-                                    ("required", "Required"),
-                                    ("optional", "Optional"),
-                                    ("no", "None"),
-                                ],
-                                default="no",  # ✅ Correct: Set a valid default value
-                            )
+        selection=[
+            ("required", "Required"),
+            ("optional", "Optional"),
+            ("no", "None"),
+        ],
+        string="يحتوي على التاريخ",
+        default="no",
+    )
     has_document = fields.Selection(
-                                string="يحتوي على المستند",
-                                selection_add=[
-                                    ("required", "Required"),
-                                    ("optional", "Optional"),
-                                    ("no", "None"),
-                                ],
-                                default="no",  # ✅ Correct: Set a valid default value
-                            )
+        selection=[
+            ("required", "Required"),
+            ("optional", "Optional"),
+            ("no", "None"),
+        ],
+        string="يحتوي على المستند",
+        default="no",
+    )
     has_amount = fields.Selection(
-                                string="يحتوي على المبلغ",
-                                selection_add=[
-                                    ("required", "Required"),
-                                    ("optional", "Optional"),
-                                    ("no", "None"),
-                                ],
-                                default="no",  # ✅ Correct: Set a valid default value
-                            )
-    # is_active = fields.Boolean(string="Is Active", default=False)
+        selection=[
+            ("required", "Required"),
+            ("optional", "Optional"),
+            ("no", "None"),
+        ],
+        string="يحتوي على المبلغ",
+        default="no",
+    )
 
 
 class PortalApprovalRequest(models.Model):
     _inherit = "approval.request"
 
-    # is_active = fields.Boolean(string="Is Active", default=False)
     date_from = fields.Datetime(string="من")
     date_to = fields.Datetime(string="إلى")
     document = fields.Binary(string="المستند")
