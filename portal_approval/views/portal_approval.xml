@@ -7,7 +7,7 @@
       <xpath expr="//div[@id='portal_client_category']" position="inside">
         <div class="o_portal_index_card col-md-6">
           <a href="/my/approval" class="d-flex align-items-center justify-content-between text-reset text-decoration-none">
-            <img src="/your_module/static/src/img/approval-icon.svg" width="100px" alt="Approval Icon"/>
+            <img src="/your_module/static/src/images/hr.svg" width="100px" alt="Approval Icon"/>
             <div>
               <h5>طلبات المواردالبشرية</h5>
               <p>اطلب وتابع طلبات المواردالبشرية هنا</p>
