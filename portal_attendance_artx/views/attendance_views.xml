@@ -254,7 +254,7 @@
             <h5 class="mt-0 mb-1"> سجلات الحضور </h5>
             <p class="m-0 text-600">  تتبع الحضور و الانصراف و التاخير و الخصومات من هنا   </p>
         </div> -->
-        <template id="portal_my_home_attendance" inherit_id="portal.portal_my_home" priority="10">
+        <!-- <template id="portal_my_home_attendance" inherit_id="portal.portal_my_home" priority="10">
             <xpath expr="//div[@id='portal_client_category']" position="inside">
                 <div class="o_portal_index_card col-md-6" >
                     <a class="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
@@ -267,15 +267,13 @@
                     </a>
                 </div>
             </xpath>
-        </template>
+        </template> -->
         
         <template id="portal_my_home_attendance" inherit_id="portal.portal_my_home" priority="11">
             <xpath expr="//div[@id='portal_client_category']" position="inside">
                 
                 <div class="o_portal_index_card col-md-6" >
                     <a href="/my/attendance" title="Leaves" class="d-flex justify-content-start gap-2 align-items-center py-3 px-3 rounded text-decoration-none text-reset text-bg-light text-bg-danger">
-                    <!-- <a class="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
-                        href="/my/attendance" title="Attendance"> -->
                         <img width="100px" src="/portal_attendance_artx/static/src/images/attendance-icon.svg" loading="lazy"/>
                         الحضور
                         <span class="badge text-bg-secondary rounded-pill">
@@ -283,7 +281,7 @@
                         </span>
                     </a>
                 </div>
-<!--                 
+                <!--                 
                 <div class="o_portal_index_card col-md-6" >
                     <a href="/my/leaves" title="Leaves" class="d-flex justify-content-start gap-2 align-items-center py-3 px-3 rounded text-decoration-none text-reset text-bg-light text-bg-danger">
                         <div class="o_portal_icon">
@@ -575,6 +573,9 @@
                         </div>
                         <div>
                             <h5 class="mt-0 mb-1">طلبات الاجازة </h5>
+                            <span class="badge text-bg-secondary rounded-pill">
+                                <i class="fa fa-sign-in"></i>
+                            </span>
                             <p class="m-0 text-600">اطلب و تتبع اجازاتك من هنا </p>
                         </div>
                     </a>
