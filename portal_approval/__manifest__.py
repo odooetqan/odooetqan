@@ -1,10 +1,13 @@
 {
     'name': 'Portal Approval',
     'version': '18.0.0.0.0',
-    'depends': ['base', 'portal', 'hr', 'hr_holidays', 'portal_attendance_artx', 'ent_ohrms_loan'],
+    'category': 'Human Resources',
+    'author': 'Sirelkhatim',
+    'depends': [],
+    'depends': ['website', 'approvals', 'base', 'portal', 'hr'],
     'data': [
         'views/portal_approval.xml',
-        'views/dynamic_fields_template.xml',
+        # 'views/dynamic_fields_template.xml',
         'security/security.xml',
     ],
     'assets': {

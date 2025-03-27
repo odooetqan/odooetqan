@@ -39,7 +39,7 @@
         </template>
 
         <!-- Dynamic Fields Template -->
-        <template id="dynamic_fields_template">
+        <!-- <template id="dynamic_fields_template">
             <t t-if="has_date">
                 <div class="form-group mb-3">
                     <label for="date_from" class="form-label">من</label>
@@ -64,6 +64,6 @@
                     <input type="number" name="amount" class="form-control" />
                 </div>
             </t>
-        </template>
+        </template> -->
     </data>
 </odoo>
