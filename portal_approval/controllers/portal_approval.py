@@ -10,7 +10,7 @@ class PortalApproval(http.Controller):
     def portal_approval_list(self, **kwargs):
         approval_requests = request.env['approval.request'].sudo().search([('request_owner_id', '=', request.env.user.id)])
         categories = request.env['approval.category'].sudo().search([])
-        return request.render('your_module.portal_approval_list', {
+        return request.render('portal_approval.portal_approval_list', {
             'approval_requests': approval_requests,
             'categories': categories,
         })
@@ -18,7 +18,7 @@ class PortalApproval(http.Controller):
     @http.route(['/my/approval/new'], type='http', auth='user', website=True)
     def portal_approval_request_form(self, **kwargs):
         categories = request.env['approval.category'].sudo().search([])
-        return request.render('your_module.portal_approval_form', {
+        return request.render('portal_approval.portal_approval_form', {
             'categories': categories,
         })
 
@@ -27,7 +27,7 @@ class PortalApproval(http.Controller):
     #     # Process the form data here
     #     # Create a new approval request record, etc.
     #     # Then redirect to success page:
-    #     return request.render('your_module.portal_approval_success')
+    #     return request.render('portal_approval.portal_approval_success')
 
 
 # class PortalApproval(http.Controller):
