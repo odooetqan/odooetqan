@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <data>
+
+        <template id="portal_approval_form" name="Approval Portal Form">
+            <t t-call="portal.portal_layout">
+                <div class="container my-5">
+                    <h2 class="text-center">طلبات الموارد البشرية</h2>
+
+                    <form action="/my/approval/submit" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="category_id">الفئة: *</label>
+                            <select name="category_id" id="category_id" class="form-control" required="true">
+                                <option value="" selected>اختر الفئة</option>
+                                <t t-foreach="categories" t-as="category">
+                                    <option t-att-value="category.id" t-esc="category.name"></option>
+                                </t>
+                            </select>
+                        </div>
+
+                        <div id="dynamic_fields"></div>
+
+                        <div class="form-group">
+                            <label for="description">الوصف *</label>
+                            <textarea name="description" class="form-control" required="true"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mt-3">إرسال</button>
+                    </form>
+                </div>
+            </t>
+        </template>
+
+        <template id="dynamic_fields_template">
+            <t t-if="has_date">
+                <div class="form-group">
+                    <label for="date_from">من</label>
+                    <input type="datetime-local" name="date_from" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="date_to">إلى</label>
+                    <input type="datetime-local" name="date_to" class="form-control">
+                </div>
+            </t>
+            <t t-if="has_document">
+                <div class="form-group">
+                    <label for="document">المستند</label>
+                    <input type="file" name="document" class="form-control">
+                </div>
+            </t>
+            <t t-if="has_amount">
+                <div class="form-group">
+                    <label for="amount">المبلغ</label>
+                    <input type="number" name="amount" class="form-control">
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>    
+

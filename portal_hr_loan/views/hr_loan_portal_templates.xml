@@ -61,6 +61,7 @@
             </div>
          </t>
       </template>
+      
       <!-- Template Form to create new Loan -->
       <template id="portal_create_loan_form" name="Create Loan">
          <t t-call="portal.portal_layout">
