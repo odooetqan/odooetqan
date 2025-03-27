@@ -11,7 +11,7 @@
                         <div class="form-group">
                             <label for="category_id">الفئة: *</label>
                             <select name="category_id" id="category_id" class="form-control" required="true">
-                                <option value="" selected>اختر الفئة</option>
+                                <option value="1" selected>اختر الفئة</option>
                                 <t t-foreach="categories" t-as="category">
                                     <option t-att-value="category.id" t-esc="category.name"></option>
                                 </t>
