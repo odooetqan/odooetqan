@@ -37,15 +37,28 @@ class PortalApproval(http.Controller):
         return request.redirect('/my/approval')
 
 
-class ProtalDynamicFieldTemplate(http.Controller):
+# class ProtalDynamicFieldTemplate(http.Controller):
 
-    @http.route(['/my/approval/get_fields'], type='json', auth="user")
+#     @http.route(['/my/approval/get_fields'], type='json', auth="user")
+#     def get_dynamic_fields(self, category_id):
+#         category = request.env['approval.category'].sudo().browse(int(category_id))
+#         values = {
+#             'has_date': category.has_date,
+#             'has_document': category.requirer_document,
+#             'has_amount': category.has_amount,
+#         }
+#         return request.env.ref('portal_approval.dynamic_fields_template').render(values)
+
+class PortalApproval(http.Controller):
+    @http.route(['/my/approval/get_dynamic_fields'], type='json', auth='user', website=True)
     def get_dynamic_fields(self, category_id):
-        category = request.env['approval.category'].sudo().browse(int(category_id))
+        category = request.env['approval.category'].browse(int(category_id))
         values = {
             'has_date': category.has_date,
             'has_document': category.requirer_document,
             'has_amount': category.has_amount,
         }
-        return request.env.ref('portal_approval.dynamic_fields_template').render(values)
-
+        return {
+            'success': True,
+            'html': request.env.ref('portal_approval.dynamic_fields_template')._render(values),
+        }
