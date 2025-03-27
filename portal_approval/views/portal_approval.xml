@@ -13,7 +13,7 @@
                         <div class="form-group mb-3">
                             <label for="category_id" class="form-label">الفئة: *</label>
                             <select name="category_id" id="category_id" class="form-select" required="true">
-                                <option value="" selected disabled>اختر الفئة</option>
+                                <option value="" >اختر الفئة</option>
                                 <t t-foreach="categories" t-as="category">
                                     <option t-att-value="category.id">
                                         <t t-esc="category.name" />
