@@ -20,7 +20,7 @@
       <template id="portal_hr_loan_list" name="Loan List">
          <t t-call="portal.portal_layout">
             <div class="container">
-               <h1> السلف </h1>
+               <h3> السلف </h3>
                <a class="btn btn-success mb-3" href="/my/loans/new">طلب سلفة جديدة</a>
                <table class="table table-striped">
                   <thead>
@@ -65,7 +65,7 @@
       <template id="portal_create_loan_form" name="Create Loan">
          <t t-call="portal.portal_layout">
             <div class="container">
-               <h1>طلب سلفة جديدة</h1>
+               <h3>طلب سلفة جديدة</h3>
                <form t-attf-action="/my/loans/save" method="post">
                   <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                   <div class="form-group">
@@ -99,7 +99,7 @@
       <template id="portal_hr_salary_list" name="Salaries List">
          <t t-call="portal.portal_layout">
             <div class="container">
-               <h1>مرتباتي</h1>
+               <h3>المرتبات</h3>
                <table class="table table-striped">
                   <thead>
                      <tr>
@@ -138,7 +138,7 @@
       <template id="portal_create_salary_form" name="Create Salary">
          <t t-call="portal.portal_layout">
             <div class="container">
-               <h1>إضافة راتب جديد</h1>
+               <h3>إضافة راتب جديد</h3>
                <form t-attf-action="/my/salaries/save" method="post">
                   <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                   <div class="form-group">
