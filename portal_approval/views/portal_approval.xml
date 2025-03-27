@@ -9,8 +9,8 @@
           <a href="/my/approval" class="d-flex align-items-center justify-content-between text-reset text-decoration-none">
             <img src="/your_module/static/src/img/approval-icon.svg" width="100px" alt="Approval Icon"/>
             <div>
-              <h5>طلبات الموافقات</h5>
-              <p>اطلب وتابع طلبات الموافقات هنا</p>
+              <h5>طلبات المواردالبشرية</h5>
+              <p>اطلب وتابع طلبات المواردالبشرية هنا</p>
             </div>
           </a>
         </div>
@@ -21,7 +21,7 @@
     <template id="portal_approval_list" name="Approval List">
       <t t-call="portal.portal_layout">
         <div class="container my-5">
-          <h3 class="mb-4 text-center">قائمة طلبات الموافقات</h3>
+          <h3 class="mb-4 text-center">قائمة طلبات المواردالبشرية</h3>
           <table class="table table-striped">
             <thead>
               <tr>
@@ -55,7 +55,7 @@
     <!-- <template id="portal_approval_form" name="Approval Portal Form">
       <t t-call="portal.portal_layout">
         <div class="container my-5">
-          <h2 class="text-center">طلبات الموافقات</h2>
+          <h2 class="text-center">طلبات المواردالبشرية</h2>
           <form action="/my/approval/submit" method="post" enctype="multipart/form-data">
             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
 
@@ -81,11 +81,11 @@
         </div>
       </t>
     </template> -->
-    
+
     <template id="portal_approval_form" name="Approval Portal Form">
         <t t-call="portal.portal_layout">
             <div class="container my-5">
-            <h2 class="text-center">طلبات الموافقات</h2>
+            <h2 class="text-center">طلبات المواردالبشرية</h2>
             <form action="/my/approval/submit" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
 
