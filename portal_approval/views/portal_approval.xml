@@ -52,7 +52,7 @@
     </template>
 
     <!-- 3. Approval Form Template -->
-    <template id="portal_approval_form" name="Approval Portal Form">
+    <!-- <template id="portal_approval_form" name="Approval Portal Form">
       <t t-call="portal.portal_layout">
         <div class="container my-5">
           <h2 class="text-center">طلبات الموافقات</h2>
@@ -70,7 +70,7 @@
                 </t>
               </select>
             </div>
-            <!-- Dynamic fields (if any) will be injected here via JavaScript -->
+            <!- - Dynamic fields (if any) will be injected here via JavaScript - ->
             <div id="dynamic_fields"></div>
             <div class="form-group">
               <label for="description">الوصف *</label>
@@ -80,7 +80,41 @@
           </form>
         </div>
       </t>
-    </template>
+    </template> -->
+    
+    <template id="portal_approval_form" name="Approval Portal Form">
+        <t t-call="portal.portal_layout">
+            <div class="container my-5">
+            <h2 class="text-center">طلبات الموافقات</h2>
+            <form action="/my/approval/submit" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                <div class="form-group">
+                <label for="category_id">الفئة: *</label>
+                <select name="category_id" id="category_id" class="form-control" required="true">
+                    <option value="" selected="selected">اختر الفئة</option>
+                    <t t-foreach="categories" t-as="category">
+                    <option t-att-value="category.id">
+                        <t t-esc="category.name"/>
+                    </option>
+                    </t>
+                </select>
+                </div>
+
+                <!-- Include dynamic fields template here -->
+                <t t-call="portal_approval.dynamic_fields_template"/>
+
+                <div class="form-group">
+                <label for="description">الوصف *</label>
+                <textarea name="description" class="form-control" required="true"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-3">إرسال</button>
+            </form>
+            </div>
+        </t>
+        </template>
+
 
     <!-- 4. Approval Submission Success Template -->
     <template id="portal_approval_success" name="Approval Submission Success">
