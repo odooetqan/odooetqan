@@ -1,9 +1,15 @@
-<record id="portal_approval_user_rule" model="ir.rule">
-    <field name="name">Portal Approval Access</field>
-    <field name="model_id" ref="model_approval_request"/>
-    <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
-    <field name="perm_read" eval="1"/>
-    <field name="perm_create" eval="1"/>
-    <field name="perm_write" eval="1"/>
-    <field name="perm_unlink" eval="0"/>
-</record>
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="portal_approval_user_rule" model="ir.rule">
+            <field name="name">Portal Approval Access</field>
+            <field name="model_id" ref="model_approval_request"/>
+            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+    </data>
+</odoo>
+
