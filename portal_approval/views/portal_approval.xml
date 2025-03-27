@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
    <data>
+   
+        <template id="portal_approval_success" name="Approval Submission Success">
+            <t t-call="portal.portal_layout">
+                <div class="container my-5 text-center">
+                    <h3>تم إرسال الطلب بنجاح!</h3>
+                    <p>تم تقديم طلب الموارد البشرية الخاص بك بنجاح. سيتم مراجعته قريبًا.</p>
+                    <a href="/my/home" class="btn btn-primary">العودة إلى الصفحة الرئيسية</a>
+                </div>
+            </t>
+        </template>
+        
         <template id="portal_approval_form" name="Approval Portal Form">
             <t t-call="portal.portal_layout">
                 <div class="container my-5">
@@ -9,7 +20,7 @@
                         <div class="form-group">
                             <label for="category_id">الفئة: *</label>
                             <select name="category_id" id="category_id" class="form-control" required="true">
-                                <option value="" selected="selected">اختر الفئة</option>
+                                <option value="1" selected="selected">اختر الفئة</option>
                                 <t t-foreach="categories" t-as="category">
                                     <option t-att-value="category.id" t-esc="category.name"></option>
                                 </t>
@@ -28,5 +39,34 @@
                 </div>
             </t>
         </template>
+
+
+        <!-- <template id="portal_approval_form" name="Approval Portal Form">
+            <t t-call="portal.portal_layout">
+                <div class="container my-5">
+                    <h2 class="text-center">طلبات الموارد البشرية</h2>
+                    <form action="/my/approval/submit" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="category_id">الفئة: *</label>
+                            <select name="category_id" id="category_id" class="form-control" required="true">
+                                <option value="1" selected="selected">اختر الفئة</option>
+                                <t t-foreach="categories" t-as="category">
+                                    <option t-att-value="category.id" t-esc="category.name"></option>
+                                </t>
+                            </select>
+                        </div>
+
+                        <div id="dynamic_fields"></div>
+
+                        <div class="form-group">
+                            <label for="description">الوصف *</label>
+                            <textarea name="description" class="form-control" required="true"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mt-3">إرسال</button>
+                    </form>
+                </div>
+            </t>
+        </template> -->
     </data>
 </odoo>
