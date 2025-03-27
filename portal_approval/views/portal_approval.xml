@@ -57,6 +57,8 @@
         <div class="container my-5">
           <h2 class="text-center">طلبات الموافقات</h2>
           <form action="/my/approval/submit" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
             <div class="form-group">
               <label for="category_id">الفئة: *</label>
               <select name="category_id" id="category_id" class="form-control" required="true">
