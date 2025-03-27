@@ -7,12 +7,12 @@
     'depends': ['website', 'approvals', 'base', 'portal', 'hr'],
     'data': [
         'views/portal_approval.xml',
-        # 'views/dynamic_fields_template.xml',
+        'views/dynamic_fields_template.xml',
         'security/security.xml',
     ],
     'assets': {
         'web.assets_frontend': [
-            'portal_attendance_artx/static/src/js/portal_approval.js',
+            'portal_approval/static/src/js/portal_approval.js',
         ],
     },
     # 'data': [
