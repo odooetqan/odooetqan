@@ -5,7 +5,7 @@ class PortalApprovalCategory(models.Model):
 
     has_date = fields.Selection(
                                 string="يحتوي على التاريخ",
-                                selection=[
+                                selection_add=[
                                     ("required", "Required"),
                                     ("optional", "Optional"),
                                     ("no", "None"),
@@ -14,7 +14,7 @@ class PortalApprovalCategory(models.Model):
                             )
     has_document = fields.Selection(
                                 string="يحتوي على المستند",
-                                selection=[
+                                selection_add=[
                                     ("required", "Required"),
                                     ("optional", "Optional"),
                                     ("no", "None"),
@@ -23,7 +23,7 @@ class PortalApprovalCategory(models.Model):
                             )
     has_amount = fields.Selection(
                                 string="يحتوي على المبلغ",
-                                selection=[
+                                selection_add=[
                                     ("required", "Required"),
                                     ("optional", "Optional"),
                                     ("no", "None"),
