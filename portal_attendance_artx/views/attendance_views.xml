@@ -1,55 +1,5 @@
     <odoo>
         <data>
-            <!-- Start Original View check in & out &  create portal user from employee -->
-            <!-- <xpath expr="//div[@class='oe_structure']" position="inside"> -->
-            <!-- <template id="portal_my_home_attendance" name="Portal Attendance" inherit_id="portal.portal_my_home" priority="20">
-                <xpath expr="//div[hasclass('oe_structure')]" position="inside">
-
-                    <div class="container text-center mt-3">
-                        <button id="attendanceBtn" class="btn btn-success attendanceBtn" onclick="handleAttendance()">
-                            <i class="fa fa-sign-in" aria-hidden="true"></i>
-                            <span id="btnText">سجل الدخول</span>
-                        </button>
-                        <button id="checkoutBtn" class="btn btn-danger d-none mt-2" onclick="handleCheckout()">
-                            <i class="fa fa-sign-out" aria-hidden="true"></i>
-                            <span>تسجيل الخروج</span>
-                        </button>
-                    </div>
-                </xpath>
-            </template> -->
-            
-            <!-- <template id="portal_my_home_sale" name="Show Quotations / Sales Orders" customize_show="True"
-                    inherit_id="portal.portal_my_home" priority="20">
-                <div class="oe_structure" position="inside">
-                    <div class="container">
-                        <button id="attendanceBtn" class="btn btn-success attendanceBtn">
-                            <i class="fa fa-sign-in" aria-hidden="true"></i>
-                            <span id="btnText">سجل الدخول</span>
-                        </button>
-                    </div>
-                </div>
-            </template> -->
-
-            <!-- Inherit the Portal Home Template -->
-            <!-- <template id="portal_my_home_attendance" inherit_id="portal.portal_my_home" priority="20">
-                <xpath expr="//div[@id='portal_client_category']" position="inside">
-                    <div class="container text-center mt-3">
-                        <t t-if="not request.env.user.employee_id.last_attendance_id or request.env.user.employee_id.last_attendance_id.check_out">
-                            <button id="attendanceBtn" class="btn btn-success" onclick="handleAttendance()">
-                                <i class="fa fa-sign-in" aria-hidden="true"></i>
-                                <span id="btnText">سجل الدخول</span>
-                            </button>
-                        </t>
-                        <t t-if="request.env.user.employee_id.last_attendance_id and not request.env.user.employee_id.last_attendance_id.check_out">
-                            <button id="checkoutBtn" class="btn btn-danger mt-2" onclick="handleCheckout()">
-                                <i class="fa fa-sign-out" aria-hidden="true"></i>
-                                <span>تسجيل الخروج</span>
-                            </button>
-                        </t>
-                    </div>
-                </xpath>
-            </template> -->
-
             <template id="portal_my_home_sale" name="Show Quotations / Sales Orders" customize_show="True"
                     inherit_id="portal.portal_my_home" priority="20">
                     <div class="oe_structure" position="inside">
@@ -62,7 +12,7 @@
                     </div>
             </template>
 
-            <template id="portal_my_home_attendance" inherit_id="portal.portal_my_home" priority="20">
+            <template id="portal_my_home_attendance" inherit_id="portal.portal_my_home" priority="9">
                 <xpath expr="//div[@id='portal_client_category']" position="inside">
                     <div class="container text-center mt-3">
                         <!-- Check In -->
@@ -236,40 +186,8 @@
                 <a href="/my/attendance" class="btn btn-primary">حضوري </a>
             </xpath>
         </template>
-        <!-- <record id="portal_attendance_main_menu" model="ir.ui.menu">
-            <field name="name">Attendance</field>
-            <field name="parent_id" ref="portal.menu_my_home"/>
-            <field name="sequence" eval="10"/>
-            </record> -->
-        <!-- <record id="portal_attendance_menu" model="ir.ui.menu">
-            <field name="name">My Attendance</field>
-            <field name="parent_id" ref="portal_attendance_main_menu"/>
-            <field name="action" ref="action_portal_attendance"/>
-            <field name="sequence" eval="20"/>
-            </record> -->
-        <!-- POrtal Tree ttee attendance -->
-        <!--     <xpath expr="//div[@class='o_portal_docs list-group']" position="after"> -->
-        <!-- <div class="list-group" style="background-color:green"> -->
-        <!-- <div>
-            <h5 class="mt-0 mb-1"> سجلات الحضور </h5>
-            <p class="m-0 text-600">  تتبع الحضور و الانصراف و التاخير و الخصومات من هنا   </p>
-        </div> -->
-        <!-- <template id="portal_my_home_attendance" inherit_id="portal.portal_my_home" priority="10">
-            <xpath expr="//div[@id='portal_client_category']" position="inside">
-                <div class="o_portal_index_card col-md-6" >
-                    <a class="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
-                        href="/my/attendance" title="Attendance">
-                        <img width="100px" src="/portal_attendance_artx/static/src/images/attendance-icon.svg" loading="lazy"/>
-                        الحضور
-                        <span class="badge text-bg-secondary rounded-pill">
-                        <i class="fa fa-sign-in"></i>
-                        </span>
-                    </a>
-                </div>
-            </xpath>
-        </template> -->
         
-        <template id="portal_my_home_attendance" inherit_id="portal.portal_my_home" priority="11">
+        <template id="portal_my_home_attendance" inherit_id="portal.portal_my_home" priority="9">
             <xpath expr="//div[@id='portal_client_category']" position="inside">
                 
                 <div class="o_portal_index_card col-md-6" >
@@ -281,18 +199,7 @@
                         </span>
                     </a>
                 </div>
-                <!--                 
-                <div class="o_portal_index_card col-md-6" >
-                    <a href="/my/leaves" title="Leaves" class="d-flex justify-content-start gap-2 align-items-center py-3 px-3 rounded text-decoration-none text-reset text-bg-light text-bg-danger">
-                        <div class="o_portal_icon">
-                            <img width="100px" src="/portal_attendance_artx/static/src/images/sun-bath-svgrepo-com.svg" loading="lazy"/>
-                        </div>
-                        <div>
-                            <h5 class="mt-0 mb-1">طلبات الاجازة </h5>
-                            <p class="m-0 text-600">اطلب و تتبع اجازاتك من هنا </p>
-                        </div>
-                    </a>
-                </div> -->
+      
             </xpath>
         </template>
 
@@ -372,141 +279,7 @@
                 </div>
             </t>
         </template>
-
-
-        <!-- <table class="table table-bordered"> -->
-                                <!-- <th>Date</th> -->
-                                    <!-- <td><t t-if="'worked_hours' in record"><t t-esc="record.get('worked_hours', '')"/></t></td> -->
-                                        <!-- Modal (Popup Form) -->
-
-
-        <!-- <template id="portal_my_attendance" name="Portal Attendance">
-            <t t-call="portal.portal_layout">
-                <div class="container">
-                    <h3>سجلات الحضور و الانصراف</h3>
-                            <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>الحضور</th>
-                                <th>الانصراف</th>
-                                <th>ساعات العمل</th>
-                                <th>الوقت الاضافي</th>
-                                <th>التاخير</th>
-                                <th>الخصم</th>
-                                <th>تصحيح</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <t t-foreach="attendance_records" t-as="record">
-                                <tr>
-                                    <td>
-                                        <t t-esc="record.get('check_in', '')"/>
-                                    </td>
-                                    <td>
-                                        <t t-esc="record.get('check_out', '')"/>
-                                    </td>
-                                    <td>
-                                        <t t-if="'worked_hours' in record">
-                                            <t t-set="total_minutes" t-value="int(record['worked_hours'] * 60)"/>
-                                            <t t-set="hours" t-value="total_minutes // 60"/>
-                                            <t t-set="minutes" t-value="total_minutes % 60"/>
-                                            <t t-esc="('%02d:%02d' % (hours, minutes))"/>
-                                        </t>
-                                    </td>
-                                    <td>
-                                        <t t-esc="record.get('overtime_minutes', '')"/>
-                                    </td>
-                                    <td>
-                                        <t t-esc="record.get('lateness', '')"/>
-                                    </td>
-                                    <td>
-                                        <t t-esc="record.get('deduction_amount', '')"/>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" t-att-data-bs-target="'#correctAttendanceModal-%s' % record['id']">
-                                        تصحيح
-                                        </button>
-                                        <div class="modal fade" t-att-id="'correctAttendanceModal-%s' % record['id']" tabindex="-1" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">تصحيح الحضور</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <form action="/portal/request_attendance_correction" method="post">
-                                                        <div class="modal-body">
-                                                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                                                            <input type="hidden" name="attendance_id" t-att-value="record['id']"/>
-                                                            <label>الحضور (المسجل):</label>
-                                                            <input type="datetime-local" name="original_check_in" t-att-value="record.get('check_in', '')" class="form-control" readonly="1"/>
-                                                            <label>الخروج (المسجل):</label>
-                                                            <input type="datetime-local" name="original_check_out" t-att-value="record.get('check_out', '')" class="form-control" readonly="1"/>
-                                                            <label>تصحيح الحضور:</label>
-                                                            <input type="datetime-local" name="corrected_check_in" class="form-control" required="true"/>
-                                                            <label>تصحيح الانصراف:</label>
-                                                            <input type="datetime-local" name="corrected_check_out" class="form-control" required="true"/>
-                                                            <label>سبب التصحيح:</label>
-                                                            <textarea name="correction_reason" class="form-control"></textarea>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-success">إرسال التصحيح</button>
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </t>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="container">
-                    <h2>طلبات تصحيح الحضور</h2>
-                        <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>الدخول</th>
-                                <th>الخروج</th>
-                                <th>السبب</th>
-                                <th>الحالة</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <t t-foreach="correction_requests" t-as="request">
-                                <tr>
-                                    <td>
-                                        <t t-esc="request.check_in"/>
-                                    </td>
-                                    <td>
-                                        <t t-esc="request.check_out"/>
-                                    </td>
-                                    <td>
-                                        <t t-esc="request.note"/>
-                                    </td>
-                                    <td>
-                                        <t t-esc="request.state"/>
-                                    </td>
-                                </tr>
-                            </t>
-                        </tbody>
-                    </table>
-                    <h3>طلب تصحيح الحضور</h3>
-                    <form action="/portal/request_attendance_correction" method="post">
-                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                        <label>الحضور :</label>
-                        <input type="datetime-local" name="check_in" required="true" class="form-control"/>
-                        <label>الخروج :</label>
-                        <input type="datetime-local" name="check_out" required="true" class="form-control"/>
-                        <label>السبب:</label>
-                        <textarea name="note" class="form-control"></textarea>
-                        <br/>
-                        <button type="submit" class="btn btn-primary">إرسال الطلب  </button>
-                    </form>
-                </div>
-            </t>
-        </template> -->
+ 
         <template id="portal_my_home_vendor_rfq" name="Show Vendor RFQs"
             customize_show="True" inherit_id="portal.portal_my_home"
             priority="25">
@@ -564,7 +337,7 @@
             </field>
         </record>
         <!-- Add "Request Leave" Card to Portal -->
-        <template id="portal_my_home_leaves" inherit_id="portal.portal_my_home" priority="11">
+        <template id="portal_my_home_leaves" inherit_id="portal.portal_my_home" priority="10">
             <xpath expr="//div[@id='portal_client_category']" position="inside">
                 <div class="o_portal_index_card col-md-6" >
                     <a href="/my/leaves" title="Leaves" class="d-flex justify-content-start gap-2 align-items-center py-3 px-3 rounded text-decoration-none text-reset text-bg-light text-bg-danger">
