@@ -17,13 +17,13 @@
                     <label for="document" class="form-label">المستند</label>
                     <input type="file" name="document" class="form-control"/>
                 </div>
-            <!-- </t>
-            <t t-if="has_amount"> -->
+            <!-- </t> -->
+            <t t-if="has_amount">
                 <div class="form-group mb-3">
                     <label for="amount" class="form-label">المبلغ</label>
                     <input type="number" name="amount" class="form-control"/>
                 </div>
-            <!-- </t> -->
+            </t>
         </template>
 
 
