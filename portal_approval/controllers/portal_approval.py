@@ -104,12 +104,12 @@ class PortalApproval(http.Controller):
     @http.route(['/my/approval/get_dynamic_fields'], type='json', auth='user', website=True)
     def get_dynamic_fields(self, category_id):
         category = request.env['approval.category'].browse(int(category_id))
-        values = {
+        req = {
             'has_date': category.has_date,
             'has_document': category.requirer_document,
             'has_amount': category.has_amount,
         }
         return {
             'success': True,
-            'html': request.env.ref('portal_approval.dynamic_fields_template')._render(values),
+            'html': request.env.ref('portal_approval.dynamic_fields_template')._render({'req':req}),
         }
