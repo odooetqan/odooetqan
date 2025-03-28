@@ -18,6 +18,7 @@
                                     t-att-onclick="`toggleAttendance()`">
                                 Click here to sign out
                             </button>
+                        </t>
                         <t t-else="">
                             <!-- If not checked in, show Check-In button -->
                             <button type="button" class="btn btn-primary btn-lg"
