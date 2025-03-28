@@ -16,7 +16,11 @@
                             <!-- If currently checked in, show Check-Out button -->
                             <!-- <button type="button" class="btn btn-danger btn-lg"
                                     t-att-onclick="`toggleAttendance()`"> -->
-                            <button type="button" class="btn btn-danger btn-lg" t-att-onclick="'toggleAttendance()'"/>
+                            <button type="button" class="btn btn-danger btn-lg" t-att-onclick="'toggleAttendance()'">
+                                <h1> 
+                                    Log IN
+                                </h1>
+                            </button>
                             <!-- <button type="button" class="btn btn-primary btn-lg" t-att-onclick="'toggleAttendance()'"/> -->
 
                             <!-- <button type="button" class="btn btn-danger btn-lg" onclick="toggleAttendance()"/> -->
@@ -26,7 +30,9 @@
                         </t>
                         <t t-else="">
                             <!-- If not checked in, show Check-In button -->
-                            <button type="button" class="btn btn-primary btn-lg" t-att-onclick="'toggleAttendance()'"/>
+                            <button type="button" class="btn btn-primary btn-lg" t-att-onclick="'toggleAttendance()'">
+                                <h1>Log Out</h1>
+                            </button>
 
                             <!-- <button type="button" class="btn btn-primary btn-lg"
                                     t-att-onclick="`toggleAttendance()`">
