@@ -18,7 +18,7 @@
                     <input type="file" name="document" class="form-control"/>
                 </div>
             <!-- </t> -->
-            <t t-if="has_amount_bool">
+            <t t-if="rec.has_amount_bool">
             
                 <div class="form-group mb-3">
                     <label for="amount" class="form-label">المبلغ</label>
