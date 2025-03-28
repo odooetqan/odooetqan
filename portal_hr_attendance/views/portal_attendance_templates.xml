@@ -27,12 +27,16 @@
             </t>
         </template>
 
-        <template id="assets_frontend_attendance_toggle" inherit_id="web.assets_frontend" name="Attendance Toggle JS">
+        <!-- <template id="assets_frontend_attendance_toggle" inherit_id="web.assets_frontend" name="Attendance Toggle JS">
             <xpath expr="." position="inside">
-                <!-- This must match your actual file path -->
                 <script type="text/javascript" src="/portal_hr_attendance/static/src/js/attendance_toggle.js"></script>
             </xpath>
-        </template>
+        </template> -->
+        <data inherit_id="portal.assets_frontend" name="Attendance Toggle JS">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/portal_hr_attendance/static/src/js/attendance_toggle.js"/>
+            </xpath>
+        </data>
 
         
         <!-- <template id="assets_frontend_attendance_toggle" inherit_id="web.assets_frontend" name="Attendance Toggle JS">
