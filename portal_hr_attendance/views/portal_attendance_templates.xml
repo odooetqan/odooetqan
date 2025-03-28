@@ -7,44 +7,26 @@
             <t t-call="portal.portal_layout">
                 <div class="container mt-5 mb-5">
                     <h2 class="text-center mb-4">Check In or Check Out</h2>
-                    
                     <div class="text-center">
                         <h3>Hi <t t-esc="employee_name"/>!</h3>
-                        <p>Today's hours: <t t-esc="total_hours" /> </p>
-                        
+                        <p>Today's hours: <t t-esc="total_hours"/></p>
                         <t t-if="is_checked_in">
                             <!-- If currently checked in, show Check-Out button -->
-                            <!-- <button type="button" class="btn btn-danger btn-lg"
-                                    t-att-onclick="`toggleAttendance()`"> -->
                             <button type="button" class="btn btn-danger btn-lg" t-att-onclick="'toggleAttendance()'">
-                                <h1> 
-                                    Click here to sign out
-                                </h1>
+                                <span>Click here to sign out</span>
                             </button>
-                            <!-- <button type="button" class="btn btn-primary btn-lg" t-att-onclick="'toggleAttendance()'"/> -->
-
-                            <!-- <button type="button" class="btn btn-danger btn-lg" onclick="toggleAttendance()"/> -->
-
-                                <!-- Click here to sign out
-                            </button> -->
                         </t>
-                        <!-- <t t-else=""> -->
                         <t t-if="is_checked_out">
                             <!-- If not checked in, show Check-In button -->
                             <button type="button" class="btn btn-primary btn-lg" t-att-onclick="'toggleAttendance()'">
-                                <h1>Click here to sign in</h1>
+                                <span>Click here to sign in</span>
                             </button>
-
-                            <!-- <button type="button" class="btn btn-primary btn-lg"
-                                    t-att-onclick="`toggleAttendance()`">
-                                Click here to sign in
-                            </button> -->
                         </t>
                     </div>
                 </div>
-                
             </t>
         </template>
+
 
         
         <!-- <template id="assets_frontend_attendance_toggle" inherit_id="web.assets_frontend" name="Attendance Toggle JS">
