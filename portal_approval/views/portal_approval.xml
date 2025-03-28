@@ -6,10 +6,23 @@
     <template id="portal_approval_home" inherit_id="portal.portal_my_home" priority="10">
       <xpath expr="//div[@id='portal_client_category']" position="inside">
         <div class="o_portal_index_card col-md-6">
-          <a href="/my/approval" class="d-flex align-items-center justify-content-between text-reset text-decoration-none">
+          <!-- <a href="/my/approval" class="d-flex align-items-center justify-content-between text-reset text-decoration-none"> -->
+          
+               <a href="/my/approval" title="Approval"
+                class="d-flex justify-content-start gap-2 align-items-center py-3 px-3 rounded text-decoration-none text-reset text-bg-light text-bg-danger">               
+               <!-- <a class="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
+                  href="/my/loans" title="Loan"> -->
+               <!-- <img width="100px" src="/portal_hr_loan/static/description/loan.svg" loading="lazy"/> -->
+               <!-- السلف -->
+
             <img src="/portal_approval/static/src/images/hr.svg" width="100px" alt="Approval Icon"/>
             <div>
               <h5>طلبات المواردالبشرية</h5>
+              
+               <span class="badge text-bg-secondary rounded-pill">
+               <i class="fa fa-sign-in"></i>
+               </span>
+
               <p>اطلب وتابع طلبات المواردالبشرية هنا</p>
             </div>
           </a>
