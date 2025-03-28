@@ -5,7 +5,7 @@ import json
 
 class PortalAttendanceController(http.Controller):
     @http.route(['/my/attendance_check'], type='http', auth='user', website=True)
-    def portal_my_attendance(self, **kwargs):
+    def portal_my_attendance_check(self, **kwargs):
         """
         Display an attendance page with a "Check In" or "Check Out" button
         depending on the employee's current status.
@@ -43,7 +43,7 @@ class PortalAttendanceController(http.Controller):
             'is_checked_in': is_checked_in,
             'total_hours': total_hours,
         }
-        return request.render('portal_hr_attendance.portal_my_attendance', values)
+        return request.render('portal_hr_attendance.portal_my_attendance_check', values)
 
     @http.route(['/my/attendance/toggle'], type='json', auth='user', methods=['POST'], website=True)
     def toggle_attendance(self, **kwargs):
