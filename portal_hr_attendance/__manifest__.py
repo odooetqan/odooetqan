@@ -8,6 +8,11 @@
     'data': [
         'views/portal_attendance_templates.xml',  # We'll define the QWeb templates here
     ],
+    'assets': {
+        'web.assets_frontend': [
+            'portal_hr_attendance/static/src/js/attendance_toggle.js',
+        ],
+    },
     'installable': True,
     'application': False,
 }

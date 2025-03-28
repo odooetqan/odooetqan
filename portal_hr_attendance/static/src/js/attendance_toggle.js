@@ -1,7 +1,7 @@
-odoo.define('your_module.attendance_toggle', function (require) {
+odoo.define('portal_hr_attendance.attendance_toggle', function (require) {
     "use strict";
-    
-    // Expose the toggleAttendance function globally
+
+    // Make the toggleAttendance function available globally
     window.toggleAttendance = function () {
         fetch("/my/attendance/toggle", {
             method: "POST",
@@ -10,18 +10,17 @@ odoo.define('your_module.attendance_toggle', function (require) {
             },
             body: JSON.stringify({})
         })
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
+        .then(response => response.json())
+        .then(data => {
             if (data.success) {
                 alert(data.message);
+                // Reload the page to reflect new status
                 window.location.reload();
             } else {
                 alert(data.message || "Error toggling attendance");
             }
         })
-        .catch(function (err) {
+        .catch(err => {
             console.error(err);
             alert("An error occurred. See console for details.");
         });
