@@ -17,6 +17,8 @@
                             <!-- <button type="button" class="btn btn-danger btn-lg"
                                     t-att-onclick="`toggleAttendance()`"> -->
                             <button type="button" class="btn btn-danger btn-lg" t-att-onclick="'toggleAttendance()'"/>
+                            <button type="button" class="btn btn-primary btn-lg" t-att-onclick="'toggleAttendance()'"/>
+
                             <!-- <button type="button" class="btn btn-danger btn-lg" onclick="toggleAttendance()"/> -->
 
                                 <!-- Click here to sign out
@@ -24,10 +26,12 @@
                         </t>
                         <t t-else="">
                             <!-- If not checked in, show Check-In button -->
-                            <button type="button" class="btn btn-primary btn-lg"
+                            <button type="button" class="btn btn-primary btn-lg" t-att-onclick="'toggleAttendance()'"/>
+
+                            <!-- <button type="button" class="btn btn-primary btn-lg"
                                     t-att-onclick="`toggleAttendance()`">
                                 Click here to sign in
-                            </button>
+                            </button> -->
                         </t>
                     </div>
                 </div>
