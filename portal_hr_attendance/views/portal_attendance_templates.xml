@@ -17,7 +17,7 @@
                             <!-- <button type="button" class="btn btn-danger btn-lg"
                                     t-att-onclick="`toggleAttendance()`"> -->
                             <button type="button" class="btn btn-danger btn-lg" t-att-onclick="'toggleAttendance()'"/>
-                            <button type="button" class="btn btn-primary btn-lg" t-att-onclick="'toggleAttendance()'"/>
+                            <!-- <button type="button" class="btn btn-primary btn-lg" t-att-onclick="'toggleAttendance()'"/> -->
 
                             <!-- <button type="button" class="btn btn-danger btn-lg" onclick="toggleAttendance()"/> -->
 
