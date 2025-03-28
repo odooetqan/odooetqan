@@ -37,6 +37,13 @@ class PortalApproval(http.Controller):
         description = post.get('description')
         date_from = post.get('date_from') or False
         date_to = post.get('date_to') or False
+
+        # Convert the ISO datetime (with "T") to Odoo's expected format by replacing "T" with a space.
+        if date_from:
+            date_from = date_from.replace('T', ' ')
+        if date_to:
+            date_to = date_to.replace('T', ' ')
+
         amount = float(post.get('amount', 0.0)) if post.get('amount') else 0.0
         document = post.get('document')
 
