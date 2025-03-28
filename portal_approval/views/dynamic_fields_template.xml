@@ -18,7 +18,8 @@
                     <input type="file" name="document" class="form-control"/>
                 </div>
             <!-- </t> -->
-            <t t-if="has_amount == 'required'">
+            <t t-if="has_amount_bool">
+            
                 <div class="form-group mb-3">
                     <label for="amount" class="form-label">المبلغ</label>
                     <input type="number" name="amount" class="form-control"/>
