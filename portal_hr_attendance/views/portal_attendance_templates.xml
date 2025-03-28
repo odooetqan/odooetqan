@@ -28,41 +28,16 @@
                     </div>
                 </div>
                 
-                <!-- We'll add a small JS snippet to handle the /my/attendance/toggle call -->
-                <script type="text/javascript">
-                    function toggleAttendance() {
-                        // We use the /my/attendance/toggle JSON route
-                        // (Remember you need to have <script src="/web/assets/..."></script> or
-                        //  to rely on Odoo’s web.assets_frontend so you can do an AJAX call.)
-                        // For a minimal example, we can do fetch or jQuery.
-                        
-                        fetch("/my/attendance/toggle", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify({})
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if(data.success) {
-                                alert(data.message);
-                                // Reload the page to reflect new status
-                                window.location.reload();
-                            } else {
-                                alert(data.message || "Error toggling attendance");
-                            }
-                        })
-                        .catch(err => {
-                            console.error(err);
-                            alert("An error occurred. See console for details.");
-                        });
-                    }
-                </script>
             </t>
         </template>
 
         
+        <template id="assets_frontend_attendance_toggle" inherit_id="web.assets_frontend" name="Attendance Toggle JS">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/portal_hr_attendance/static/src/js/attendance_toggle.js"></script>
+            </xpath>
+        </template>
+
         <template id="portal_my_home_attendance" inherit_id="portal.portal_my_home" priority="10">
         <xpath expr="//div[@id='portal_client_category']" position="inside">
             <div class="o_portal_index_card col-md-6">
