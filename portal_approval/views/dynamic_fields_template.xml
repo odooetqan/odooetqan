@@ -2,7 +2,7 @@
 <odoo>
     <data>
         <template id="dynamic_fields_template">
-            <!-- <t t-if="has_date"> -->
+            <!-- <t t-if="has_date_bool"> -->
                 <div class="form-group mb-3">
                     <label for="date_from" class="form-label">من</label>
                     <input type="datetime-local" name="date_from" class="form-control"/>
@@ -12,7 +12,7 @@
                     <input type="datetime-local" name="date_to" class="form-control"/>
                 </div>
             <!-- </t> -->
-            <!-- <t t-if="has_document"> -->
+            <!-- <t t-if="has_document_bool"> -->
                 <div class="form-group mb-3">
                     <label for="document" class="form-label">المستند</label>
                     <input type="file" name="document" class="form-control"/>

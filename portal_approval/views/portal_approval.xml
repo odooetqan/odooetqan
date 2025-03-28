@@ -117,12 +117,7 @@
                 <!-- Include dynamic fields template here -->
                 <t t-call="portal_approval.dynamic_fields_template"/>
 
-            <t t-if="has_amount_bool">
-                <div class="form-group mb-3">
-                    <label for="amount" class="form-label">المبلغ</label>
-                    <input type="number" name="amount" class="form-control"/>
-                </div>
-            </t>
+
                 <div class="form-group mb-3">
                     <label for="amount" class="form-label">المبلغ</label>
                     <input type="number" name="amount" class="form-control"/>
