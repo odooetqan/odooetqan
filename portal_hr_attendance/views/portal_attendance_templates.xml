@@ -42,7 +42,7 @@
         <template id="portal_my_home_attendance" inherit_id="portal.portal_my_home" priority="10">
         <xpath expr="//div[@id='portal_client_category']" position="inside">
             <div class="o_portal_index_card col-md-6">
-            <a href="/my/attendance" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between">
+            <a href="/my/attendance_check" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between">
                 <img width="64px" src="/portal_hr_attendance/static/img/attendance_icon.svg" />
                 <span>Check In / Check Out</span>
             </a>
