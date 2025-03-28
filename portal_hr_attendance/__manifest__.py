@@ -3,14 +3,19 @@
     'version': '1.0',
     'category': 'Human Resources',
     'summary': 'Portal page for employees to Check In/Check Out',
-    'auther': 'Srelkhatim',
-    'depends': ['base', 'hr_attendance', 'portal'],  # Make sure hr_attendance & portal are included
+    'author': 'Sirelkhatim',
+    'depends': [
+        'base',
+        'hr_attendance',  # Attendance module
+        'portal',  # Portal module to access the user portal
+        'website',  # Required for frontend assets and views
+    ],
     'data': [
-        'views/portal_attendance_templates.xml',  # We'll define the QWeb templates here
+        'views/portal_attendance_templates.xml',  # QWeb Templates for the portal
     ],
     'assets': {
-        'web.assets_frontend': [
-            'portal_hr_attendance/static/src/js/attendance_toggle.js',
+        'web.assets_frontend': [  # For assets used in frontend pages
+            '/portal_hr_attendance/static/src/js/attendance_toggle.js',
         ],
     },
     'installable': True,
