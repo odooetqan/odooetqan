@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- 1) Portal My Attendance Page -->
+        <template id="portal_my_attendance" name="Portal My Attendance">
+            <t t-call="portal.portal_layout">
+                <div class="container mt-5 mb-5">
+                    <h2 class="text-center mb-4">Check In or Check Out</h2>
+                    
+                    <div class="text-center">
+                        <h3>Hi <t t-esc="employee_name"/>!</h3>
+                        <p>Today's hours: <t t-esc="total_hours" /> </p>
+                        
+                        <t t-if="is_checked_in">
+                            <!-- If currently checked in, show Check-Out button -->
+                            <button type="button" class="btn btn-danger btn-lg"
+                                    t-att-onclick="`toggleAttendance()`">
+                                Click here to sign out
+                            </button>
+                        <t t-else="">
+                            <!-- If not checked in, show Check-In button -->
+                            <button type="button" class="btn btn-primary btn-lg"
+                                    t-att-onclick="`toggleAttendance()`">
+                                Click here to sign in
+                            </button>
+                        </t>
+                    </div>
+                </div>
+                
+                <!-- We'll add a small JS snippet to handle the /my/attendance/toggle call -->
+                <script type="text/javascript">
+                    function toggleAttendance() {
+                        // We use the /my/attendance/toggle JSON route
+                        // (Remember you need to have <script src="/web/assets/..."></script> or
+                        //  to rely on Odoo’s web.assets_frontend so you can do an AJAX call.)
+                        // For a minimal example, we can do fetch or jQuery.
+                        
+                        fetch("/my/attendance/toggle", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({})
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if(data.success) {
+                                alert(data.message);
+                                // Reload the page to reflect new status
+                                window.location.reload();
+                            } else {
+                                alert(data.message || "Error toggling attendance");
+                            }
+                        })
+                        .catch(err => {
+                            console.error(err);
+                            alert("An error occurred. See console for details.");
+                        });
+                    }
+                </script>
+            </t>
+        </template>
+
+        
+        <template id="portal_my_home_attendance" inherit_id="portal.portal_my_home" priority="10">
+        <xpath expr="//div[@id='portal_client_category']" position="inside">
+            <div class="o_portal_index_card col-md-6">
+            <a href="/my/attendance" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between">
+                <img width="64px" src="/portal_hr_attendance/static/img/attendance_icon.svg" />
+                <span>Check In / Check Out</span>
+            </a>
+            </div>
+        </xpath>
+        </template>
+
+    </data>
+</odoo>
