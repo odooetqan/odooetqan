@@ -18,7 +18,7 @@
                                     t-att-onclick="`toggleAttendance()`"> -->
                             <button type="button" class="btn btn-danger btn-lg" t-att-onclick="'toggleAttendance()'">
                                 <h1> 
-                                    Log IN
+                                    Click here to sign out
                                 </h1>
                             </button>
                             <!-- <button type="button" class="btn btn-primary btn-lg" t-att-onclick="'toggleAttendance()'"/> -->
@@ -31,7 +31,7 @@
                         <t t-else="">
                             <!-- If not checked in, show Check-In button -->
                             <button type="button" class="btn btn-primary btn-lg" t-att-onclick="'toggleAttendance()'">
-                                <h1>Log Out</h1>
+                                <h1>Click here to sign in</h1>
                             </button>
 
                             <!-- <button type="button" class="btn btn-primary btn-lg"
