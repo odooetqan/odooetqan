@@ -27,6 +27,10 @@ class PortalAttendanceController(http.Controller):
         is_checked_in = False
         if last_attendance and not last_attendance.check_out:
             is_checked_in = True
+            is_checked_out = False
+        else:
+            is_checked_out= True
+            is_checked_in = False
 
         # Calculate "Today's hours" (optional). You might sum attendances for today:
         # This is just a simple example:
@@ -41,6 +45,7 @@ class PortalAttendanceController(http.Controller):
         values = {
             'employee_name': employee.name,
             'is_checked_in': is_checked_in,
+            'is_checked_out': is_checked_out,
             'total_hours': total_hours,
         }
         return request.render('portal_hr_attendance.portal_my_attendance_check', values)
