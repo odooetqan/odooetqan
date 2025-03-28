@@ -14,10 +14,13 @@
                         
                         <t t-if="is_checked_in">
                             <!-- If currently checked in, show Check-Out button -->
-                            <button type="button" class="btn btn-danger btn-lg"
-                                    t-att-onclick="`toggleAttendance()`">
-                                Click here to sign out
-                            </button>
+                            <!-- <button type="button" class="btn btn-danger btn-lg"
+                                    t-att-onclick="`toggleAttendance()`"> -->
+                            <button type="button" class="btn btn-danger btn-lg" t-att-onclick="'toggleAttendance()'"/>
+                            <!-- <button type="button" class="btn btn-danger btn-lg" onclick="toggleAttendance()"/> -->
+
+                                <!-- Click here to sign out
+                            </button> -->
                         </t>
                         <t t-else="">
                             <!-- If not checked in, show Check-In button -->
