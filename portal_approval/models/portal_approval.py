@@ -61,14 +61,25 @@ class PortalApprovalRequest(models.Model):
     @api.depends('category_id.has_date')
     def _compute_has_date(self):
         for rec in self:
-            rec.has_date_bool = rec.category_id.has_date == 'required'
+            if rec.category_id.has_date == 'required':
+                rec.has_date_bool = True
+            else:
+                rec.has_date_bool = False
+
 
     @api.depends('category_id.has_document')
     def _compute_has_document(self):
         for rec in self:
-            rec.has_document_bool = rec.category_id.has_document == 'required'
+            if rec.category_id.has_document == 'required':
+                rec.has_document_bool = True
+            else:
+                rec.has_document_bool = False
+
 
     @api.depends('category_id.has_amount')
     def _compute_has_amount(self):
         for rec in self:
-            rec.has_amount_bool = rec.category_id.has_amount == 'required'
+            if rec.category_id.has_amount == 'required':
+                rec.has_amount_bool = True
+            else:
+                rec.has_amount_bool = False
