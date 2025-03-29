@@ -3,3 +3,10 @@
     direction: ltr;  /* or rtl for right-to-left languages */
     text-orientation: mixed;
 }
+
+.btn.btn-danger.btn-lg.btn-attendance-toggle {
+    width: 250px;
+    height: 250px;
+}
+
+
