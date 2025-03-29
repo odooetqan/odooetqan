@@ -20,7 +20,7 @@
               <h5>طلبات المواردالبشرية</h5>
               
                <span class="badge text-bg-secondary rounded-pill">
-               <i class="fa fa-sign-in"></i>
+               <!--<i class="fa fa-sign-in"></i>-->
                </span>
 
               <p>اطلب وتابع طلبات المواردالبشرية هنا</p>
