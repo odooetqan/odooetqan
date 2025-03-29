@@ -48,7 +48,8 @@
                                 <i class="fa fa-sign-in fa-3x" aria-hidden="true"></i>
                             </button>
                         </t>
-                        <t t-if="is_checked_out">
+                        <!-- <t t-if="is_checked_out"> -->
+                        <t t-else="">
                             <button type="button" class="btn btn-success btn-lg btn-attendance-toggle">
                                 دخول
                                 <i class="fa fa-sign-in fa-3x" aria-hidden="true"></i>
