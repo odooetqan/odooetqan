@@ -1,34 +1,29 @@
-/** @odoo-module **/
+odoo.define('portal_hr_attendance.attendance_toggle', function (require) {
+    "use strict";
 
-import publicWidget from 'web.public.widget';
-import ajax from 'web.ajax';
+    var PublicWidget = require('web.public.widget');  // Access web.public.widget
+    var ajax = require('web.ajax'); // Access web.ajax
 
-const AttendanceToggle = publicWidget.Widget.extend({
-    selector: '.btn-attendance-toggle',
-    events: {
-        'click': '_onToggleAttendance',
-    },
-    _onToggleAttendance(ev) {
-        ev.preventDefault();
-        fetch("/my/attendance/toggle", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({}),
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert(data.message);
-                window.location.reload();
-            } else {
-                alert(data.message || "Error toggling attendance");
-            }
-        })
-        .catch(err => {
-            console.error(err);
-            alert("An error occurred. Check the console for details.");
-        });
-    },
+    var AttendanceToggle = PublicWidget.Widget.extend({ // Use PublicWidget.Widget
+        selector: '.o_portal_attendance',
+        events: {
+            'click .o_portal_attendance_button': '_onClickAttendance',
+        },
+
+        _onClickAttendance: function (ev) {
+            var self = this;
+            ajax.jsonRpc('/my/attendance/check', 'call', {}).then(function (data) { // Use ajax
+                if (data.error) {
+                    // Handle error
+                } else {
+                    // Update the page
+                    window.location.reload();
+                }
+            });
+        },
+    });
+
+    PublicWidget.registry.AttendanceToggle = AttendanceToggle; // Register the widget
+
+    return AttendanceToggle;
 });
-
-publicWidget.registry.AttendanceToggle = AttendanceToggle;

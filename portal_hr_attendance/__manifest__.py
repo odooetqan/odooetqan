@@ -6,22 +6,14 @@
     'author': 'Sirelkhatim',
     'depends': [
         'base',
-        'hr_attendance',  # Attendance module
-        'portal',  # Portal module to access the user portal
-        'website',  # Required for frontend assets and views
-        'web',  # ✅ Add this to ensure JS dependencies
-
+        'hr_attendance',
+        'portal',
+        'website',
+        'web',  # Keep this!
     ],
     'data': [
-        'views/portal_attendance_templates.xml',  # QWeb Templates for the portal
+        'views/portal_attendance_templates.xml',
     ],
-    # 'assets': {
-    #     'web.assets_frontend': [
-    #         '/portal_hr_attendance/static/src/js/attendance_toggle.js',
-    #     ],
-    # },
-
-
     'assets': {
         'web.assets_frontend': [
             'portal_hr_attendance/static/src/js/attendance_toggle.js',
@@ -31,9 +23,6 @@
             'portal_hr_attendance/static/src/xml/portal_hr_attendance_templates.xml',
         ],
     },
-
-
-
     'installable': True,
     'application': False,
 }
