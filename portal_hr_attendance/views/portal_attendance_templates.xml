@@ -15,12 +15,16 @@
                             <button  width="250px" height="250px"  type="button" class="btn btn-danger btn-lg btn-attendance-toggle">
                                 Click here to sign out
                                 <i width="250px" height="250px" id="sign-in" class="fa fa-sign-in" aria-hidden="true"></i>
+                                <i class="fa fa-sign-in fa-3x"></i>
+
                             </button>
                         </t>
                         <t t-if="is_checked_out">
                             <button  width="250px" height="250px"  type="button" class="btn btn-success btn-lg btn-attendance-toggle">
                                 Click here to sign in
                                 <i width="250px" height="250px" id="sign-in" class="fa fa-sign-in" aria-hidden="true"></i>
+                                <i class="fa fa-sign-in fa-3x"></i>
+
                             </button>
                         </t>
 
