@@ -6,7 +6,9 @@
         
         <!-- Display Attendance Directly on Account Page -->
         <template id="portal_my_home_attendance_direct" inherit_id="portal.portal_my_home" priority="10">
-            <xpath expr="//div[contains(@class, 'col-md-4')]" position="inside">
+            <!-- <xpath expr="//div[contains(@class, 'col-md-4')]" position="inside"> -->
+            <xpath expr="//div[@class='d-none d-lg-flex justify-content-end col-lg-4']" position="inside">
+
                 <div class="container mt-4">
                     <h2 class="text-center mb-4">Check In or Check Out</h2>
                     <div class="text-center">
@@ -30,7 +32,7 @@
                 </div>
             </xpath>
         </template>
-        
+
         <!-- <template id="portal_my_home_attendance_direct" inherit_id="portal.portal_my_home" priority="10">
             <xpath expr="//div[@id='portal_client_category']" position="after">
                 <div class="container mt-5 mb-5">
