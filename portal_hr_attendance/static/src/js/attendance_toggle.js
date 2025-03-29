@@ -1,3 +1,8 @@
+
+/** @odoo-module **/
+// import publicWidget from 'web.public.widget';
+// import ajax from 'web.ajax';
+
 odoo.define('portal_hr_attendance.attendance_toggle', function (require) {
     "use strict";
 

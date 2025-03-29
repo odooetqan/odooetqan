@@ -10,14 +10,27 @@
                     <div class="text-center">
                         <h3>Hi <t t-esc="employee_name"/>!</h3>
                         <p>Today's hours: <t t-esc="total_hours"/></p>
+
                         <t t-if="is_checked_in">
-                            <!-- If currently checked in, show Check-Out button -->
+                            <button type="button" class="btn btn-danger btn-lg btn-attendance-toggle">
+                                Click here to sign out
+                                <i width="250px" height="250px" class="fa fa-sign-in" aria-hidden="true"></i>
+                            </button>
+                        </t>
+                        <t t-if="is_checked_out">
+                            <button type="button" class="btn btn-primary btn-lg btn-attendance-toggle">
+                                Click here to sign in
+                                <i width="250px" height="250px" class="fa fa-sign-in" aria-hidden="true"></i>
+                            </button>
+                        </t>
+
+
+                        <t t-if="is_checked_in">
                             <button type="button" class="btn btn-danger btn-lg" t-att-onclick="'toggleAttendance()'">
                                 <span>Click here to sign out</span>
                             </button>
                         </t>
                         <t t-if="is_checked_out">
-                            <!-- If not checked in, show Check-In button -->
                             <button type="button" class="btn btn-primary btn-lg" t-att-onclick="'toggleAttendance()'">
                                 <span>Click here to sign in</span>
                             </button>

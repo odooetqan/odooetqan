@@ -14,10 +14,11 @@
         'views/portal_attendance_templates.xml',  # QWeb Templates for the portal
     ],
     'assets': {
-        'web.assets_frontend': [  # For assets used in frontend pages
+        'web.assets_frontend': [
             '/portal_hr_attendance/static/src/js/attendance_toggle.js',
         ],
     },
+
     'installable': True,
     'application': False,
 }
