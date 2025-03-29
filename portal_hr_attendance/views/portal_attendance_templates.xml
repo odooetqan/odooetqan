@@ -3,7 +3,35 @@
     <data>
 
         <!-- 1) Portal My Attendance Page -->
+        
+        <!-- Display Attendance Directly on Account Page -->
         <template id="portal_my_home_attendance_direct" inherit_id="portal.portal_my_home" priority="10">
+            <xpath expr="//div[contains(@class, 'col-md-4')]" position="inside">
+                <div class="container mt-4">
+                    <h2 class="text-center mb-4">Check In or Check Out</h2>
+                    <div class="text-center">
+                        <h3>Hi <t t-esc="employee_name"/>!</h3>
+                        <p>Today's hours: <t t-esc="total_hours"/></p>
+
+                        <!-- Check In/Out Button Logic -->
+                        <t t-if="is_checked_in">
+                            <button type="button" class="btn btn-danger btn-lg btn-attendance-toggle" style="width: 150px; height: 150px;">
+                                خروج
+                                <i class="fa fa-sign-in fa-3x" aria-hidden="true"></i>
+                            </button>
+                        </t>
+                        <t t-if="is_checked_out">
+                            <button type="button" class="btn btn-success btn-lg btn-attendance-toggle" style="width: 150px; height: 150px;">
+                                دخول
+                                <i class="fa fa-sign-in fa-3x" aria-hidden="true"></i>
+                            </button>
+                        </t>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+        
+        <!-- <template id="portal_my_home_attendance_direct" inherit_id="portal.portal_my_home" priority="10">
             <xpath expr="//div[@id='portal_client_category']" position="after">
                 <div class="container mt-5 mb-5">
                     <h2 class="text-center mb-4">Check In or Check Out</h2>
@@ -26,7 +54,7 @@
                     </div>
                 </div>
             </xpath>
-        </template>
+        </template> -->
 
         <!-- <template id="portal_my_attendance_check" name="Portal My Attendance">
             <t t-call="portal.portal_layout">
