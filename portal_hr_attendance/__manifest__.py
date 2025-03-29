@@ -9,6 +9,8 @@
         'hr_attendance',  # Attendance module
         'portal',  # Portal module to access the user portal
         'website',  # Required for frontend assets and views
+        'web',  # ✅ Add this to ensure JS dependencies
+
     ],
     'data': [
         'views/portal_attendance_templates.xml',  # QWeb Templates for the portal
