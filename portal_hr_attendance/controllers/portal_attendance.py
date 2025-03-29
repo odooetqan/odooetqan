@@ -4,7 +4,8 @@ import pytz
 import json
 
 class PortalAttendanceController(http.Controller):
-    @http.route(['/my/attendance_check'], type='http', auth='user', website=True)
+    # @http.route(['/my/attendance_check'], type='http', auth='user', website=True)
+    @http.route(['/my/home'], type='http', auth='user', website=True)
     def portal_my_attendance_check(self, **kwargs):
         """
         Display an attendance page with a "Check In" or "Check Out" button
