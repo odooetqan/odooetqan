@@ -5,6 +5,7 @@ import json
 
 class PortalAttendanceControllerHome(http.Controller):
     # @http.route(['/my/attendance_check'], type='http', auth='user', website=True)
+    
     @http.route(['/my/home'], type='http', auth='user', website=True)
     def portal_my_attendance_check_home(self, **kwargs):
         """
@@ -14,6 +15,7 @@ class PortalAttendanceControllerHome(http.Controller):
         user = request.env.user
         # Find the employee record linked to this portal user
         employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
+
 
         if not employee:
             # If there's no employee, redirect or show an error
