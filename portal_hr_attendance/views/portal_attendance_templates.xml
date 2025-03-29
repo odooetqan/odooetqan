@@ -25,7 +25,7 @@
                         </t>
 
 
-                        <t t-if="is_checked_in">
+                        <!-- <t t-if="is_checked_in">
                             <button type="button" class="btn btn-danger btn-lg" t-att-onclick="'toggleAttendance()'">
                                 <span>Click here to sign out</span>
                             </button>
@@ -34,7 +34,7 @@
                             <button type="button" class="btn btn-primary btn-lg" t-att-onclick="'toggleAttendance()'">
                                 <span>Click here to sign in</span>
                             </button>
-                        </t>
+                        </t> -->
                     </div>
                 </div>
             </t>
