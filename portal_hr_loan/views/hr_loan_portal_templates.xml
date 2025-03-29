@@ -11,7 +11,7 @@
                <img width="100px" src="/portal_hr_loan/static/description/loan.svg" loading="lazy"/>
                السلف
                <span class="badge text-bg-secondary rounded-pill">
-               <i class="fa fa-sign-in"></i>
+               <!--<i class="fa fa-sign-in"></i>-->
                </span>
                </a>
             </div>
@@ -91,7 +91,7 @@
                <img width="100px" src="/portal_hr_loan/static/description/salary.svg" loading="lazy"/>
                المرتبات
                <span class="badge text-bg-secondary rounded-pill">
-               <i class="fa fa-sign-in"></i>
+               <!--<i class="fa fa-sign-in"></i>-->
                </span>
                </a>
             </div>
