@@ -12,13 +12,13 @@
                         <p>Today's hours: <t t-esc="total_hours"/></p>
 
                         <t t-if="is_checked_in">
-                            <button type="button" class="btn btn-danger btn-lg btn-attendance-toggle">
+                            <button  width="250px" height="250px"  type="button" class="btn btn-danger btn-lg btn-attendance-toggle">
                                 Click here to sign out
                                 <i width="250px" height="250px" class="fa fa-sign-in" aria-hidden="true"></i>
                             </button>
                         </t>
                         <t t-if="is_checked_out">
-                            <button type="button" class="btn btn-primary btn-lg btn-attendance-toggle">
+                            <button  width="250px" height="250px"  type="button" class="btn btn-primary btn-lg btn-attendance-toggle">
                                 Click here to sign in
                                 <i width="250px" height="250px" class="fa fa-sign-in" aria-hidden="true"></i>
                             </button>
