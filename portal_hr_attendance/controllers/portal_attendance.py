@@ -3,10 +3,10 @@ from odoo.http import request
 import pytz
 import json
 
-class PortalAttendanceController(http.Controller):
+class PortalAttendanceControllerHome(http.Controller):
     # @http.route(['/my/attendance_check'], type='http', auth='user', website=True)
     @http.route(['/my/home'], type='http', auth='user', website=True)
-    def portal_my_attendance_check(self, **kwargs):
+    def portal_my_attendance_check_home(self, **kwargs):
         """
         Display an attendance page with a "Check In" or "Check Out" button
         depending on the employee's current status.
