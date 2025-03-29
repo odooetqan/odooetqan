@@ -18,7 +18,7 @@
                             </button>
                         </t>
                         <t t-if="is_checked_out">
-                            <button  width="250px" height="250px"  type="button" class="btn btn-primary btn-lg btn-attendance-toggle">
+                            <button  width="250px" height="250px"  type="button" class="btn btn-success btn-lg btn-attendance-toggle">
                                 Click here to sign in
                                 <i width="250px" height="250px" class="fa fa-sign-in" aria-hidden="true"></i>
                             </button>
