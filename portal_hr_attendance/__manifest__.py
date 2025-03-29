@@ -15,11 +15,24 @@
     'data': [
         'views/portal_attendance_templates.xml',  # QWeb Templates for the portal
     ],
+    # 'assets': {
+    #     'web.assets_frontend': [
+    #         '/portal_hr_attendance/static/src/js/attendance_toggle.js',
+    #     ],
+    # },
+
+
     'assets': {
         'web.assets_frontend': [
-            '/portal_hr_attendance/static/src/js/attendance_toggle.js',
+            'portal_hr_attendance/static/src/js/attendance_toggle.js',
+            'portal_hr_attendance/static/src/css/attendance_styles.css',
+        ],
+        'web.assets_qweb': [
+            'portal_hr_attendance/static/src/xml/portal_hr_attendance_templates.xml',
         ],
     },
+
+
 
     'installable': True,
     'application': False,
