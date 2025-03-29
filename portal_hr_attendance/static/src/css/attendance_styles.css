@@ -1,0 +1,5 @@
+:root {
+    writing-mode: horizontal-tb;
+    direction: ltr;  /* or rtl for right-to-left languages */
+    text-orientation: mixed;
+}
