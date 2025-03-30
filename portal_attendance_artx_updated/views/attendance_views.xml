@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
     <odoo>
         <data>
-            <template id="portal_my_home_sale" name="Show Quotations / Sales Orders" customize_show="True"
+            <!-- <template id="portal_my_home_sale" name="Show Quotations / Sales Orders" customize_show="True"
                     inherit_id="portal.portal_my_home" priority="20">
                     <div class="oe_structure" position="inside">
                         <div class="container">
@@ -11,12 +11,11 @@
                             </button>
                         </div>
                     </div>
-            </template>
+            </template> -->
 
-            <template id="portal_my_home_attendance" inherit_id="portal.portal_my_home" priority="9">
+            <!-- <template id="portal_my_home_attendance" inherit_id="portal.portal_my_home" priority="9">
                 <xpath expr="//div[@id='portal_client_category']" position="inside">
                     <div class="container text-center mt-3">
-                        <!-- Check In -->
                         <t t-if="not active_attendance">
                             <form action="/portal/add_attendance" method="post">
                                 <input type="hidden" name="check_in" value="1"/>
@@ -27,7 +26,6 @@
                             </form>
                         </t>
 
-                        <!-- Check Out -->
                         <t t-if="active_attendance">
                             <form action="/portal/add_attendance" method="post">
                                 <input type="hidden" name="check_out" value="1"/>
@@ -39,7 +37,7 @@
                         </t>
                     </div>
                 </xpath>
-            </template>
+            </template> -->
 
 
             <!-- Attendance Check-In/Check-Out JavaScript -->
