@@ -38,7 +38,7 @@ class PortalAttendance(http.Controller):
             'attendance_records': attendance_records,
             'active_attendance': active_attendance,
         }
-        return request.render('portal_attendance_artx_updates.portal_my_attendance', values)
+        return request.render('portal_attendance_artx_updated.portal_my_attendance', values)
     
     # @http.route('/portal/add_attendance', type='http', auth='user', methods=['POST'], csrf=False)
 
@@ -133,7 +133,7 @@ class PortalAttendance(http.Controller):
     #         ('check_out', '=', False)
     #     ], limit=1)
 
-    #     return request.render('portal_attendance_artx_updates.portal_my_attendance', {
+    #     return request.render('portal_attendance_artx_updated.portal_my_attendance', {
     #         'attendance_records': ...,  # your records
     #         'active_attendance': active_attendance
     #     })
@@ -180,7 +180,7 @@ class PortalAttendance(http.Controller):
     #         ('check_in', '<=', today)
     #     ])
 
-    #     return request.render('portal_attendance_artx_updates.portal_my_attendance', {
+    #     return request.render('portal_attendance_artx_updated.portal_my_attendance', {
     #         'attendance_records': attendance_records  # Pass ORM records
     #     })
 
@@ -203,7 +203,7 @@ class PortalAttendance(http.Controller):
     #         ('check_in', '<=', today)
     #     ])
 
-    #     return request.render('portal_attendance_artx_updates.portal_my_attendance', {
+    #     return request.render('portal_attendance_artx_updated.portal_my_attendance', {
     #         'attendance_records': attendance_records
     #     })
 
@@ -220,13 +220,13 @@ class PortalLeaves(http.Controller):
         values = {
             'leave_records': leave_records,
         }
-        return request.render('portal_attendance_artx_updates.portal_my_leaves', values)
+        return request.render('portal_attendance_artx_updated.portal_my_leaves', values)
     
     # @http.route(['/my/leave/new'], type='http', auth='user', website=True)
     # def portal_leave_form(self, **kwargs):
     #     # Fetch leave types from the database
     #     leave_types = request.env['hr.leave.type'].sudo().search([])
-    #     return request.render('portal_attendance_artx_updates.leave_form_template', {'leave_types': leave_types})
+    #     return request.render('portal_attendance_artx_updated.leave_form_template', {'leave_types': leave_types})
     
     @http.route(['/my/leave/submit'], type='http', auth='user', methods=['POST'], website=True)
     def portal_leave_submit(self, **post):
@@ -286,17 +286,17 @@ class PortalLeaves(http.Controller):
     @http.route(['/my/leave/new'], type='http', auth='user', website=True)
     def portal_leave_form(self, **kwargs):
         leave_types = request.env['hr.leave.type'].sudo().search([])
-        return request.render('portal_attendance_artx_updates.leave_form_template', {'leave_types': leave_types})
+        return request.render('portal_attendance_artx_updated.leave_form_template', {'leave_types': leave_types})
 
     # class PortalLeave(http.Controller):
     # @http.route(['/my/leave/new'], type='http', auth="user", website=True)
     # def portal_new_leave(self, **kw):
 
     #     leave_types = request.env['hr.leave.type'].sudo().search([])
-    #     return request.render('portal_attendance_artx_updates.portal_new_leave_form', {
+    #     return request.render('portal_attendance_artx_updated.portal_new_leave_form', {
     #         'leave_types': leave_types,
     #     })
-            # return request.render('portal_attendance_artx_updates.portal_new_leave_form', {})
+            # return request.render('portal_attendance_artx_updated.portal_new_leave_form', {})
 
 
 
@@ -414,7 +414,7 @@ class PortalLeaves(http.Controller):
     #     values = {
     #         'attendance_records': converted_attendance,
     #     }
-    #     return request.render('portal_attendance_artx_updates.portal_my_attendance', values)
+    #     return request.render('portal_attendance_artx_updated.portal_my_attendance', values)
 
 # class PortalAttendance(http.Controller):
 
@@ -461,7 +461,7 @@ class PortalLeaves(http.Controller):
 #         values = {
 #             'attendance_records': converted_attendance,
 #         }
-#         return request.render('portal_attendance_artx_updates.portal_my_attendance', values)
+#         return request.render('portal_attendance_artx_updated.portal_my_attendance', values)
 
 
 # class PortalAttendance(http.Controller):
@@ -507,7 +507,7 @@ class PortalLeaves(http.Controller):
 #         values = {
 #             'attendance_records': attendance_records,  # Pass ORM objects
 #         }
-#         return request.render('portal_attendance_artx_updates.portal_my_attendance', values)
+#         return request.render('portal_attendance_artx_updated.portal_my_attendance', values)
 
 
 # class PortalAttendance(http.Controller):
@@ -563,13 +563,13 @@ class PortalLeaves(http.Controller):
 #         values = {
 #             'attendance_records': attendance_records,  # Pass ORM objects instead of dicts
 #         }
-#         return request.render('portal_attendance_artx_updates.portal_my_attendance', values)
+#         return request.render('portal_attendance_artx_updated.portal_my_attendance', values)
 
         
 #        # values = {
 #        #     'attendance_records': converted_attendance,
 #       #  }
-#       #  return request.render('portal_attendance_artx_updates.portal_my_attendance', values)
+#       #  return request.render('portal_attendance_artx_updated.portal_my_attendance', values)
 # #_________________________________________________________________________________________________________________________________
 
 # class PortalAttendance(http.Controller):
@@ -602,7 +602,7 @@ class PortalLeaves(http.Controller):
 #         values = {
 #             'attendance_records': attendance_records,
 #         }
-#         return request.render('portal_attendance_artx_updates.portal_my_attendance', values)
+#         return request.render('portal_attendance_artx_updated.portal_my_attendance', values)
 
 # #________________________________________________________________________________________________________________________________
 
@@ -827,7 +827,7 @@ class PortalLeaves(http.Controller):
 #     #     values = {
 #     #         'correction_requests': correction_requests,
 #     #     }
-#     #     return request.render('portal_attendance_artx_updates.portal_my_attendance_correction', values)
+#     #     return request.render('portal_attendance_artx_updated.portal_my_attendance_correction', values)
 
 #     # @http.route(['/portal/request_attendance_correction'], type='http', auth="user", methods=['POST'], csrf=False)
 #     # def submit_attendance_correction(self, **kwargs):
@@ -904,7 +904,7 @@ class PortalLeaves(http.Controller):
 # #             'attendance_records': attendance_records,
 # #         }
 # #         # Adjust the template name to match your actual template
-# #         return request.render('portal_attendance_artx_updates.portal_my_attendance', values)
+# #         return request.render('portal_attendance_artx_updated.portal_my_attendance', values)
 
 # #---- TO addd tree attendance  portal gate#######################################################################################################################
 
@@ -917,7 +917,7 @@ class PortalLeaves(http.Controller):
 #     #     values = {
 #     #         'attendance_records': attendance_records,
 #     #     }
-#     #     return request.render('portal_attendance_artx_updates.portal_attendance_tree', values)
+#     #     return request.render('portal_attendance_artx_updated.portal_attendance_tree', values)
 # #---- TO addd tree attendance  portal gate
 # # from odoo import http
 # # from odoo.http import request
@@ -931,8 +931,8 @@ class PortalLeaves(http.Controller):
 #         values = {
 #             'attendance_records': attendance_records
 #         }
-#         # return request.render('portal_attendance_artx_updates_name.portal_my_attendance', values)
-#         return request.render('portal_attendance_artx_updates.portal_my_attendance', values)
+#         # return request.render('portal_attendance_artx_updated_name.portal_my_attendance', values)
+#         return request.render('portal_attendance_artx_updated.portal_my_attendance', values)
 
         
 # #---- TO addd tree attendance  portal gate 2222222222222222
@@ -1089,7 +1089,7 @@ class PortalLeaves(http.Controller):
 # class PortalLeave(http.Controller):
     # @http.route(['/my/leave/new'], type='http', auth="user", website=True)
     # def portal_new_leave(self, **kw):
-    #     return request.render('portal_attendance_artx_updates.portal_new_leave_form', {})
+    #     return request.render('portal_attendance_artx_updated.portal_new_leave_form', {})
 
  
 # class PortalLeave(http.Controller):
@@ -1300,7 +1300,7 @@ class PortalLeaves(http.Controller):
 #             'employee_name': employee.name,  # Add employee name for display
 #         }
         
-#         return request.render('portal_attendance_artx_updates.portal_my_attendance', values)
+#         return request.render('portal_attendance_artx_updated.portal_my_attendance', values)
 
 # class PortalAttendance(http.Controller):
 

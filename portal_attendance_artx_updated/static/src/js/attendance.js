@@ -1,4 +1,4 @@
-odoo.define('portal_attendance_artx_updates.attendance', function (require) {
+odoo.define('portal_attendance_artx_updated.attendance', function (require) {
     'use strict';
 
     var publicWidget = require('web.public.widget');
