@@ -1,0 +1,22 @@
+:root {
+    writing-mode: horizontal-tb;
+    direction: ltr;  /* or rtl for right-to-left languages */
+    text-orientation: mixed;
+}
+
+.btn.btn-danger.btn-lg.btn-attendance-toggle {
+    width: 150px;
+    height: 150px;
+}
+.btn.btn-success.btn-lg.btn-attendance-toggle {
+    width: 150px;
+    height: 150px;
+}
+.fa-sign-in{
+    width: 100px;
+    height: 100px;
+}
+.fa-sign-in {
+    font-size: 100px; /* Adjust the value as needed */
+}
+
