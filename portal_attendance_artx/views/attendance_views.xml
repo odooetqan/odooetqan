@@ -5,7 +5,9 @@
             <div class="oe_structure" position="inside">
                 <div class="container">
                     <button id="attendanceBtn" class="btn btn-success attendanceBtn">
-                        <i class="fa fa-sign-in" aria-hidden="true"></i>
+                        <!-- <i class="fa fa-sign-in" aria-hidden="true"></i> -->
+                        <i class="fa fa-sign-in fa-3x" aria-hidden="true"></i>
+
                         <span id="btnText">Click to Check In</span>
                     </button>
                 </div>
