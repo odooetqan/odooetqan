@@ -193,7 +193,7 @@
                 
                 <div class="o_portal_index_card col-md-6" >
                     <a href="/my/attendance" title="Leaves" class="d-flex justify-content-start gap-2 align-items-center py-3 px-3 rounded text-decoration-none text-reset text-bg-light text-bg-danger">
-                        <img width="100px" src="/portal_attendance_artx/static/src/images/attendance-icon.svg" loading="lazy"/>
+                        <img width="100px" src="/portal_attendance_artx_updates/static/src/images/attendance-icon.svg" loading="lazy"/>
                         الحضور
                         <span class="badge text-bg-secondary rounded-pill">
                         <!-- <i class="fa fa-sign-in"></i> -->
@@ -343,7 +343,7 @@
                 <div class="o_portal_index_card col-md-6" >
                     <a href="/my/leaves" title="Leaves" class="d-flex justify-content-start gap-2 align-items-center py-3 px-3 rounded text-decoration-none text-reset text-bg-light text-bg-danger">
                         <div class="o_portal_icon">
-                            <img width="100px" src="/portal_attendance_artx/static/src/images/sun-bath-svgrepo-com.svg" loading="lazy"/>
+                            <img width="100px" src="/portal_attendance_artx_updates/static/src/images/sun-bath-svgrepo-com.svg" loading="lazy"/>
                         </div>
                         <div>
                             <h5 class="mt-0 mb-1">طلبات الاجازة </h5>
