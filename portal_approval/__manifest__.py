@@ -10,22 +10,11 @@
         'views/dynamic_fields_template.xml',
         'security/security.xml',
     ],
-    # 'assets': {
-    #     'web.assets_frontend': [
-    #         'portal_approval/static/src/js/portal_approval.js',
-    #     ],
-    # },
     'assets': {
         'web.assets_frontend': [
             'portal_approval/static/src/js/portal_approval.js',
         ],
     },
-
-    # 'data': [
-    #     'security/ir.model.access.csv',
-    #     'security/hr_loan_security.xml',
-    #     'views/hr_loan_portal_templates.xml',
-    # ],
 }
 
 
