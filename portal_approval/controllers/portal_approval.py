@@ -22,13 +22,9 @@ class PortalApproval(http.Controller):
             'categories': categories,
         })
 
-    # @http.route(['/my/approval/submit'], type='http', auth='user', website=True, methods=['POST'])
-    # def portal_approval_submit(self, **post):
-    #     # Process the form data here
-    #     # Create a new approval request record, etc.
-    #     # Then redirect to success page:
-    #     return request.render('portal_approval.portal_approval_success')
-
+    @http.route(['/my/approval/get_fields'], type='json', auth='user', website=True)
+    def get_dynamic_fields_alias(self, category_id):
+        return self.get_dynamic_fields(category_id)
 
 # class PortalApproval(http.Controller):
     @http.route(['/my/approval/submit'], type='http', auth='user', website=True, csrf=True)

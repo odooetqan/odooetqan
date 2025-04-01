@@ -17,7 +17,8 @@ odoo.define('portal_attendance_artx.portal_approval', function (require) {
             }
 
             $.ajax({
-                url: '/my/approval/get_fields',
+                // url: '/my/approval/get_fields',
+                url: '/my/approval/get_dynamic_fields',
                 data: {category_id: categoryId},
                 success: function (data) {
                     $('#dynamic_fields').html(data);
