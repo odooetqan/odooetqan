@@ -30,7 +30,7 @@
             # 'web/static/src/js/core/ajax.js',
 
             # Your custom JS (correct path)
-            'portal_attendance_artx_updates/static/src/js/attendance.js',
+            'portal_attendance_artx_updated/static/src/js/attendance.js',
         ],
     },
 
