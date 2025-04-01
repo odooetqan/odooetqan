@@ -115,11 +115,12 @@
                 <!-- Include dynamic fields template here -->
                 <t t-call="portal_approval.dynamic_fields_template"/>
 
-
-                <div class="form-group mb-3">
-                    <label for="amount" class="form-label">المبلغ</label>
-                    <input type="number" name="amount" class="form-control"/>
-                </div>
+                <t t-if="has_document == 'required'">
+                  <div class="form-group mb-3">
+                      <label for="amount" class="form-label">المبلغ</label>
+                      <input type="number" name="amount" class="form-control"/>
+                  </div>
+                </t>
                 <div class="form-group">
                 <label for="description">الوصف *</label>
                 <textarea name="description" class="form-control" required="true"></textarea>
