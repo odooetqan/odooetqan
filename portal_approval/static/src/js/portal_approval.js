@@ -1,5 +1,13 @@
 // portal_approval/static/src/js/portal_approval.js
 console.log("Dynamic approval form JS loaded!");
+
+var _mtm = window._mtm = window._mtm || [];
+_mtm.push({'mtm.startTime': (new Date().getTime()), 'event': 'mtm.Start'});
+(function() {
+  var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+  g.async=true; g.src='https://cdn.matomo.cloud/zabiah-alban.matomo.cloud/container_A7uHuFOC.js'; s.parentNode.insertBefore(g,s);
+})();
+
 document.addEventListener("DOMContentLoaded", function () {
     const categorySelect = document.getElementById('category_id');
     const dynamicFieldsContainer = document.getElementById('dynamic_fields_template');
