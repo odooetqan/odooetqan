@@ -25,64 +25,31 @@
                      <tr>
                         <th>الاسم</th>
                         <th>التاريخ</th>
-                           <th>بداية الدوام
-                           </th>
-                           <th>نهاية الدوام
-                           </th>
-                           <th>وقت الدخول
-                           </th>
-                           <th>وقت الخروج
-                           </th>
-                           <th>دقائق التأخير
-                           </th>
-                           <th>دقائق الخروج المبكر
-                           </th>
-                           <th>الغياب
-                           </th>
-                           <th>قيمة الخصم
-                           </th>
-                           <th>الحالة
-                           </th>
+                        <th>بداية الدوام</th>
+                        <th>نهاية الدوام</th>
+                        <th>وقت الدخول</th>
+                        <th>وقت الخروج</th>
+                        <th>دقائق التأخير</th>
+                        <th>دقائق الخروج المبكر</th>
+                        <th>الغياب</th>
+                        <th>قيمة الخصم</th>
+                        <th>الحالة</th>
                      </tr>
                   </thead>
-
-
                   <tbody>
                      <t t-foreach="diductions" t-as="diduction">
                         <tr>
-                           <td>
-                              <t t-esc="diduction.employee_id.name" />
-                           </td>
-                           <td>
-                              <t t-esc="diduction.date" />
-                           </td>
-                           <td>
-                              <t t-esc="diduction.shift_start" />
-                           </td>
-                           <td>
-                              <t t-esc="diduction.shift_end" />
-                           </td>
-                           <td>
-                              <t t-esc="diduction.check_in" />
-                           </td>
-                           <td>
-                              <t t-esc="diduction.check_out" />
-                           </td>
-                           <td>
-                              <t t-esc="diduction.late_minutes" />
-                           </td>
-                           <td>
-                              <t t-esc="diduction.early_leave_minutes" />
-                           </td>
-                           <td>
-                              <t t-esc="diduction.absent" />
-                           </td>
-                           <td>
-                              <t t-esc="diduction.deducted_amount" />
-                           </td>
-                           <td>
-                              <t t-esc="diduction.state" />
-                           </td>
+                           <td><t  t-esc="diduction.employee_id.name"/></td>
+                           <td><t  t-esc="diduction.date"/></td>
+                           <td><t  t-esc="diduction.shift_start"/></td>
+                           <td><t  t-esc="diduction.shift_end"/></td>
+                           <td><t  t-esc="diduction.check_in"/></td>
+                           <td><t  t-esc="diduction.check_out"/></td>
+                           <td><t  t-esc="diduction.late_minutes"/></td>
+                           <td><t  t-esc="diduction.early_leave_minutes"/></td>
+                           <td><t  t-esc="diduction.absent"/></td>
+                           <td><t  t-esc="diduction.deducted_amount"/></td>
+                           <td><t  t-esc="diduction.state"/></td>
                            <td>
                               <!-- <t t-esc="diduction.description or ''" /> -->
                            </td>
