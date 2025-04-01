@@ -9,13 +9,13 @@
                 class="d-flex justify-content-start gap-2 align-items-center py-3 px-3 rounded text-decoration-none text-reset text-bg-light text-bg-danger">               
                <img width="50px" src="/portal_hr_diductions/static/description/icons/diduction.svg" loading="lazy"/>
                   <div>
-                     <h5>
+                     <h5 class="mt-0 mb-1">
                         الخصومات
                      </h5>
                      <span class="badge text-bg-secondary rounded-pill">
                      <!--<i class="fa fa-sign-in"></i>-->
                      </span>
-                     <p>
+                     <p class="m-0 text-600">
                         راجع الخصومات من هنا 
                      </p>
                   </div>
