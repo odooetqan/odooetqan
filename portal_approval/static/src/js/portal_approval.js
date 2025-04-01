@@ -1,34 +1,36 @@
-odoo.define('portal_approval.portal_approval', function (require) {
-    'use strict';
+console.log('Dynamic approval form JS loaded!');
 
-    const publicWidget = require('web.public.widget');
+document.addEventListener('DOMContentLoaded', function () {
+    const categorySelect = document.getElementById('category_id');
+    const dynamicFieldsContainer = document.getElementById('dynamic_fields');
 
-    publicWidget.registry.PortalApprovalForm = publicWidget.Widget.extend({
-        selector: '#category_id',
-        events: {
-            'change': '_onCategoryChange',
-        },
+    if (!categorySelect || !dynamicFieldsContainer) return;
 
-        _onCategoryChange: function (ev) {
-            const categoryId = $(ev.target).val();
-            if (!categoryId) {
-                $('#dynamic_fields').empty();
-                return;
-            }
+    categorySelect.addEventListener('change', async function () {
+        const categoryId = this.value;
+        if (!categoryId) {
+            dynamicFieldsContainer.innerHTML = '';
+            return;
+        }
 
-            $.ajax({
-                url: '/my/approval/get_dynamic_fields',
-                dataType: 'json',
-                data: { category_id: categoryId },
-                success: function (res) {
-                    if (res.success && res.html) {
-                        $('#dynamic_fields').html(res.html);
-                    }
+        try {
+            const response = await fetch('/my/approval/get_dynamic_fields', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                error: function (err) {
-                    console.error('Dynamic field load failed:', err);
-                }
+                body: new URLSearchParams({ category_id: categoryId })
             });
-        },
+
+            const result = await response.json();
+            if (result.success && result.html) {
+                dynamicFieldsContainer.innerHTML = result.html;
+            } else {
+                console.warn('No dynamic fields returned.');
+                dynamicFieldsContainer.innerHTML = '';
+            }
+        } catch (err) {
+            console.error('Failed to fetch dynamic fields:', err);
+        }
     });
 });
