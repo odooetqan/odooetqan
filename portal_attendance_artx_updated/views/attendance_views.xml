@@ -1,84 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
     <odoo>
         <data>
-            <!-- <template id="portal_my_home_sale" name="Show Quotations / Sales Orders" customize_show="True"
-                    inherit_id="portal.portal_my_home" priority="20">
-                    <div class="oe_structure" position="inside">
-                        <div class="container">
-                            <button id="attendanceBtn" class="btn btn-warning attendanceBtn">
-                                <i class="fa fa-sign-in" aria-hidden="true"></i>
-                                <span id="btnText">Click to Check In</span>
-                            </button>
-                        </div>
-                    </div>
-            </template> -->
-
-            <!-- <template id="portal_my_home_attendance" inherit_id="portal.portal_my_home" priority="9">
-                <xpath expr="//div[@id='portal_client_category']" position="inside">
-                    <div class="container text-center mt-3">
-                        <t t-if="not active_attendance">
-                            <form action="/portal/add_attendance" method="post">
-                                <input type="hidden" name="check_in" value="1"/>
-                                <button type="submit" class="btn btn-success">
-                                    <i class="fa fa-sign-in" aria-hidden="true"></i>
-                                    <span>سجل الدخول</span>
-                                </button>
-                            </form>
-                        </t>
-
-                        <t t-if="active_attendance">
-                            <form action="/portal/add_attendance" method="post">
-                                <input type="hidden" name="check_out" value="1"/>
-                                <button type="submit" class="btn btn-danger mt-2">
-                                    <i class="fa fa-sign-out" aria-hidden="true"></i>
-                                    <span>تسجيل الخروج</span>
-                                </button>
-                            </form>
-                        </t>
-                    </div>
-                </xpath>
-            </template> -->
-
-
-            <!-- Attendance Check-In/Check-Out JavaScript -->
-            <!-- <script type="text/javascript">
-                function handleAttendance() {
-                    fetch('/portal/add_attendance', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({})
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert('تم تسجيل الدخول بنجاح!');
-                            location.reload();
-                        } else {
-                            alert(data.message);
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
-                }
-
-                function handleCheckout() {
-                    fetch('/portal/check_out', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({})
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert('تم تسجيل الخروج بنجاح!');
-                            location.reload();
-                        } else {
-                            alert(data.message);
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
-                }
-            </script>
-         -->
 
         <record id="action_hr_employee_create_portal_user" model="ir.actions.server">
             <field name="name">Create Portal User</field>
@@ -196,6 +118,7 @@
                         <span class="badge text-bg-secondary rounded-pill">
                         <!-- <i class="fa fa-sign-in"></i> -->
                         </span>
+                        <span>تابع الحضور و الانصراف من هنا 
                     </a>
                 </div>
       

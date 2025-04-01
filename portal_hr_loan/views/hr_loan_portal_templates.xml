@@ -13,6 +13,8 @@
                <span class="badge text-bg-secondary rounded-pill">
                <!--<i class="fa fa-sign-in"></i>-->
                </span>
+               <span>طلبات السلف و متابعتها
+               </span>
                </a>
             </div>
          </xpath>
@@ -92,6 +94,8 @@
                المرتبات
                <span class="badge text-bg-secondary rounded-pill">
                <!--<i class="fa fa-sign-in"></i>-->
+               </span>
+               <span>متابعة المرتبات من هنا 
                </span>
                </a>
             </div>
