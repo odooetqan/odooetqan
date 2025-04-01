@@ -12,7 +12,7 @@
     'assets': {
         'web.assets_frontend':
         [
-            'portal_approval/static/src/js/portal_approval.esm.js',
+            'portal_approval/static/src/js/portal_approval.js',
             'portal_approval/static/src/css/style.css',
         ],
     },
