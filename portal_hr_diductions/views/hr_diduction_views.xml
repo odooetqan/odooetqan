@@ -7,7 +7,7 @@
             <div class="o_portal_index_card col-md-6">
                <a href="/my/diductions" title="Diduction"
                 class="d-flex justify-content-start gap-2 align-items-center py-3 px-3 rounded text-decoration-none text-reset text-bg-light text-bg-danger">               
-               <img width="100px" src="/portal_hr_loan/static/description/icons/diduction.svg" loading="lazy"/>
+               <img width="100px" src="/portal_hr_diductions/static/description/icons/diduction.svg" loading="lazy"/>
                الخصومات
                <span class="badge text-bg-secondary rounded-pill">
                <!--<i class="fa fa-sign-in"></i>-->
