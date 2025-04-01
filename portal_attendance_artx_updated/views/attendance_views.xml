@@ -111,7 +111,7 @@
         <template id="portal_my_home_attendance" inherit_id="portal.portal_my_home" priority="9">
             <xpath expr="//div[@id='portal_client_category']" position="inside">
                 
-                <div class="o_portal_index_card col-md-6 rounded-pill" >
+                <div class="o_portal_index_card col-md-4 rounded-3">
                     <a href="/my/attendance" title="Leaves" class="d-flex justify-content-start gap-2 align-items-center py-3 px-3 rounded text-decoration-none text-reset text-bg-light text-bg-danger">
                         <img width="50px" src="/portal_attendance_artx_updated/static/src/images/attendance-icon.svg" loading="lazy"/>
                         <h5 class="mt-0 mb-1">الحضور</h5>
@@ -262,7 +262,7 @@
         <!-- Add "Request Leave" Card to Portal -->
         <template id="portal_my_home_leaves" inherit_id="portal.portal_my_home" priority="10">
             <xpath expr="//div[@id='portal_client_category']" position="inside">
-                <div class="o_portal_index_card col-md-6  rounded-pill" >
+                <div class="o_portal_index_card col-md-4 rounded-3">
                     <a href="/my/leaves" title="Leaves" class="d-flex justify-content-start gap-2 align-items-center py-3 px-3 rounded text-decoration-none text-reset text-bg-light text-bg-danger">
                         <div class="o_portal_icon">
                             <img width="50px" src="/portal_attendance_artx_updated/static/src/images/sun-bath-svgrepo-com.svg" loading="lazy"/>
