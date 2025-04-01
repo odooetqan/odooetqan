@@ -1,3 +1,5 @@
+from odoo import models, fields, api
+
 class HRDiscountCorrection(models.Model):
     _name = 'hr.discount.correction'
     _description = 'Salary Deduction Correction Request'
