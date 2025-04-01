@@ -12,6 +12,9 @@ body {
     line-height: 1.6;
     padding: 20px;
 }
+.rounded-card {
+    border-radius: 15px;
+}
 
 /* Header Styles */
 .company-header {
