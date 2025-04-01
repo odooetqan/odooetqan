@@ -5,7 +5,7 @@
     <!-- 1. Approval Portal Home Card -->
     <template id="portal_approval_home" inherit_id="portal.portal_my_home" priority="10">
       <xpath expr="//div[@id='portal_client_category']" position="inside">
-        <div class="o_portal_index_card col-md-6">
+        <div class="o_portal_index_card col-md-4">
           <!-- <a href="/my/approval" class="d-flex align-items-center justify-content-between text-reset text-decoration-none"> -->
           
                <a href="/my/approval" title="Approval"
