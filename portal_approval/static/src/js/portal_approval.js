@@ -2,7 +2,7 @@
 console.log("Dynamic approval form JS loaded!");
 document.addEventListener("DOMContentLoaded", function () {
     const categorySelect = document.getElementById('category_id');
-    const dynamicFieldsContainer = document.getElementById('dynamic_fields');
+    const dynamicFieldsContainer = document.getElementById('dynamic_fields_template');
 
     if (!categorySelect || !dynamicFieldsContainer) return;
 
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         try {
-            const response = await fetch('/my/approval/get_dynamic_fields', {
+            const response = await fetch('/my/approval/get_dynamic_fields_template', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //     document.addEventListener('DOMContentLoaded', function () {
 //         const categorySelect = document.getElementById('category_id');
-//         const dynamicFieldsContainer = document.getElementById('dynamic_fields');
+//         const dynamicFieldsContainer = document.getElementById('dynamic_fields_template');
 
 //         if (!categorySelect || !dynamicFieldsContainer) return;
 
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
 //             }
 
 //             try {
-//                 const response = await fetch('/my/approval/get_dynamic_fields', {
+//                 const response = await fetch('/my/approval/get_dynamic_fields_template', {
 //                     method: 'POST',
 //                     headers: {
 //                         'Content-Type': 'application/x-www-form-urlencoded'
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // // document.addEventListener('DOMContentLoaded', function () {
 // //     const categorySelect = document.getElementById('category_id');
-// //     const dynamicFieldsContainer = document.getElementById('dynamic_fields');
+// //     const dynamicFieldsContainer = document.getElementById('dynamic_fields_template');
 
 // //     if (!categorySelect || !dynamicFieldsContainer) return;
 
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // //         }
 
 // //         try {
-// //             const response = await fetch('/my/approval/get_dynamic_fields', {
+// //             const response = await fetch('/my/approval/get_dynamic_fields_template', {
 // //                 method: 'POST',
 // //                 headers: {
 // //                     'Content-Type': 'application/x-www-form-urlencoded'
