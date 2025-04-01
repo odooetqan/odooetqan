@@ -1,7 +1,7 @@
 from odoo import models, fields, api
 
-class HRDiscount(models.Model):
-    _name = 'hr.discount'
+class HRDiduction(models.Model):
+    _name = 'hr.diduction'
     _description = 'Salary Deduction for Attendance'
     _inherit = ['mail.thread', 'mail.activity.mixin']  # Enables chatter and approvals
 

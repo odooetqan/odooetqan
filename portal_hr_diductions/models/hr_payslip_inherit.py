@@ -30,7 +30,7 @@ class HrPayslip(models.Model):
 
                 absent = late_minutes > 120 or early_leave_minutes > 120  # Absent if more than 2 hours late
 
-                self.env['hr.discount'].create({
+                self.env['hr.diduction'].create({
                     'employee_id': payslip.employee_id.id,
                     'date': attendance.check_in.date(),
                     'shift_start': shift_start,

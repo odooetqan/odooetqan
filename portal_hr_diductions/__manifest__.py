@@ -32,8 +32,8 @@
     'depends': ['base_setup', 'hr_attendance','hr_payroll'],
 
     'data': [
-        'views/hr_discount_correction_views.xml',
-        'views/hr_discount_views.xml',
+        'views/hr_diduction_correction_views.xml',
+        'views/hr_diduction_views.xml',
         'views/hr_payslip_views.xml',
     ],
     'images': ['static/description/banner.png'],
