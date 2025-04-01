@@ -14,7 +14,7 @@
                   <span class="badge text-bg-secondary rounded-pill">
                   <!--<i class="fa fa-sign-in"></i>-->
                   </span>
-                  <p>طلبات السلف و متابعتها </p>
+                  <p class="m-0 text-600">طلبات السلف و متابعتها </p>
                </div>
                </a>
             </div>
@@ -97,8 +97,7 @@
                      <span class="badge text-bg-secondary rounded-pill">
                      <!--<i class="fa fa-sign-in"></i>-->
                      </span>
-                     <p>متابعة المرتبات من هنا 
-                     </p>
+                     <p class="m-0 text-600">متابعة المرتبات من هنا  </p>
                   </div>
                </a>
             </div>
