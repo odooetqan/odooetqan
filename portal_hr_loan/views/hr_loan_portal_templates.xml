@@ -9,11 +9,13 @@
                <!-- <a class="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
                   href="/my/loans" title="Loan"> -->
                <img width="50px" src="/portal_hr_loan/static/description/loan.svg" loading="lazy"/>
-               <h5 class="mt-0 mb-1">السلف</h5>
-               <span class="badge text-bg-secondary rounded-pill">
-               <!--<i class="fa fa-sign-in"></i>-->
-               </span>
-               <p>طلبات السلف و متابعتها </p>
+               <div>
+                  <h5 class="mt-0 mb-1">السلف</h5>
+                  <span class="badge text-bg-secondary rounded-pill">
+                  <!--<i class="fa fa-sign-in"></i>-->
+                  </span>
+                  <p>طلبات السلف و متابعتها </p>
+               </div>
                </a>
             </div>
          </xpath>
@@ -90,12 +92,14 @@
                <a href="/my/salaries" title="Salary"
                 class="d-flex justify-content-start gap-2 align-items-center py-3 px-3 rounded text-decoration-none text-reset text-bg-light text-bg-danger">               
                <img width="50px" src="/portal_hr_loan/static/description/salary.svg" loading="lazy"/>
-               <h5 class="mt-0 mb-1">المرتبات</h5>
-               <span class="badge text-bg-secondary rounded-pill">
-               <!--<i class="fa fa-sign-in"></i>-->
-               </span>
-               <p>متابعة المرتبات من هنا 
-               </p>
+                  <div>
+                     <h5 class="mt-0 mb-1">المرتبات</h5>
+                     <span class="badge text-bg-secondary rounded-pill">
+                     <!--<i class="fa fa-sign-in"></i>-->
+                     </span>
+                     <p>متابعة المرتبات من هنا 
+                     </p>
+                  </div>
                </a>
             </div>
          </xpath>
