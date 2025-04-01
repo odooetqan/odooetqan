@@ -115,9 +115,11 @@
                     <a href="/my/attendance" title="Leaves" class="d-flex justify-content-start gap-2 align-items-center py-3 px-3 rounded text-decoration-none text-reset text-bg-light text-bg-danger">
                         <img width="50px" src="/portal_attendance_artx_updated/static/src/images/attendance-icon.svg" loading="lazy"/>
                         <h5 class="mt-0 mb-1">الحضور</h5>
+                        <br></br>
                         <span class="badge text-bg-secondary rounded-pill">
                         <!-- <i class="fa fa-sign-in"></i> -->
                         </span>
+                        <br></br>
                         <p class="m-0 text-600">
                             تابع الحضور و الانصراف من هنا 
                         </p>
