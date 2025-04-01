@@ -3,7 +3,6 @@
     'version': '18.0.0.0.0',
     'category': 'Human Resources',
     'author': 'Sirelkhatim',
-    'depends': [],
     'depends': ['website', 'approvals', 'base', 'portal', 'hr'],
     'data': [
         'views/portal_approval.xml',
@@ -11,7 +10,8 @@
         'security/security.xml',
     ],
     'assets': {
-        'web.assets_frontend': [
+        'web.assets_frontend':
+        [
             'portal_approval/static/src/js/portal_approval.js',
         ],
     },
