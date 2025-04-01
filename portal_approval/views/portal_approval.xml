@@ -56,6 +56,7 @@
     </template>
 
     <template id="portal_approval_form" name="Approval Portal Form">
+        <t t-js="portal_approval.portal_approval"/>
         <t t-call="portal.portal_layout">
             <div class="container my-5">
             <h2 class="text-center">طلبات المواردالبشرية</h2>
