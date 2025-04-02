@@ -4,7 +4,7 @@
 
         <template id="dynamic_fields_template">
             <!-- <t t-if="req"> -->
-                <t t-if="req.has_date == 'required'">
+                <!-- <t t-if="req.has_date == 'required'"> -->
                     <div class="form-group mb-3">
                         <label for="date_from" class="form-label">من</label>
                         <input type="datetime-local" name="date_from" class="form-control"/>
@@ -13,7 +13,7 @@
                         <label for="date_to" class="form-label">إلى</label>
                         <input type="datetime-local" name="date_to" class="form-control"/>
                     </div>
-                </t>
+                <!-- </t> -->
                 <t t-if="req.has_document == 'required'">
                     <div class="form-group mb-3">
                         <label for="document" class="form-label">المستند</label>
