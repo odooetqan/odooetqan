@@ -34,8 +34,9 @@
     
 
     
-  <template id="custom_portal_sidebar_attendance" inherit_id="portal.portal_layout">
-    <xpath expr="//div[hasclass('mt-3') and hasclass('mw-100')]" position="inside">
+  <template id="custom_portal_sidebar_attendance" inherit_id="portal.portal_record_sidebar">
+    <!-- Insert before the "Edit Info" link -->
+    <xpath expr="//a[contains(@href, '/my/account')]" position="before">
       <div class="mt-3">
         <button id="attendanceBtn" class="btn btn-success w-100 attendanceBtn">
           <i class="fa fa-sign-in fa-lg me-2"></i>
@@ -47,6 +48,7 @@
       </div>
     </xpath>
   </template>
+
 
 
 
