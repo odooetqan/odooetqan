@@ -32,7 +32,8 @@
         </xpath>
     </template> -->
     <template id="custom_portal_sidebar_attendance" inherit_id="portal.portal_layout">
-    <xpath expr="//div[@class='mt-3 mw-100']/a[@href='/my/account']" position="before">
+    <!-- Target the "Edit Info" button and insert above it -->
+    <xpath expr="//a[@href='/my/account']" position="before">
         <div class="mt-3">
             <button id="attendanceBtn" class="btn btn-success w-100 attendanceBtn">
                 <i class="fa fa-sign-in fa-lg me-2"></i>
@@ -44,7 +45,6 @@
         </div>
     </xpath>
 </template>
-
 
         <record id="action_hr_employee_create_portal_user" model="ir.actions.server">
             <field name="name">Create Portal User</field>
