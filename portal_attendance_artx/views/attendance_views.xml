@@ -1,11 +1,13 @@
 <odoo>
     <data>
-        <template id="portal_my_home_sale" name="Show Quotations / Sales Orders" customize_show="True"
+
+
+        <!-- <i class="fa fa-sign-in" aria-hidden="true"></i> -->
+        <!-- <template id="portal_my_home_sale" name="Show Quotations / Sales Orders" customize_show="True"
                   inherit_id="portal.portal_my_home" priority="20">
             <div class="oe_structure" position="inside">
                 <div class="container">
                     <button id="attendanceBtn" class="btn btn-success attendanceBtn">
-                        <!-- <i class="fa fa-sign-in" aria-hidden="true"></i> -->
                         <i class="fa fa-sign-in fa-3x" aria-hidden="true"></i>
 
                         <span id="btnText">Click to Check In</span>
@@ -15,7 +17,22 @@
                     </p>
                 </div>
             </div>
-        </template>
+        </template> -->
+    <template id="portal_my_home_attendance" inherit_id="portal.portal_my_home" priority="50">
+        <xpath expr="//div[@class='mt-3 mw-100']" position="inside">
+            <div class="container my-4">
+                <button id="attendanceBtn" class="btn btn-success attendanceBtn mb-3">
+                    <i class="fa fa-sign-in fa-3x" aria-hidden="true"></i>
+                    <span id="btnText">Click to Check In</span>
+                </button>
+                <p>
+                    أقر أنا الموظف بتسجيل حضوري وانصرافي من مكتبي المخصص، وأن تسجيلي من خارج المكتب أو تسجيلي نيابة عن الغير يعد مخالفة وفق النظام الجزائي لجرائم التزوير حيث نصت المادة السادسة عشرة: "من زوّر في محرر معدّ لإثبات حضور الموظف إلى عمله أو انصرافه منه؛ يعاقب بالسجن مدة لا تتجاوز ثلاثة أشهر وبغرامة لا تزيد على ثلاثين ألف ريال، أو بإحدى هاتين العقوبتين."
+                </p>
+            </div>
+        </xpath>
+    </template>
+
+
         <record id="action_hr_employee_create_portal_user" model="ir.actions.server">
             <field name="name">Create Portal User</field>
             <field name="model_id" ref="hr.model_hr_employee"/>
