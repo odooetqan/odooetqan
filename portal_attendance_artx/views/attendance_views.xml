@@ -33,9 +33,9 @@
     </template> -->
     
 
+    
   <template id="custom_portal_sidebar_attendance" inherit_id="portal.portal_layout">
-    <!-- Safer: inject at the end of the left sidebar block -->
-    <xpath expr="//div[contains(@class, 'mt-3') and contains(@class, 'mw-100')]" position="inside">
+    <xpath expr="//div[hasclass('mt-3') and hasclass('mw-100')]" position="inside">
       <div class="mt-3">
         <button id="attendanceBtn" class="btn btn-success w-100 attendanceBtn">
           <i class="fa fa-sign-in fa-lg me-2"></i>
@@ -48,6 +48,13 @@
     </xpath>
   </template>
 
+
+
+
+
+
+
+  
         <record id="action_hr_employee_create_portal_user" model="ir.actions.server">
             <field name="name">Create Portal User</field>
             <field name="model_id" ref="hr.model_hr_employee"/>
