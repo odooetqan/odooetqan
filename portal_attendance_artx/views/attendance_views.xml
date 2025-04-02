@@ -31,19 +31,19 @@
             </div>
         </xpath>
     </template> -->
-    <template id="portal_my_home_attendance" inherit_id="portal.portal_my_home">
-        <xpath expr="//div[contains(@class, 'o_portal_my_details')]" position="after">
-            <div class="mt-3">
-                <button id="attendanceBtn" class="btn btn-success w-100 attendanceBtn">
-                    <i class="fa fa-sign-in fa-lg me-2"></i>
-                    <span id="btnText">تسجيل الحضور</span>
-                </button>
-                <small class="d-block text-muted mt-2">
-                    أقر أنا الموظف بتسجيل حضوري من مكتبي المخصص، وأتحمل المسؤولية في حال تم تسجيل الحضور من خارج المكتب.
-                </small>
-            </div>
-        </xpath>
-    </template>
+    <template id="custom_portal_sidebar_attendance" inherit_id="portal.portal_layout">
+    <xpath expr="//div[@class='mt-3 mw-100']/a[@href='/my/account']" position="before">
+        <div class="mt-3">
+            <button id="attendanceBtn" class="btn btn-success w-100 attendanceBtn">
+                <i class="fa fa-sign-in fa-lg me-2"></i>
+                <span id="btnText">تسجيل الحضور</span>
+            </button>
+            <small class="d-block text-muted mt-2">
+                أقر أنا الموظف بتسجيل حضوري من مكتبي المخصص، وأتحمل المسؤولية في حال تم تسجيل الحضور من خارج المكتب.
+            </small>
+        </div>
+    </xpath>
+</template>
 
 
         <record id="action_hr_employee_create_portal_user" model="ir.actions.server">
