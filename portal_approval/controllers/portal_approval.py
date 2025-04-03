@@ -1,5 +1,8 @@
 from odoo import http
 from odoo.http import request
+import base64
+from datetime import datetime
+
 
 
 # from odoo import http
@@ -35,16 +38,22 @@ class PortalApproval(http.Controller):
         reference = post.get('reference') or False
         date_from = post.get('date_from') or False
         date_to = post.get('date_to') or False
-
         # Convert the ISO datetime (with "T") to Odoo's expected format by replacing "T" with a space.
         if date_from:
             date_from = date_from.replace('T', ' ')
         if date_to:
             date_to = date_to.replace('T', ' ')
-
+        if date:
+            date = date.replace('T', ' ')
+            
         amount = float(post.get('amount', 0.0)) if post.get('amount') else 0.0
         document = post.get('document')
 
+        uploaded_file = post.get('document')
+        document = False
+        if uploaded_file:
+            document = base64.b64encode(uploaded_file.read()).decode('utf-8')
+    
         # إنشاء الطلب
         request.env['approval.request'].sudo().create({
             'category_id': category_id,
@@ -54,7 +63,7 @@ class PortalApproval(http.Controller):
             'date_from': date_from,
             'date_to': date_to,
             'amount': amount,
-            'document': document,
+            'document': document,  # <-- الآن أصبح بصيغة base64
             'request_owner_id': request.env.user.id,
         })
         return request.render('portal_approval.portal_approval_success')
