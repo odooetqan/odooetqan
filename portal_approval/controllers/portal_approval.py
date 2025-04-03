@@ -31,6 +31,8 @@ class PortalApproval(http.Controller):
     def submit_approval_request(self, **post):
         category_id = int(post.get('category_id', 0))
         description = post.get('description')
+        date = post.get('date') or False
+        reference = post.get('reference') or False
         date_from = post.get('date_from') or False
         date_to = post.get('date_to') or False
 
@@ -47,6 +49,8 @@ class PortalApproval(http.Controller):
         request.env['approval.request'].sudo().create({
             'category_id': category_id,
             'name': description,
+            'date': date,
+            'reference': reference,
             'date_from': date_from,
             'date_to': date_to,
             'amount': amount,
