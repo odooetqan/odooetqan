@@ -38,11 +38,11 @@
   <template id="custom_portal_home_attendance" inherit_id="portal.portal_my_home">
     <xpath expr="//div[contains(@class, 'o_portal_my_home')]//div[contains(@class, 'oe_structure')][1]" position="after">
 
-                <div class="container my-4 border rounded shadow-sm ">
+        <div class="container my-4 border rounded shadow-sm ">
 
       <!-- <div class="mt-4 mb-4 p-3 border rounded shadow-sm bg-light"> -->
         <button id="attendanceBtn" class="btn btn-success w-100 attendanceBtn">
-          <i class="fa fa-sign-in fa-lg me-2  fa-3x"></i>
+          <i class="fa fa-sign-in fa-3x"></i>
           <span id="btnText">تسجيل الحضور</span>
         </button>
         <small class="d-block text-muted mt-2">
