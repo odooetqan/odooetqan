@@ -9,13 +9,3 @@
         </record>
     </data>
 </odoo>
-
-
-
-<!-- access_hr_loan_portal,access_hr_loan_portal,model_hr_loan,base.group_portal,1,1,1,0
-access_hr_loan_line_portal,access_hr_loan_line_portal,model_hr_loan_line,base.group_portal,1,1,1,0
-access_hr_payroll_structure_portal,access_hr_payroll_structure_portal,model_hr_payroll_structure,base.group_portal,1,1,1,0
-access_hr_payslip_input_type_portal,access_hr_payslip_input_type_portal,model_hr_payslip_input_type,base.group_portal,1,1,1,0
-access_hr_payslip_input_portal,access_hr_payslip_input_portal,model_hr_payslip_input,base.group_portal,1,1,1,0
-access_hr_payslip_portal,access_hr_payslip_portal,model_hr_payslip,base.group_portal,1,1,1,0
-access_hr_salary_rule_portal,access_hr_salary_rule_portal,model_hr_salary_rule,base.group_portal,1,1,1,0 -->
