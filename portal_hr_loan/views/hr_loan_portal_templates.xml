@@ -103,6 +103,7 @@
             </div>
          </xpath>
       </template>
+
       <template id="portal_hr_salary_tree" name="Salaries tree">
          <t t-call="portal.portal_layout">
             <div class="container">
@@ -146,7 +147,7 @@
       <template id="portal_create_salary_form" name="Create Salary">
          <t t-call="portal.portal_layout">
             <div class="container">
-               <h3>إضافة راتب جديد</h3>
+               <h4>إضافة راتب جديد</h4>
                <form t-attf-action="/my/salaries/save" method="post">
                   <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                   <div class="form-group">
