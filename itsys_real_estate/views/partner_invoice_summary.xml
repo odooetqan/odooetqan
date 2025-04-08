@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="partner_invoice_summary_form_view" model="ir.ui.view">
+        <field name="name">partner.invoice.summary.form.view</field>
+        <field name="model">partner.invoice.summary</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="partner_id"/>
+                        <field name="total_amount"/>
+                    </group>
+                    <notebook>
+                        <page string="Invoices">
+                            <field name="invoice_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <!-- <field name="invoice_date"/> -->
+                                    <field name="amount_total"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="partner_invoice_summary_tree_view" model="ir.ui.view">
+        <field name="name">partner.invoice.summary.tree.view</field>
+        <field name="model">partner.invoice.summary</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="partner_id"/>
+                <field name="total_amount"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="partner_invoice_summary_action" model="ir.actions.act_window">
+        <field name="name">Partner Invoice Summary</field>
+        <field name="res_model">partner.invoice.summary</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Partner Invoice Summary
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="partner_invoice_summary_menu" name="Partner Invoice Summary"
+        parent="account.menu_finance_entries_management" action="partner_invoice_summary_action"/>
+</odoo>
+
+<!-- This will define form and [tree views](poe://www.poe.com/_api/key_phrase?phrase=tree%20views&prompt=Tell%20me%20more%20about%20tree%20views.) for the new model, an action, and a [menu item](poe://www.poe.com/_api/key_phrase?phrase=menu%20item&prompt=Tell%20me%20more%20about%20menu%20item.) under the Accounting app. -->

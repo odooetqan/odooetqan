@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <record id="inherit_view_employee_form" model="ir.ui.view">
+       <field name="name">view.emplyee.form.inherit.geolocation</field>
+       <field name="model">hr.employee</field>
+       <field name="inherit_id" ref="hr.view_employee_form"/>
+       <field name="arch" type="xml">
+            <xpath expr="//field[@name='address_id']" position="after">
+                <field name="active_location" groups="hr.group_hr_manager"/>
+                <label for="geolocation" string="Geo Location" modifiers="{'invisible': [('active_location','=',False)]}" groups="hr.group_hr_manager"/>
+                <div class="o_row" modifiers="{'invisible': [('active_location','=',False)]}" groups="hr.group_hr_manager">
+                    <field name="geolocation" nolabel="1" class="oe_inline" placeholder="Ex: 50.76557157123835, 4.616882043017905 "/>
+                    <button name="check_workplace" string="Check workplace" class="btn-primary" type="object" icon="fa-map-marker" groups="hr.group_hr_manager"/>
+                </div>
+                <field name="latitude" invisible="1"/>
+                <field name="longitude" invisible="1"/>
+           </xpath>
+       </field>
+   </record>
+
+</odoo>

@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_hr_attendance_correction_tree" model="ir.ui.view">
+        <field name="name">hr.attendance.correction.tree</field>
+        <field name="model">hr.attendance.correction</field>
+        <field name="type">tree</field> <!-- Ensure this line is correct -->
+        <field name="arch" type="xml">
+            <tree string="Attendance Correction Requests">
+                <field name="employee_id"/>
+                <field name="original_check_in"/>
+                <field name="original_check_out"/>
+                <field name="corrected_check_in"/>
+                <field name="corrected_check_out"/>
+                <field name="reason"/>
+                <field name="state"/>
+                <field name="create_uid" string="Requested By"/>
+                <field name="create_date" string="Request Date"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- ✅ Tree View -->
+    <!-- <record id="view_hr_attendance_correction_tree" model="ir.ui.view">
+        <field name="name">hr.attendance.correction.tree</field>
+        <field name="model">hr.attendance.correction</field>
+        <field name="type">tree</field>  <!- - ✅ Add this line - ->
+        <field name="arch" type="xml">
+            <tree string="Attendance Correction Requests">
+                <field name="employee_id"/>
+                <field name="original_check_in"/>
+                <field name="original_check_out"/>
+                <field name="corrected_check_in"/>
+                <field name="corrected_check_out"/>
+                <field name="reason"/>
+                <field name="state"/>
+                <field name="create_uid" string="Requested By"/>
+                <field name="create_date" string="Request Date"/>
+            </tree>
+        </field>
+    </record> -->
+
+    <!-- ✅ Form View -->
+    <record id="view_hr_attendance_correction_form" model="ir.ui.view">
+        <field name="name">hr.attendance.correction.form</field>
+        <field name="model">hr.attendance.correction</field>
+        <field name="arch" type="xml">
+            <form string="Attendance Correction Request">
+                <sheet>
+                    <header>
+                        <button name="action_submit" type="object" string="Submit" class="oe_highlight"/>
+<!--                                 attrs="{'invisible': [('state', '!=', 'draft')]}"/> -->
+                        <button name="action_approve" type="object" string="Approve" class="btn-primary"/>
+<!--                                 attrs="{'invisible': [('state', '!=', 'pending')]}"/> -->
+                        <button name="action_reject" type="object" string="Reject" class="btn-danger"/>
+<!--                                 attrs="{'invisible': [('state', '!=', 'pending')]}"/> -->
+                        <field name="state" widget="statusbar" readonly="1"/>
+                    </header>
+                    <group>
+                        <field name="employee_id"/>
+                        <field name="attendance_id"/>
+                        <field name="original_check_in"/>
+                        <field name="original_check_out"/>
+                        <field name="corrected_check_in"/>
+                        <field name="corrected_check_out"/>
+                        <field name="reason"/>
+                        <field name="state" readonly="1"/>
+                    </group>
+                    <!-- ✅ Add Chatter for better tracking -->
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ✅ Action to Show the View -->
+    <record id="action_hr_attendance_correction" model="ir.actions.act_window">
+        <field name="name">Attendance Correction Requests</field>
+        <field name="res_model">hr.attendance.correction</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ✅ Menu Item to Access the View -->
+    <menuitem id="menu_hr_attendance_correction" name="Attendance Correction Requests"
+        parent="hr_attendance.menu_hr_attendance_root"
+        action="action_hr_attendance_correction"/>
+<!-- 
+        <template id="leave_form_template" name="Leave Form">
+            <t t-call="portal.portal_layout">
+                <section class="leave-form-section py-4">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-primary text-white">
+                                        <h4 class="mb-0 text-center">طلب إجازة</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <form action="/my/leave/submit" method="POST" id="leaveRequestForm">
+                                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                                            <div class="mb-3">
+                                                <label for="leave_type" class="form-label fw-bold">نوع الإجازة</label>
+                                                <select id="leave_type" name="leave_type" class="form-select" required="true">
+                                                    <option value="" disabled="true" selected="true">اختر نوع الإجازة</option>
+                                                    <t t-foreach="leave_types" t-as="leave_type">
+                                                        <option t-att-value="leave_type.id">
+                                                            <t t-esc="leave_type.name"/>
+                                                        </option>
+                                                    </t>
+                                                </select>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="start_date" class="form-label fw-bold">تاريخ البدء</label>
+                                                <input type="date" id="start_date" name="start_date" class="form-control" required="true" />
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="end_date" class="form-label fw-bold">تاريخ الانتهاء</label>
+                                                <input type="date" id="end_date" name="end_date" class="form-control" required="true" />
+                                            </div>
+
+                                            <div id="error-message" class="text-danger fw-bold mb-3" style="display: none;"></div>
+
+                                            <div class="d-grid">
+                                                <button type="submit" class="btn btn-success">
+                                                    <span id="submit-text">إرسال الطلب</span>
+                                                    <span id="loading-spinner" class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true" style="display: none;"></span>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <script>
+                    document.getElementById('leaveRequestForm').addEventListener('submit', function(event) {
+                        var startDate = document.getElementById('start_date').value;
+                        var endDate = document.getElementById('end_date').value;
+                        var errorMessage = document.getElementById('error-message');
+
+                        if (startDate &amp;&amp; endDate &amp;&amp; new Date(startDate) > new Date(endDate)) {
+
+                            event.preventDefault();
+                            errorMessage.innerText = "يجب أن يكون تاريخ البدء قبل تاريخ الانتهاء.";
+                            errorMessage.style.display = "block";
+                            return;
+                        } else {
+                            errorMessage.style.display = "none";
+                        }
+
+                        document.getElementById('submit-text').innerText = "جارٍ الإرسال...";
+                        document.getElementById('loading-spinner').style.display = "inline-block";
+                    });
+                </script>
+            </t>
+        </template> -->
+
+
+<!--                         if (startDate && endDate && new Date(startDate) > new Date(endDate)) {  -->
+       
+       <!-- <template id="leave_form_template" name="Leave Form">
+            <t t-call="portal.portal_layout">
+                <section class="leave-form-section py-4">
+                    <div class="container">
+                        <h3>طلب إجازة</h3>
+                        <form action="/my/leave/submit" method="POST" id="leaveRequestForm">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="mb-3">
+                                <label for="leave_type" class="form-label">نوع الإجازة</label>
+                                <select id="leave_type" name="leave_type" class="form-select" required="true">
+                                    <t t-foreach="leave_types" t-as="leave_type">
+                                        <option t-att-value="leave_type.id">
+                                            <t t-esc="leave_type.name"/>
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="start_date" class="form-label">تاريخ البدء</label>
+                                <input type="date" id="start_date" name="start_date" class="form-control" required="true" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="end_date" class="form-label">تاريخ الانتهاء</label>
+                                <input type="date" id="end_date" name="end_date" class="form-control" required="true" />
+                            </div>
+                            <button type="submit" class="btn btn-success">إرسال الطلب</button>
+                        </form>
+                    </div>
+                </section>
+            </t>
+        </template> -->
+
+
+        <!-- <template id="leave_form_template" name="Leave Form">
+            <t t-call="portal.portal_layout">
+                <section class="leave-form-section py-4">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-primary text-white">
+                                        <h4 class="mb-0 text-center">طلب إجازة</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <form action="/my/leave/submit" method="POST" id="leaveRequestForm">
+                                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                                            <div class="mb-3">
+                                                <label for="leave_type" class="form-label fw-bold">نوع الإجازة</label>
+                                                <select id="leave_type" name="leave_type" class="form-select" >
+                                                    <option value="" disabled="true" selected="true">اختر نوع الإجازة</option>
+                                                    <t t-foreach="leave_types" t-as="leave_type">
+                                                        <option t-att-value="leave_type.id">
+                                                            <t t-esc="leave_type.name"/>
+                                                        </option>
+                                                    </t>
+                                                </select>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="start_date" class="form-label fw-bold">تاريخ البدء</label>
+                                                <input type="date" id="start_date" name="start_date" class="form-control" required="true" />
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="end_date" class="form-label fw-bold">تاريخ الانتهاء</label>
+                                                <input type="date" id="end_date" name="end_date" class="form-control" required="true" />
+                                            </div>
+
+                                            <div id="error-message" class="text-danger fw-bold mb-3" style="display: none;"></div>
+
+                                            <div class="d-grid">
+                                                <button type="submit" class="btn btn-success">
+                                                    <span id="submit-text">إرسال الطلب</span>
+                                                    <span id="loading-spinner" class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true" style="display: none;"></span>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+                <script>
+                    document.getElementById('leaveRequestForm').addEventListener('submit', function(event) {
+                        var startDate = document.getElementById('start_date').value;
+                        var endDate = document.getElementById('end_date').value;
+                        var errorMessage = document.getElementById('error-message');
+
+                        if (startDate &amp;&amp; endDate &amp;&amp; new Date(startDate) > new Date(endDate)) {
+
+                            event.preventDefault();
+                            errorMessage.innerText = "يجب أن يكون تاريخ البدء قبل تاريخ الانتهاء.";
+                            errorMessage.style.display = "block";
+                            return;
+                        } else {
+                            errorMessage.style.display = "none";
+                        }
+
+                        document.getElementById('submit-text').innerText = "جارٍ الإرسال...";
+                        document.getElementById('loading-spinner').style.display = "inline-block";
+                    });
+                </script>
+            </t>
+        </template> -->
+
+        <!-- <template id="leave_frm_template" name="Leave Form" inherit_id="website.layout"> -->
+                    <!-- <xpath expr="//main" position="after"> -->
+
+        <!-- <template id="leave_form_template" name="Leave Form" inherit_id="portal_my_home_leaves">
+            <xpath expr="//div[@id='portal_client_category']" position="inside">
+                <section class="leave-form-section">
+                    <div class="container"  type="hidden" >
+                        <h3>طلب اجازة</h3>
+                        <form action="/my/leave/submit" method="POST">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="mb-3">
+                                <label for="leave_type" class="form-label">نوع الاجازة</label>
+                                <select id="leave_type" name="leave_type" class="form-select">
+                                    <t t-foreach="leave_types" t-as="leave_type">
+                                        <option t-att-value="leave_type.id">
+                                            <t t-esc="leave_type.name"/>
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="start_date" class="form-label">تاريخ البدء</label>
+                                <input type="date" id="start_date" name="start_date" class="form-control" required="true" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="end_date" class="form-label">تاريخ الانتهاء</label>
+                                <input type="date" id="end_date" name="end_date" class="form-control"  required="true"  />
+                            </div>
+                            <button type="submit" class="btn btn-success">اطلب</button>
+                        </form>
+                    </div>
+                </section>
+            </xpath>
+        </template> -->
+                <!-- JavaScript for Validation -->
+                <!-- // if (startDate && endDate && new Date(startDate) > new Date(endDate)) {  -->
+                        <!-- // Validate date fields -->
+                        <!-- // Show loading spinner -->
+        <!-- Leaves -->
+</odoo>

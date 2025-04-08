@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<template id="report_rental_contract_document">
+			<t t-call="web.external_layout">
+				<div class="page">
+		            <link rel="stylesheet" href="/itsys_real_estate/static/src/css/report-style.css"/>
+		            <!-- <link rel="stylesheet" href="/itsys_real_estate/static/src/css/report-style.css"/> -->
+					<table class="report_table">
+						<tr>
+							<th align="center">
+								<!--Rental Contract--> إستلام وحدة  # <span style="color: white !important" t-field="o.building_unit.code"/>
+							</th>
+						</tr>
+					</table>
+					<br/>
+					<p style="text-decoration: underline;font-size: 16px;">المستلم : </p>
+					<!-- <p style="text-decoration: underline;font-size: 16px;">This Agreement is made by and between: </p> -->
+
+					<table class="gridtable">
+						<tr>
+							<th colspan="2">بيانات المستأجر:</th>
+						</tr>
+						<tr>
+							<td><span t-field="o.partner_id.name"/></td>
+							<td><span t-field="o.partner_id.id"/></td>
+						</tr>				
+					</table>
+					<table class="gridtable">
+						<tr>
+							<th colspan="2">بيانات المؤجر:</th>
+						</tr>
+						<tr>
+							<td><span t-field="o.partner_id.name"/></td>
+							<td><span t-field="o.partner_id.id"/></td>
+						</tr>				
+					</table>
+					<table class="gridtable">
+						<tr>
+							<th colspan="2">بيانات الوسيط العقارى (إن وجد):</th>
+						</tr>
+						<tr>
+							<td><span t-field="o.partner_id.name"/></td>
+							<td><span t-field="o.partner_id.id"/></td>
+						</tr>				
+					</table>
+					<table class="gridtable">
+						<tr>
+							<th colspan="2">حالة الوحدة عند الاستلام : </th>
+						</tr>
+							<tr></tr><tr><td><span t-field="o.property_owner_id"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.paints"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.grounds"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.pathrooms"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.kitchen"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.rooms"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.plumbing"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.water"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.doors"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.windows"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.air_conditions"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.intercome"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.gibs"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.keys"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.grage"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.others"/></td></tr>
+					</table>
+				</div>
+			</t>
+		</template>
+
+		<template id="report_rental_contract_document2">
+			<t t-call="web.external_layout">
+				<div class="page">
+		            <link rel="stylesheet" href="/itsys_real_estate/static/src/css/report-style.css"/>
+		            <!-- <link rel="stylesheet" href="/itsys_real_estate/static/src/css/report-style.css"/> -->
+					<table class="report_table">
+						<tr>
+							<th align="center">
+								<!--Rental Contract--> إستلام وحدة  # <span style="color: white !important" t-field="o.building_unit.code"/>
+							</th>
+						</tr>
+					</table>
+					<br/>
+					<p style="text-decoration: underline;font-size: 16px;">المستلم : </p>
+					<!-- <p style="text-decoration: underline;font-size: 16px;">This Agreement is made by and between: </p> -->
+
+					<table class="gridtable">
+						<tr>
+							<th colspan="2">بيانات المستأجر:</th>
+						</tr>
+						<tr>
+							<td><span t-field="o.partner_id.name"/></td>
+							<td><span t-field="o.partner_id.id_number"/></td>
+						</tr>				
+					</table>
+					<table class="gridtable">
+						<tr>
+							<th colspan="2">بيانات المؤجر:</th>
+						</tr>
+						<tr>
+							<td><span t-field="o.user_id.company_id.name"/></td>
+							<td><span t-field="o.user_id.company_id.id"/></td>
+						</tr>				
+					</table>
+					<table class="gridtable">
+						<tr>
+							<th colspan="2">بيانات الوسيط العقارى (إن وجد):</th>
+						</tr>
+						<tr>
+							<td><span t-field="o.partner_id.name"/></td>
+							<td><span t-field="o.partner_id.id_number"/></td>
+						</tr>				
+					</table>
+					<table class="gridtable">
+						<tr>
+							<th colspan="2">حالة الوحدة عند الاستلام : </th>
+						</tr>
+						<tr></tr><tr><td><span t-field="o.property_owner_id"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.paints"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.grounds"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.pathrooms"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.kitchen"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.rooms"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.plumbing"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.water"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.doors"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.windows"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.air_conditions"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.intercome"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.gibs"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.keys"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.grage"/></td></tr>
+							<tr></tr><tr><td><span t-field="o.others"/></td></tr>
+					</table>
+				</div>
+			</t>
+		</template>
+
+		<template id="report_rental_contract">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-call="itsys_real_estate.report_rental_contract_document" t-lang="o.partner_id.lang"/>
+				</t>
+			</t>
+		</template>
+
+		<template id="report_rental_contract2">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-call="itsys_real_estate.report_rental_contract_document2" t-lang="o.partner_id.lang"/>
+				</t>
+			</t>
+		</template>
+	</data>
+</odoo>

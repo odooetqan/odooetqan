@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_student_from_inherit" model="ir.ui.view">
+            <field name="name">res.student.form</field>
+            <field name="model">student.student</field>
+            <field name="inherit_id" ref="school_reg_base.student_student_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field['state']" position="after">
+                    <button name="create_partner_from_student" type="object"  string="Make Partner"   class="btn-danger" />
+                </xpath>
+            </field>
+        </record>
+
+<!--         
+        <record id="view_student_from_inherit" model="ir.ui.view">
+            <field name="name">student.student.form</field>
+            <field name="model">student.student</field>
+            <field name="inherit_id" ref="school_reg_base.student_student_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='other_information']" position="after">
+                    <page name="create_partner">
+                        <group>
+                            <button name="create_partner_students" type="object"  string="Make Partner"   class="btn-warning" 
+                                    context="{'active_id': active_id}" confirm="Are you sure you want to create a partner for this student?"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo> -->
+
+
+
+
+<!-- <?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>        
+        <record id="view_student_from _inherit" model="ir.ui.view">
+            <field name="name">student.student.form</field>
+            <field name="model">student.student</field>
+            <field name="inherit_id" ref="school_reg_base.student_student_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button['action_promissory_students_form']" position="after">
+                    <button name="create_partner_students" type="object"  string="Make Partner"   class="btn-warning" 
+                            context="{'active_id': active_id}" />
+                </xpath>
+            </field>
+        </record>-->
+    </data>
+</odoo> 
