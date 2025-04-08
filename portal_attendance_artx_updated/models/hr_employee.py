@@ -29,9 +29,17 @@ from odoo.exceptions import UserError
 
 
 class HrAttendance(models.Model):
+    _inherit = "hr.payroll.structure"
+
+    bonus_percentage = fields.Float("Bonus %")
+
+
+
+class HrAttendance(models.Model):
     _inherit = "hr.attendance"
 
     overtime_minutes = fields.Integer(string="Overtime (Minutes)", compute="_compute_overtime")
+
 
     def _compute_overtime(self):
         for rec in self:
