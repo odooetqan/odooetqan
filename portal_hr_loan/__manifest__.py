@@ -1,6 +1,6 @@
 {
     'name': 'Portal HR Loan',
-    'version': '1.0',
+    'version': '17.0.0.0.0',
     'depends': ['base', 'portal', 'hr', 'hr_holidays', 'portal_attendance_artx', 'ent_ohrms_loan'],
     'data': [
         'security/ir.model.access.csv',
