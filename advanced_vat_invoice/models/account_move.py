@@ -3,8 +3,8 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2024-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
-#    Author: Gayathri V(odoo@cybrosys.com)
+#    Copyright (C) 2024-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU AFFERO
 #    GENERAL PUBLIC LICENSE (AGPL v3), Version 3.
@@ -37,26 +37,6 @@ except ImportError:
     base64 = None
 
 
-
-class AccountMoveLine(models.Model):
-    _name = "account.move.line"
-    _inherit = "account.move.line"
-    einv_amount_discount = fields.Monetary(string="Amount discount", compute="_compute_amount_discount", store='True',
-                                           help="")
-    einv_amount_tax = fields.Monetary(string="Amount tax", compute="_compute_amount_tax", store='True', help="")
-
-    @api.depends('discount', 'quantity', 'price_unit')
-    def _compute_amount_discount(self):
-        for r in self:
-            r.einv_amount_discount = r.quantity * r.price_unit * (r.discount / 100)
-
-    @api.depends('tax_ids', 'discount', 'quantity', 'price_unit')
-    def _compute_amount_tax(self):
-        for r in self:
-            r.einv_amount_tax = sum(r.price_subtotal * (tax.amount / 100) for tax in r.tax_ids)
-
-
-
 class AccountMove(models.Model):
     """Class for adding new button and a page in account move"""
     _inherit = 'account.move'
@@ -68,36 +48,31 @@ class AccountMove(models.Model):
     qr_page = fields.Boolean(string="Qr Page", compute="_compute_qr",
                              help="Is QR page is enable or not")
 
-    # ... other methods, including hexa and timezone ...
-    einv_amount_sale_total = fields.Monetary(string="Amount sale total", compute="_compute_total", store='True',
-                                             help="")
-    einv_amount_discount_total = fields.Monetary(string="Amount discount total", compute="_compute_total", store='True',
-                                                 help="")
-    einv_amount_tax_total = fields.Monetary(string="Amount tax total", compute="_compute_total", store='True', help="")
-    
-    @api.depends('invoice_line_ids', 'amount_total')
-    def _compute_total(self):
-        for r in self:
-            r.einv_amount_sale_total = r.amount_untaxed + sum(line.einv_amount_discount for line in r.invoice_line_ids)
-            r.einv_amount_discount_total = sum(line.einv_amount_discount for line in r.invoice_line_ids)
-            r.einv_amount_tax_total = sum(line.einv_amount_tax for line in r.invoice_line_ids)
-
-    
     @api.depends('qr_button')
     def _compute_qr(self):
-        """Compute function for checking the value of a field in settings"""
+        """Compute function for checking the value of a field in settings."""
         for record in self:
             qr_code = self.env['ir.config_parameter'].sudo().get_param(
-                'advanced_vat_invoice.is_qr')
+                'advanced_vat_invoice.is_qr'
+            )
             qr_code_generate_method = self.env[
                 'ir.config_parameter'].sudo().get_param(
-                'advanced_vat_invoice.generate_qr')
-            record.qr_button = True if qr_code and qr_code_generate_method == 'manually' else False
-            record.qr_page = True if (qr_code and record.state in ['posted',
-                                                                   'cancelled']
-                                      and qr_code_generate_method == 'manually'
-                                      or qr_code_generate_method == 'automatically') \
+                'advanced_vat_invoice.generate_qr'
+            )
+            record.qr_button = (
+                True if (
+                        qr_code and qr_code_generate_method == 'manually')
                 else False
+            )
+            record.qr_page = (
+                True if (
+                        qr_code
+                        and record.state in ['posted', 'cancelled']
+                        and qr_code_generate_method == 'manually'
+                        or qr_code_generate_method == 'automatically'
+                )
+                else False
+            )
 
     def timezone(self, userdate):
         """Function to convert a user's date to their timezone."""
@@ -133,17 +108,11 @@ class AccountMove(models.Model):
 
     def qr_code_data(self):
         """Generate QR code data for the current record."""
-        # Now that we ensure all variables are strings, concatenation should not raise a TypeError
-        # qr_hex = seller_hex + vat_hex + date_hex + total_with_vat_hex
-
-
         seller_name = str(self.company_id.name)
         seller_vat_no = self.company_id.vat or ''
         seller_hex = self.hexa("01", "0c", seller_name)
         vat_hex = self.hexa("02", "0f", seller_vat_no) or ""
-        create_date = self.invoice_date
-        # time_stamp = self.timezone(self.create_date)#
-        time_stamp = create_date
+        time_stamp = self.timezone(self.create_date)
         date_hex = self.hexa("03", "14", time_stamp)
         amount_total = self.currency_id._convert(
             self.amount_total,
@@ -157,12 +126,6 @@ class AccountMove(models.Model):
             self.env.company, self.invoice_date or fields.Date.today())
         total_vat_hex = self.hexa("05", "09",
                                   str(round(amount_tax, 2)))
-
-        seller_hex = seller_hex or ''
-        vat_hex = vat_hex or ''
-        date_hex = date_hex or ''
-        total_with_vat_hex = total_with_vat_hex or ''
-        
         qr_hex = (seller_hex + vat_hex + date_hex + total_with_vat_hex +
                   total_vat_hex)
         encoded_base64_bytes = base64.b64encode(bytes.fromhex(qr_hex)).decode()
