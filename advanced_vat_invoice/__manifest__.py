@@ -22,7 +22,7 @@
 {
     'name': 'E-Invoicing For Saudi | Saudi VAT Invoice '
             '| Saudi Electronic Invoice | Saudi Zatca',
-    'version': '18.0.1.0.0',
+    'version': '17.0.1.0.0',
     'category': 'Accounting',
     'summary': "This module enables VAT-compliant e-Invoicing for Saudi Arabia,"
                " following ZATCA (Fatoorah) regulations. It supports generating"
