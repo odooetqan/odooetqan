@@ -80,21 +80,46 @@ class HrAttendance(models.Model):
 
 
 
-            if shift_start:
+
+            # Calculate lateness and shift duration if shift_start is defined
+            if shift_start and record.check_in:
                 record.lateness = max((record.check_in - shift_start).total_seconds() / 60, 0)
                 record.shift_duration = (shift_end - shift_start).total_seconds() / 60 if shift_end else 0
             else:
                 record.lateness = 0
                 record.shift_duration = 0
 
-            if record.check_out and shift_end:
+            # Only calculate early checkout and attended duration if both check_in and check_out exist
+            if record.check_in and record.check_out and shift_end:
                 record.early_checkout = max((shift_end - record.check_out).total_seconds() / 60, 0)
                 record.attended_duration = (record.check_out - record.check_in).total_seconds() / 60
             else:
                 record.early_checkout = 0
                 record.attended_duration = 0
 
-            record.attendance_gap = record.shift_duration - record.attended_duration
+            # Calculate attendance gap only if both durations are available
+            if record.shift_duration and record.attended_duration:
+                record.attendance_gap = record.shift_duration - record.attended_duration
+            else:
+                record.attendance_gap = 0
+
+
+
+            # if shift_start:
+            #     record.lateness = max((record.check_in - shift_start).total_seconds() / 60, 0)
+            #     record.shift_duration = (shift_end - shift_start).total_seconds() / 60 if shift_end else 0
+            # else:
+            #     record.lateness = 0
+            #     record.shift_duration = 0
+
+            # if record.check_out and shift_end:
+            #     record.early_checkout = max((shift_end - record.check_out).total_seconds() / 60, 0)
+            #     record.attended_duration = (record.check_out - record.check_in).total_seconds() / 60
+            # else:
+            #     record.early_checkout = 0
+            #     record.attended_duration = 0
+
+            # record.attendance_gap = record.shift_duration - record.attended_duration
 
     # @api.depends('check_in', 'check_out', 'employee_id')
     # def _compute_attendance_metrics(self):
