@@ -14,6 +14,7 @@ SH_USERNAME = "odoo@etqan-ltd.com"
 SH_PASSWORD = "123456"
 
 # Mapping punch_type to attendance_type
+# Mapping punch_type to attendance_type
 def get_attendance_type(punch_type):
     punch_to_attendance = {
         '0': '1',   # Check In -> Finger
@@ -82,12 +83,6 @@ if uid:
             }])
 
         print("✅ Attendance data successfully pushed to Odoo.sh")
-
-
-
-
-
-
 
 
 
