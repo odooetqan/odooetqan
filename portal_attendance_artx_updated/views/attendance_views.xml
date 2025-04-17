@@ -140,6 +140,7 @@
                                     <th>ساعات العمل</th>
                                     <th>الوقت الاضافي</th>
                                     <th>التاخير</th>
+                                    <th>تأخير</th>
                                     <th>الخصم</th>
                                     <th>تصحيح</th>
                                 </tr>
@@ -150,6 +151,15 @@
                                         <td><t t-esc="record.check_in or ''"/></td>
                                         <td><t t-esc="record.check_out or ''"/></td>
                                         <td>
+
+                                                    <!-- worked_hours
+                                                    shift_duration
+                                                    attended_duration
+                                                    attendance_gap
+                                                    late_minutes -->
+
+
+
                                             <t t-if="record.worked_hours">
                                                 <t t-set="total_minutes" t-value="int(record.worked_hours * 60)"/>
                                                 <t t-set="hours" t-value="total_minutes // 60"/>
@@ -159,6 +169,7 @@
                                         </td>
                                         <td><t t-esc="record.overtime_minutes or ''"/></td>
                                         <td><t t-esc="record.lateness or ''"/></td>
+                                        <td><t t-esc="record.late_minutes or ''"/></td>
                                         <td><t t-esc="record.deduction_amount or ''"/></td>
                                         <td>
                                             <button type="button" class="btn btn-warning" 
