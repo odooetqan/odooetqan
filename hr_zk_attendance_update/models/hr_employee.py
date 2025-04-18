@@ -41,7 +41,7 @@ class HrEmployee(models.Model):
     #             daily_minutes = employee.contract_id.resource_calendar_id.hours_per_day * 60 or 1   
             
     #         employee.per_minute_rate = (employee.contract_id.wage / daily_minutes) if employee.contract_id and daily_minutes else 0.0
-    @api.depends('contract_id', 'contract_id.wage', 'contract_id.resource_calendar_id.hours_per_day')
+    @api.depends('contract_id', 'per_minute_rate_manual', 'contract_id.wage', 'contract_id.resource_calendar_id.hours_per_day')
     def _compute_per_minute_rate(self):
         for employee in self:
             # تعيين القيمة الافتراضية دائمًا لضمان عدم حدوث الخطأ
