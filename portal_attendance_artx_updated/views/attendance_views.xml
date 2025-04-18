@@ -191,7 +191,7 @@
                                                             <input type="hidden" name="attendance_id" t-att-value="record.id"/>
                                                             <label>الحضور (المسجل):</label>
                                                             <input type="datetime-local" name="original_check_in" t-att-value="record.check_in or ''" class="form-control" readonly="1"/>
-                                                            <label>الخروج (المسجل):</lc fr5abel>
+                                                            <label>الخروج (المسجل):</label>
                                                             <input type="datetime-local" name="original_check_out" t-att-value="record.check_out or ''" class="form-control" readonly="1"/>
                                                             <label>تصحيح الحضور:</label>
                                                             <input type="datetime-local" name="corrected_check_in" class="form-control" required="true"/>
