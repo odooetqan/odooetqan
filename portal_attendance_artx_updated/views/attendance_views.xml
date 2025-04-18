@@ -140,7 +140,7 @@
                                     <th>ساعات العمل</th>
                                     <th>الوقت الاضافي</th>
                                     <th>التاخير</th>
-                                    <th>تأخير</th>
+                                    <!-- <th>تأخير</th> -->
                                     <th>الخصم</th>
                                     <th>تصحيح</th>
                                 </tr>
@@ -167,10 +167,10 @@
                                                 <t t-esc="('%02d:%02d' % (hours, minutes))"/>
                                             </t>
                                         </td>
-                                        <td><t t-esc="record.overtime_minutes or ''"/></td>
-                                        <td><t t-esc="record.lateness or ''"/></td>
-                                        <td><t t-esc="record.late_minutes or ''"/></td>
-                                        <td><t t-esc="record.deduction_amount or ''"/></td>
+                                        <td><t t-esc="record.overtime_minutes or ''"/></td><td><t t-esc="formatLang(record.lateness or 0.0, digits=2)" /></td>
+                                        <!-- <td><t t-esc="formatLang(record.late_minutes or 0.0, digits=2)" /> </td> -->
+                                        <td><t t-esc="formatLang(record.deduction_amount or 0.0, digits=2)" /></td>
+
                                         <td>
                                             <button type="button" class="btn btn-warning" 
                                                 data-bs-toggle="modal" t-att-data-bs-target="'#correctAttendanceModal-%s' % record.id">
@@ -190,7 +190,7 @@
                                                             <input type="hidden" name="attendance_id" t-att-value="record.id"/>
                                                             <label>الحضور (المسجل):</label>
                                                             <input type="datetime-local" name="original_check_in" t-att-value="record.check_in or ''" class="form-control" readonly="1"/>
-                                                            <label>الخروج (المسجل):</label>
+                                                            <label>الخروج (المسجل):</lc fr5abel>
                                                             <input type="datetime-local" name="original_check_out" t-att-value="record.check_out or ''" class="form-control" readonly="1"/>
                                                             <label>تصحيح الحضور:</label>
                                                             <input type="datetime-local" name="corrected_check_in" class="form-control" required="true"/>
