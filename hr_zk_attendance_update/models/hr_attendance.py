@@ -77,10 +77,7 @@ class HrAttendance(models.Model):
                             second=0
                         )
                     )
-
-
-
-
+                    
             # Calculate lateness and shift duration if shift_start is defined
             if shift_start and record.check_in:
                 record.lateness = max((record.check_in - shift_start).total_seconds() / 60, 0)
