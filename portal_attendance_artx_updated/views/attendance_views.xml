@@ -170,12 +170,12 @@
                                         <td><t t-esc="record.overtime_minutes or ''"/></td>
                                         <!-- <td><t t-esc="formatLang(record.lateness or 0.0, digits=2)" /></td> -->
                                         <!-- <t t-esc="request.env['res.lang']._format(record.lateness or 0.0, digits=(16, 2), grouping=True)"/> -->
-                                        <t t-esc="'%.2f' % (record.lateness or 0.0)"/>
+                                        <td><t t-esc="'%.2f' % (record.lateness or 0.0)"/></td>
 
                                         <!-- <td><t t-esc="formatLang(record.late_minutes or 0.0, digits=2)" /> </td> -->
                                         <!-- <td><t t-esc="formatLang(record.deduction_amount or 0.0, digits=2)" /></td> -->
                                         <!-- <t t-esc="request.env['res.lang']._format(record.deduction_amount or 0.0, digits=(16, 2), grouping=True)"/> -->
-                                        <t t-esc="'%.2f' % (record.deduction_amount or 0.0)"/>
+                                        <td><t t-esc="'%.2f' % (record.deduction_amount or 0.0)"/></td>
 
                                         <td>
                                             <button type="button" class="btn btn-warning" 
