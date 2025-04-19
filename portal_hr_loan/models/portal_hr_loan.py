@@ -5,10 +5,8 @@ class HrLeaveType(models.Model):
 
     overtime_deductible = fields.Boolean(string="Overtime Deductible", default=False)
 
-
 class HrLoan(models.Model):
     _inherit = 'hr.loan'
-
 
 class HrSalary(models.Model):
     _name = 'hr.salary'
@@ -31,18 +29,15 @@ class HrSalary(models.Model):
             record.state = 'approved'
             # Add any additional logic here
 
-
 class HrLoanLine(models.Model):
     _inherit = 'hr.loan.line'
 
     line_number = fields.Integer(string="Line Number")
 
-
 class HRPayrollStructure(models.Model):
     _inherit = 'hr.payroll.structure'
 
     bonus_percentage = fields.Float(string="Bonus Percentage", default=10.0)
-
 
 class HrPayslip(models.Model):
     _inherit = 'hr.payslip'
@@ -52,18 +47,15 @@ class HrPayslip(models.Model):
         total_deductions = sum(line.amount for line in self.input_line_ids if line.input_type_id.code == 'LOAN')
         return total_deductions
 
-
 class HRPayslipInputType(models.Model):
     _inherit = 'hr.payslip.input.type'
 
     is_loan_related = fields.Boolean(string="Is Loan Related", default=False)
 
-
 class HrPayslipInput(models.Model):
     _inherit = 'hr.payslip.input'
 
     description = fields.Text(string="Description")
-
 
 class HrSalaryRule(models.Model):
     _inherit = 'hr.salary.rule'

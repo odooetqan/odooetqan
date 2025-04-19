@@ -11,36 +11,6 @@ _logger = logging.getLogger(__name__)
 
 
 class PortalAttendance(http.Controller):
-    # @http.route(['/my/attendance'], type='http', auth='user', website=True)
-    # def portal_my_attendance(self, **kwargs):
-    #     user = request.env.user
-    #     employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
-
-    #     if not employee:
-    #         return request.redirect('/my/home')
-
-    #     today = fields.Date.today()
-    #     first_day_of_current_month = today.replace(day=1)
-    #     fifteenth_previous_month = first_day_of_current_month - timedelta(days=15)
-
-    #     attendance_records = request.env['hr.attendance'].sudo().search([
-    #         ('employee_id', '=', employee.id),
-    #         ('check_in', '>=', fifteenth_previous_month),
-    #         ('check_in', '<=', today)
-    #     ])
-
-    #     # Get the active attendance (if exists)
-    #     active_attendance = request.env['hr.attendance'].sudo().search([
-    #         ('employee_id', '=', employee.id),
-    #         ('check_out', '=', False)
-    #     ], order='check_in desc', limit=1)
-
-    #     values = {
-    #         'attendance_records': attendance_records,
-    #         'active_attendance': active_attendance,
-    #     }
-    #     return request.render('portal_attendance_artx_updated.portal_my_attendance', values)
-
     @http.route(['/my/attendance'], type='http', auth='user', website=True)
     def portal_my_attendance(self, **kw):
         user = request.env.user
