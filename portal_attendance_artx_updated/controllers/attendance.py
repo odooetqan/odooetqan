@@ -66,7 +66,7 @@ class PortalAttendance(http.Controller):
         values = {
             'attendance_records': attendance_records,
         }
-        return request.render("portal_attendance_artx.portal_my_attendance", values)
+        return request.render("portal_attendance_artx_updated.portal_my_attendance", values)
 
     @http.route('/portal/get_attendance_status', type='http', auth="user", methods=['GET'], csrf=False)
     def get_attendance_status(self, **kwargs):
