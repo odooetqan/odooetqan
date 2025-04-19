@@ -10,10 +10,12 @@
             <xpath expr="//page[@name='hr_settings']//group[@name='active_group']"
                    position="after">
                 <group name="device_rates">
-                <field name="device_id_num"/>
-                <field name="per_minute_rate_manual"/>                
-                <field name="total_wage" readonly="0"/>
-                <field name="per_minute_rate" readonly="0"/>
+                    <field name="device_id_num"/>
+                    <field name="per_minute_rate_manual"/>                
+                    <field name="total_wage" readonly="0"/>
+                    <field name="per_minute_rate" readonly="0"/>
+                </group>
+
             </xpath>
         </field>
     </record>
