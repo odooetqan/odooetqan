@@ -15,7 +15,6 @@
                     <field name="total_wage" readonly="0"/>
                     <field name="per_minute_rate" readonly="0"/>
                 </group>
-
             </xpath>
         </field>
     </record>
