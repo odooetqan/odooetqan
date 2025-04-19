@@ -7,8 +7,9 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//page[@name='hr_settings']//field[@name='user_id']"
+            <xpath expr="//page[@name='hr_settings']//group[@name='active_group']"
                    position="after">
+                <group name="device_rates">
                 <field name="device_id_num"/>
                 <field name="per_minute_rate_manual"/>                
                 <field name="total_wage" readonly="0"/>
