@@ -11,6 +11,30 @@ class HRDiduction(models.Model):
     shift_end = fields.Datetime(string="Shift End")
     check_in = fields.Datetime(string="Check In")
     check_out = fields.Datetime(string="Check Out")
+    
+    @api.depends('employee_id', 'date')
+    def _compute_check_times(self):
+        for rec in self:
+            rec.check_in = False
+            rec.check_out = False
+            if rec.employee_id and rec.date:
+                start_of_day = datetime.combine(rec.date, datetime.min.time())
+                end_of_day = datetime.combine(rec.date, datetime.max.time())
+
+                # Find the attendance for the employee on that day
+                attendances = self.env['hr.attendance'].search([
+                    ('employee_id', '=', rec.employee_id.id),
+                    ('check_in', '>=', start_of_day),
+                    ('check_in', '<=', end_of_day)
+                ], order='check_in asc')
+
+                if attendances:
+                    # Earliest check_in
+                    rec.check_in = attendances[0].check_in
+                    # Latest check_out (if available)
+                    check_outs = [att.check_out for att in attendances if att.check_out]
+                    if check_outs:
+                        rec.check_out = max(check_outs)
 
     late_minutes = fields.Integer(string="Late Minutes")
     early_leave_minutes = fields.Integer(string="Early Leave Minutes")
