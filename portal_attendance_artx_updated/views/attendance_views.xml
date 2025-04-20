@@ -149,8 +149,8 @@
                                 <t t-foreach="attendance_records" t-as="record">
                                     <tr>
                                         <!-- <td><t t-esc="record.check_in or ''"/></td> -->
-                                        <t t-esc="record.display_check_in or ''"/>
-                                        <t t-esc="record.display_check_out or ''"/>
+                                         <td><t t-esc="record.display_check_in or ''"/> </td>
+                                         <td><t t-esc="record.display_check_out or ''"/> </td>
                                         <!-- <td><t t-esc="record.check_out or ''"/></td> -->
                                         <td>
 
