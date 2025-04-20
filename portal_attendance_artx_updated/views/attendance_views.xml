@@ -209,10 +209,12 @@
                                                             <label>سبب التصحيح:</label>
                                                             <textarea name="correction_reason" class="form-control"></textarea>
                                                         </div>
+
                                                         <div class="modal-footer">
                                                             <button type="submit" class="btn btn-success">إرسال التصحيح</button>
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
                                                         </div>
+                                                        
                                                     </form>
                                                 </div>
                                             </div>
