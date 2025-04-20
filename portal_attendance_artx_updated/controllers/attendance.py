@@ -21,9 +21,9 @@ class PortalAttendance(http.Controller):
         ], order="check_in desc")
 
         # Convert check_in and check_out to user's timezone
-        # user_tz = user.tz or 'UTC'
-        # tz = pytz.timezone(user_tz)
-        tz = pytz.timezone('Asia/Riyadh')
+        user_tz = user.tz or 'UTC'
+        tz = pytz.timezone(user_tz)
+        # tz = pytz.timezone('Asia/Riyadh')
 
 
         # def convert_dt(dt):
