@@ -21,18 +21,31 @@ class PortalAttendance(http.Controller):
         ], order="check_in desc")
 
         # Convert check_in and check_out to user's timezone
-        user_tz = user.tz or 'UTC'
-        tz = pytz.timezone(user_tz)
+        # user_tz = user.tz or 'UTC'
+        # tz = pytz.timezone(user_tz)
+        tz = pytz.timezone('Asia/Riyadh')
 
+
+        # def convert_dt(dt):
+        #     if dt:
+        #         return fields.Datetime.context_timestamp(request.env.user, dt).strftime('%Y-%m-%d %H:%M')
+        #     return ''
         def convert_dt(dt):
             if dt:
-                return fields.Datetime.context_timestamp(request.env.user, dt).strftime('%Y-%m-%d %H:%M')
+                # Convert from UTC to Asia/Riyadh
+                dt_utc = dt.replace(tzinfo=pytz.utc)
+                dt_riyadh = dt_utc.astimezone(pytz.timezone('Asia/Riyadh'))
+                return dt_riyadh.strftime('%Y-%m-%d %H:%M')
             return ''
 
-
         for record in attendance_records:
-            record.display_check_in = convert_dt(record.check_in) if record.check_in else None
-            record.display_check_out = convert_dt(record.check_out) if record.check_out else None
+            record.display_check_in = convert_dt(record.check_in)
+            record.display_check_out = convert_dt(record.check_out)
+
+
+        # for record in attendance_records:
+        #     record.display_check_in = convert_dt(record.check_in) if record.check_in else None
+        #     record.display_check_out = convert_dt(record.check_out) if record.check_out else None
 
 
         # for record in attendance_records:
