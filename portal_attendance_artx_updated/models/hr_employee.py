@@ -27,11 +27,24 @@ from odoo.exceptions import UserError
     #     currency_field='currency_id'
     # )
 
-
 class HrAttendance(models.Model):
     _inherit = "hr.attendance"
 
     overtime_minutes = fields.Integer(string="Overtime (Minutes)", compute="_compute_overtime")
+
+    display_check_in = fields.Char(string='Display Check-In', compute='_compute_display_times')
+    display_check_out = fields.Char(string='Display Check-Out', compute='_compute_display_times')
+
+    def _compute_display_times(self):
+        for rec in self:
+            if rec.check_in:
+                rec.display_check_in = rec.check_in.strftime('%Y-%m-%d %H:%M')
+            else:
+                rec.display_check_in = ''
+            if rec.check_out:
+                rec.display_check_out = rec.check_out.strftime('%Y-%m-%d %H:%M')
+            else:
+                rec.display_check_out = ''
 
     def _compute_overtime(self):
         for rec in self:
