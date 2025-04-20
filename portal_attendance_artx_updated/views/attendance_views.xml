@@ -148,8 +148,10 @@
                             <tbody>
                                 <t t-foreach="attendance_records" t-as="record">
                                     <tr>
-                                        <td><t t-esc="record.check_in or ''"/></td>
-                                        <td><t t-esc="record.check_out or ''"/></td>
+                                        <!-- <td><t t-esc="record.check_in or ''"/></td> -->
+                                        <t t-esc="record.display_check_in or ''"/>
+                                        <t t-esc="record.display_check_out or ''"/>
+                                        <!-- <td><t t-esc="record.check_out or ''"/></td> -->
                                         <td>
 
                                                     <!-- worked_hours
@@ -197,9 +199,9 @@
                                                             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                                                             <input type="hidden" name="attendance_id" t-att-value="record.id"/>
                                                             <label>الحضور (المسجل):</label>
-                                                            <input type="datetime-local" name="original_check_in" t-att-value="record.check_in or ''" class="form-control" readonly="1"/>
+                                                            <input type="datetime-local" name="original_check_in" t-att-value="display_record.check_in or ''" class="form-control" readonly="1"/>
                                                             <label>الخروج (المسجل):</label>
-                                                            <input type="datetime-local" name="original_check_out" t-att-value="record.check_out or ''" class="form-control" readonly="1"/>
+                                                            <input type="datetime-local" name="original_check_out" t-att-value="record.display_check_out or ''" class="form-control" readonly="1"/>
                                                             <label>تصحيح الحضور:</label>
                                                             <input type="datetime-local" name="corrected_check_in" class="form-control" required="true"/>
                                                             <label>تصحيح الانصراف:</label>
@@ -243,10 +245,14 @@
                     <t t-foreach="attendance_records" t-as="record">
                         <div>
                             <span>
-                                <t t-esc="record.check_in"/>
+                                <!-- <t t-esc="record.check_in"/> -->
+                                <t t-esc="record.display_check_in"/>
+
                             </span>
                             <span>
-                                <t t-esc="record.check_out"/>
+                                <!-- <t t-esc="record.check_out"/> -->
+                                <t t-esc="record.display_check_out"/>
+
                             </span>
                         </div>
                     </t>
