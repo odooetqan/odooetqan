@@ -29,9 +29,15 @@ class PortalAttendance(http.Controller):
                 return fields.Datetime.context_timestamp(request.env.user, dt).strftime('%Y-%m-%d %H:%M')
             return ''
 
+
         for record in attendance_records:
-            record.check_in = convert_dt(record.check_in)
-            record.check_out = convert_dt(record.check_out)
+            record.display_check_in = convert_dt(record.check_in) if record.check_in else None
+            record.display_check_out = convert_dt(record.check_out) if record.check_out else None
+
+
+        # for record in attendance_records:
+        #     record.check_in = convert_dt(record.check_in)
+        #     record.check_out = convert_dt(record.check_out)
 
         values = {
             'attendance_records': attendance_records,
