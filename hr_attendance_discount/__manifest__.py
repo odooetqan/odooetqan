@@ -20,7 +20,7 @@
 #
 ################################################################################
 {
-    'name': 'HR Diduction',
+    'name': 'HR Diduction Portal.',
     'version': '17.0.1.2.2',
     'category': 'Human Resources',
     'summary': " ",
