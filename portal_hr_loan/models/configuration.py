@@ -61,7 +61,7 @@ class Discounts(models.Model):
 
     discount_id = fields.Many2one("discount.type", tracking=True, required=True)
     discription = fields.Char("Discription", tracking=True, required=True)
-    company_id = fields.Many2one("res.company", string="Company", default=1)
+    company_id = fields.Many2one("res.company", string="Company", default=lambda self: self.env.company)
 
 
 class SchoolssBase(models.Model):

@@ -147,7 +147,7 @@
       <template id="portal_create_salary_form" name="Create Salary">
          <t t-call="portal.portal_layout">
             <div class="container">
-               <h4>إضافة راتب جديد</h>
+               <h4>إضافة راتب جديد</h4>
                <form t-attf-action="/my/salaries/save" method="post">
                   <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                   <div class="form-group">
