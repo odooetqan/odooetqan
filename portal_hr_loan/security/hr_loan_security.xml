@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="portal_hr_loan_rule" model="ir.rule">
+            <field name="name">HR Loan Portal Rule</field>
+            <field name="model_id" ref="model_hr_loan"/>
+            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="domain_force">[('employee_id.user_id', '=', user.id)]</field>
+        </record>
+    </data>
+</odoo>
+
+
+
+<!-- access_hr_loan_portal,access_hr_loan_portal,model_hr_loan,base.group_portal,1,1,1,0
+access_hr_loan_line_portal,access_hr_loan_line_portal,model_hr_loan_line,base.group_portal,1,1,1,0
+access_hr_payroll_structure_portal,access_hr_payroll_structure_portal,model_hr_payroll_structure,base.group_portal,1,1,1,0
+access_hr_payslip_input_type_portal,access_hr_payslip_input_type_portal,model_hr_payslip_input_type,base.group_portal,1,1,1,0
+access_hr_payslip_input_portal,access_hr_payslip_input_portal,model_hr_payslip_input,base.group_portal,1,1,1,0
+access_hr_payslip_portal,access_hr_payslip_portal,model_hr_payslip,base.group_portal,1,1,1,0
+access_hr_salary_rule_portal,access_hr_salary_rule_portal,model_hr_salary_rule,base.group_portal,1,1,1,0 -->
