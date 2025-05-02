@@ -1,5 +1,5 @@
 {
-    'name': 'Employee Portal Attendance Management',
+    'name': 'Employee Portal Attendance Management Updated ',
     'version': '17.0.0.0.0',
     'category': 'Human Resources',
     'summary': 'Allows HR managers or administrators to automatically create portal users for employees and manage attendance via the portal.',
@@ -11,7 +11,7 @@
         - Automatically manage the linking of employees to the portal user accounts.        
     """,
     'author': "Areterix Technologies",
-    'price': '10.0',
+    'price': '100.0',
     'currency': 'USD',
     'website': 'https://areterix.com',
     'depends': ['hr_attendance', 'portal', 'base_setup', 'hr_payroll','hr', 'base', 'mail','website'],
