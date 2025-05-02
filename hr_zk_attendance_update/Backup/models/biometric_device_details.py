@@ -368,3 +368,142 @@ class MachineAttendance(models.Model):
                         'check_out': check_out_time.replace(tzinfo=None)
                     })
                     _logger.info(f"✅ Attendance Recorded for {employee.name} on {punch_date}: IN {check_in_time}, OUT {check_out_time}")
+
+# ########################8
+#     def action_process_attendance(self):
+#         """Process attendance based on employee shifts, prioritizing shift time constraints."""
+#         hr_attendance_obj = self.env['hr.attendance']
+#         now = fields.Datetime.now()
+
+#         # Fetch all attendance records sorted by time
+#         all_attendance_records = self.search([], order="punching_time asc")
+
+#         # Group attendance records by employee and shift time
+#         employee_attendance = {}
+#         for record in all_attendance_records:
+#             employee_id = record.device_id_num
+#             punch_date = record.punching_time.date()
+
+#             if employee_id not in employee_attendance:
+#                 employee_attendance[employee_id] = {}
+
+#             if punch_date not in employee_attendance[employee_id]:
+#                 employee_attendance[employee_id][punch_date] = []
+
+#             employee_attendance[employee_id][punch_date].append(record.punching_time)
+
+#         ksa_tz = timezone('Asia/Riyadh')  # ✅ Define the KSA timezone
+#         for employee_id, dates in employee_attendance.items():
+#             employee = self.env['hr.employee'].search([('device_id_num', '=', employee_id)], limit=1)
+#             if not employee:
+#                 _logger.warning(f"⚠️ No Employee Found for Device ID: {employee_id}")
+#                 continue
+
+#             for punch_date, punch_times in dates.items():
+#                 shift = employee.resource_calendar_id
+#                 if not shift:
+#                     _logger.warning(f"⚠️ No Shift Found for Employee {employee.name} on {punch_date}")
+#                     continue
+
+#                 shift_intervals = []
+#                 for att in shift.attendance_ids:
+#                     if att.dayofweek == str(punch_date.weekday()):
+
+
+#                         # ✅ Convert Shift Time from KSA to UTC
+#                         shift_start_ksa = datetime.combine(punch_date, datetime.min.time()).replace(
+#                             hour=int(att.hour_from), minute=int((att.hour_from % 1) * 60), second=0
+#                         )
+#                         shift_end_ksa = datetime.combine(punch_date, datetime.min.time()).replace(
+#                             hour=int(att.hour_to), minute=int((att.hour_to % 1) * 60), second=0
+#                         )
+
+#                         shift_start_utc = ksa_tz.localize(shift_start_ksa).astimezone(utc)
+#                         shift_end_utc = ksa_tz.localize(shift_end_ksa).astimezone(utc)
+
+#                         shift_intervals.append((shift_start_utc, shift_end_utc))
+
+
+
+#                         # shift_start = datetime.combine(punch_date, datetime.min.time()).replace(
+#                         #     hour=int(att.hour_from), minute=int((att.hour_from % 1) * 60), second=0
+#                         # )
+#                         # shift_end = datetime.combine(punch_date, datetime.min.time()).replace(
+#                         #     hour=int(att.hour_to), minute=int((att.hour_to % 1) * 60), second=0
+#                         # )
+#                         # shift_intervals.append((shift_start, shift_end))
+
+#                 if not shift_intervals:
+#                     _logger.warning(f"⚠️ No Shift Timings for Employee {employee.name} on {punch_date}")
+#                     continue
+
+#                 punch_times.sort()  # Ensure punches are in chronological order
+
+#                 for shift_start, shift_end in shift_intervals:
+#                     # shift_punches = [p for p in punch_times if shift_start <= p <= shift_end]
+#                     shift_punches = [  p for p in punch_times   if shift_start.replace(tzinfo=None) <= p.replace(tzinfo=None) <= shift_end.replace(tzinfo=None)]
+
+#                     if len(shift_punches) > 1:
+#                         # 🔹 Multiple Check-Ins and Check-Outs in a Shift: Use first check-in and last check-out
+#                         check_in_time = shift_punches[0]
+#                         check_out_time = shift_punches[-1]
+#                         _logger.info(f"✅ Multiple punches for {employee.name} on {punch_date}: First IN {check_in_time}, Last OUT {check_out_time}")
+
+#                     elif len(shift_punches) == 1:
+#                         # 🔹 Single Punch: Determine check-in or check-out based on proximity
+#                         punch_time = shift_punches[0]
+#                         # if abs((punch_time - shift_start).total_seconds()) <= abs((punch_time - shift_end).total_seconds()):
+#                         if abs((punch_time.replace(tzinfo=None) - shift_start.replace(tzinfo=None)).total_seconds()) <= \
+#                            abs((punch_time.replace(tzinfo=None) - shift_end.replace(tzinfo=None)).total_seconds()):
+
+
+#                             # Punch is closer to shift start, consider it a check-in
+#                             check_in_time = punch_time
+#                             check_out_time = shift_end - timedelta(hours=1)  # Early check-out
+#                             _logger.info(f"⏳ Single Punch for {employee.name} on {punch_date}: Assigned IN {check_in_time}, OUT {check_out_time} (1 hour early)")
+#                         else:
+#                             # Punch is closer to shift end, consider it a check-out
+#                             check_in_time = shift_start + timedelta(hours=1)  # Late check-in
+#                             check_out_time = punch_time
+#                             _logger.info(f"⏳ Single Punch for {employee.name} on {punch_date}: Assigned Late IN {check_in_time}, OUT {check_out_time}")
+
+#                     else:
+#                         # 🔹 No Punches for this Shift: Mark as absent (No attendance record created)
+#                         _logger.warning(f"🚫 {employee.name} marked absent for shift {shift_start.strftime('%H:%M')} - {shift_end.strftime('%H:%M')} on {punch_date}")
+#                         continue
+
+#                     # Ensure check-out is after check-in
+#                     # if check_out_time < check_in_time:
+#                     if check_out_time.replace(tzinfo=None) < check_in_time.replace(tzinfo=None):
+
+#                         _logger.warning(f"❌ Error: Check-Out time {check_out_time} is before Check-In {check_in_time}, correcting...")
+#                         check_out_time = check_in_time + timedelta(minutes=1)  # Force valid checkout
+
+#                     # Check for existing attendance for this shift
+#                     existing_attendance = hr_attendance_obj.search([
+#                         ('employee_id', '=', employee.id),
+#                         ('check_in', '>=', shift_start),
+#                         ('check_in', '<=', shift_end)
+#                     ], limit=1)
+
+#                     if existing_attendance:
+#                         _logger.warning(f"⚠️ Skipping Duplicate Attendance for {employee.name} on {punch_date} in shift {shift_start.strftime('%H:%M')} - {shift_end.strftime('%H:%M')}")
+#                         continue  # Skip duplicate attendance
+
+#                     # ✅ Create attendance record
+#                     hr_attendance_obj.create({
+#                         'employee_id': employee.id,
+#                         'check_in': check_in_time.replace(tzinfo=None),
+#                         'check_out': check_out_time.replace(tzinfo=None)
+#                     })
+#                     _logger.info(f"✅ Attendance Recorded for {employee.name} on {punch_date}: IN {check_in_time}, OUT {check_out_time}")
+
+        # return {
+        #     'type': 'ir.actions.client',
+        #     'tag': 'display_notification',
+        #     'params': {
+        #         'message': 'Attendance processed successfully with shift-based calculations!',
+        #         'type': 'success',
+        #         'sticky': False
+        #     }
+        # }

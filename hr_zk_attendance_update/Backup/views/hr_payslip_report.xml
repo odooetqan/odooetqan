@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_payslip_form_inherit" model="ir.ui.view">
+        <field name="name">hr.payslip.form.inherit</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form" />
+        <field name="arch" type="xml">
+           
+<!--             <xpath expr="//table[@class='line_ids']" position="inside">
+                <tr>
+                    <td><strong>Total Lateness:</strong></td>
+                    <td t-esc="format_amount(payslip.total_late_minutes, 'Minutes')" />
+                </tr>
+                <tr>
+                    <td><strong>Total Overtime:</strong></td>
+                    <td t-esc="format_amount(payslip.total_overtime_minutes, 'Minutes')" />
+                </tr>
+            </xpath> -->
+           
+            <xpath expr="//page[@name='salary_computation']" position="inside">
+                <field name="total_late_minutes"/>
+                <field name="total_overtime_minutes"/>
+<!--                 <tr>
+                    <td><strong>Total Lateness:</strong></td>
+                    <td t-field="format_amount(payslip.total_late_minutes, 'Minutes')" />
+                </tr>
+                <tr>
+                    <td><strong>Total Overtime:</strong></td>
+                    <td t-field="format_amount(payslip.total_overtime_minutes, 'Minutes')" />
+                </tr> -->
+            </xpath>
+
+            
+        </field>
+    </record>
+
+
+
+   
+    <record id="view_hr_payslip_form_inherit_extra" model="ir.ui.view">
+        <field name="name">hr.payslip.form.inherit.extra</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <notebook position="before">
+                <!-- <page string="معلومات إضافية"> -->
+                    <group col="2">
+<!--                         <field name="extra_info_id" nolabel="1">
+                            <tree editable="bottom"> -->
+<!--                                 <field name="total_allowances"/>
+                                <field name="total_deductions"/>
+                                <field name="bank_account"/>
+                                <field name="tax_id"/> -->
+                                <field name="total_overtime_minutes"/>
+                                <field name="total_late_minutes"/>
+
+<!--                             </tree> -->
+                            <form string="معلومات إضافية">
+                                <group col="2">
+<!--                                     <field name="total_allowances"/>
+                                    <field name="total_deductions"/>
+                                    <field name="bank_account"/>
+                                    <field name="tax_id"/> -->
+                                </group>
+                            </form>
+<!--                         </field> -->
+                    </group>
+                <!-- </page> -->
+            </notebook>
+        </field>
+    </record>
+ 
+
+
+
+
+    
+</odoo>
+

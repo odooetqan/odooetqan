@@ -31,7 +31,6 @@ class HrEmployee(models.Model):
     deduction_multiplier = fields.Float(string='Deduction Multiplier', default=1.0)
     allowance_multiplier = fields.Float(string='Allowance Multiplier', default=1.0)
     per_minute_rate = fields.Float(string='Per Minute Rate', compute='_compute_per_minute_rate', default=0.0)
-    per_minute_rate_manual = fields.Float(string='Per Minute Rate Manual',  default=0.0)
 
     # @api.depends('contract_id', 'contract_id.wage', 'contract_id.resource_calendar_id.hours_per_day')
     # def _compute_per_minute_rate(self):
@@ -41,20 +40,18 @@ class HrEmployee(models.Model):
     #             daily_minutes = employee.contract_id.resource_calendar_id.hours_per_day * 60 or 1   
             
     #         employee.per_minute_rate = (employee.contract_id.wage / daily_minutes) if employee.contract_id and daily_minutes else 0.0
-    @api.depends('contract_id', 'per_minute_rate_manual', 'contract_id.wage', 'contract_id.resource_calendar_id.hours_per_day')
+    @api.depends('contract_id', 'contract_id.wage', 'contract_id.resource_calendar_id.hours_per_day')
     def _compute_per_minute_rate(self):
         for employee in self:
             # تعيين القيمة الافتراضية دائمًا لضمان عدم حدوث الخطأ
             employee.per_minute_rate = 0.0  
-            if employee.per_minute_rate_manual:
-                employee.per_minute_rate = employee.per_minute_rate_manual
-            else:
-                if employee.contract_id and employee.contract_id.wage and employee.contract_id.resource_calendar_id:
-                    hours_per_day = employee.contract_id.resource_calendar_id.hours_per_day or 8
-                    daily_minutes = hours_per_day * 60 * 30
 
-                    if daily_minutes > 0:
-                        employee.per_minute_rate = employee.contract_id.wage / daily_minutes
+            if employee.contract_id and employee.contract_id.wage and employee.contract_id.resource_calendar_id:
+                hours_per_day = employee.contract_id.resource_calendar_id.hours_per_day or 0
+                daily_minutes = hours_per_day * 60
+
+                if daily_minutes > 0:
+                    employee.per_minute_rate = employee.contract_id.wage / daily_minutes
 
 
 class HrContractHistory(models.Model):
