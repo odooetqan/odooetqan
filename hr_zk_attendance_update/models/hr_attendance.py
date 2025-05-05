@@ -39,6 +39,23 @@ class HrAttendance(models.Model):
 #     attended_duration = fields.Float(string="Attended Duration (minutes)", compute="_compute_attendance_metrics", store=True)
 #     attendance_gap = fields.Float(string="Attendance Gap (minutes)", compute="_compute_attendance_metrics", store=True)
 
+    def _get_shift_times(self, employee, punch_date):
+        shift = employee.resource_calendar_id
+        if not shift:
+            return None, None
+
+        for att in shift.attendance_ids:
+            if att.dayofweek == str(punch_date.weekday()):
+                start = datetime.combine(punch_date, datetime.min.time()).replace(
+                    hour=int(att.hour_from), minute=int((att.hour_from % 1) * 60)
+                )
+                end = datetime.combine(punch_date, datetime.min.time()).replace(
+                    hour=int(att.hour_to), minute=int((att.hour_to % 1) * 60)
+                )
+                return start, end
+        return None, None
+
+
     def action_recompute_attendance(self):
         """ Manually trigger the computation of attendance metrics """
         for record in self:
