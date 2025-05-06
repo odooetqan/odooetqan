@@ -1,20 +1,23 @@
 <odoo>
-    <record id="view_payslip_export_wizard" model="ir.ui.view">
+   <record id="view_payslip_export_wizard_form" model="ir.ui.view">
         <field name="name">payslip.export.wizard.form</field>
         <field name="model">payslip.export.wizard</field>
         <field name="arch" type="xml">
-            <form string="Export Payslips">
-                <footer>
-                    <button string="Generate Excel" type="object" name="generate_excel" class="btn-primary"/>
-                    <button string="Cancel" class="btn-secondary" special="cancel"/>
-                </footer>
-                <field name="file_data" filename="file_name" invisible="1"/>
-                <field name="file_name" invisible="1"/>
-                <div attrs="{'invisible': [('file_data', '=', False)]}">
-                    <p>Click to download your file:</p>
-                    <field name="file_data" filename="file_name"/>
-                </div>
+            <form string="Export Payslip Excel">
+                <group>
+                    <footer>
+                        <button name="generate_excel" type="object" string="Generate Excel" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </group>
+                <t t-if="record.file_data.raw_value">
+                    <div class="mt16">
+                        <p>Click to download your file:</p>
+                        <field name="file_data" filename="file_name"/>
+                    </div>
+                </t>
             </form>
         </field>
     </record>
+
 </odoo>
