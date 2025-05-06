@@ -10,12 +10,15 @@
                         <button string="Cancel" class="btn-secondary" special="cancel"/>
                     </footer>
                 </group>
+                <field name="file_data" widget="binary" filename="file_name" invisible="not file_data"/>
+
+<!-- 
                 <t t-if="record.file_data.raw_value">
                     <div class="mt16">
                         <p>Click to download your file:</p>
                         <field name="file_data" filename="file_name"/>
                     </div>
-                </t>
+                </t> -->
             </form>
         </field>
     </record>
