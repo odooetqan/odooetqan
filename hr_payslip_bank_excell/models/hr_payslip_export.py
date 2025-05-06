@@ -1,4 +1,10 @@
-from odoo import models
+from odoo import fields, models
+
+class HrEmployee(models.Model):
+    _inherit = 'hr.employee'
+
+    employee_code = fields.Char(string="Employee Code")
+
 
 class HrPayslip(models.Model):
     _inherit = 'hr.payslip'
