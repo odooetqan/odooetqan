@@ -5,6 +5,11 @@ class HrEmployee(models.Model):
 
     employee_code = fields.Char(string="Employee Code")
 
+# In your custom module, add this extension:
+class Department(models.Model):
+    _inherit = 'hr.department'
+
+    code = fields.Char(string='Code')
 
 class HrPayslip(models.Model):
     _inherit = 'hr.payslip'
