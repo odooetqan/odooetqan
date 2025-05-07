@@ -87,7 +87,7 @@ class PayslipExportWizard(models.TransientModel):
 
             emp = slip.employee_id
             howuse_allowance = slip.contract_id.l10n_sa_housing_allowance
-            other = slip.basic_wage + howuse_allowance  - slip.lateness_deduction - slip.net_wage
+            other =  slip.net_wage  + slip.lateness_deduction - slip.basic_wage - howuse_allowance 
 
             sheet.write(row_index, 0, emp.bank_account_id.bank_id.name if emp.bank_account_id and emp.bank_account_id.bank_id else '')
             sheet.write(row_index, 1, emp.bank_account_id.acc_number or '')
