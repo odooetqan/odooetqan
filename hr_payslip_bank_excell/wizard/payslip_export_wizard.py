@@ -83,7 +83,7 @@ class PayslipExportWizard(models.TransientModel):
         # -----------------------------
         # Row 8+: Data rows
         # -----------------------------
-        for row_index, slip in enumerate(payslips, start=6):  # start at row 8 (index 7)
+        for row_index, slip in enumerate(payslips, start=7):  # start at row 8 (index 7)
 
             emp = slip.employee_id
             howuse_allowance = slip.contract_id.l10n_sa_housing_allowance
