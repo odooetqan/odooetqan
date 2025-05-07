@@ -25,6 +25,7 @@ class PayslipExportWizard(models.TransientModel):
         # Row 1 to 6: Constant headers
         # ----------------------------
         sheet.write(0, 0, "جهة الصرف: البنك الأجنبي", bold)
+        sheet.write(0, 1, "جهة الصرف: البنك الأجنبي", bold)
         sheet.write(1, 0, "نوع الملف: مرتبات", bold)
         sheet.write(2, 0, "الشهر: مايو 2025", bold)
         sheet.write(3, 0, "العملة: جنيه مصري", bold)
@@ -35,8 +36,26 @@ class PayslipExportWizard(models.TransientModel):
         # Row 7: Column headers (fields)
         # -----------------------------
         headers = [
-            'الرقم القومي', 'الاسم', 'الكود الوظيفي', 'رقم الحساب البنكي',
-            'اسم البنك', 'صافي المرتب', 'من', 'إلى', 'كود الإدارة', 'الوظيفة'
+            'Bank Name',
+            'Account Number(34N)',
+            'الرقم القومي', 
+            'Employee Name', 
+            'Employee Number', 
+            'National ID Number (15N)',
+            # 'رقم الحساب البنكي',
+            # 'اسم البنك', 
+            'Salary (15N)',
+            'Basic Salary',
+            'Housing Allowance',
+            'Other Earnings',
+            'Deductions',
+            'Deductions',
+            'Employee Remarks'
+            # 'من', 
+            # 'إلى',
+            # 'كود الإدارة',
+            # 'الوظيفة',
+
         ]
         for col, header in enumerate(headers):
             sheet.write(6, col, header, bold)

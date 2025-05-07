@@ -10,6 +10,8 @@
                         <button string="Cancel" class="btn-secondary" special="cancel"/>
                     </footer>
                 </group>
+                <p>تنزيل الملف هنا </p>
+                <button string="Download" class="btn-success" />
                 <field name="file_data" widget="binary" filename="file_name" invisible="not file_data"/>
 
 <!-- 
