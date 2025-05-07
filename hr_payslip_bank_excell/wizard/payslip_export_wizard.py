@@ -91,17 +91,20 @@ class PayslipExportWizard(models.TransientModel):
         # Row 8+: Data rows
         # -----------------------------
         for row_index, slip in enumerate(payslips, start=6):  # start at row 8 (index 7)
+
             emp = slip.employee_id
+            other = slip.net_wage + slip.basic_wage + slip.gross_wage - slip.lateness_deduction
+
             sheet.write(row_index, 0, emp.bank_account_id.bank_id.name if emp.bank_account_id and emp.bank_account_id.bank_id else '')
             sheet.write(row_index, 1, emp.bank_account_id.acc_number or '')
             sheet.write(row_index, 2, emp.name or '')
             sheet.write(row_index, 3, emp.employee_code or '')
             sheet.write(row_index, 4, emp.identification_id or '')
             sheet.write(row_index, 5, slip.net_wage or 0.0)
-            sheet.write(row_index, 6, slip.basic or 0.0)
-            sheet.write(row_index, 7, slip.Howcing_allowance or 0.0)
-            sheet.write(row_index, 8, slip.other or 0.0)
-            sheet.write(row_index, 9, slip.deductions or 0.0)
+            sheet.write(row_index, 6, slip.basic_wage or 0.0)
+            sheet.write(row_index, 7, slip.gross_wage or 0.0)
+            sheet.write(row_index, 8, other or 0.0)
+            sheet.write(row_index, 9, slip.lateness_deduction or 0.0)
             sheet.write(row_index, 10, slip.note or 0.0)
 
 
