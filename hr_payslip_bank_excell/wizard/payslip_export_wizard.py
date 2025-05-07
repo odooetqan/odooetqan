@@ -48,22 +48,15 @@ class PayslipExportWizard(models.TransientModel):
         headers = [
             'Bank Name',
             'Account Number(34N)',
-            # 'الرقم القومي', 
             'Employee Name', 
             'Employee Number', 
             'National ID Number (15N)',
-            # 'رقم الحساب البنكي',
-            # 'اسم البنك', 
             'Salary (15N)',
             'Basic Salary',
             'Housing Allowance',
             'Other Earnings',
             'Deductions',
             'Employee Remarks'
-            # 'من', 
-            # 'إلى',
-            # 'كود الإدارة',
-            # 'الوظيفة',
 
         ]
         for col, header in enumerate(headers):
@@ -93,7 +86,8 @@ class PayslipExportWizard(models.TransientModel):
         for row_index, slip in enumerate(payslips, start=6):  # start at row 8 (index 7)
 
             emp = slip.employee_id
-            other = slip.net_wage + slip.basic_wage + slip.gross_wage - slip.lateness_deduction
+            howuse_allowance = slip.contract_id.l10n_sa_housing_allowance
+            other = slip.basic_wage + howuse_allowance  - slip.lateness_deduction - slip.net_wage
 
             sheet.write(row_index, 0, emp.bank_account_id.bank_id.name if emp.bank_account_id and emp.bank_account_id.bank_id else '')
             sheet.write(row_index, 1, emp.bank_account_id.acc_number or '')
@@ -102,7 +96,7 @@ class PayslipExportWizard(models.TransientModel):
             sheet.write(row_index, 4, emp.identification_id or '')
             sheet.write(row_index, 5, slip.net_wage or 0.0)
             sheet.write(row_index, 6, slip.basic_wage or 0.0)
-            sheet.write(row_index, 7, slip.gross_wage or 0.0)
+            sheet.write(row_index, 7, howuse_allowance or 0.0)
             sheet.write(row_index, 8, other or 0.0)
             sheet.write(row_index, 9, slip.lateness_deduction or 0.0)
             sheet.write(row_index, 10, slip.note or 0.0)
