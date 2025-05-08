@@ -42,12 +42,12 @@
 
                     <group string="Shift Time Table">
                         <field name="shift_ids">
-                            <tree>
+                            <list>
                                 <field name="name"/>
                                 <!-- <field name="dayofweek"/> -->
                                 <field name="hour_from"/>
                                 <field name="hour_to"/>
-                            </tree>
+                            </list>
                         </field>
                     </group>
                 </sheet>
