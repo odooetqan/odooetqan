@@ -148,7 +148,12 @@ class HrPayslip(models.Model):
             for line in slip.line_ids:
                 if line.category_id.code in ['GROSS', 'ALW']:  # Use category codes relevant to your system
                     gross += line.total
-                elif line.total < 0:
-                    deductions += abs(line.total)
+                # elif line.total < 0:
+                #     deductions += abs(line.total)
+            for line in slip.line_ids:
+                if line.category_id.code in ['DED']:  # Use category codes relevant to your system
+                    deductions += line.total
+                # elif line.total < 0:
+                #     deductions += abs(line.total)
             slip.total_gross = gross
             slip.total_deductions = deductions
