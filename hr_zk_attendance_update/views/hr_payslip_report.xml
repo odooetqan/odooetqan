@@ -53,6 +53,10 @@
                                 <field name="tax_id"/> -->
                                 <field name="total_overtime_minutes"/>
                                 <field name="total_late_minutes"/>
+                                                    
+                                <field name="total_gross"/>
+                                <field name="total_deductions"/>
+
 
 <!--                             </list> -->
                             <form string="معلومات إضافية">
@@ -69,6 +73,20 @@
             </notebook>
         </field>
     </record>
+
+
+    <record id="hr_payslip_list_inherit_totals" model="ir.ui.view">
+        <field name="name">hr.payslip.list.inherit.totals</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_list"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='employee_id']" position="after">
+                <field name="total_gross"/>
+                <field name="total_deductions"/>
+            </xpath>
+        </field>
+    </record>
+
  
 
 

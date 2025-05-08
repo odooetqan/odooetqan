@@ -20,7 +20,6 @@ from odoo.exceptions import UserError
 #     # _description = "Contract History"
     # _auto = True  # ✅ هذا مهم! يجعل Odoo ينشئ جدول حقيقي
 
-    # # حقولك...
     # currency_id = fields.Many2one('res.currency', string="Currency")
     # reference_yearly_cost = fields.Monetary(
     #     string="Yearly Cost",

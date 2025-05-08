@@ -135,3 +135,20 @@ class HrPayslip(models.Model):
             penalty_per_minute = contract.penalty_per_minute if contract else 0
 
             payslip.lateness_deduction = total_late_minutes * penalty_per_minute
+
+
+    total_gross = fields.Monetary(string="Total Gross", compute="_compute_totals", store=True, currency_field='currency_id')
+    total_deductions = fields.Monetary(string="Total Deductions", compute="_compute_totals", store=True, currency_field='currency_id')
+
+    @api.depends('line_ids.total')
+    def _compute_totals(self):
+        for slip in self:
+            gross = 0.0
+            deductions = 0.0
+            for line in slip.line_ids:
+                if line.category_id.code in ['GROSS', 'ALW']:  # Use category codes relevant to your system
+                    gross += line.total
+                elif line.total < 0:
+                    deductions += abs(line.total)
+            slip.total_gross = gross
+            slip.total_deductions = deductions
