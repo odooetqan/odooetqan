@@ -44,7 +44,7 @@
                         <field name="shift_ids">
                             <tree>
                                 <field name="name"/>
-                                <field name="dayofweek"/>
+                                <!-- <field name="dayofweek"/> -->
                                 <field name="hour_from"/>
                                 <field name="hour_to"/>
                             </tree>
