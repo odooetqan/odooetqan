@@ -28,6 +28,35 @@
         </field>
     </record>
 
+    <record id="view_resource_calendar_multi_form" model="ir.ui.view">
+        <field name="name">resource.calendar.multi.form</field>
+        <field name="model">resource.calendar.multi</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="calendar_id"/>
+                        <field name="employee_ids" widget="many2many_tags"/>
+                    </group>
+
+                    <group string="Shift Time Table">
+                        <field name="shift_ids">
+                            <tree>
+                                <field name="name"/>
+                                <field name="dayofweek"/>
+                                <field name="hour_from"/>
+                                <field name="hour_to"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+
     <record id="action_resource_calendar_multi" model="ir.actions.act_window">
         <field name="name">Employee Calendars</field>
         <field name="res_model">resource.calendar.multi</field>

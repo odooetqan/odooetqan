@@ -7,6 +7,13 @@ class ResourceCalendarMulti(models.Model):
     name = fields.Char(string="Name", required=True)
     calendar_id = fields.Many2one('resource.calendar', string="Calendar")
     employee_ids = fields.Many2many('hr.employee', string="Employees")
+    shift_ids = fields.One2many(
+            related='calendar_id.attendance_ids',
+            string='Shift Time Table',
+            readonly=True
+        )
+
+
 
     def _apply_calendar_to_employees(self):
         for record in self:
@@ -18,12 +25,6 @@ class ResourceCalendarMulti(models.Model):
                     # تحديث جميع عقود الموظف
                     contracts = self.env['hr.contract'].search([('employee_id', '=', emp.id)])
                     contracts.write({'resource_calendar_id': record.calendar_id.id})
-
-                    # تحديث جهة الاتصال المرتبطة
-                    # # if emp.user_id and emp.user_id.partner_id:
-                    # #     emp.user_id.partner_id.write({'resource_calendar_id': record.calendar_id.id})
-                    # elif emp.address_home_id:
-                    #     emp.address_home_id.write({'resource_calendar_id': record.calendar_id.id})
 
     @api.model
     def create(self, vals):
