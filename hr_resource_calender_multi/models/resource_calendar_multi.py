@@ -20,10 +20,10 @@ class ResourceCalendarMulti(models.Model):
                     contracts.write({'resource_calendar_id': record.calendar_id.id})
 
                     # تحديث جهة الاتصال المرتبطة
-                    if emp.user_id and emp.user_id.partner_id:
-                        emp.user_id.partner_id.write({'resource_calendar_id': record.calendar_id.id})
-                    elif emp.address_home_id:
-                        emp.address_home_id.write({'resource_calendar_id': record.calendar_id.id})
+                    # # if emp.user_id and emp.user_id.partner_id:
+                    # #     emp.user_id.partner_id.write({'resource_calendar_id': record.calendar_id.id})
+                    # elif emp.address_home_id:
+                    #     emp.address_home_id.write({'resource_calendar_id': record.calendar_id.id})
 
     @api.model
     def create(self, vals):
