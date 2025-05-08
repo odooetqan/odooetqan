@@ -40,6 +40,8 @@
                         <field name="employee_ids" widget="many2many_tags"/>
                     </group>
 
+
+
                     <group string="Shift Time Table">
                         <field name="shift_ids">
                             <list>
