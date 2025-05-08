@@ -46,15 +46,19 @@
                 <!-- <page string="معلومات إضافية"> -->
                     <group col="2">
 <!--                         <field name="extra_info_id" nolabel="1">
-                            <tree editable="bottom"> -->
+                            <list editable="bottom"> -->
 <!--                                 <field name="total_allowances"/>
                                 <field name="total_deductions"/>
                                 <field name="bank_account"/>
                                 <field name="tax_id"/> -->
                                 <field name="total_overtime_minutes"/>
                                 <field name="total_late_minutes"/>
+                                                    
+                                <field name="total_gross"/>
+                                <field name="total_deductions"/>
 
-<!--                             </tree> -->
+
+<!--                             </list> -->
                             <form string="معلومات إضافية">
                                 <group col="2">
 <!--                                     <field name="total_allowances"/>
@@ -69,6 +73,24 @@
             </notebook>
         </field>
     </record>
+
+
+    <record id="hr_payslip_list_inherit_totals" model="ir.ui.view">
+        <field name="name">hr.payslip.list.inherit.totals</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='net_wage']" position="before">
+                <field name="total_gross"/>
+                <!-- <field name="total_deductions"/> -->
+            </xpath>
+            <xpath expr="//field[@name='gross_wage']" position="after">
+                <!-- <field name="total_gross"/> -->
+                <field name="total_deductions"/>
+            </xpath>
+        </field>
+    </record>
+
  
 
 
