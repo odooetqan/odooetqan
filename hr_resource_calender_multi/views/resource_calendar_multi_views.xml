@@ -1,14 +1,14 @@
 <!-- views/resource_calendar_multi_views.xml -->
 <odoo>
-    <record id="view_resource_calendar_multi_tree" model="ir.ui.view">
-        <field name="name">resource.calendar.multi.tree</field>
+    <record id="view_resource_calendar_multi_list" model="ir.ui.view">
+        <field name="name">resource.calendar.multi.list</field>
         <field name="model">resource.calendar.multi</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name"/>
                 <field name="calendar_id"/>
                 <field name="employee_ids"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -31,7 +31,7 @@
     <record id="action_resource_calendar_multi" model="ir.actions.act_window">
         <field name="name">Employee Calendars</field>
         <field name="res_model">resource.calendar.multi</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <menuitem id="menu_resource_calendar_multi"
