@@ -81,8 +81,10 @@
         <field name="inherit_id" ref="hr_payroll.view_hr_payslip_tree"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='net_wage']" position="before">
-                <field name="total_gross"/>
                 <field name="total_deductions"/>
+            </xpath>
+            <xpath expr="//field[@name='gross_wage']" position="after">
+                <field name="total_gross"/>
             </xpath>
         </field>
     </record>
