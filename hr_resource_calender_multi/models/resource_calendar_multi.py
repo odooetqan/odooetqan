@@ -2,14 +2,12 @@ from odoo import models, fields, api
 
 class ResourceCalendarMulti(models.Model):
     _name = 'resource.calendar.multi'
-    _description = 'Multi-Employee Resource Calendar'
+    _description = 'Multi Resource Calendar'
 
-    name = fields.Char(required=True)
-    calendar_id = fields.Many2one('resource.calendar', string='Working Time', required=True)
-    employee_ids = fields.Many2many('hr.employee', string='Employees')
+    name = fields.Char(string="Name", required=True)
+    calendar_id = fields.Many2one('resource.calendar', string="Calendar")
+    employee_ids = fields.Many2many('hr.employee', string="Employees")
 
-    import logging
-    _logger = logging.getLogger(__name__)
 
     def _apply_calendar_to_employees(self):
         for record in self:
