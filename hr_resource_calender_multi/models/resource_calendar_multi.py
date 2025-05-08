@@ -11,11 +11,15 @@ class ResourceCalendarMulti(models.Model):
     def _apply_calendar_to_employees(self):
         for record in self:
             if record.calendar_id and record.employee_ids:
-                # تحديث تقويم الموظف
-                record.employee_ids.write({'resource_calendar_id': record.calendar_id.id})
-
-                # تحديث تقويم جهة الاتصال المرتبطة بكل موظف
                 for emp in record.employee_ids:
+                    # تحديث تقويم الموظف
+                    emp.resource_calendar_id = record.calendar_id.id
+
+                    # تحديث جميع عقود الموظف
+                    contracts = self.env['hr.contract'].search([('employee_id', '=', emp.id)])
+                    contracts.write({'resource_calendar_id': record.calendar_id.id})
+
+                    # تحديث جهة الاتصال المرتبطة
                     if emp.user_id and emp.user_id.partner_id:
                         emp.user_id.partner_id.write({'resource_calendar_id': record.calendar_id.id})
                     elif emp.address_home_id:
