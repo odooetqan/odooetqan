@@ -59,7 +59,7 @@ class PayslipExportWizard(models.TransientModel):
             'Employee Remarks'
 
         ]
-        for col, header in enumerate(headers):
+        for col, header in enumerate(headers): # start at row 8 (index 6)
             sheet.write(5, col, header, bold)
 
         
