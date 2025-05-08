@@ -8,19 +8,18 @@ class ResourceCalendarMulti(models.Model):
     calendar_id = fields.Many2one('resource.calendar', string="Calendar")
     employee_ids = fields.Many2many('hr.employee', string="Employees")
 
-
     def _apply_calendar_to_employees(self):
         for record in self:
             if record.calendar_id and record.employee_ids:
-                _logger.info(f"Applying calendar {record.calendar_id.name} to employees: {[e.name for e in record.employee_ids]}")
+                # تحديث تقويم الموظف
                 record.employee_ids.write({'resource_calendar_id': record.calendar_id.id})
 
-
-
-    def _apply_calendar_to_employees(self):
-        for record in self:
-            if record.calendar_id and record.employee_ids:
-                record.employee_ids.write({'resource_calendar_id': record.calendar_id.id})
+                # تحديث تقويم جهة الاتصال المرتبطة بكل موظف
+                for emp in record.employee_ids:
+                    if emp.user_id and emp.user_id.partner_id:
+                        emp.user_id.partner_id.write({'resource_calendar_id': record.calendar_id.id})
+                    elif emp.address_home_id:
+                        emp.address_home_id.write({'resource_calendar_id': record.calendar_id.id})
 
     @api.model
     def create(self, vals):
