@@ -75,7 +75,7 @@
     </record>
 
 
-    <record id="hr_payslip_list_inherit_totals" model="ir.ui.view">
+    <!-- <record id="hr_payslip_list_inherit_totals" model="ir.ui.view">
         <field name="name">hr.payslip.list.inherit.totals</field>
         <field name="model">hr.payslip</field>
         <field name="inherit_id" ref="hr_payroll.view_hr_payslip_list"/>
@@ -85,7 +85,7 @@
                 <field name="total_deductions"/>
             </xpath>
         </field>
-    </record>
+    </record> -->
 
  
 
