@@ -1,0 +1,21 @@
+<odoo>
+    <record id="view_sync_now_wizard" model="ir.ui.view">
+        <field name="name">freshchat.sync.now.wizard</field>
+        <field name="model">freshchat.sync.now</field>
+        <field name="arch" type="xml">
+            <form string="Manual Sync">
+                <footer>
+                    <button name="action_sync_users" string="Sync Users" type="object" class="btn-primary"/>
+                    <button name="action_sync_channels" string="Sync Channels" type="object" class="btn-secondary"/>
+                    <button string="Close" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window id="action_sync_now_wizard"
+        name="Sync Now"
+        res_model="freshchat.sync.now"
+        view_mode="form"
+        target="new"/>
+</odoo>

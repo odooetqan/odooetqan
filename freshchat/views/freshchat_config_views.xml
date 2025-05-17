@@ -1,0 +1,23 @@
+<odoo>
+    <record id="view_freshchat_config_form" model="ir.ui.view">
+        <field name="name">freshchat.config.form</field>
+        <field name="model">freshchat.config</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="account_url"/>
+                    <field name="api_token" password="True"/>
+                    <field name="is_active"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <menuitem id="menu_freshchat_config" name="Settings" parent="menu_freshchat_root" action="action_freshchat_config"/>
+
+    <record id="action_freshchat_config" model="ir.actions.act_window">
+        <field name="name">Freshchat Config</field>
+        <field name="res_model">freshchat.config</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

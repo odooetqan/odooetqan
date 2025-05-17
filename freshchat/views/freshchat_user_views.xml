@@ -1,0 +1,40 @@
+<odoo>
+  <record id="view_freshchat_user_tree" model="ir.ui.view">
+    <field name="name">freshchat.user.tree</field>
+    <field name="model">freshchat.user</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="email"/>
+        <field name="phone"/>
+        <field name="external_id"/>
+        <field name="partner_id"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="view_freshchat_user_form" model="ir.ui.view">
+    <field name="name">freshchat.user.form</field>
+    <field name="model">freshchat.user</field>
+    <field name="arch" type="xml">
+      <form>
+        <group>
+          <field name="name"/>
+          <field name="email"/>
+          <field name="phone"/>
+          <field name="external_id"/>
+          <field name="partner_id"/>
+        </group>
+      </form>
+    </field>
+  </record>
+
+  <menuitem id="menu_freshchat_root" name="Freshchat" sequence="10"/>
+  <menuitem id="menu_freshchat_user" name="Users" parent="menu_freshchat_root" action="action_freshchat_user"/>
+
+  <record id="action_freshchat_user" model="ir.actions.act_window">
+    <field name="name">Freshchat Users</field>
+    <field name="res_model">freshchat.user</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+</odoo>

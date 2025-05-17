@@ -1,0 +1,20 @@
+<odoo>
+  <record id="ir_cron_freshchat_sync_users" model="ir.cron">
+    <field name="name">Sync Freshchat Users</field>
+    <field name="model_id" ref="base.model_res_partner"/>
+    <field name="state">code</field>
+    <field name="code">model.env['freshchat.user'].sync_users_from_api()</field>
+    <field name="interval_number">1</field>
+    <field name="interval_type">hours</field>
+    <field name="active">True</field>
+  </record>
+  <record id="ir_cron_freshchat_sync_channels" model="ir.cron">
+    <field name="name">Sync Freshchat Channels</field>
+    <field name="model_id" ref="base.model_res_partner"/>
+    <field name="state">code</field>
+    <field name="code">model.env['freshchat.channel'].sync_channels_from_api()</field>
+    <field name="interval_number">1</field>
+    <field name="interval_type">hours</field>
+    <field name="active">True</field>
+  </record>
+</odoo>

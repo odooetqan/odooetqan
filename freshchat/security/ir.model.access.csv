@@ -1,0 +1,3 @@
+access_freshchat_config,access.freshchat.config,model_freshchat_config,base.group_system,1,1,1,1
+access_freshchat_user,access.freshchat.user,model_freshchat_user,base.group_user,1,1,1,1
+access_freshchat_channel,access.freshchat.channel,model_freshchat_channel,base.group_user,1,1,1,1
