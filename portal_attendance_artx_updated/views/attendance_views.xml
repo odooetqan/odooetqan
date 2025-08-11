@@ -254,6 +254,19 @@
                                 <t t-esc="record.check_out"/>
                             </span>
                         </div>
+
+                        <td>
+                          <t t-if="record.check_in">
+                            <t t-esc="format_datetime(record.check_in, tz=tz, dt_format='short')"/>
+                          </t>
+                        </td>
+                        <td>
+                          <t t-if="record.check_out">
+                            <t t-esc="format_datetime(record.check_out, tz=tz, dt_format='short')"/>
+                          </t>
+                        </td>
+
+                        
                     </t>
                 </div>
             </t>
