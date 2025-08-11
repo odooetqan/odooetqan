@@ -147,8 +147,20 @@
                             <tbody>
                                 <t t-foreach="attendance_records" t-as="record">
                                     <tr>
-                                        <td><t t-esc="record.check_in or ''"/></td>
-                                        <td><t t-esc="record.check_out or ''"/></td>
+                                        <!-- td><t t-esc="record.check_in or ''"/></td>
+                                        <td><t t-esc="record.check_out or ''"/></td -->
+                                        <td>
+                                          <t t-if="record.check_in">
+                                            <t t-esc="format_datetime(record.check_in, tz=tz, dt_format='short')"/>
+                                          </t>
+                                        </td>
+                                        <td>
+                                          <t t-if="record.check_out">
+                                            <t t-esc="format_datetime(record.check_out, tz=tz, dt_format='short')"/>
+                                          </t>
+                                        </td>
+                                        
+                                                                                
                                         <td>
                                             <t t-if="record.worked_hours">
                                                 <t t-set="total_minutes" t-value="int(record.worked_hours * 60)"/>
@@ -159,7 +171,9 @@
                                         </td>
                                         <td><t t-esc="record.overtime_minutes or ''"/></td>
                                         <td><t t-esc="record.lateness or ''"/></td>
-                                        <td><t t-esc="record.deduction_amount or ''"/></td>
+                                        <!-- td><t t-esc="record.deduction_amount or ''"/></td -->
+                                        <td><t t-esc="'{:.2f}'.format(record.deduction_amount or 0.0)"/></td>
+
                                         <td>
                                             <button type="button" class="btn btn-warning" 
                                                 data-bs-toggle="modal" t-att-data-bs-target="'#correctAttendanceModal-%s' % record.id">
