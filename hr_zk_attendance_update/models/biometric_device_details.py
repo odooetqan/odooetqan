@@ -244,32 +244,41 @@ class MachineAttendance(models.Model):
 
     def action_process_attendance(self):
         """
-        Build hr.attendance per shift:
-        - multiple punches: first->in, last->out
-        - single punch near start: in=punch, out=shift_end-1h
-          single punch near end:   in=shift_start+1h, out=punch
-        - mark used punches as processed
+        Build hr.attendance per shift **based only on timestamps**.
+        Rules:
+        - Consider punches within [shift_start-±NO_PUNCH_WINDOW, shift_end+±NO_PUNCH_WINDOW].
+        - If ≥2 punches in window: IN = first, OUT = last.
+        - If exactly 1 punch:
+            * closer to shift start  -> IN = punch, OUT = shift_end - AUTOCHECKOUT_HRS
+            * closer to shift end    -> IN = shift_start + AUTOCHECKOUT_HRS, OUT = punch
+        - If none: skip (absence).
+        - Mark used zk logs as processed. Prevent duplicates.
         """
         hr_att = self.env['hr.attendance']
-        grouped = _group_unprocessed_punches(self.env)
+        grouped = _group_unprocessed_punches(self.env)   # returns {(device_id, day): [(punch_dt, rec), ...]}
 
         for (dev_id, day), punches in grouped.items():
             employee = self.env['hr.employee'].search([('device_id_num', '=', dev_id)], limit=1)
-            if not employee or not (employee.resource_calendar_id or employee.contract_id.resource_calendar_id):
+            if not employee:
                 continue
-            calendar = employee.resource_calendar_id or employee.contract_id.resource_calendar_id
 
-            shifts = _build_day_shifts(calendar, day)
+            calendar = employee.resource_calendar_id or employee.contract_id.resource_calendar_id
+            if not calendar:
+                continue
+
+            shifts = _build_day_shifts(calendar, day)  # [(s_start_utc_naive, s_end_utc_naive), ...]
             if not shifts:
                 continue
 
-            times_only = [p for (p, _r) in punches]
-            punch_map  = {p: r for (p, r) in punches}
+            times_only = [p for (p, _r) in punches]     # list of UTC-naive datetimes
+            punch_map  = {p: r for (p, r) in punches}   # datetime -> zk record
 
             for (s_start, s_end) in shifts:
-                # consider punches inside shift ± window
+                # window around shift
                 start_win = s_start - timedelta(minutes=NO_PUNCH_WINDOW)
                 end_win   = s_end   + timedelta(minutes=NO_PUNCH_WINDOW)
+
+                # take ALL punches in window (ignore zk punch type)
                 near = [p for p in times_only if start_win <= p <= end_win]
                 near.sort()
 
@@ -277,38 +286,111 @@ class MachineAttendance(models.Model):
                     check_in, check_out = near[0], near[-1]
                 elif len(near) == 1:
                     only = near[0]
+                    # choose the closer boundary
                     if abs((only - s_start).total_seconds()) <= abs((only - s_end).total_seconds()):
-                        check_in = only
+                        check_in  = only
                         check_out = s_end - timedelta(hours=AUTOCHECKOUT_HRS)
                     else:
-                        check_in = s_start + timedelta(hours=AUTOCHECKOUT_HRS)
+                        check_in  = s_start + timedelta(hours=AUTOCHECKOUT_HRS)
                         check_out = only
                 else:
-                    # no punch around this shift -> skip (treat as absence)
+                    # no punches near this shift -> treat as absence (no line created)
                     continue
 
                 if check_out < check_in:
                     check_out = check_in + timedelta(minutes=1)
 
-                # prevent duplicates in this shift
+                # prevent duplicates for this shift
                 existing = hr_att.search([
                     ('employee_id', '=', employee.id),
                     ('check_in', '>=', s_start),
                     ('check_in', '<=', s_end),
                 ], limit=1)
                 if existing:
-                    # still mark used near punches as processed
+                    # still mark used punches as processed so we don't keep re-evaluating them
                     for p in near:
                         punch_map[p].processed = True
                     continue
 
-                # create hr.attendance (UTC naive already)
+                # create attendance (UTC-naive already)
                 hr_att.create({
                     'employee_id': employee.id,
                     'check_in':  check_in,
                     'check_out': check_out,
                 })
 
-                # mark used zk punches as processed
+                # mark zk punches as processed
                 for p in near:
                     punch_map[p].processed = True
+
+
+    # def action_process_attendance(self):
+    #     """
+    #     Build hr.attendance per shift:
+    #     - multiple punches: first->in, last->out
+    #     - single punch near start: in=punch, out=shift_end-1h
+    #       single punch near end:   in=shift_start+1h, out=punch
+    #     - mark used punches as processed
+    #     """
+    #     hr_att = self.env['hr.attendance']
+    #     grouped = _group_unprocessed_punches(self.env)
+
+    #     for (dev_id, day), punches in grouped.items():
+    #         employee = self.env['hr.employee'].search([('device_id_num', '=', dev_id)], limit=1)
+    #         if not employee or not (employee.resource_calendar_id or employee.contract_id.resource_calendar_id):
+    #             continue
+    #         calendar = employee.resource_calendar_id or employee.contract_id.resource_calendar_id
+
+    #         shifts = _build_day_shifts(calendar, day)
+    #         if not shifts:
+    #             continue
+
+    #         times_only = [p for (p, _r) in punches]
+    #         punch_map  = {p: r for (p, r) in punches}
+
+    #         for (s_start, s_end) in shifts:
+    #             # consider punches inside shift ± window
+    #             start_win = s_start - timedelta(minutes=NO_PUNCH_WINDOW)
+    #             end_win   = s_end   + timedelta(minutes=NO_PUNCH_WINDOW)
+    #             near = [p for p in times_only if start_win <= p <= end_win]
+    #             near.sort()
+
+    #             if len(near) >= 2:
+    #                 check_in, check_out = near[0], near[-1]
+    #             elif len(near) == 1:
+    #                 only = near[0]
+    #                 if abs((only - s_start).total_seconds()) <= abs((only - s_end).total_seconds()):
+    #                     check_in = only
+    #                     check_out = s_end - timedelta(hours=AUTOCHECKOUT_HRS)
+    #                 else:
+    #                     check_in = s_start + timedelta(hours=AUTOCHECKOUT_HRS)
+    #                     check_out = only
+    #             else:
+    #                 # no punch around this shift -> skip (treat as absence)
+    #                 continue
+
+    #             if check_out < check_in:
+    #                 check_out = check_in + timedelta(minutes=1)
+
+    #             # prevent duplicates in this shift
+    #             existing = hr_att.search([
+    #                 ('employee_id', '=', employee.id),
+    #                 ('check_in', '>=', s_start),
+    #                 ('check_in', '<=', s_end),
+    #             ], limit=1)
+    #             if existing:
+    #                 # still mark used near punches as processed
+    #                 for p in near:
+    #                     punch_map[p].processed = True
+    #                 continue
+
+    #             # create hr.attendance (UTC naive already)
+    #             hr_att.create({
+    #                 'employee_id': employee.id,
+    #                 'check_in':  check_in,
+    #                 'check_out': check_out,
+    #             })
+
+    #             # mark used zk punches as processed
+    #             for p in near:
+    #                 punch_map[p].processed = True
