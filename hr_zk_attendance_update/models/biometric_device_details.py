@@ -16,10 +16,15 @@
 #    (AGPL v3) along with this program.
 #
 ################################################################################
+# -*- coding: utf-8 -*-
+################################################################################
+# Cybrosys base + custom logic (cleaned & unified)
+################################################################################
 import logging
 import pytz
 from datetime import datetime, timedelta
 from pytz import timezone, utc
+
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 
@@ -27,7 +32,7 @@ _logger = logging.getLogger(__name__)
 try:
     from zk import ZK, const
 except ImportError:
-    _logger.error("Please Install pyzk library.")
+    _logger.error("Please Install pyzk library: pip3 install pyzk")
 
 # ── Business rules ────────────────────────────────────────────────────────────
 GRACE_LATE_MIN   = 30       # lateness grace (minutes)
@@ -36,8 +41,7 @@ AUTOCHECKOUT_HRS = 1        # auto-checkout 1h before shift end when no out punc
 NO_PUNCH_WINDOW  = 20       # consider punches within ± window minutes around shift
 KSA_TZ = timezone('Asia/Riyadh')
 
-
-# ── Helpers (module-level) ────────────────────────────────────────────────────
+# ── Helpers ───────────────────────────────────────────────────────────────────
 def _to_utc_naive(dt_local, tz):
     """Local aware -> UTC naive (Odoo convention)."""
     if dt_local.tzinfo is None:
@@ -76,24 +80,25 @@ def _group_unprocessed_punches(env):
     by_emp_day = {}
     recs = env['zk.machine.attendance'].search([('processed', '=', False)], order='punching_time asc')
     for r in recs:
-        p = fields.Datetime.from_string(r.punching_time).replace(tzinfo=None)  # UTC naive from DB
+        # Odoo stores as UTC naive; convert to python datetime and drop tz
+        p = fields.Datetime.from_string(r.punching_time).replace(tzinfo=None)
         key = (r.device_id_num, p.date())
         by_emp_day.setdefault(key, []).append((p, r))
     return by_emp_day
 
-
 # ── Device config model ───────────────────────────────────────────────────────
 class BiometricDeviceDetails(models.Model):
-    """Model for configuring and connecting the biometric device with Odoo"""
     _name = 'biometric.device.details'
     _description = 'Biometric Device Details'
 
-    name = fields.Char(string='Name', required=True, help='Record Name')
-    device_ip = fields.Char(string='Device IP', required=True, help='The IP address of the Device')
-    port_number = fields.Integer(string='Port Number', required=True, help="The Port Number of the Device")
-    address_id = fields.Many2one('res.partner', string='Working Address', help='Working address of the partner')
-    company_id = fields.Many2one('res.company', string='Company',
-                                 default=lambda self: self.env.user.company_id.id, help='Current Company')
+    name = fields.Char(string='Name', required=True)
+    device_ip = fields.Char(string='Device IP', required=True)
+    port_number = fields.Integer(string='Port Number', required=True)
+    address_id = fields.Many2one('res.partner', string='Working Address')
+    company_id = fields.Many2one(
+        'res.company', string='Company',
+        default=lambda self: self.env.user.company_id.id
+    )
 
     def device_connect(self, zk):
         try:
@@ -164,7 +169,6 @@ class BiometricDeviceDetails(models.Model):
         """Download attendance and store in buffer table `zk.machine.attendance`."""
         _logger.info("++++++++++++ Cron Executed: download ++++++++++++")
         zk_attendance = self.env['zk.machine.attendance']
-        # fetch all, or set a date window if you like:
         start_date = datetime(2023, 1, 1)
 
         for info in self:
@@ -188,7 +192,7 @@ class BiometricDeviceDetails(models.Model):
                 if each.timestamp < start_date:
                     continue
 
-                # device returns local timestamp (device TZ) -> convert to UTC naive
+                # device returns local timestamp -> convert to UTC naive
                 local_tz = pytz.timezone(self.env.user.partner_id.tz or 'Asia/Riyadh')
                 local_dt = local_tz.localize(each.timestamp, is_dst=None)
                 utc_dt   = local_dt.astimezone(pytz.utc).replace(tzinfo=None)
@@ -219,10 +223,8 @@ class BiometricDeviceDetails(models.Model):
             conn.disconnect()
         return True
 
-
 # ── Buffer (intermediate) model ───────────────────────────────────────────────
 class MachineAttendance(models.Model):
-    """Intermediate table to store biometric attendance before processing."""
     _name = 'zk.machine.attendance'
     _description = 'Biometric Attendance Log'
 
@@ -246,39 +248,35 @@ class MachineAttendance(models.Model):
         """
         Build hr.attendance per shift **based only on timestamps**.
         Rules:
-        - Consider punches within [shift_start-±NO_PUNCH_WINDOW, shift_end+±NO_PUNCH_WINDOW].
-        - If ≥2 punches in window: IN = first, OUT = last.
-        - If exactly 1 punch:
-            * closer to shift start  -> IN = punch, OUT = shift_end - AUTOCHECKOUT_HRS
-            * closer to shift end    -> IN = shift_start + AUTOCHECKOUT_HRS, OUT = punch
-        - If none: skip (absence).
-        - Mark used zk logs as processed. Prevent duplicates.
+        - consider punches within [shift_start-±NO_PUNCH_WINDOW, shift_end+±NO_PUNCH_WINDOW]
+        - if ≥2 punches: IN = first, OUT = last
+        - if exactly 1 punch:
+            * closer to start -> IN=punch, OUT=shift_end - AUTOCHECKOUT_HRS
+            * closer to end   -> IN=shift_start + AUTOCHECKOUT_HRS, OUT=punch
+        - if none: skip (absence)
+        - mark used zk logs as processed; prevent duplicates
         """
         hr_att = self.env['hr.attendance']
-        grouped = _group_unprocessed_punches(self.env)   # returns {(device_id, day): [(punch_dt, rec), ...]}
+        grouped = _group_unprocessed_punches(self.env)
 
         for (dev_id, day), punches in grouped.items():
             employee = self.env['hr.employee'].search([('device_id_num', '=', dev_id)], limit=1)
             if not employee:
                 continue
-
             calendar = employee.resource_calendar_id or employee.contract_id.resource_calendar_id
             if not calendar:
                 continue
 
-            shifts = _build_day_shifts(calendar, day)  # [(s_start_utc_naive, s_end_utc_naive), ...]
+            shifts = _build_day_shifts(calendar, day)
             if not shifts:
                 continue
 
-            times_only = [p for (p, _r) in punches]     # list of UTC-naive datetimes
-            punch_map  = {p: r for (p, r) in punches}   # datetime -> zk record
+            times_only = [p for (p, _r) in punches]
+            punch_map  = {p: r for (p, r) in punches}
 
             for (s_start, s_end) in shifts:
-                # window around shift
                 start_win = s_start - timedelta(minutes=NO_PUNCH_WINDOW)
                 end_win   = s_end   + timedelta(minutes=NO_PUNCH_WINDOW)
-
-                # take ALL punches in window (ignore zk punch type)
                 near = [p for p in times_only if start_win <= p <= end_win]
                 near.sort()
 
@@ -286,7 +284,6 @@ class MachineAttendance(models.Model):
                     check_in, check_out = near[0], near[-1]
                 elif len(near) == 1:
                     only = near[0]
-                    # choose the closer boundary
                     if abs((only - s_start).total_seconds()) <= abs((only - s_end).total_seconds()):
                         check_in  = only
                         check_out = s_end - timedelta(hours=AUTOCHECKOUT_HRS)
@@ -294,7 +291,6 @@ class MachineAttendance(models.Model):
                         check_in  = s_start + timedelta(hours=AUTOCHECKOUT_HRS)
                         check_out = only
                 else:
-                    # no punches near this shift -> treat as absence (no line created)
                     continue
 
                 if check_out < check_in:
@@ -307,21 +303,78 @@ class MachineAttendance(models.Model):
                     ('check_in', '<=', s_end),
                 ], limit=1)
                 if existing:
-                    # still mark used punches as processed so we don't keep re-evaluating them
                     for p in near:
                         punch_map[p].processed = True
                     continue
 
-                # create attendance (UTC-naive already)
                 hr_att.create({
                     'employee_id': employee.id,
-                    'check_in':  check_in,
-                    'check_out': check_out,
+                    'check_in':  check_in,   # UTC-naive
+                    'check_out': check_out,  # UTC-naive
                 })
 
-                # mark zk punches as processed
                 for p in near:
                     punch_map[p].processed = True
+
+# ── Attendance computed metrics (on hr.attendance) ────────────────────────────
+class HrAttendance(models.Model):
+    _inherit = 'hr.attendance'
+
+    # store the computed shift bounds for reporting (UTC-naive)
+    shift_start = fields.Datetime(string='Shift Start', readonly=True)
+    shift_end   = fields.Datetime(string='Shift End',   readonly=True)
+    notes = fields.Char('Notes')
+
+    # KPIs
+    lateness = fields.Float(string="Lateness (minutes)", compute="_compute_attendance_metrics", store=True)
+    early_checkout = fields.Float(string="Early Check-Out (minutes)", compute="_compute_attendance_metrics", store=True)
+    shift_duration = fields.Float(string="Shift Duration (minutes)", compute="_compute_attendance_metrics", store=True)
+    attended_duration = fields.Float(string="Attended Duration (minutes)", compute="_compute_attendance_metrics", store=True)
+    attendance_gap = fields.Float(string="Attendance Gap (minutes)", compute="_compute_attendance_metrics", store=True)
+
+    def action_recompute_attendance(self):
+        for record in self:
+            record._compute_attendance_metrics()
+
+    @api.depends('check_in', 'check_out', 'employee_id')
+    def _compute_attendance_metrics(self):
+        for rec in self:
+            rec.lateness = rec.early_checkout = rec.shift_duration = rec.attended_duration = rec.attendance_gap = 0.0
+            rec.shift_start = rec.shift_end = False
+
+            if not rec.check_in or not rec.employee_id:
+                continue
+
+            cal = rec.employee_id.resource_calendar_id or rec.employee_id.contract_id.resource_calendar_id
+            if not cal:
+                continue
+
+            # pick the shift of that day that is closest/contains the check_in
+            shifts = _build_day_shifts(cal, rec.check_in.date())
+            if not shifts:
+                continue
+            # choose shift that contains check_in, otherwise nearest by boundary
+            def _dist(s):
+                s0, s1 = s
+                if s0 <= rec.check_in <= s1:
+                    return 0
+                return min(abs((rec.check_in - s0).total_seconds()), abs((rec.check_in - s1).total_seconds()))
+            s_start, s_end = min(shifts, key=_dist)
+
+            rec.shift_start = s_start
+            rec.shift_end   = s_end
+
+            rec.shift_duration = (s_end - s_start).total_seconds()/60.0
+            rec.attended_duration = ((rec.check_out or s_end) - rec.check_in).total_seconds()/60.0
+
+            raw_late  = max(0, (rec.check_in - s_start).total_seconds()/60.0)
+            raw_early = 0
+            if rec.check_out:
+                raw_early = max(0, (s_end - rec.check_out).total_seconds()/60.0)
+
+            rec.lateness       = max(0, raw_late  - GRACE_LATE_MIN)
+            rec.early_checkout = max(0, raw_early - GRACE_EARLY_MIN)
+            rec.attendance_gap = rec.shift_duration - rec.attended_duration
 
 
     # def action_process_attendance(self):
