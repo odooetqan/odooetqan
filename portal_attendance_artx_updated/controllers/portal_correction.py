@@ -1,8 +1,8 @@
-from odoo import http
+from odoo import http, fields
 from odoo.http import request
 import logging
 from datetime import datetime
-
+import base64
 
 _logger = logging.getLogger(__name__)
 class PortalAttendance(http.Controller):
@@ -27,6 +27,29 @@ class PortalAttendance(http.Controller):
             'correction_type': correction_type,
             'reason': correction_reason,
         })
+        
+        # 2) Save uploaded files as ir.attachment and link to M2M field
+        files = request.httprequest.files.getlist('attachments')  # Werkzeug FileStorage list
+        att_ids = []
+        for f in files:
+            if not f or not f.filename:
+                continue
+            data = f.read()
+            if not data:
+                continue
+            att = request.env['ir.attachment'].sudo().create({
+                'name': f.filename,
+                'datas': base64.b64encode(data),
+                'mimetype': f.content_type,
+                # Attach to the record (so it appears in chatter)
+                'res_model': 'hr.attendance.correction',
+                'res_id': correction.id,
+            })
+            att_ids.append(att.id)
+
+        if att_ids:
+            correction.sudo().write({'attachment': [(6, 0, att_ids)]})
+            
 
         return request.redirect('/my/attendance')
 
