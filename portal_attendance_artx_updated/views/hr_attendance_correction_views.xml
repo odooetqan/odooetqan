@@ -329,18 +329,37 @@
                                 <t t-foreach="attendance_records" t-as="record">
                                     <tr>
                                         <td>                                                
-                                            <t t-if="record.check_in">
+                                            <!-- t t-if="record.check_in">
                                               <t t-esc="format_datetime(record.check_in, tz=tz, dt_format='short')"/>
                                             </t>
                                             ||| 
                                           <t t-if="record.check_in">
                                             <t t-esc="format_datetime(record.check_in, tz=tz, dt_format='short')"/>
+                                          </t -->
+                                            
+                                        <t t-if="record.check_in">
+                                          <t t-if="format_datetime">
+                                            <t t-esc="format_datetime(record.check_in, tz=user_tz, dt_format='short')"/>
                                           </t>
+                                          <t t-if="not format_datetime">
+                                            <t t-esc="request.env['ir.qweb.field.datetime'].value_to_html(record.check_in, {'tz': user_tz})"/>
+                                          </t>
+                                        </t>
+                                            
                                         </td>
                                         <td>
-                                          <t t-if="record.check_out">
+                                          <!--t t-if="record.check_out">
                                             <t t-esc="format_datetime(record.check_out, tz=tz, dt_format='short')"/>
-                                          </t>
+                                          </t-->
+                                            
+                                            <t t-if="record.check_out">
+                                              <t t-if="format_datetime">
+                                                <t t-esc="format_datetime(record.check_out, tz=user_tz, dt_format='short')"/>
+                                              </t>
+                                              <t t-if="not format_datetime">
+                                                <t t-esc="request.env['ir.qweb.field.datetime'].value_to_html(record.check_out, {'tz': user_tz})"/>
+                                              </t>
+                                            </t>
                                         </td>
                                         <td>
                                             <t t-if="record.worked_hours">
@@ -355,9 +374,9 @@
                                         <td>
                                             <!-- <t t-esc="record.deduction_amount or ''"/> -->
 
-                                            <t t-esc="'{:.2f}'.format(record.deduction_amount or 0.0)"/>
-                                            |||
-                                            <td><t t-esc="format_amount(record.deduction_amount or 0.0, currency)"/></td>
+                                            <!--t t-esc="'{:.2f}'.format(record.deduction_amount or 0.0)"/>
+                                            ||| -->
+                                            <t t-esc="format_amount(record.deduction_amount or 0.0, currency)"/>
 
                                         
                                         
