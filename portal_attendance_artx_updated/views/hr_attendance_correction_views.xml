@@ -361,6 +361,8 @@
                                               </t>
                                             </t>
                                         </td>
+
+                                        
                                         <td>
                                             <t t-if="record.worked_hours">
                                                 <t t-set="total_minutes" t-value="int(record.worked_hours * 60)"/>
@@ -371,12 +373,17 @@
                                         </td>
                                         <td><t t-esc="record.overtime_minutes or ''"/></td>
                                         <td><t t-esc="record.lateness or ''"/></td>
+                                        <t t-set="currency" t-value="request.env.company.currency_id"/>
                                         <td>
+                                              <t t-raw="request.env['ir.qweb.field.monetary'].value_to_html(
+                                                          (record.deduction_amount or 0.0),
+                                                          {'display_currency': currency}
+                                                        )"/>
                                             <!-- <t t-esc="record.deduction_amount or ''"/> -->
 
                                             <!--t t-esc="'{:.2f}'.format(record.deduction_amount or 0.0)"/>
                                             ||| -->
-                                            <t t-esc="format_amount(record.deduction_amount or 0.0, currency)"/>
+                                            <!--t t-esc="format_amount(record.deduction_amount or 0.0, currency)"/ -->
 
                                         
                                         
