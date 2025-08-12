@@ -10,37 +10,72 @@ _logger = logging.getLogger(__name__)
 
 
 class PortalAttendance(http.Controller):
+    
     @http.route(['/my/attendance'], type='http', auth='user', website=True)
+        
     def portal_my_attendance(self, **kwargs):
         user = request.env.user
         employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
-
         if not employee:
             return request.redirect('/my/home')
 
         today = fields.Date.today()
-        first_day_of_current_month = today.replace(day=1)
-        fifteenth_previous_month = first_day_of_current_month - timedelta(days=15)
+        first_day = today.replace(day=1)
+        from_date = first_day - timedelta(days=15)
 
         attendance_records = request.env['hr.attendance'].sudo().search([
             ('employee_id', '=', employee.id),
-            ('check_in', '>=', fifteenth_previous_month),
-            ('check_in', '<=', today)
+            ('check_in', '>=', from_date),
+            ('check_in', '<=', today),
         ])
 
-        # Get the active attendance (if exists)
-        active_attendance = request.env['hr.attendance'].sudo().search([
-            ('employee_id', '=', employee.id),
-            ('check_out', '=', False)
-        ], order='check_in desc', limit=1)
+        tz = user.tz or request.env.context.get('tz') or 'UTC'
 
         values = {
             'attendance_records': attendance_records,
-            'active_attendance': active_attendance,
+            'active_attendance': request.env['hr.attendance'].sudo().search([
+                ('employee_id', '=', employee.id),
+                ('check_out', '=', False)
+            ], order='check_in desc', limit=1),
+            'tz': tz,
+            'currency': request.env.company.currency_id,  # for proper money formatting (next step)
         }
+        # ensure Jinja/QWeb sees tz/lang in context
+        request.env.context = dict(request.env.context, tz=tz, lang=user.lang or request.env.lang)
         return request.render('portal_attendance_artx_updated.portal_my_attendance', values)
+
+
+    # @http.route(['/my/attendance'], type='http', auth='user', website=True)
+    # def portal_my_attendance(self, **kwargs):
+    #     user = request.env.user
+    #     employee = request.env['hr.employee'].sudo().search([('user_id', '=', user.id)], limit=1)
+
+    #     if not employee:
+    #         return request.redirect('/my/home')
+
+    #     today = fields.Date.today()
+    #     first_day_of_current_month = today.replace(day=1)
+    #     fifteenth_previous_month = first_day_of_current_month - timedelta(days=15)
+
+    #     attendance_records = request.env['hr.attendance'].sudo().search([
+    #         ('employee_id', '=', employee.id),
+    #         ('check_in', '>=', fifteenth_previous_month),
+    #         ('check_in', '<=', today)
+    #     ])
+
+    #     # Get the active attendance (if exists)
+    #     active_attendance = request.env['hr.attendance'].sudo().search([
+    #         ('employee_id', '=', employee.id),
+    #         ('check_out', '=', False)
+    #     ], order='check_in desc', limit=1)
+
+    #     values = {
+    #         'attendance_records': attendance_records,
+    #         'active_attendance': active_attendance,
+    #     }
+    #     return request.render('portal_attendance_artx_updated.portal_my_attendance', values)
     
-    # @http.route('/portal/add_attendance', type='http', auth='user', methods=['POST'], csrf=False)
+    # # @http.route('/portal/add_attendance', type='http', auth='user', methods=['POST'], csrf=False)
 
     @http.route('/portal/add_attendance', type='json', auth="user", methods=['POST'], csrf=False)
     def add_attendance(self, **kwargs):
@@ -1347,4 +1382,4 @@ class PortalLeaves(http.Controller):
         last_attendance.sudo().write({'check_out': fields.Datetime.now()})
 
         return {'success': True, 'message': 'تم تسجيل الخروج بنجاح!'}
-
+    
