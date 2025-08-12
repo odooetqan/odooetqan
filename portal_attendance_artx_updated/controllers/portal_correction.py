@@ -7,7 +7,8 @@ import base64
 _logger = logging.getLogger(__name__)
 class PortalAttendance(http.Controller):
 
-    @http.route('/portal/request_attendance_correction', type='http', auth="user", methods=['POST'], website=True, csrf=False)
+    # @http.route('/portal/request_attendance_correction', type='http', auth="user", methods=['POST'], website=True, csrf=False)
+    @http.route('/portal/request_attendance_correction', type='http', auth='user', methods=['POST'], website=True, csrf=True)
     def request_attendance_correction(self, **kwargs):
         attendance_id = int(kwargs.get('attendance_id', 0))
         corrected_time = kwargs.get('corrected_time')  # HH:MM format
@@ -29,27 +30,44 @@ class PortalAttendance(http.Controller):
         })
         
         # 2) Save uploaded files as ir.attachment and link to M2M field
-        files = request.httprequest.files.getlist('attachments')  # Werkzeug FileStorage list
+        #files = request.httprequest.files.getlist('attachments')  # Werkzeug FileStorage list
+        #att_ids = []
+        #for f in files:
+           # if not f or not f.filename:
+           #     continue
+          #  data = f.read()
+          #  if not data:
+          #      continue
+          #  att = request.env['ir.attachment'].sudo().create({
+           #     'name': f.filename,
+          #      'datas': base64.b64encode(data),
+          #      'mimetype': f.content_type,
+           #     # Attach to the record (so it appears in chatter)
+           #     'res_model': 'hr.attendance.correction',
+           #     'res_id': correction.id,
+          #  })
+          #  att_ids.append(att.id)
+
+     #   if att_ids:
+         #   correction.sudo().write({'attachment': [(6, 0, att_ids)]})
+        
+        files = request.httprequest.files.getlist('attachments')
         att_ids = []
         for f in files:
-            if not f or not f.filename:
-                continue
-            data = f.read()
-            if not data:
-                continue
-            att = request.env['ir.attachment'].sudo().create({
-                'name': f.filename,
-                'datas': base64.b64encode(data),
-                'mimetype': f.content_type,
-                # Attach to the record (so it appears in chatter)
-                'res_model': 'hr.attendance.correction',
-                'res_id': correction.id,
-            })
-            att_ids.append(att.id)
-
+            if f and f.filename:
+                data = f.read()
+                if data:
+                    att = request.env['ir.attachment'].sudo().create({
+                        'name': f.filename,
+                        'datas': base64.b64encode(data),
+                        'mimetype': f.content_type,
+                        'res_model': 'hr.attendance.correction',
+                        'res_id': correction.id,
+                    })
+                    att_ids.append(att.id)
         if att_ids:
-            correction.sudo().write({'attachment': [(6, 0, att_ids)]})
-            
+            correction.sudo().write({'attachment': [(6, 0, att_ids)]})   # or [(4, i) for i in att_ids]
+        
 
         return request.redirect('/my/attendance')
 
