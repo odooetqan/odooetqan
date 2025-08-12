@@ -29,9 +29,11 @@ class PortalAttendance(http.Controller):
             ('check_in', '<=', today),
         ])
 
-        tz = user.tz or request.env.context.get('tz') or 'UTC'
+        tz = user.tz or request.env.context.get('tz') #or 'UTC'
+        env_ctx = request.env(context=dict(request.env.context, tz=tz, lang=user.lang or request.env.lang))
 
-        values = {
+
+        values = {           
             'attendance_records': attendance_records,
             'active_attendance': request.env['hr.attendance'].sudo().search([
                 ('employee_id', '=', employee.id),
