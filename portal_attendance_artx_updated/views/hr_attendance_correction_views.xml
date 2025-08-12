@@ -417,6 +417,10 @@
 
                                                                 <label>سبب التصحيح:</label>
                                                                 <textarea name="correction_reason" class="form-control" required="1"></textarea>
+                                                                                                                
+                                                                <label>مرفقات (اختياري):</label>
+                                                                <input type="file" name="attachments" multiple="multiple" class="form-control"/>
+                                                                
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="submit" class="btn btn-success">إرسال التصحيح</button>
