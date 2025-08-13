@@ -63,6 +63,17 @@
                                 <field name="attachment" widget="many2many_binary"  readonly="state != 'pending'"/>
                                 <field name="state" readonly="1"/>
                             </group>
+                            <group>
+                                <field name="attachment_ids"
+                                       widget="attachment"
+                                       domain="[('res_model', '=', 'hr.attendance.correction'), ('res_id', '=', id)]"
+                                       context="{
+                                           'default_res_model': 'hr.attendance.correction',
+                                           'default_res_id': active_id
+                                       }"/>
+                            </group>
+
+            
                         </group>
                         <footer>
                             <button name="action_approve" type="object" string="Approve"
