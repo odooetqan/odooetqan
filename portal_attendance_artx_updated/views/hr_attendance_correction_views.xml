@@ -171,6 +171,12 @@
                             <field name="reason"/>
                             <field name="state" readonly="1"/>
                         </group>
+                        
+                            <group>
+                                <field name="attachment" widget="many2many_binary"  readonly="state != 'pending'"/>
+                                <field name="state" readonly="1"/>
+                            </group>
+                        
                         <footer>
                             <button name="action_approve" type="object" class="oe_highlight" string="Approve"
                                 invisible="state != 'pending'"/>
