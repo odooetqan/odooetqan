@@ -2,71 +2,6 @@
 <odoo>
     <data noupdate="1">
 
-
-
-<!-- == Wizard view for attendance.review.wizard == -->
-<record id="view_attendance_review_wizard_form" model="ir.ui.view">
-    <field name="name">attendance.review.wizard.form</field>
-    <field name="model">attendance.review.wizard</field>
-    <field name="arch" type="xml">
-        <form string="Review Attendance from Biometric Buffer">
-            <group>
-                <field name="employee_id"/>
-                <field name="date_from"/>
-                <field name="date_to"/>
-                <field name="window_min"/>
-                <field name="include_processed"/>
-                <field name="dry_run"/>
-            </group>
-
-            <header>
-                <button name="action_scan" type="object" string="Scan" class="oe_highlight"/>
-                <button name="action_apply" type="object" string="Apply" class="btn-primary"/>
-                <button string="Close" class="btn-secondary" special="cancel"/>
-            </header>
-
-            <notebook>
-                <page string="Suggestions">
-                    <field name="line_ids" context="{'default_wizard_id': active_id}">
-                        <tree editable="bottom">
-                            <field name="day"/>
-                            <field name="shift_start"/>
-                            <field name="shift_end"/>
-                            <field name="punch_count" readonly="1"/>
-                            <field name="punches" readonly="1"/>
-                            <field name="suggested_in"/>
-                            <field name="suggested_out"/>
-                            <field name="existing_attendance_id"/>
-                            <field name="action"/>
-                            <field name="reason" readonly="1"/>
-                        </tree>
-                    </field>
-                </page>
-                <page string="Notes">
-                    <field name="note"/>
-                </page>
-            </notebook>
-        </form>
-    </field>
-</record>
-
-<!-- == Action that opens the wizard == -->
-<record id="action_attendance_review_wizard" model="ir.actions.act_window">
-    <field name="name">Review Attendance Device</field>
-    <field name="res_model">attendance.review.wizard</field>
-    <field name="view_mode">form</field>
-    <field name="target">new</field>
-    <field name="context">{}</field>
-</record>
-
-<!-- == Put a menu for the Wizard (unique id) == -->
-<menuitem id="menu_attendance_review_wizard"
-          name="Review Attendance Device"
-          parent="hr_attendance.menu_hr_attendance_root"
-          action="action_attendance_review_wizard"
-          sequence="22"/>
-
-
     <!--    Defined all menus here -->
     <menuitem id="biometric_device_details_menu"
               name="Biometric Device"
@@ -80,14 +15,6 @@
               action="daily_attendance_action"
               parent="biometric_device_details_menu"
               /><!--              groups="hr_attendance.group_hr_attendance_officer"-->
-
-
-    <!-- <menuitem id="biometric_device_details_menu"
-              action="action_attendance_review_wizard"
-              name="Review Attendance Device"
-              parent="hr_attendance.menu_hr_attendance_root"
-              sequence="22"/> -->
-
 
 
 
