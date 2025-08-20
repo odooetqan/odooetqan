@@ -72,7 +72,7 @@
     <field name="model">hr.employee</field>
     <field name="inherit_id" ref="hr.view_employee_form"/>
     <field name="arch" type="xml">
-      <xpath expr="//div[@name='button_box']" position="inside">
+      <xpath expr="//div[@name='button_box']" position="after">
         <button type="action" name="%(action_attendance_review_wizard)d"
                 class="oe_stat_button" context="{'employee_id': active_id}">
           <div class="o_stat_info">
