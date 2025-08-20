@@ -41,6 +41,7 @@
         'views/daily_attendance_views.xml',
         'views/biometric_device_attendance_menus.xml',
         'views/hr_payslip_report.xml',
+        'wizard/attendance_review_wizard_views.xml',
         'data/download_data.xml',
         'data/attendance_email_template.xml',
     ],
