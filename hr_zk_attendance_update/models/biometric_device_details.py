@@ -241,6 +241,50 @@ class MachineAttendance(models.Model):
         company = self.env.company
         return company.partner_id.id if company.partner_id else False
 
+
+
+    # --- helper: create attendance safely (no overlaps, closes open rows) ----
+    def _safe_create_attendance(self, employee, check_in, check_out):
+        Att = self.env['hr.attendance']
+
+        # 1) sanity
+        if not check_in:
+            return False
+        if not check_out or check_out <= check_in:
+            check_out = check_in + timedelta(minutes=1)
+
+        # 2) close ANY open attendance for this employee BEFORE our interval
+        open_att = Att.search([
+            ('employee_id', '=', employee.id),
+            ('check_out', '=', False),
+        ], limit=1, order='check_in desc')
+        if open_att:
+            # close it right before our new interval; keep >= 1 minute total
+            safe_checkout = max(open_att.check_in + timedelta(minutes=1),
+                                check_in - timedelta(minutes=1))
+            if not open_att.check_out or open_att.check_out > safe_checkout:
+                open_att.check_out = safe_checkout
+
+        # 3) if anything would still overlap, skip creating to avoid core error
+        overlapping = Att.search([
+            ('employee_id', '=', employee.id),
+            ('check_in', '<', check_out),
+            '|',
+            ('check_out', '=', False),         # open row overlaps anything after its check_in
+            ('check_out', '>', check_in),
+        ], limit=1)
+        if overlapping:
+            return overlapping  # treat as handled/merged
+
+        # 4) create clean record
+        return Att.create({
+            'employee_id': employee.id,
+            'check_in':  check_in,   # UTC-naive already in your flow
+            'check_out': check_out,
+        })
+
+
+
     def action_process_attendance_manual(self):
         self.action_process_attendance()
 
@@ -307,11 +351,16 @@ class MachineAttendance(models.Model):
                         punch_map[p].processed = True
                     continue
 
-                hr_att.create({
-                    'employee_id': employee.id,
-                    'check_in':  check_in,   # UTC-naive
-                    'check_out': check_out,  # UTC-naive
-                })
+                # hr_att.create({
+                #     'employee_id': employee.id,
+                #     'check_in':  check_in,   # UTC-naive
+                #     'check_out': check_out,  # UTC-naive
+                # })
+                
+                # >>> replace the raw create with the safe creator <<<
+                created = self._safe_create_attendance(employee, check_in, check_out)
+
+                # mark used zk punches as processed regardless (created or merged/overlapped)
 
                 for p in near:
                     punch_map[p].processed = True
