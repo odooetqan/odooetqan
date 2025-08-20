@@ -2,6 +2,48 @@
 <odoo>
     <data noupdate="1">
 
+
+    
+  <!-- Button on hr.attendance form header -->
+  <record id="view_hr_attendance_form_inherit_review" model="ir.ui.view">
+    <field name="name">hr.attendance.form.review.buffer</field>
+    <field name="model">hr.attendance</field>
+    <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//header" position="inside">
+        <button type="action"
+                string="Review from Buffer"
+                class="oe_highlight"
+                name="%(action_attendance_review_wizard)d"
+                context="{'default_employee_id': employee_id}"/>
+      </xpath>
+    </field>
+  </record>
+
+
+
+<!--    -->
+  <!-- (Optional) Smart button on hr.employee -->
+  <record id="view_hr_employee_form_inherit_review" model="ir.ui.view">
+    <field name="name">hr.employee.form.review.buffer</field>
+    <field name="model">hr.employee</field>
+    <field name="inherit_id" ref="hr.view_employee_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//div[@name='button_box']" position="inside">
+        <button type="action" name="%(action_attendance_review_wizard)d"
+                class="oe_stat_button" context="{'employee_id': active_id}">
+          <div class="o_stat_info">
+            <span class="o_stat_text">Review Attendance</span>
+          </div>
+        </button>
+      </xpath>
+    </field>
+  </record>
+
+
+
+  
+
     <!--    Defined all menus here -->
     <menuitem id="biometric_device_details_menu"
               name="Biometric Device"
