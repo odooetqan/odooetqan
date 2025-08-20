@@ -1,0 +1,85 @@
+<odoo>
+  <!-- Wizard form -->
+  <record id="view_attendance_review_wizard_form" model="ir.ui.view">
+    <field name="name">attendance.review.wizard.form</field>
+    <field name="model">attendance.review.wizard</field>
+    <field name="arch" type="xml">
+      <form string="Review Attendance from Buffer">
+        <group>
+          <group>
+            <field name="employee_id"/>
+            <field name="date_from"/>
+            <field name="date_to"/>
+          </group>
+          <group>
+            <field name="window_min"/>
+            <field name="include_processed"/>
+            <field name="dry_run"/>
+          </group>
+        </group>
+        <footer>
+          <button name="action_scan" type="object" class="btn-secondary" string="Scan"/>
+          <button name="action_apply" type="object" class="btn-primary" string="Apply Fixes"/>
+          <button string="Close" class="btn-link" special="cancel"/>
+        </footer>
+        <separator string="Suggestions"/>
+        <field name="line_ids" nolabel="1" context="{'default_wizard_id': active_id}">
+          <tree editable="bottom">
+            <field name="day" readonly="1"/>
+            <field name="shift_start" readonly="1"/>
+            <field name="shift_end" readonly="1"/>
+            <field name="punch_count" readonly="1"/>
+            <field name="punches" readonly="1"/>
+            <field name="suggested_in"/>
+            <field name="suggested_out"/>
+            <field name="existing_attendance_id" readonly="1"/>
+            <field name="action"/>
+            <field name="reason" readonly="1"/>
+          </tree>
+        </field>
+        <field name="note" nolabel="1"/>
+      </form>
+    </field>
+  </record>
+
+  <!-- Action to open wizard -->
+  <record id="action_attendance_review_wizard" model="ir.actions.act_window">
+    <field name="name">Review from Buffer</field>
+    <field name="res_model">attendance.review.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+  </record>
+
+  <!-- Button on hr.attendance form header -->
+  <record id="view_hr_attendance_form_inherit_review" model="ir.ui.view">
+    <field name="name">hr.attendance.form.review.buffer</field>
+    <field name="model">hr.attendance</field>
+    <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//header" position="inside">
+        <button type="action"
+                string="Review from Buffer"
+                class="oe_highlight"
+                name="%(action_attendance_review_wizard)d"
+                context="{'default_employee_id': employee_id}"/>
+      </xpath>
+    </field>
+  </record>
+
+  <!-- (Optional) Smart button on hr.employee -->
+  <record id="view_hr_employee_form_inherit_review" model="ir.ui.view">
+    <field name="name">hr.employee.form.review.buffer</field>
+    <field name="model">hr.employee</field>
+    <field name="inherit_id" ref="hr.view_employee_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//div[@name='button_box']" position="inside">
+        <button type="action" name="%(action_attendance_review_wizard)d"
+                class="oe_stat_button" context="{'employee_id': active_id}">
+          <div class="o_stat_info">
+            <span class="o_stat_text">Review Attendance</span>
+          </div>
+        </button>
+      </xpath>
+    </field>
+  </record>
+</odoo>
