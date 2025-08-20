@@ -228,6 +228,11 @@ class MachineAttendance(models.Model):
     _name = 'zk.machine.attendance'
     _description = 'Biometric Attendance Log'
 
+    @api.model
+    def _build_day_shifts(self, calendar, day_date):
+        # reuse the top-level function defined in the same python file
+        return _build_day_shifts(calendar, day_date)
+    
     employee_id = fields.Many2one('hr.employee', string="Employee", required=True)
     device_id_num = fields.Char(string="Device ID", required=True)
     punching_time = fields.Datetime(string="Punching Time", required=True)  # UTC naive

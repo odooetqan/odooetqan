@@ -74,13 +74,14 @@ class AttendanceReviewWizard(models.TransientModel):
         # _build_day_shifts(calendar, day_date) and _safe_create_attendance on buffer model
         # We’ll call _safe_create_attendance through the buffer model (self.env['zk.machine.attendance'])
         BufModel = self.env['zk.machine.attendance']
+        
 
         suggestion_count = 0
         for day in self._iter_days(self.date_from, self.date_to):
             shifts = self.env['zk.machine.attendance']._build_day_shifts(cal, day) if hasattr(BufModel, '_build_day_shifts') else None
             # Fallback: import from module namespace if not bound; but in your code _build_day_shifts is defined at module top.
             if not shifts:
-                from odoo.addons.<your_module_name>.models import biometric_attendance  # adjust path if needed
+                # from odoo.addons.<your_module_name>.models import biometric_attendance  # adjust path if needed
                 shifts = biometric_attendance._build_day_shifts(cal, day)
 
             day_points = [p for (p, _r) in by_day.get(day, [])]
