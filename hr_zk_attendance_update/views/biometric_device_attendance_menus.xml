@@ -17,6 +17,14 @@
               /><!--              groups="hr_attendance.group_hr_attendance_officer"-->
 
 
+    <menuitem id="biometric_device_details_menu"
+              action="action_attendance_review_wizard"
+              name="Review Attendance Device"
+              parent="hr_attendance.menu_hr_attendance_root"
+              sequence="22"/>
+
+
+
 
         <record id="view_hr_attendance_form" model="ir.ui.view">
             <field name="name">hr.attendance.form.view</field>
