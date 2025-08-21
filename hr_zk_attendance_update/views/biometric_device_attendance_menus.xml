@@ -82,7 +82,7 @@
     <!-- New update attendance to correct attendance -->
     
     <!-- Server action: Apply selected biometric logs to attendance -->
-    <record id="action_apply_selected_bio_to_attendance" model="ir.actions.server">
+    <!-- <record id="action_apply_selected_bio_to_attendance" model="ir.actions.server">
       <field name="name">Apply to Attendance (Overwrite)</field>
       <field name="model_id" ref="model_zk_machine_attendance"/>
       <field name="binding_model_id" ref="model_zk_machine_attendance"/>
@@ -90,7 +90,26 @@
       <field name="binding_type">action</field>
       <field name="code">records.action_apply_to_attendance()</field>
       <field name="usage">ir_actions_act_multi</field>
+    </record> -->
+
+    <record id="action_apply_selected_bio_to_attendance" model="ir.actions.server">
+        <field name="name">Apply to Attendance (Overwrite)</field>
+        <field name="model_id" ref="model_zk_machine_attendance"/>
+        <field name="state">code</field>
+        <field name="code">records.action_apply_to_attendance()</field>
+
+        <!-- الربط بقائمة الإجراءات على نفس الموديل -->
+        <field name="binding_model_id" ref="model_zk_machine_attendance"/>
+        <field name="binding_type">action</field>
+
+        <!-- مهم: حتى يظهر في عرض القائمة ويعمل على السجلات المختارة -->
+        <field name="binding_view_types">list</field>
+
+        <!-- (اختياري) تقييد الصلاحيات -->
+        <!-- <field name="groups_id" eval="[(4, ref('hr_attendance.group_hr_attendance_user'))]"/> -->
     </record>
+
+
 <!--     
     <record id="action_apply_selected_bio_to_attendance" model="ir.actions.server">
         <field name="name">Apply to Attendance (Overwrite)</field>
