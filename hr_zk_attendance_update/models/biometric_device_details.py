@@ -473,11 +473,21 @@ class MachineAttendance(models.Model):
                 for p in near:
                     punch_map[p].processed = True
 
+        # return {
+        #     'type': 'ir.actions.client',
+        #     'tag': 'display_notification',
+        #     'params': {'message': _('Attendance updated from selected biometric logs.'), 'type': 'success', 'sticky': False}
+        # }
+        created_n = updated_n = 0
+        # بعد existing.write(..): updated_n += 1
+        # بعد create/write(..):  created_n += 1
         return {
-            'type': 'ir.actions.client',
-            'tag': 'display_notification',
-            'params': {'message': _('Attendance updated from selected biometric logs.'), 'type': 'success', 'sticky': False}
+        'type': 'ir.actions.client',
+        'tag': 'display_notification',
+        'params': {'message': _('Attendance updated: %s updated, %s created') % (updated_n, created_n),
+                    'type': 'success','sticky': False}
         }
+
 
 # ── Attendance computed metrics (on hr.attendance) ────────────────────────────
 class HrAttendance(models.Model):
