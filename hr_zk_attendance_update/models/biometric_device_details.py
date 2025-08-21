@@ -82,9 +82,17 @@ def _group_unprocessed_punches(env):
     for r in recs:
         # Odoo stores as UTC naive; convert to python datetime and drop tz
         p = fields.Datetime.from_string(r.punching_time).replace(tzinfo=None)
-        key = (r.device_id_num, p.date())
+        # key = (r.device_id_num, p.date())
+        key = (r.device_id_num, _ksa_date_from_utc_naive(p))   # ← بدل p.date()
         by_emp_day.setdefault(key, []).append((p, r))
     return by_emp_day
+
+# أعلى الملف (قرب KSA_TZ)
+def _ksa_date_from_utc_naive(dt_utc_naive):
+    """dt_utc_naive: datetime naive مُخزّن في Odoo كـ UTC.
+       ترجع تاريخ اليوم حسب منطقة الرياض."""
+    return pytz.utc.localize(dt_utc_naive).astimezone(KSA_TZ).date()
+
 
 # ── Device config model ───────────────────────────────────────────────────────
 class BiometricDeviceDetails(models.Model):
@@ -411,7 +419,8 @@ class MachineAttendance(models.Model):
         by_emp_day = {}
         for r in self:
             p = fields.Datetime.from_string(r.punching_time).replace(tzinfo=None)
-            key = (r.employee_id.id, p.date())
+            # key = (r.employee_id.id, p.date())
+            key = (r.employee_id.id, _ksa_date_from_utc_naive(p))  # ← بدل p.date()
             by_emp_day.setdefault(key, []).append((p, r))
 
         for (emp_id, day), punch_list in by_emp_day.items():
@@ -459,15 +468,22 @@ class MachineAttendance(models.Model):
                         'shift_end':   s_end,
                         'notes': _('Set from biometric logs (manual apply)'),
                     })
+                # if existing:
+                #     existing.write({...})
+                    updated_n += 1                       # ← أضف هذا
+
                 else:
                     # create in a safe way (closes open rows, avoids overlap)
                     created = self._safe_create_attendance(employee, ci, co)
-                    if created and created._fields.get('shift_start'):
-                        created.write({
-                            'shift_start': s_start,
-                            'shift_end':   s_end,
-                            'notes': _('Created from biometric logs (manual apply)'),
-                        })
+                    if created:
+                        created_n += 1 
+
+                        if created and created._fields.get('shift_start'):
+                            created.write({
+                                'shift_start': s_start,
+                                'shift_end':   s_end,
+                                'notes': _('Created from biometric logs (manual apply)'),
+                            })
 
                 # mark only the used buffer rows as processed
                 for p in near:
@@ -481,12 +497,23 @@ class MachineAttendance(models.Model):
         created_n = updated_n = 0
         # بعد existing.write(..): updated_n += 1
         # بعد create/write(..):  created_n += 1
+
         return {
-        'type': 'ir.actions.client',
-        'tag': 'display_notification',
-        'params': {'message': _('Attendance updated: %s updated, %s created') % (updated_n, created_n),
-                    'type': 'success','sticky': False}
+            'type': 'ir.actions.client',
+            'tag': 'display_notification',
+            'params': {
+                'message': _('Attendance updated: %s updated, %s created') % (updated_n, created_n),
+                'type': 'success',
+                'sticky': False
+            }
         }
+    
+        # return {
+        # 'type': 'ir.actions.client',
+        # 'tag': 'display_notification',
+        # 'params': {'message': _('Attendance updated: %s updated, %s created') % (updated_n, created_n),
+        #             'type': 'success','sticky': False}
+        # }
 
 
 # ── Attendance computed metrics (on hr.attendance) ────────────────────────────
