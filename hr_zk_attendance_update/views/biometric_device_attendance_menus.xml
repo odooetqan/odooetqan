@@ -103,14 +103,16 @@
     </record> -->
 
     <!-- Optional: show in the list “Action” menu -->
-    <record id="zk_machine_attendance_tree" model="ir.ui.view">
+    <!-- <record id="zk_machine_attendance_tree" model="ir.ui.view">
         <field name="name">zk.machine.attendance.tree.inherit.apply</field>
         <field name="model">zk.machine.attendance</field>
         <field name="inherit_id" ref="hr_zk_attendance_update.zk_machine_attendance_tree_original"/>
         <field name="arch" type="xml">
-        <!-- no UI changes needed if you use the standard Action menu -->
         </field>
-    </record>
+    </record> -->
+        <!-- no UI changes needed if you use the standard Action menu -->
+
+
     <!-- New update attendance to correct attendance -->
 
 
