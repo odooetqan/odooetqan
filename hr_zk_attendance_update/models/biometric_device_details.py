@@ -22,7 +22,7 @@
 ################################################################################
 import logging
 import pytz
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time 
 from pytz import timezone, utc
 
 from odoo import api, fields, models, _
@@ -40,6 +40,14 @@ GRACE_EARLY_MIN  = 15       # early checkout grace (minutes)
 AUTOCHECKOUT_HRS = 1        # auto-checkout 1h before shift end when no out punch
 NO_PUNCH_WINDOW  = 20       # consider punches within ± window minutes around shift
 KSA_TZ = timezone('Asia/Riyadh')
+PRE_START_SNAP_MIN  = 45   # نسمح ببصمة قبل بداية الشفت بهذا الحد (دقائق)
+POST_END_SNAP_MIN   = 90   # نسمح ببصمة بعد نهاية الشفت بهذا الحد (دقائق)
+
+def _ksa_day_bounds_utc(day):
+    """حدود يوم الرياض [00:00, 24:00) كـ UTC-naive لاستخدامها في البحث بالدومين."""
+    start_local = datetime.combine(day, time.min)
+    end_local   = start_local + timedelta(days=1)
+    return _to_utc_naive(start_local, KSA_TZ), _to_utc_naive(end_local, KSA_TZ)
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 def _to_utc_naive(dt_local, tz):
@@ -402,25 +410,20 @@ class MachineAttendance(models.Model):
 
     # ---------- NEW: manual apply & OVERWRITE attendance for selected rows -----
     def action_apply_to_attendance(self):
-        """
-        Apply selected biometric logs to attendance (overwrite/ create).
-        """
         Att = self.env['hr.attendance']
         if not self:
             return True
 
-        # 1) counters MUST be defined up-front
         created_n = 0
         updated_n = 0
 
-        # 2) group selected records by employee + Riyadh date
+        # تجميع حسب يوم الرياض
         by_emp_day = {}
         for r in self:
             p = fields.Datetime.from_string(r.punching_time).replace(tzinfo=None)
             key = (r.employee_id.id, _ksa_date_from_utc_naive(p))
             by_emp_day.setdefault(key, []).append((p, r))
 
-        # 3) process per day/shift
         for (emp_id, day), punch_list in by_emp_day.items():
             employee = self.env['hr.employee'].browse(emp_id)
             if not employee.exists():
@@ -429,25 +432,62 @@ class MachineAttendance(models.Model):
             if not calendar:
                 continue
 
+            # شفتات اليوم
             shifts = _build_day_shifts(calendar, day)
             if not shifts:
                 continue
 
+            # بصمات اليوم كاملة (حتى غير المحددة) كمرجع للـ snap
+            day_utc_start, day_utc_end = _ksa_day_bounds_utc(day)
+            day_logs = self.env['zk.machine.attendance'].search([
+                ('employee_id', '=', employee.id),
+                ('punching_time', '>=', fields.Datetime.to_string(day_utc_start)),
+                ('punching_time', '<',  fields.Datetime.to_string(day_utc_end)),
+            ], order='punching_time asc')
+            day_times = [fields.Datetime.from_string(x.punching_time).replace(tzinfo=None) for x in day_logs]
+
+            # البصمات المختارة فقط (لا نعلّم غيرها processed)
             times_only = sorted([p for (p, _r) in punch_list])
             punch_map  = {p: r for (p, r) in punch_list}
 
             for (s_start, s_end) in shifts:
                 start_win = s_start - timedelta(minutes=NO_PUNCH_WINDOW)
                 end_win   = s_end   + timedelta(minutes=NO_PUNCH_WINDOW)
+
                 near = [p for p in times_only if start_win <= p <= end_win]
                 near.sort()
                 ci, co = _derive_interval_for_shift(near, s_start, s_end)
                 if not ci:
-                    continue
-                if not co or co <= ci:
+                    # قد لا توجد بصمة داخل النافذة، نحاول بالـ snap مباشرة
+                    ci = None
+                    co = None
+
+                # -------- Snap قبل بداية الشفت --------
+                # أقرب بصمة <= بداية الشفت وبحد أقصى PRE_START_SNAP_MIN
+                pre_candidates = [t for t in day_times
+                                if (s_start - timedelta(minutes=PRE_START_SNAP_MIN)) <= t <= s_start]
+                if pre_candidates:
+                    closest_before = max(pre_candidates)  # الأقرب للبداية
+                    ci = (ci and min(ci, closest_before)) or closest_before
+
+                # -------- Snap بعد نهاية الشفت --------
+                # أقرب بصمة >= نهاية الشفت وبحد أقصى POST_END_SNAP_MIN
+                post_candidates = [t for t in day_times
+                                if s_end <= t <= (s_end + timedelta(minutes=POST_END_SNAP_MIN))]
+                if post_candidates:
+                    # نختار الأقرب لنهاية الشفت (مثلاً 13:07 إن كانت نهاية الشفت 13:00)
+                    closest_after = min(post_candidates, key=lambda t: (t - s_end).total_seconds())
+                    co = max(co or closest_after, closest_after)
+
+                # fallback أخير لو لا يزال co <= ci
+                if ci and (not co or co <= ci):
                     co = ci + timedelta(minutes=1)
 
-                # pick existing attendance by time-overlap with the shift
+                if not ci:
+                    # لم نجد أي شيء معقول
+                    continue
+
+                # ابحث سجل حضور موجود يتقاطع زمنياً مع الشفت
                 existing = Att.search([
                     ('employee_id', '=', employee.id),
                     ('check_in', '<', s_end),
@@ -461,7 +501,7 @@ class MachineAttendance(models.Model):
                         'check_out': co,
                         'shift_start': s_start,
                         'shift_end':   s_end,
-                        'notes': _('Set from biometric logs (manual apply)'),
+                        'notes': _('Set from biometric logs (manual apply, snapped)'),
                     })
                     updated_n += 1
                 else:
@@ -471,11 +511,11 @@ class MachineAttendance(models.Model):
                             created.write({
                                 'shift_start': s_start,
                                 'shift_end':   s_end,
-                                'notes': _('Created from biometric logs (manual apply)'),
+                                'notes': _('Created from biometric logs (manual apply, snapped)'),
                             })
                         created_n += 1
 
-                # mark used buffer rows as processed
+                # علّم فقط البصمات المحددة التي استُخدمت
                 for p in near:
                     punch_map[p].processed = True
 
@@ -488,6 +528,95 @@ class MachineAttendance(models.Model):
                 'sticky': False
             }
         }
+
+
+    # def action_apply_to_attendance(self):
+    #     """
+    #     Apply selected biometric logs to attendance (overwrite/ create).
+    #     """
+    #     Att = self.env['hr.attendance']
+    #     if not self:
+    #         return True
+
+    #     # 1) counters MUST be defined up-front
+    #     created_n = 0
+    #     updated_n = 0
+
+    #     # 2) group selected records by employee + Riyadh date
+    #     by_emp_day = {}
+    #     for r in self:
+    #         p = fields.Datetime.from_string(r.punching_time).replace(tzinfo=None)
+    #         key = (r.employee_id.id, _ksa_date_from_utc_naive(p))
+    #         by_emp_day.setdefault(key, []).append((p, r))
+
+    #     # 3) process per day/shift
+    #     for (emp_id, day), punch_list in by_emp_day.items():
+    #         employee = self.env['hr.employee'].browse(emp_id)
+    #         if not employee.exists():
+    #             continue
+    #         calendar = employee.resource_calendar_id or employee.contract_id.resource_calendar_id
+    #         if not calendar:
+    #             continue
+
+    #         shifts = _build_day_shifts(calendar, day)
+    #         if not shifts:
+    #             continue
+
+    #         times_only = sorted([p for (p, _r) in punch_list])
+    #         punch_map  = {p: r for (p, r) in punch_list}
+
+    #         for (s_start, s_end) in shifts:
+    #             start_win = s_start - timedelta(minutes=NO_PUNCH_WINDOW)
+    #             end_win   = s_end   + timedelta(minutes=NO_PUNCH_WINDOW)
+    #             near = [p for p in times_only if start_win <= p <= end_win]
+    #             near.sort()
+    #             ci, co = _derive_interval_for_shift(near, s_start, s_end)
+    #             if not ci:
+    #                 continue
+    #             if not co or co <= ci:
+    #                 co = ci + timedelta(minutes=1)
+
+    #             # pick existing attendance by time-overlap with the shift
+    #             existing = Att.search([
+    #                 ('employee_id', '=', employee.id),
+    #                 ('check_in', '<', s_end),
+    #                 '|', ('check_out', '=', False),
+    #                     ('check_out', '>', s_start),
+    #             ], limit=1)
+
+    #             if existing:
+    #                 existing.write({
+    #                     'check_in':  ci,
+    #                     'check_out': co,
+    #                     'shift_start': s_start,
+    #                     'shift_end':   s_end,
+    #                     'notes': _('Set from biometric logs (manual apply)'),
+    #                 })
+    #                 updated_n += 1
+    #             else:
+    #                 created = self._safe_create_attendance(employee, ci, co)
+    #                 if created:
+    #                     if created._fields.get('shift_start'):
+    #                         created.write({
+    #                             'shift_start': s_start,
+    #                             'shift_end':   s_end,
+    #                             'notes': _('Created from biometric logs (manual apply)'),
+    #                         })
+    #                     created_n += 1
+
+    #             # mark used buffer rows as processed
+    #             for p in near:
+    #                 punch_map[p].processed = True
+
+    #     return {
+    #         'type': 'ir.actions.client',
+    #         'tag': 'display_notification',
+    #         'params': {
+    #             'message': _('Attendance updated: %s updated, %s created') % (updated_n, created_n),
+    #             'type': 'success',
+    #             'sticky': False
+    #         }
+    #     }
 
 
     # def action_apply_to_attendance(self):
@@ -639,7 +768,10 @@ class HrAttendance(models.Model):
                 continue
 
             # pick the shift of that day that is closest/contains the check_in
-            shifts = _build_day_shifts(cal, rec.check_in.date())
+            # shifts = _build_day_shifts(cal, rec.check_in.date())
+            ksa_day = _ksa_date_from_utc_naive(rec.check_in)
+            shifts = _build_day_shifts(cal, ksa_day)
+
             if not shifts:
                 continue
             # choose shift that contains check_in, otherwise nearest by boundary
