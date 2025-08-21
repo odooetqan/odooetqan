@@ -79,27 +79,39 @@
         <field name="active" eval="True"/>
     </record>
 
-<!-- New update attendance to correct attendance -->
-  <record id="action_apply_selected_bio_to_attendance" model="ir.actions.server">
-    <field name="name">Apply to Attendance (Overwrite)</field>
-    <field name="model_id" ref="model_zk_machine_attendance"/>
-    <field name="binding_model_id" ref="model_zk_machine_attendance"/>
-    <field name="state">code</field>
-    <field name="binding_type">action</field>
-    <field name="code">records.action_apply_to_attendance()</field>
-    <field name="usage">ir_actions_act_multi</field>
-  </record>
+    <!-- New update attendance to correct attendance -->
+    
+    <!-- Server action: Apply selected biometric logs to attendance -->
+    <record id="action_apply_selected_bio_to_attendance" model="ir.actions.server">
+      <field name="name">Apply to Attendance (Overwrite)</field>
+      <field name="model_id" ref="model_zk_machine_attendance"/>
+      <field name="binding_model_id" ref="model_zk_machine_attendance"/>
+      <field name="state">code</field>
+      <field name="binding_type">action</field>
+      <field name="code">records.action_apply_to_attendance()</field>
+      <field name="usage">ir_actions_act_multi</field>
+    </record>
+<!--     
+    <record id="action_apply_selected_bio_to_attendance" model="ir.actions.server">
+        <field name="name">Apply to Attendance (Overwrite)</field>
+        <field name="model_id" ref="model_zk_machine_attendance"/>
+        <field name="binding_model_id" ref="model_zk_machine_attendance"/>
+        <field name="state">code</field>
+        <field name="binding_type">action</field>
+        <field name="code">records.action_apply_to_attendance()</field>
+        <field name="usage">ir_actions_act_multi</field>
+    </record> -->
 
-  <!-- Optional: show in the list “Action” menu -->
-  <record id="zk_machine_attendance_tree" model="ir.ui.view">
-    <field name="name">zk.machine.attendance.tree.inherit.apply</field>
-    <field name="model">zk.machine.attendance</field>
-    <field name="inherit_id" ref="your_module.zk_machine_attendance_tree_original"/>
-    <field name="arch" type="xml">
-      <!-- no UI changes needed if you use the standard Action menu -->
-    </field>
-  </record>
-<!-- New update attendance to correct attendance -->
+    <!-- Optional: show in the list “Action” menu -->
+    <record id="zk_machine_attendance_tree" model="ir.ui.view">
+        <field name="name">zk.machine.attendance.tree.inherit.apply</field>
+        <field name="model">zk.machine.attendance</field>
+        <field name="inherit_id" ref="hr_zk_attendance_update.zk_machine_attendance_tree_original"/>
+        <field name="arch" type="xml">
+        <!-- no UI changes needed if you use the standard Action menu -->
+        </field>
+    </record>
+    <!-- New update attendance to correct attendance -->
 
 
 
