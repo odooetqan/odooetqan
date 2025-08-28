@@ -15,7 +15,7 @@ from datetime import datetime, timedelta, timezone
 
 # ----------------- CONFIG -----------------
 # How many days back to fetch if no CLI argument is given
-DAYS_BACK_DEFAULT = 4
+DAYS_BACK_DEFAULT = 2
 
 # Local Odoo credentials
 LOCAL_ODOO_URL = "http://etqan_attendance.sirelkhatim.uk"
