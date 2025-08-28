@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     "name": "ZK Attendance Push to Odoo.sh",
-    "version": "18.0.1.0.0",
+    "version": "17.0.1.0.0",
     "summary": "Push zk.machine.attendance from a local Odoo to Odoo.sh via XML-RPC (manual & scheduled).",
     "category": "Human Resources/Attendance",
     "depends": ["base", "hr"],
