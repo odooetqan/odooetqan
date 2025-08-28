@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="ir_cron_zk_attendance_push" model="ir.cron">
+    <field name="name">ZK Attendance Push</field>
+    <field name="model_id" ref="model_zk_attendance_push_job"/>
+    <field name="state">code</field>
+    <field name="code">model.cron_push()</field>
+    <field name="interval_number">30</field>
+    <field name="interval_type">minutes</field>
+    <!-- <field name="numbercall">-1</field> -->
+    <field name="active">False</field>
+  </record>
+</odoo>

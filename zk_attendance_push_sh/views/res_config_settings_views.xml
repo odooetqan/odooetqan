@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_res_config_settings_zk_push" model="ir.ui.view">
+    <field name="name">res.config.settings.view.zk.push</field>
+    <field name="model">res.config.settings</field>
+    <!-- ✅ الصحيح في Odoo 18 -->
+    <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+    <field name="arch" type="xml">
+      <!-- ✅ ادخل داخل الـ sheet بدل الاعتماد على div ids -->
+      <xpath expr="//sheet" position="inside">
+        <div class="app_settings_block" string="ZK Attendance Push">
+          <h2>ZK Attendance Push</h2>
+
+          <div class="row mt16 o_settings_container">
+            <!-- Local Odoo (source) -->
+            <div class="col-12 col-lg-6">
+              <div class="o_setting_box">
+                <div class="o_setting_left_pane">
+                  <label for="zk_local_url"/>
+                  <div class="o_form_label">Local Odoo (source)</div>
+                  <div class="text-muted">URL/DB/user/password for the source (local) Odoo.</div>
+                </div>
+                <div class="o_setting_right_pane">
+                  <field name="zk_local_url"/>
+                  <field name="zk_local_db"/>
+                  <field name="zk_local_user"/>
+                  <field name="zk_local_password" password="True"/>
+                </div>
+              </div>
+            </div>
+
+            <!-- Odoo.sh (destination) -->
+            <div class="col-12 col-lg-6">
+              <div class="o_setting_box">
+                <div class="o_setting_left_pane">
+                  <label for="zk_sh_url"/>
+                  <div class="o_form_label">Odoo.sh (destination)</div>
+                  <div class="text-muted">URL/DB/user/password for the target Odoo.sh.</div>
+                </div>
+                <div class="o_setting_right_pane">
+                  <field name="zk_sh_url"/>
+                  <field name="zk_sh_db"/>
+                  <field name="zk_sh_user"/>
+                  <field name="zk_sh_password" password="True"/>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt16 o_settings_container">
+            <div class="col-12 col-lg-6">
+              <div class="o_setting_box">
+                <div class="o_setting_left_pane">
+                  <label for="zk_days_back_default"/>
+                  <div class="o_form_label">Default window (days)</div>
+                  <div class="text-muted">Used if a job doesn't override days_back.</div>
+                </div>
+                <div class="o_setting_right_pane">
+                  <field name="zk_days_back_default"/>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </xpath>
+    </field>
+  </record>
+</odoo>

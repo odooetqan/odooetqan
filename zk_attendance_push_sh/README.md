@@ -1,0 +1,1 @@
+# ZK Attendance Push to Odoo.sh\n\nInstall on Odoo 18. Configure settings, then run a job or enable the scheduled action.

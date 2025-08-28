@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- Config form -->
+  <record id="view_zk_attendance_config_form" model="ir.ui.view">
+    <field name="name">zk.attendance.config.form</field>
+    <field name="model">zk.attendance.config</field>
+    <field name="arch" type="xml">
+      <form string="ZK Attendance Push Configuration">
+        <sheet>
+          <group string="Local Odoo (source)">
+            <field name="zk_local_url"/>
+            <field name="zk_local_db"/>
+            <field name="zk_local_user"/>
+            <field name="zk_local_password" password="True"/>
+          </group>
+          <group string="Odoo.sh (destination)">
+            <field name="zk_sh_url"/>
+            <field name="zk_sh_db"/>
+            <field name="zk_sh_user"/>
+            <field name="zk_sh_password" password="True"/>
+          </group>
+          <group string="Defaults">
+            <field name="zk_days_back_default"/>
+          </group>
+        </sheet>
+        <footer>
+          <button name="action_save" type="object" class="btn-primary" string="Save"/>
+          <button string="Close" class="btn-secondary" special="cancel"/>
+        </footer>
+      </form>
+    </field>
+  </record>
+
+  <!-- Config action -->
+  <record id="action_zk_attendance_config" model="ir.actions.act_window">
+    <field name="name">Configuration</field>
+    <field name="res_model">zk.attendance.config</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+  </record>
+
+  <!-- Config menu -->
+  <menuitem id="menu_zk_push_config" name="Configuration"
+            parent="menu_zk_push_root" action="action_zk_attendance_config" sequence="99"/>
+</odoo>
