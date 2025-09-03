@@ -1,6 +1,6 @@
 {
 "name": "Attendance: Absence Daylines",
-"version": "18.0.1.0.0",
+"version": "17.0.1.0.0",
 "summary": "Compute per‑day/shift absence and show it next to HR Attendance",
 "description": """
 Adds a lightweight daily/shift "dayline" for each employee so you can see:

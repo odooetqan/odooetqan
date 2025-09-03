@@ -15,12 +15,12 @@
     </field>
   </record>
 
-  <!-- Daylines list -->
-  <record id="view_hr_attendance_dayline_list" model="ir.ui.view">
-    <field name="name">hr.attendance.dayline.list</field>
+  <!-- Daylines tree -->
+  <record id="view_hr_attendance_dayline_tree" model="ir.ui.view">
+    <field name="name">hr.attendance.dayline.tree</field>
     <field name="model">hr.attendance.dayline</field>
     <field name="arch" type="xml">
-      <list string="Attendance Daylines" decoration-danger="status == 'absent'"
+      <tree string="Attendance Daylines" decoration-danger="status == 'absent'"
             decoration-warning="status == 'partial'" decoration-success="status == 'present'">
         <field name="date"/>
         <field name="employee_id"/>
@@ -33,7 +33,7 @@
         <field name="shift_end"/>
         <field name="attendance_id"/>
         <field name="notes"/>
-      </list>
+      </tree>
     </field>
   </record>
 
@@ -60,16 +60,16 @@
   <record id="action_hr_attendance_daylines" model="ir.actions.act_window">
     <field name="name">Attendance Daylines</field>
     <field name="res_model">hr.attendance.dayline</field>
-    <field name="view_mode">list,graph,pivot,form</field>
+    <field name="view_mode">tree,graph,pivot,form</field>
     <field name="context">{'search_default_this_month': 1}</field>
   </record>
-  <!-- OPTIONAL: add day_status to hr.attendance list -->
-  <record id="view_hr_attendance_list_inherit_status" model="ir.ui.view">
-    <field name="name">hr.attendance.list.daystatus</field>
+  <!-- OPTIONAL: add day_status to hr.attendance tree -->
+  <record id="view_hr_attendance_tree_inherit_status" model="ir.ui.view">
+    <field name="name">hr.attendance.tree.daystatus</field>
     <field name="model">hr.attendance</field>
     <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
     <field name="arch" type="xml">
-      <xpath expr="//list/field[@name='check_out']" position="after">
+      <xpath expr="//tree/field[@name='check_out']" position="after">
         <field name="day_status"/>
       </xpath>
     </field>
