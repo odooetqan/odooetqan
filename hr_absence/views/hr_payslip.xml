@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+    
+        <!-- Payslip form: show absence/partial/present counts + push button -->
+            <record id="hr_payslip_view_form_absence_counts" model="ir.ui.view">
+                <field name="name">hr.payslip.form.absence.counts</field>
+                <field name="model">hr.payslip</field>
+
+                <!-- IMPORTANT: change this to YOUR real xmlid -->
+                <!-- Examples: hr_payroll.view_hr_payslip_form  |  hr_payroll_community.view_hr_payslip_form  |  om_hr_payroll.view_hr_payslip_form -->
+                <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+
+                <field name="arch" type="xml">
+                <!-- Insert a new page AFTER the 'Worked Days & Inputs' page -->
+                <xpath expr="//notebook/page[@name='worked_days_input']" position="after">
+                    <page string="Attendance (Absences)" name="attendance_absences">
+                    <group>
+                        <group string="Summary">
+                        <field name="absence_days" readonly="1"/>
+                        <field name="partial_days" readonly="1"/>
+                        <field name="present_days" readonly="1"/>
+                        </group>
+                        <group string="Actions">
+                        <button name="action_push_absence_days_to_inputs"
+                                type="object" class="btn-primary"
+                                string="Push Absence Days to Inputs"/>
+                        <!-- <label string="Creates/updates an Inputs line (code: ABSENCE_DAYS) with total absence days in this period."/> -->
+                        </group>
+                    </group>
+                    </page>
+                </xpath>
+                </field>
+            </record>
+ 
+
+                <!-- Enterprise -->
+                <!-- <record id="payslip_absence_counts_ent" model="ir.ui.view">
+                <field name="name">hr.payslip.absence.counts.ent</field>
+                <field name="model">hr.payslip</field>
+                <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//sheet/notebook" position="inside">
+                    <page string="Attendance (Absences)"> ... </page>
+                    </xpath>
+                </field>
+                </record> -->
+
+                <!-- Community (odoomates example) -->
+                <!-- <record id="payslip_absence_counts_comm" model="ir.ui.view">
+                <field name="name">hr.payslip.absence.counts.comm</field>
+                <field name="model">hr.payslip</field>
+                <field name="inherit_id" ref="hr_payroll_community.view_hr_payslip_form"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//sheet/notebook" position="inside">
+                    <page string="Attendance (Absences)"> ... </page>
+                    </xpath>
+                </field>
+                </record> -->
+
+
+
+
+
+
+    </data>
+</odoo>
