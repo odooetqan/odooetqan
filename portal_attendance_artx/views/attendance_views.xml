@@ -22,7 +22,7 @@
         </record> -->
 
 
-        <record id="action_portal_attendance" model="ir.actions.server">
+        <!-- <record id="action_portal_attendance" model="ir.actions.server">
             <field name="name">My Attendance</field>
             <field name="model_id" ref="hr.model_hr_employee"/>
             <field name="binding_model_id" ref="hr.model_hr_employee"/>
@@ -34,19 +34,16 @@
                     "target": "self",
                 }
             </field>
-        </record>
+        </record> -->
 
-        <template id="portal_my_home_attendance" 
-
-        
+        <!-- <template id="portal_my_home_attendance" 
               name="Portal Home Attendance "
               inherit_id="portal.portal_breadcrumbs" priority="2">
-        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+                <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
 
-            <!-- <xpath expr="//div[@id='content']" position="inside"> -->
                 <a href="/my/attendance" class="btn btn-primary">حضوري </a>
             </xpath>
-        </template>
+        </template> -->
 
         <!-- <record id="portal_attendance_main_menu" model="ir.ui.menu">
             <field name="name">Attendance</field>
@@ -64,7 +61,6 @@
 <!-- POrtal Tree ttee attendance -->
 
     <template id="portal_my_home_attendance" inherit_id="portal.portal_my_home" priority="10">
-<!--     <xpath expr="//div[@class='o_portal_docs list-group']" position="after"> -->
             <xpath expr="//div[@id='portal_client_category']" position="inside">
 
         <div class="list-group" style="background-color:green">
@@ -83,14 +79,13 @@
 </template>
 
 
-<template id="portal_my_attendance" name="Portal Attendance">
+<!-- <template id="portal_my_attendance" name="Portal Attendance">
     <t t-call="portal.portal_layout">
         <div class="container">
             <h1>سجلات الحضور و الانصراف</h1>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <!-- <th>Date</th> -->
                         <th>الحضور</th>
                         <th>الانصراف</th>
                     </tr>
@@ -98,7 +93,6 @@
                 <tbody>
                     <t t-foreach="attendance_records" t-as="record">
                         <tr>
-                            <!-- <td><t t-esc="record.check_in_date"/></td> -->
                             <td><t t-esc="record.check_in"/></td>
                             <td><t t-esc="record.check_out"/></td>
                         </tr>
@@ -107,10 +101,10 @@
             </table>
         </div>
     </t>
-</template> 
+</template>  -->
 
 
-    <template id="portal_my_home_vendor_rfq" name="Show Vendor RFQs"
+    <!-- <template id="portal_my_home_vendor_rfq" name="Show Vendor RFQs"
               customize_show="True" inherit_id="portal.portal_my_home"
               priority="25">
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
@@ -120,10 +114,10 @@
                 <t t-set="placeholder_count" t-value="'my_rfq_count'"/>
             </t>
         </xpath>
-    </template>
+    </template> -->
 <!--    Portal table views-->
 
-            <template id="portal_my_home_sale" name="Show Quotations / Sales Orders" customize_show="True"
+            <!-- <template id="portal_my_home_sale" name="Show Quotations / Sales Orders" customize_show="True"
                     inherit_id="portal.portal_my_home" priority="1">
                 <div class="oe_structure" position="inside">
                     <div class="container">
@@ -134,8 +128,6 @@
 
                         <button id="leave_portal_request_main" class="btn btn-succes leave_portal_request_main">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <!-- <h1>Your Leave Requests</h1> -->
-                                <!-- Button to Create New Leave Request -->
                                 <h1>
                                     <a href="/my/leave/new" class="btn btn-primary">
                                         <i class="fa fa-plus me-1"></i>                             
@@ -147,7 +139,7 @@
 
                     </div>
                 </div>
-            </template>
+            </template> -->
 <!-- POrtal Tree ttee attendance  template -->
 
             <template id="portal_attendance_tree" name="Portal Attendance Tree">
@@ -166,7 +158,7 @@
 
 <!-- POrtal Tree ttee attendance template -->
 
-            <record id="action_hr_employee_create_portal_user" model="ir.actions.server">
+            <!-- <record id="action_hr_employee_create_portal_user" model="ir.actions.server">
                 <field name="name">إنشاء مستخدم بوابة</field>
                 <field name="model_id" ref="hr.model_hr_employee"/>
                 <field name="binding_model_id" ref="hr.model_hr_employee"/>
@@ -176,13 +168,12 @@
                 <field name="code">
                     action = records.action_create_portal_user()
                 </field>
-            </record>
+            </record> -->
 
             <!-- Leaves -->
             
         <!-- Action to Handle Leave Requests -->
-        <record id="action_portal_request_leave" model="ir.actions.server">
-            <!-- <field name="name">طلب إجازة</field> -->
+        <!-- <record id="action_portal_request_leave" model="ir.actions.server">
             <field name="name">Request Leave</field>
             <field name="model_id" ref="hr.model_hr_employee"/>
             <field name="state">code</field>
@@ -193,10 +184,10 @@
                     "target": "self",
                 }
             </field>
-        </record>
+        </record> -->
 
         <!-- Add "Request Leave" Card to Portal -->
-        <template id="portal_my_home_leaves" inherit_id="portal.portal_my_home" priority="11">
+        <!-- <template id="portal_my_home_leaves" inherit_id="portal.portal_my_home" priority="11">
             <xpath expr="//div[@id='portal_client_category']" position="inside">
  
                 <div class="o_portal_index_card col-md-6" >
@@ -212,7 +203,7 @@
                     </a>
                 </div>
             </xpath>
-        </template>
+        </template> -->
 
         <!-- Template for Leave List -->
 <!--         <template id="portal_my_leaves" name="Portal Leave List">
@@ -244,12 +235,11 @@
         </template> -->
 
 
-<template id="portal_my_leaves" name="Portal Leave List">
+<!-- <template id="portal_my_leaves" name="Portal Leave List">
     <t t-call="portal.portal_layout">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h1>طلبات الاجازة</h1>
-                <!-- Button to Create New Leave Request -->
                 <h1>
                     <a href="/my/leave/new" class="btn btn-primary">
                         <i class="fa fa-plus me-1"></i>إنشاء طلب اجازة
@@ -268,7 +258,6 @@
                 <tbody>
                     <t t-foreach="leave_records" t-as="leave">
                         <tr>
-                            <!-- Display the name of the leave type -->
                             <td><t t-esc="leave.holiday_status_id.name"/></td>
                             <td><t t-esc="leave.date_from"/></td>
                             <td><t t-esc="leave.date_to"/></td>
@@ -285,7 +274,7 @@
             </table>
         </div>
     </t>
-</template>
+</template> -->
 <!--             
             
         <template id="portal_my_leaves" name="Portal Leave List">
@@ -337,7 +326,7 @@
         </template> -->
 
         <!-- <odoo> -->
-    <template id="leave_form_template" name="Leave Form" inherit_id="website.layout">
+    <!-- <template id="leave_form_template" name="Leave Form" inherit_id="website.layout">
         <xpath expr="//main" position="inside">
             <section class="leave-form-section">
                 <div class="container">
@@ -367,7 +356,7 @@
                 </div>
             </section>
         </xpath>
-    </template>
+    </template> -->
 <!-- </odoo> -->
 
         <!-- <template id="leave_form_template" name="Portal New Leave Form">
