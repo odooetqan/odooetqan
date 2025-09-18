@@ -1,0 +1,15 @@
+<odoo>
+
+    <!-- Define action first -->
+  <record id="action_biostar_devices" model="ir.actions.act_window">
+    <field name="name">BioStar Devices</field>
+    <field name="res_model">biostar.device</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+
+  <menuitem id="menu_biostar_root" name="BioStar" parent="hr_attendance.menu_hr_attendance_root" sequence="50"/>
+  <menuitem id="menu_biostar_devices" name="Devices" parent="menu_biostar_root" action="action_biostar_devices"/>
+  <menuitem id="menu_biostar_users" name="Users" parent="menu_biostar_root" action="action_biostar_users"/>
+
+</odoo>

@@ -1,0 +1,26 @@
+<odoo>
+  <record id="ir_cron_biostar_pull_and_process" model="ir.cron">
+    <field name="name">BioStar: Pull + Process</field>
+    <field name="model_id" ref="model_biostar_device"/>
+    <field name="state">code</field>
+    <field name="code">model.search([('active','=',True)]).action_pull_events()</field>
+    <field name="interval_number">5</field>
+    <field name="interval_type">minutes</field>
+    <field name="numbercall">-1</field>
+    <field name="doall">False</field>
+    <field name="active">True</field>
+  </record>
+
+
+  <!-- <record id="ir_cron_biostar_pull" model="ir.cron">
+    <field name="name">BioStar – Pull Attendance</field>
+    <field name="model_id" ref="model_biostar_device"/>
+    <field name="state">code</field>
+    <field name="code">
+model.search([('active','=',True)]).action_pull_events()
+    </field>
+    <field name="interval_type">minutes</field>
+    <field name="interval_number">10</field>
+    <field name="active">True</field>
+  </record> -->
+</odoo>
