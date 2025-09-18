@@ -1,6 +1,6 @@
 {
     "name": "BioStar Attendance Connector",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "author": "Sirelkhatim Gamal",
     "depends": ["hr", "hr_attendance", "base", "mail"],
     "data": [
