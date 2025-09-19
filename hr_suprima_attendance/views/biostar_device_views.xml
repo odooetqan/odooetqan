@@ -24,7 +24,11 @@
         <header>
           <button name="action_test_connection" type="object" string="Test Connection" class="oe_highlight"/>
           <button name="action_import_users" type="object" string="Import Users"/>
+<<<<<<< HEAD
           <button name="action_pull_events" type="object" string="Pull Events "/>
+=======
+          <button name="action_pull_events" type="object" string="Pull Events (365 Day)"/>
+>>>>>>> 850c232 (upload Suprema model)
           <field name="status" widget="statusbar" statusbar_visible="unknown,ok,error"/>
         </header>
         <sheet>

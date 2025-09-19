@@ -394,7 +394,11 @@ class BiostarDevice(models.Model):
             recc = rec._login()
 
             # default window = last 24h
+<<<<<<< HEAD
             since_dt = fields.Datetime.from_string(since) if since else (fields.Datetime.now() - timedelta(days=360))
+=======
+            since_dt = fields.Datetime.from_string(since) if since else (fields.Datetime.now() - timedelta(days=365))
+>>>>>>> 850c232 (upload Suprema model)
             until_dt = fields.Datetime.from_string(until) if until else fields.Datetime.now()
 
             conditions = [{
