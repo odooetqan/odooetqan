@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+  <!-- runs every 1 hour -->
   <record id="ir_cron_build_yesterday_daylines" model="ir.cron">
     <field name="name">Attendance: Build Yesterday Daylines</field>
     <field name="model_id" ref="model_hr_attendance_dayline"/>
     <field name="state">code</field>
     <field name="code">model.cron_build_yesterday()</field>
-    <field name="interval_type">days</field>
+
+    <!-- frequency -->
+    <field name="interval_type">hours</field>
     <field name="interval_number">1</field>
-    <!-- <field name="numbercall">-1</field> -->
+
+    <!-- run forever -->
+    <field name="numbercall">-1</field>
+
     <field name="active">True</field>
-    <field name="nextcall">1970-01-01 02:05:00</field>
+
+    <!-- first run ~5 minutes after install/upgrade (stored in UTC) -->
+    <field name="nextcall" eval="(DateTime.now() + relativedelta(minutes=5)).strftime('%Y-%m-%d %H:%M:%S')"/>
   </record>
 </odoo>

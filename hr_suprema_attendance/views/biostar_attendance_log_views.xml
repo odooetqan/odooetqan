@@ -143,11 +143,4 @@
         </xpath>
     </field>
     </record>
-
-
-
-  <menuitem id="menu_biostar_logs" name="Attendance Logs" parent="hr_suprima_attendance.menu_biostar_root"
-            action="action_biostar_attendance_logs" sequence="10"/>
-
-
 </odoo>
