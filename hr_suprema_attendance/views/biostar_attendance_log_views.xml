@@ -1,0 +1,146 @@
+<odoo>
+
+
+
+  <!-- SEARCH -->
+  <record id="biostar_attendance_log_search" model="ir.ui.view">
+    <field name="name">biostar.attendance.log.search</field>
+    <field name="model">biostar.attendance.log</field>
+    <field name="arch" type="xml">
+      <search string="Attendance Logs">
+        <field name="employee_id"/>
+        <field name="device_id"/>
+        <field name="biostar_user_id" string="BioStar User"/>
+        <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+        <filter string="Processed" name="processed" domain="[('state','=','processed')]"/>
+        <filter string="Skipped" name="skipped" domain="[('state','=','skipped')]"/>
+        <separator/>
+        <filter string="Today" name="today"
+                domain="[('event_dt_utc','&gt;=', context_today().strftime('%%Y-%%m-%%d 00:00:00')),
+                         ('event_dt_utc','&lt;',  context_today().strftime('%%Y-%%m-%%d 23:59:59'))]"/>
+        <filter string="Last 7 Days" name="last7"
+                domain="[('event_dt_utc','&gt;=', (context_today() - datetime.timedelta(days=7)).strftime('%%Y-%%m-%%d 00:00:00'))]"/>
+        <group expand="0" string="Group By">
+          <filter string="Employee" name="grp_emp" context="{'group_by':'employee_id'}"/>
+          <filter string="Device"   name="grp_dev" context="{'group_by':'device_id'}"/>
+          <filter string="State"    name="grp_state" context="{'group_by':'state'}"/>
+          <filter string="Day"      name="grp_day" context="{'group_by':'event_dt_utc:day'}"/>
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <!-- TREE -->
+  <record id="biostar_attendance_log_tree" model="ir.ui.view">
+    <field name="name">biostar.attendance.log.tree</field>
+    <field name="model">biostar.attendance.log</field>
+    <field name="arch" type="xml">
+      <tree string="Attendance Logs" decoration-success="state == 'processed'"
+            decoration-muted="state == 'skipped'" decoration-warning="state == 'draft'">
+        <field name="event_dt_utc"/>
+        <field name="employee_id"/>
+        <field name="biostar_user_id"/>
+        <field name="device_id"/>
+        <field name="direction"/>
+        <field name="state"/>
+        <field name="attendance_id"/>
+        <field name="event_time"/>
+        <field name="event_type"/>
+        <field name="note"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- FORM -->
+  <record id="biostar_attendance_log_form" model="ir.ui.view">
+    <field name="name">biostar.attendance.log.form</field>
+    <field name="model">biostar.attendance.log</field>
+    <field name="arch" type="xml">
+      <form string="Attendance Log">
+        <sheet>
+          <group>
+            <group>
+              <field name="event_dt_utc"/>
+              <field name="direction"/>
+              <field name="state"/>
+              <field name="note"/>
+            </group>
+            <group>
+              <field name="employee_id"/>
+              <field name="biostar_user_id"/>
+              <field name="device_id"/>
+              <field name="attendance_id"/>
+              <field name="external_key" readonly="1"/>
+            </group>
+          </group>
+          <notebook>
+            <page string="Raw">
+              <field name="raw" widget="json"/>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- GRAPH (optional) -->
+  <record id="biostar_attendance_log_graph" model="ir.ui.view">
+    <field name="name">biostar.attendance.log.graph</field>
+    <field name="model">biostar.attendance.log</field>
+    <field name="arch" type="xml">
+      <graph string="Logs by Day" type="bar">
+        <field name="event_dt_utc" type="row"/>
+        <field name="id" type="measure"/>
+      </graph>
+    </field>
+  </record>
+
+  <!-- PIVOT (optional) -->
+  <record id="biostar_attendance_log_pivot" model="ir.ui.view">
+    <field name="name">biostar.attendance.log.pivot</field>
+    <field name="model">biostar.attendance.log</field>
+    <field name="arch" type="xml">
+      <pivot string="Attendance Logs">
+        <field name="employee_id" type="row"/>
+        <field name="device_id" type="col"/>
+        <field name="event_dt_utc" interval="day" type="row"/>
+        <field name="id" type="measure"/>
+      </pivot>
+    </field>
+  </record>
+
+  <!-- ACTION -->
+  <record id="action_biostar_attendance_logs" model="ir.actions.act_window">
+    <field name="name">Attendance Logs</field>
+    <field name="res_model">biostar.attendance.log</field>
+    <field name="view_mode">tree,form,graph,pivot</field>
+    <field name="context">{}</field>
+    <field name="domain">[]</field>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        No logs yet
+      </p>
+      <p>Use <b>Pull Events</b> on your BioStar Device to fetch raw punches.</p>
+    </field>
+  </record>
+
+
+<!-- Smart Button On Device -->
+    <record id="biostar_device_form_inherit_logs_button" model="ir.ui.view">
+    <field name="name">biostar.device.form.logs.button</field>
+    <field name="model">biostar.device</field>
+    <field name="inherit_id" ref="view_biostar_device_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//sheet" position="inside">
+            <div class="oe_button_box" name="button_box"/>
+        </xpath>
+
+        <xpath expr="//sheet//div[@class='oe_button_box']" position="inside">
+        <button type="action" class="oe_stat_button" icon="fa-list"
+                name="%(action_biostar_attendance_logs)d"
+                context="{'search_default_device_id': active_id, 'default_device_id': active_id}"
+                string="Logs"/>
+        </xpath>
+    </field>
+    </record>
+</odoo>

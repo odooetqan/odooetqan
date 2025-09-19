@@ -1,0 +1,37 @@
+<!-- views/dayline_wizard_views.xml -->
+<odoo>
+  <record id="view_dayline_build_wizard" model="ir.ui.view">
+    <field name="name">hr.dayline.build.wizard.form</field>
+    <field name="model">hr.dayline.build.wizard</field>
+    <field name="arch" type="xml">
+      <form string="Build Attendance Daylines">
+        <group>
+          <field name="employee_ids" widget="many2many_tags"/>
+          <field name="date_from"/>
+          <field name="date_to"/>
+        </group>
+        <footer>
+          <button name="action_build_custom" type="object" class="btn-primary" string="Build for Range"/>
+          <button name="action_build_yesterday" type="object" string="Build Yesterday"/>
+          <button name="action_build_last_365" type="object" string="Build Last 365 Days"/>
+          <button string="Close" class="btn-link" special="cancel"/>
+        </footer>
+      </form>
+    </field>
+  </record>
+
+  <!-- Open the wizard -->
+  <record id="action_dayline_build_wizard" model="ir.actions.act_window">
+    <field name="name">Build Daylines</field>
+    <field name="res_model">hr.dayline.build.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+  </record>
+
+  <!-- Put an entry under Attendances menu (adjust parent menu as you wish) -->
+  <menuitem id="menu_dayline_tools"
+            name="Build Daylines"
+            parent="hr_attendance.menu_hr_attendance_root"
+            action="action_dayline_build_wizard"
+            sequence="96"/>
+</odoo>

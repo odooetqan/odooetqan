@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_student_attendance_user,student_attendance_user,model_student_attendance,base.group_user,1,1,1,0
+access_student_classes_groups,student_classes_groups,model_classes_groups,base.group_user,1,1,1,0
+access_student_classes_classes,student_classes_classes,model_classes_classe,base.group_user,1,1,1,0

@@ -1,0 +1,14 @@
+<!-- data/dayline_cron.xml -->
+<odoo>
+  <record id="ir_cron_build_yesterday_daylines" model="ir.cron">
+    <field name="name">Attendance: Build Yesterday Daylines</field>
+    <field name="model_id" ref="model_hr_attendance_dayline"/>
+    <field name="state">code</field>
+    <field name="code">model.cron_build_yesterday()</field>
+    <field name="interval_type">hours</field>
+    <field name="interval_number">1</field>
+    <field name="numbercall">-1</field>
+    <field name="active">True</field>
+    <field name="nextcall" eval="(DateTime.now() + relativedelta(minutes=5)).strftime('%Y-%m-%d %H:%M:%S')"/>
+  </record>
+</odoo>

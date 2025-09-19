@@ -61,4 +61,15 @@
   <!-- Jobs menu -->
   <menuitem id="menu_zk_push_jobs" name="Jobs" parent="menu_zk_push_root"
             action="action_zk_attendance_push_jobs" sequence="10"/>
+
+
+
+             
+
+  <!-- Root menu under HR -->
+  <menuitem id="menu_zk_push_root_attendance" name="ZK Attendance Push"  parent="hr_attendance.menu_hr_attendance_root" sequence="22"/>
+  <!-- Jobs menu -->
+  <menuitem id="menu_zk_push_jobs" name="Jobs" parent="menu_zk_push_root_attendance"
+            action="action_zk_attendance_push_jobs" sequence="10"/>
+
 </odoo>

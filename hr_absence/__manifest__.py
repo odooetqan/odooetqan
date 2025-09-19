@@ -18,6 +18,8 @@ You can set your working timezone in user preferences. Defaults to Asia/Riyadh.
 "depends": ["hr_attendance", "hr_payroll"],
 "data": [
 "security/ir.model.access.csv",
+'data/dayline_cron.xml',
+'views/dayline_wizard_views.xml',
 "views/hr_absence_views.xml",
 "views/hr_payslip.xml",
 "data/cron.xml",

@@ -1,0 +1,759 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* hr_suprema_attendance
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-24 11:43+0000\n"
+"PO-Revision-Date: 2025-09-24 15:02+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ar_001\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"X-Generator: Poedit 3.6\n"
+
+#. module: hr_suprema_attendance
+msgid "API Base URL"
+msgstr "عنوان URL الأساسي لواجهة برمجة التطبيقات (API)"
+
+#. module: hr_suprema_attendance
+msgid "Absent After (min)"
+msgstr "يُعدّ غائبًا بعد (دقائق)"
+
+#. module: hr_suprema_attendance
+msgid "Action Needed"
+msgstr "الإجراء المطلوب"
+
+#. module: hr_suprema_attendance
+msgid "Active"
+msgstr "نشط"
+
+#. module: hr_suprema_attendance
+msgid "Activities"
+msgstr "الأنشطة"
+
+#. module: hr_suprema_attendance
+msgid "Activity Exception Decoration"
+msgstr "تمييز استثناء النشاط"
+
+#. module: hr_suprema_attendance
+msgid "Activity State"
+msgstr "حالة النشاط"
+
+#. module: hr_suprema_attendance
+msgid "Activity Type Icon"
+msgstr "أيقونة نوع النشاط"
+
+#. module: hr_suprema_attendance
+msgid "Attachment Count"
+msgstr "عدد المرفقات"
+
+#. module: hr_suprema_attendance
+msgid "Attendance"
+msgstr "الحضور"
+
+#. module: hr_suprema_attendance
+msgid "Attendance Log"
+msgstr "سجل الحضور"
+
+#. module: hr_suprema_attendance
+msgid "Attendance Logs"
+msgstr "سجلات الحضور"
+
+#. module: hr_suprema_attendance
+msgid "Attendance Mode"
+msgstr "وضع الحضور"
+
+#. module: hr_suprema_attendance
+msgid "Auto close a shift longer than this."
+msgstr "إغلاق الوردية تلقائيًا إذا تجاوزت هذه المدة."
+
+#. module: hr_suprema_attendance
+msgid "Badge ID"
+msgstr "معرّف الشارة"
+
+#. module: hr_suprema_attendance
+msgid "BioStar"
+msgstr "بايوستار"
+
+#. module: hr_suprema_attendance
+msgid "BioStar Device"
+msgstr "جهاز بايوستار"
+
+#. module: hr_suprema_attendance
+msgid "BioStar Devices"
+msgstr "أجهزة بايوستار"
+
+#. module: hr_suprema_attendance
+msgid "BioStar Raw Attendance Log"
+msgstr "سجل الحضور الخام من بايوستار"
+
+#. module: hr_suprema_attendance
+msgid "BioStar User"
+msgstr "مستخدم بايوستار"
+
+#. module: hr_suprema_attendance
+msgid "BioStar Users"
+msgstr "مستخدمو بايوستار"
+
+#. module: hr_suprema_attendance
+msgid "BioStar events fetch failed: %s"
+msgstr "فشل جلب أحداث بايوستار: %s"
+
+#. module: hr_suprema_attendance
+msgid "BioStar login failed: %s"
+msgstr "فشل تسجيل الدخول إلى بايوستار: %s"
+
+#. module: hr_suprema_attendance
+msgid "BioStar rejected the user payload (uid %s). Last error: %s
+Hints:
+- Ensure User Group ID %s exists and is accessible.
+- Keep user_group_id and user_group as OBJECTS with an 'id'.
+- Ensure user_id is an integer (we coerced it to %s).
+- Keep start_datetime & expiry_datetime in ISO ending with .00Z."
+msgstr "رفض بايوستار حمولة بيانات المستخدم (uid %s). آخر خطأ: %s
+تلميحات:
+- تأكد من وجود معرّف مجموعة المستخدم %s وإمكانية الوصول إليه.
+- اترك user_group_id و user_group ككائنات تحتوي على 'id'.
+- تأكد أن user_id عددٌ صحيح (قمنا بتحويله إلى %s).
+- استخدم start_datetime و expiry_datetime بصيغة ISO وتنتهي بـ ‎.00Z."
+
+#. module: hr_suprema_attendance
+msgid "BioStar: Pull + Process"
+msgstr "بايوستار: سحب + معالجة"
+
+#. module: hr_suprema_attendance
+msgid "Biostar User"
+msgstr "مستخدم بايوستار"
+
+#. module: hr_suprema_attendance
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: hr_suprema_attendance
+msgid "Card No"
+msgstr "رقم البطاقة"
+
+#. module: hr_suprema_attendance
+msgid "Check In"
+msgstr "دخول"
+
+#. module: hr_suprema_attendance
+msgid "Check Out"
+msgstr "خروج"
+
+#. module: hr_suprema_attendance
+msgid "Contact"
+msgstr "جهة الاتصال"
+
+#. module: hr_suprema_attendance
+msgid "Create/Update all students on this device and link them locally."
+msgstr "إنشاء/تحديث جميع الطلاب على هذا الجهاز وربطهم محليًا."
+
+#. module: hr_suprema_attendance
+msgid "Create/Update user lines from students (name and card from student_number)."
+msgstr "إنشاء/تحديث أسطر المستخدمين من الطلاب (الاسم والبطاقة من رقم الطالب)."
+
+#. module: hr_suprema_attendance
+msgid "Created by"
+msgstr "أُنشئ بواسطة"
+
+#. module: hr_suprema_attendance
+msgid "Created on"
+msgstr "أُنشئ في"
+
+#. module: hr_suprema_attendance
+msgid "Day"
+msgstr "اليوم"
+
+#. module: hr_suprema_attendance
+msgid "Default Partition/Site ID"
+msgstr "معرّف القسم/الموقع الافتراضي"
+
+#. module: hr_suprema_attendance
+msgid "Default User Group ID"
+msgstr "معرّف مجموعة المستخدم الافتراضية"
+
+#. module: hr_suprema_attendance
+msgid "Device"
+msgstr "الجهاز"
+
+#. module: hr_suprema_attendance
+msgid "Device IP"
+msgstr "عنوان IP للجهاز"
+
+#. module: hr_suprema_attendance
+msgid "Devices"
+msgstr "الأجهزة"
+
+#. module: hr_suprema_attendance
+msgid "Direction"
+msgstr "الاتجاه"
+
+#. module: hr_suprema_attendance
+msgid "Display Name"
+msgstr "الاسم المعروض"
+
+#. module: hr_suprema_attendance
+msgid "Draft"
+msgstr "مسودة"
+
+#. module: hr_suprema_attendance
+msgid "Employee"
+msgstr "موظف"
+
+#. module: hr_suprema_attendance
+msgid "Error"
+msgstr "خطأ"
+
+#. module: hr_suprema_attendance
+msgid "Event Dt Utc"
+msgstr "تاريخ/وقت الحدث UTC"
+
+#. module: hr_suprema_attendance
+msgid "Event Time"
+msgstr "وقت الحدث"
+
+#. module: hr_suprema_attendance
+msgid "Event Type"
+msgstr "نوع الحدث"
+
+#. module: hr_suprema_attendance
+msgid "External Key"
+msgstr "مفتاح خارجي"
+
+#. module: hr_suprema_attendance
+msgid "Failed to create user on BioStar: %s"
+msgstr "فشل إنشاء مستخدم على بايوستار: %s"
+
+#. module: hr_suprema_attendance
+msgid "Followers"
+msgstr "المتابعون"
+
+#. module: hr_suprema_attendance
+msgid "Followers (Partners)"
+msgstr "المتابعون (الشركاء)"
+
+#. module: hr_suprema_attendance
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "أيقونة Font Awesome مثل fa-tasks"
+
+#. module: hr_suprema_attendance
+msgid "Group By"
+msgstr "تجميع حسب"
+
+#. module: hr_suprema_attendance
+msgid "Has Message"
+msgstr "به رسائل"
+
+#. module: hr_suprema_attendance
+msgid "ID"
+msgstr "المعرّف"
+
+#. module: hr_suprema_attendance
+msgid "ID used for employee identification."
+msgstr "المعرّف المستخدم لتعريف الموظف."
+
+#. module: hr_suprema_attendance
+msgid "Icon"
+msgstr "أيقونة"
+
+#. module: hr_suprema_attendance
+msgid "Icon to indicate an exception activity."
+msgstr "أيقونة للدلالة على نشاط استثنائي."
+
+#. module: hr_suprema_attendance
+msgid "If checked, new messages require your attention."
+msgstr "إن كان محددًا فهناك رسائل جديدة تتطلب انتباهك."
+
+#. module: hr_suprema_attendance
+msgid "If checked, some messages have a delivery error."
+msgstr "إن كان محددًا فبعض الرسائل بها خطأ في التسليم."
+
+#. module: hr_suprema_attendance
+msgid "If direction unknown, alternate starting with IN."
+msgstr "إن كانت الجهة غير معروفة، فابدأ بالتناوب بالدخول."
+
+#. module: hr_suprema_attendance
+msgid "If set, force this Partition/Site when creating users on BioStar."
+msgstr "إن تم التحديد، فسيُفرض هذا القسم/الموقع عند إنشاء المستخدمين على بايوستار."
+
+#. module: hr_suprema_attendance
+msgid "If set, force this User Group when creating users on BioStar."
+msgstr "إن تم التحديد، فستُفرض مجموعة المستخدم هذه عند إنشاء المستخدمين على بايوستار."
+
+#. module: hr_suprema_attendance
+msgid "If set, logs can build student.attendance for this student."
+msgstr "إن تم التحديد، يمكن للسجلات تكوين حضور الطالب لهذا الطالب."
+
+#. module: hr_suprema_attendance
+msgid "Ignore repeated punches within this gap."
+msgstr "تجاهل البصمات المتكررة ضمن هذه المدة."
+
+#. module: hr_suprema_attendance
+msgid "Import Employees/Student Images"
+msgstr "استيراد صور الموظفين/الطلاب"
+
+#. module: hr_suprema_attendance
+msgid "Import Users"
+msgstr "استيراد المستخدمين"
+
+#. module: hr_suprema_attendance
+msgid "Invalid API Base URL: %s"
+msgstr "عنوان URL الأساسي لواجهة البرمجة غير صالح: %s"
+
+#. module: hr_suprema_attendance
+msgid "Is Follower"
+msgstr "متابع"
+
+#. module: hr_suprema_attendance
+msgid "Last 7 Days"
+msgstr "آخر 7 أيام"
+
+#. module: hr_suprema_attendance
+msgid "Last Event Sync"
+msgstr "آخر مزامنة للأحداث"
+
+#. module: hr_suprema_attendance
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: hr_suprema_attendance
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: hr_suprema_attendance
+msgid "Last User Sync"
+msgstr "آخر مزامنة للمستخدمين"
+
+#. module: hr_suprema_attendance
+msgid "Late After (min)"
+msgstr "متأخر بعد (دقائق)"
+
+#. module: hr_suprema_attendance
+msgid "Link to employee (barcode should match BioStar user/card if you prefer auto)"
+msgstr "ربط بموظف (يجب أن يتطابق الباركود مع مستخدم/بطاقة بايوستار عند التفعيل التلقائي)"
+
+#. module: hr_suprema_attendance
+msgid "Linked Employee"
+msgstr "الموظف المرتبط"
+
+#. module: hr_suprema_attendance
+msgid "Linked Student"
+msgstr "الطالب المرتبط"
+
+#. module: hr_suprema_attendance
+msgid "Login failed (%s): %s"
+msgstr "فشل تسجيل الدخول (%s): %s"
+
+#. module: hr_suprema_attendance
+msgid "Logs"
+msgstr "السجلات"
+
+#. module: hr_suprema_attendance
+msgid "Logs by Day"
+msgstr "السجلات حسب اليوم"
+
+#. module: hr_suprema_attendance
+msgid "Max Shift Hours"
+msgstr "أقصى ساعات للوردية"
+
+#. module: hr_suprema_attendance
+msgid "Message Delivery error"
+msgstr "خطأ في تسليم الرسائل"
+
+#. module: hr_suprema_attendance
+msgid "Messages"
+msgstr "الرسائل"
+
+#. module: hr_suprema_attendance
+msgid "Min Gap Seconds"
+msgstr "الحد الأدنى للفاصل (ثوانٍ)"
+
+#. module: hr_suprema_attendance
+msgid "Minutes after start to mark as Absent if no check-in."
+msgstr "دقائق بعد بدء الدوام لاعتبار الشخص غائبًا إن لم يسجّل دخولًا."
+
+#. module: hr_suprema_attendance
+msgid "Minutes after start to still be counted Present; beyond that -> Late."
+msgstr "دقائق بعد بدء الدوام يُعدّ فيها حاضرًا؛ بعدها يُعتبر متأخرًا."
+
+#. module: hr_suprema_attendance
+msgid "My Activity Deadline"
+msgstr "الموعد النهائي لنشاطي"
+
+#. module: hr_suprema_attendance
+msgid "Name"
+msgstr "الاسم"
+
+#. module: hr_suprema_attendance
+msgid "Next Activity Calendar Event"
+msgstr "حدث التقويم للنشاط التالي"
+
+#. module: hr_suprema_attendance
+msgid "Next Activity Deadline"
+msgstr "الموعد النهائي للنشاط التالي"
+
+#. module: hr_suprema_attendance
+msgid "Next Activity Summary"
+msgstr "ملخص النشاط التالي"
+
+#. module: hr_suprema_attendance
+msgid "Next Activity Type"
+msgstr "نوع النشاط التالي"
+
+#. module: hr_suprema_attendance
+msgid "No image found for user code %s"
+msgstr "لم يتم العثور على صورة لرمز المستخدم %s"
+
+#. module: hr_suprema_attendance
+msgid "No local biostar.user mapped to %s"
+msgstr "لا يوجد biostar.user محلي مربوط بـ %s"
+
+#. module: hr_suprema_attendance
+msgid "No logs yet"
+msgstr "لا توجد سجلات بعد"
+
+#. module: hr_suprema_attendance
+msgid "No valid User Group found. Set 'Default User Group ID' or ensure /user_groups returns 'All Users'."
+msgstr "لا توجد مجموعة مستخدمين صالحة. عيّن «معرّف مجموعة المستخدم الافتراضية» أو تأكد أن ‎/user_groups‎ تُرجع «كل المستخدمين»."
+
+#. module: hr_suprema_attendance
+msgid "Note"
+msgstr "ملاحظة"
+
+#. module: hr_suprema_attendance
+msgid "Number of Actions"
+msgstr "عدد الإجراءات"
+
+#. module: hr_suprema_attendance
+msgid "Number of errors"
+msgstr "عدد الأخطاء"
+
+#. module: hr_suprema_attendance
+msgid "Number of messages requiring action"
+msgstr "عدد الرسائل التي تتطلب إجراءً"
+
+#. module: hr_suprema_attendance
+msgid "Number of messages with delivery error"
+msgstr "عدد الرسائل التي بها خطأ في التسليم"
+
+#. module: hr_suprema_attendance
+msgid "OK"
+msgstr "ممتاز"
+
+#. module: hr_suprema_attendance
+msgid "Origin only (no /api). Example: https://10.201.2.88:5002"
+msgstr "الأصل فقط (بدون ‎/api). مثال: ‎https://10.201.2.88:5002"
+
+#. module: hr_suprema_attendance
+msgid "PREPARE STUDENTS"
+msgstr "تجهيز الطلاب"
+
+#. module: hr_suprema_attendance
+msgid "PUSH STUDENTS"
+msgstr "دفع الطلاب"
+
+#. module: hr_suprema_attendance
+msgid "Password"
+msgstr "كلمة السر"
+
+#. module: hr_suprema_attendance
+msgid "Please configure BioStar 2 credentials in Settings."
+msgstr "يرجى تكوين بيانات اعتماد BioStar 2 في الإعدادات."
+
+#. module: hr_suprema_attendance
+msgid "Prefer First In"
+msgstr "اعتبار أول بصمة دخول"
+
+#. module: hr_suprema_attendance
+msgid "Prepared students: created %(c)s, updated %(u)s, linked %(l)s, skipped %(s)s."
+msgstr "الطلاب المُجهَّزون: تم إنشاء %(c)s وتحديث %(u)s وربط %(l)s وتخطي %(s)s."
+
+#. module: hr_suprema_attendance
+msgid "Processed"
+msgstr "مُعالج"
+
+#. module: hr_suprema_attendance
+msgid "Pull"
+msgstr "جلب"
+
+#. module: hr_suprema_attendance
+msgid "Pull Events"
+msgstr "جلب الأحداث"
+
+#. module: hr_suprema_attendance
+msgid "Pull Events (365 Day)"
+msgstr "جلب الأحداث (365 يومًا)"
+
+#. module: hr_suprema_attendance
+msgid "Pull Events (Last Day)"
+msgstr "جلب الأحداث (اليوم الأخير)"
+
+#. module: hr_suprema_attendance
+msgid "Pull Events Range"
+msgstr "نطاق جلب الأحداث"
+
+#. module: hr_suprema_attendance
+msgid "Pulled %s new raw events; processed to attendances."
+msgstr "تم جلب %s حدثًا خامًا؛ وتمت معالجتها إلى سجلات الحضور."
+
+#. module: hr_suprema_attendance
+msgid "Pushed students: %s total (created %s, updated %s, linked %s)."
+msgstr "تم دفع الطلاب: %s إجمالاً (أُنشئ %s، وتم تحديث %s، وتم ربط %s)."
+
+#. module: hr_suprema_attendance
+msgid "Pushed users: %s total (created %s, updated %s, linked %s)."
+msgstr "تم دفع المستخدمين: %s إجمالاً (أُنشئ %s، تم تحديث %s، رُبط %s)."
+
+#. module: hr_suprema_attendance
+msgid "Ratings"
+msgstr "التقييمات"
+
+#. module: hr_suprema_attendance
+msgid "Raw"
+msgstr "خام"
+
+#. module: hr_suprema_attendance
+msgid "Raw JSON"
+msgstr "JSON خام"
+
+#. module: hr_suprema_attendance
+msgid "Raw Payload"
+msgstr "الحمولة الخام"
+
+#. module: hr_suprema_attendance
+msgid "Responsible User"
+msgstr "المستخدم المسؤول"
+
+#. module: hr_suprema_attendance
+msgid "SMS Delivery error"
+msgstr "خطأ في تسليم الرسائل القصيرة"
+
+#. module: hr_suprema_attendance
+msgid "School start time as a float hour, e.g., 8.0 means 08:00."
+msgstr "وقت بدء المدرسة كساعات عشرية؛ مثلًا 8.0 تعني 08:00."
+
+#. module: hr_suprema_attendance
+msgid "Session Token"
+msgstr "رمز الجلسة"
+
+#. module: hr_suprema_attendance
+msgid "Since"
+msgstr "منذ"
+
+#. module: hr_suprema_attendance
+msgid "Skipped"
+msgstr "متجاهَل"
+
+#. module: hr_suprema_attendance
+msgid "State"
+msgstr "الحالة"
+
+#. module: hr_suprema_attendance
+msgid "Status"
+msgstr "الحالة"
+
+#. module: hr_suprema_attendance
+msgid "Status Message"
+msgstr "رسالة الحالة"
+
+#. module: hr_suprema_attendance
+msgid "Status based on activities
+Overdue: Due date is already passed
+Today: Activity date is today
+Planned: Future activities."
+msgstr "الحالة بناءً على الأنشطة
+متأخر: تجاوز تاريخ الاستحقاق
+اليوم: تاريخ النشاط هو اليوم
+مخطط: أنشطة قادمة."
+
+#. module: hr_suprema_attendance
+msgid "Student"
+msgstr "طالب"
+
+#. module: hr_suprema_attendance
+msgid "Student Attendance"
+msgstr "حضور الطلاب"
+
+#. module: hr_suprema_attendance
+msgid "Student Start Hour"
+msgstr "ساعة بدء الطلاب"
+
+#. module: hr_suprema_attendance
+msgid "Student number (user code) is required."
+msgstr "رقم الطالب (رمز المستخدم) مطلوب."
+
+#. module: hr_suprema_attendance
+msgid "Suprema BioStar Device"
+msgstr "جهاز سوبرما بايوستار"
+
+#. module: hr_suprema_attendance
+msgid "Test Connection"
+msgstr "اختبار الاتصال"
+
+#. module: hr_suprema_attendance
+msgid "This log entry already exists (duplicate external key)."
+msgstr "هذا السجل موجود مسبقًا (مفتاح خارجي مكرر)."
+
+#. module: hr_suprema_attendance
+msgid "Timezone"
+msgstr "المنطقة الزمنية"
+
+#. module: hr_suprema_attendance
+msgid "Today"
+msgstr "اليوم"
+
+#. module: hr_suprema_attendance
+msgid "Token Expires"
+msgstr "انتهاء الرمز"
+
+#. module: hr_suprema_attendance
+msgid "Type of the exception activity on record."
+msgstr "نوع نشاط الاستثناء في السجل."
+
+#. module: hr_suprema_attendance
+msgid "UTC timestamp from BioStar"
+msgstr "طابع وقت UTC من بايوستار"
+
+#. module: hr_suprema_attendance
+msgid "Uniqueness key from device+event (e.g., device-id/user/timestamp/event_id)"
+msgstr "مفتاح التفرد من الجهاز+الحدث (مثل device-id/user/timestamp/event_id)"
+
+#. module: hr_suprema_attendance
+msgid "Unknown"
+msgstr "غير معروف"
+
+#. module: hr_suprema_attendance
+msgid "Until"
+msgstr "حتى"
+
+#. module: hr_suprema_attendance
+msgid "Use <b>Pull Events</b> on your BioStar Device to fetch raw punches."
+msgstr "استخدم <b>جلب الأحداث</b> على جهاز بايوستار لجلب البصمات الخام."
+
+#. module: hr_suprema_attendance
+msgid "User import finished. Created: %s, Updated: %s"
+msgstr "اكتمل استيراد المستخدمين. المُنشأ: %s، المُحدّث: %s"
+
+#. module: hr_suprema_attendance
+msgid "User import: no users returned (check API user permissions/endpoint)."
+msgstr "استيراد المستخدمين: لم تُرجِع الواجهة أي مستخدمين (تحقق من صلاحيات مستخدم API/نقطة النهاية)."
+
+#. module: hr_suprema_attendance
+msgid "User photos: downloaded %s; set on %s employees, %s students."
+msgstr "صور المستخدمين: تم تنزيل %s؛ وتعيينها لـ %s موظفًا و%s طالبًا."
+
+#. module: hr_suprema_attendance
+msgid "Username"
+msgstr "اسم المستخدم"
+
+#. module: hr_suprema_attendance
+msgid "Users"
+msgstr "المستخدمون"
+
+#. module: hr_suprema_attendance
+msgid "Verify Ssl"
+msgstr "تحقق من SSL"
+
+#. module: hr_suprema_attendance
+msgid "Website Messages"
+msgstr "رسائل الموقع"
+
+#. module: hr_suprema_attendance
+msgid "Website communication history"
+msgstr "سجل التواصل على الموقع"
+
+#. module: hr_suprema_attendance
+msgid "Work Calendar"
+msgstr "جدول العمل"
+
+#. module: hr_suprema_attendance
+msgid "classes.classe"
+msgstr "classes.classe"
+
+#. module: hr_suprema_attendance
+msgid "classes.groups"
+msgstr "classes.groups"
+
+#. module: hr_suprema_attendance
+msgid "أول دخول (جهاز)"
+msgstr "أول دخول (جهاز)"
+
+#. module: hr_suprema_attendance
+msgid "الجهاز"
+msgstr "الجهاز"
+
+#. module: hr_suprema_attendance
+msgid "الشعبة/المجموعة"
+msgstr "الشعبة/المجموعة"
+
+#. module: hr_suprema_attendance
+msgid "الطالب"
+msgstr "الطالب"
+
+#. module: hr_suprema_attendance
+msgid "الفصل"
+msgstr "الفصل"
+
+#. module: hr_suprema_attendance
+msgid "الفصول"
+msgstr "الفصول"
+
+#. module: hr_suprema_attendance
+msgid "المرفق"
+msgstr "المرفق"
+
+#. module: hr_suprema_attendance
+msgid "تاريخ الحضور"
+msgstr "تاريخ الحضور"
+
+#. module: hr_suprema_attendance
+msgid "تم تسجيل حضور هذا الطالب في هذا التاريخ مسبقاً."
+msgstr "تم تسجيل حضور هذا الطالب في هذا التاريخ مسبقًا."
+
+#. module: hr_suprema_attendance
+msgid "حاضر"
+msgstr "حاضر"
+
+#. module: hr_suprema_attendance
+msgid "حضور الطالب"
+msgstr "حضور الطالب"
+
+#. module: hr_suprema_attendance
+msgid "حضور الطلاب"
+msgstr "حضور الطلاب"
+
+#. module: hr_suprema_attendance
+msgid "رقم الطالب"
+msgstr "رقم الطالب"
+
+#. module: hr_suprema_attendance
+msgid "غائب"
+msgstr "غائب"
+
+#. module: hr_suprema_attendance
+msgid "غائب بعذر"
+msgstr "غائب بعذر"
+
+#. module: hr_suprema_attendance
+msgid "لم يتم تحضيرهم"
+msgstr "لم يتم تحضيرهم"
+
+#. module: hr_suprema_attendance
+msgid "متأخر"
+msgstr "متأخر"
+
+#. module: hr_suprema_attendance
+msgid "مستأذن"
+msgstr "مستأذن"
+
+#. module: hr_suprema_attendance
+msgid "ملاحظة"
+msgstr "ملاحظة"
+
