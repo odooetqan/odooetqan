@@ -1,0 +1,55 @@
+<odoo>
+  <record id="view_student_attendance_tree" model="ir.ui.view">
+    <field name="name">student.attendance.tree</field>
+    <field name="model">student.attendance</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="attendance_date"/>
+        <field name="student_id"/>
+        <field name="class_id"/>
+        <field name="group_id"/>
+        <field name="state"/>
+        <field name="device_id"/>
+        <field name="first_check_in"/>
+        <field name="note"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="view_student_attendance_form" model="ir.ui.view">
+    <field name="name">student.attendance.form</field>
+    <field name="model">student.attendance</field>
+    <field name="arch" type="xml">
+      <form string="حضور الطالب">
+        <sheet>
+          <group>
+            <group>
+              <field name="student_id" options="{'no_create_edit': True}"/>
+              <field name="group_id"/>
+              <field name="class_id" domain="[('group_id', '=', group_id)]"/>
+              <field name="attendance_date"/>
+              <field name="state"/>
+            </group>
+            <group>
+              <field name="attachment" filename="student_id"/>
+              <field name="note"/>
+              <field name="device_id" readonly="1"/>
+              <field name="first_check_in" readonly="1"/>
+            </group>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_student_attendance" model="ir.actions.act_window">
+    <field name="name">حضور الطلاب</field>
+    <field name="res_model">student.attendance</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <menuitem id="menu_student_attendance_root"
+            name="حضور الطلاب"
+            action="action_student_attendance"/><!--             parent="base.menu_custom"  
+ put your real parent menu here -->
+</odoo>

@@ -67,6 +67,13 @@ class BiostarDevice(models.Model):
     min_gap_seconds = fields.Integer(default=60, help="Ignore repeated punches within this gap.")
     max_shift_hours = fields.Integer(default=16, help="Auto close a shift longer than this.")
     prefer_first_in = fields.Boolean(default=True, help="If direction unknown, alternate starting with IN.")
+        
+    # in biostar.device
+    student_attendance_ids = fields.One2many(
+        'student.attendance',
+        'device_id',            # ← must match the M2O on student.attendance
+        string="Student Attendance"
+    )
 
     # --------------------------
     # Internals / utilities
@@ -394,11 +401,155 @@ class BiostarDevice(models.Model):
             recc = rec._login()
 
             # default window = last 24h
-<<<<<<< HEAD
-            since_dt = fields.Datetime.from_string(since) if since else (fields.Datetime.now() - timedelta(days=360))
-=======
             since_dt = fields.Datetime.from_string(since) if since else (fields.Datetime.now() - timedelta(days=365))
->>>>>>> 850c232 (upload Suprema model)
+            until_dt = fields.Datetime.from_string(until) if until else fields.Datetime.now()
+
+            conditions = [{
+                "column": "datetime",
+                "operator": 3,  # BETWEEN
+                "values": [
+                    since_dt.strftime("%Y-%m-%dT%H:%M:%S.000Z"),
+                    until_dt.strftime("%Y-%m-%dT%H:%M:%S.000Z"),
+                ],
+            }]
+            if user_filter:
+                conditions.append({"column": "user_id.user_id", "operator": 0, "values": [str(user_filter)]})
+            if device_filter:
+                conditions.append({"column": "device_id.id", "operator": 0, "values": [str(device_filter)]})
+
+            limit = 500
+            offset = 0
+            created = 0
+
+            while True:
+                body = {
+                    "Query": {
+                        "limit": limit,
+                        "offset": offset,  # some builds ignore; loop stops on len<limit anyway
+                        "conditions": conditions,
+                        "orders": [{"column": "datetime", "descending": False}],
+                    }
+                }
+                data = recc._req("POST", "/events/search", json=body)
+                rows = _rows(data)
+                if not rows:
+                    break
+
+                for ev in rows:
+                    # --- normalize from EventCollection.rows ---
+                    ev_id = str(ev.get("id") or "").strip()
+
+                    # prefer UTC from server_datetime; fallback to local datetime
+                    ts = ev.get("server_datetime") or ev.get("datetime")
+                    dt_utc = self._parse_biostar_dt(ts)
+                    if not dt_utc:
+                        continue
+
+                    # nested user id
+                    uid = ""
+                    u = ev.get("user_id") or {}
+                    if isinstance(u, dict):
+                        uid = str(u.get("user_id") or "").strip()
+                    if not uid:
+                        uid = str(ev.get("user_id") or ev.get("user_code") or "").strip()
+                    if not uid:
+                        continue
+
+                    # direction from code (optional)
+                    code = str((ev.get("event_type_id") or {}).get("code") or "").strip()
+                    direction = "in" if code in CODE_IN else ("out" if code in CODE_OUT else None)
+
+                    # unique key
+                    external_key = f"{rec.id}:{ev_id}" if ev_id else f"{rec.id}:{uid}:{dt_utc.isoformat()}"
+
+                    # employee mapping
+                    # Guard against aborted tx: everything inside savepoint below
+                    try:
+                        with self.env.cr.savepoint():
+                            emp = Employee.search([("barcode", "=", uid)], limit=1)
+                            if not emp:
+                                bs_user = BiostarUser.search(
+                                    [("device_id", "=", rec.id), ("biostar_user_id", "=", uid), ("employee_id", "!=", False)],
+                                    limit=1
+                                )
+                                emp = bs_user.employee_id
+
+                            vals = {
+                                "device_id": rec.id,
+                                "employee_id": emp.id if emp else False,
+                                "biostar_user_id": uid,
+                                "event_dt_utc": dt_utc,   # keep UTC (your processor orders by this)
+                                "event_time": dt_utc,     # required by your model
+                                "event_type": code,
+                                "external_key": external_key,
+                                "state": "draft",
+                            }
+                            if direction in ("in", "out"):
+                                vals["direction"] = direction
+                            # do NOT set 'unknown' if selection disallows it; omit instead
+
+                            # Avoid full-row exception storm: rely on unique index and catch it.
+                            Log.create(vals)
+                            created += 1
+                    except IntegrityError as ex:
+                        # duplicate unique constraint -> already imported
+                        if "uniq_external_key" in str(ex).lower():
+                            continue
+                        raise
+                    except PsycoError:
+                        # any other pg error inside the savepoint → skip this row, keep loop alive
+                        continue
+                    except Exception as ex:
+                        # Unexpected business error: log and continue with next row
+                        _logger.exception("Failed to import BioStar event %s: %s", external_key, ex)
+                        continue
+
+                if len(rows) < limit:
+                    break
+                offset += limit
+
+            # watermark + process into hr.attendance
+            rec.write({"last_event_sync": fields.Datetime.now()})
+            self._process_logs()
+
+            # optional notification (ignore websocket errors if bus not configured)
+            try:
+                self.env["bus.bus"]._sendone(
+                    self.env.user.partner_id, "simple_notification",
+                    {"title": _("BioStar"),
+                     "message": _("Pulled %s new raw events; processed to attendances.") % created,
+                     "sticky": False}
+                )
+            except Exception:
+                pass
+
+        return True
+
+
+
+    def action_pull_events_24 (self, since=None, until=None, user_filter=None, device_filter=None):
+        """Fetch BioStar events (EventCollection.rows) -> biostar.attendance.log, then process."""
+        Log = self.env["biostar.attendance.log"].sudo()
+        Employee = self.env["hr.employee"].sudo()
+        BiostarUser = self.env["biostar.user"].sudo()
+
+        def _rows(payload):
+            if isinstance(payload, dict):
+                ec = payload.get("EventCollection") or {}
+                rows = ec.get("rows") or []
+                if isinstance(rows, list):
+                    return rows
+            return []
+
+        # map codes to directions (tune to your site)
+        CODE_IN  = {"4867"}  # e.g. auth success -> IN
+        CODE_OUT = set()     # put OUT codes here if you have them
+
+        for rec in self:
+            recc = rec._login()
+
+            # default window = last 24h
+            since_dt = fields.Datetime.from_string(since) if since else (fields.Datetime.now() - timedelta(days=1))
             until_dt = fields.Datetime.from_string(until) if until else fields.Datetime.now()
 
             conditions = [{

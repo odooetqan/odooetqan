@@ -1,0 +1,1055 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* hr_suprema_attendance
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-24 11:43+0000\n"
+"PO-Revision-Date: 2025-09-24 15:02+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ar_001\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"X-Generator: Poedit 3.6\n"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__base_url
+msgid "API Base URL"
+msgstr "عنوان URL الأساسي لواجهة برمجة التطبيقات (API)"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__time_to_calculate_absent
+msgid "Absent After (min)"
+msgstr "الغائب بعد (دقيقة)"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__message_needaction
+msgid "Action Needed"
+msgstr "الإجراء المطلوب"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__active
+msgid "Active"
+msgstr "نشط"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__activity_ids
+msgid "Activities"
+msgstr "النشاطات"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_attendance_log__attendance_id
+msgid "Attendance"
+msgstr "الحضور"
+
+#. module: hr_suprema_attendance
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.biostar_attendance_log_form
+msgid "Attendance Log"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.actions.act_window,name:hr_suprema_attendance.action_biostar_attendance_logs
+#: model:ir.ui.menu,name:hr_suprema_attendance.menu_biostar_logs
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.biostar_attendance_log_pivot
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.biostar_attendance_log_search
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.biostar_attendance_log_tree
+msgid "Attendance Logs"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__attendance_mode
+msgid "Attendance Mode"
+msgstr "نوع الحضور"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,help:hr_suprema_attendance.field_biostar_device__max_shift_hours
+msgid "Auto close a shift longer than this."
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_user__employee_barcode
+msgid "Badge ID"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#. odoo-python
+#: code:addons/hr_suprema_attendance/models/biostar_device copy.py:0
+#: code:addons/hr_suprema_attendance/models/biostar_device.py:0
+#: model:ir.ui.menu,name:hr_suprema_attendance.menu_biostar_root
+#, python-format
+msgid "BioStar"
+msgstr "أجهزة البصمة"
+
+#. module: hr_suprema_attendance
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.view_biostar_device_form
+msgid "BioStar Device"
+msgstr "أجهزة البصمة"
+
+#. module: hr_suprema_attendance
+#: model:ir.actions.act_window,name:hr_suprema_attendance.action_biostar_devices
+msgid "BioStar Devices"
+msgstr "أجهزة البصمة"
+
+#. module: hr_suprema_attendance
+#: model:ir.model,name:hr_suprema_attendance.model_biostar_attendance_log
+msgid "BioStar Raw Attendance Log"
+msgstr "البصمات علي جهاز البصمة"
+
+#. module: hr_suprema_attendance
+#: model:ir.model,name:hr_suprema_attendance.model_biostar_user
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.biostar_attendance_log_search
+msgid "BioStar User"
+msgstr "مستخدم علي الجهاز"
+
+#. module: hr_suprema_attendance
+#: model:ir.actions.act_window,name:hr_suprema_attendance.action_biostar_users
+msgid "BioStar Users"
+msgstr "المستخدمين علي الجهاز"
+
+#. module: hr_suprema_attendance
+#. odoo-python
+#: code:addons/hr_suprema_attendance/models/suprema_sync.py:0
+#, python-format
+msgid "BioStar events fetch failed: %s"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#. odoo-python
+#: code:addons/hr_suprema_attendance/models/suprema_sync.py:0
+#, python-format
+msgid "BioStar login failed: %s"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#. odoo-python
+#: code:addons/hr_suprema_attendance/models/biostar_device.py:0
+#, python-format
+msgid ""
+"BioStar rejected the user payload (uid %s). Last error: %s\n"
+"Hints:\n"
+"- Ensure User Group ID %s exists and is accessible.\n"
+"- Keep user_group_id and user_group as OBJECTS with an 'id'.\n"
+"- Ensure user_id is an integer (we coerced it to %s).\n"
+"- Keep start_datetime & expiry_datetime in ISO ending with .00Z."
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.actions.server,name:hr_suprema_attendance.ir_cron_biostar_pull_and_process_ir_actions_server
+msgid "BioStar: Pull + Process"
+msgstr "سحب البصمات من الجهاز"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_attendance_log__biostar_user_id
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_user__biostar_user_id
+msgid "Biostar User"
+msgstr "مستخدم علي الجهاز"
+
+#. module: hr_suprema_attendance
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.view_biostar_pull_wizard
+msgid "Cancel"
+msgstr "الغاء"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_user__card_no
+msgid "Card No"
+msgstr "رقم البطاقة"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields.selection,name:hr_suprema_attendance.selection__biostar_attendance_log__direction__in
+msgid "Check In"
+msgstr "دخول"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields.selection,name:hr_suprema_attendance.selection__biostar_attendance_log__direction__out
+msgid "Check Out"
+msgstr "خروج"
+
+#. module: hr_suprema_attendance
+#: model:ir.model,name:hr_suprema_attendance.model_res_partner
+msgid "Contact"
+msgstr "جهه الاتصال"
+
+#. module: hr_suprema_attendance
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.view_biostar_device_form
+msgid "Create/Update all students on this device and link them locally."
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.view_biostar_device_form
+msgid ""
+"Create/Update user lines from students (name and card from student_number)."
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_attendance_log__create_uid
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__create_uid
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_pull_wizard__create_uid
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_user__create_uid
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_classes_classe__create_uid
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_classes_groups__create_uid
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_student_attendance__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_attendance_log__create_date
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__create_date
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_pull_wizard__create_date
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_user__create_date
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_classes_classe__create_date
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_classes_groups__create_date
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_student_attendance__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.biostar_attendance_log_search
+msgid "Day"
+msgstr "يوم"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__default_partition_id
+msgid "Default Partition/Site ID"
+msgstr "موقع افتراضي"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__default_user_group_id
+msgid "Default User Group ID"
+msgstr "مجموعة افتراضية"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_attendance_log__device_id
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_pull_wizard__device_id
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_user__device_id
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.biostar_attendance_log_search
+msgid "Device"
+msgstr "جهاز"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__device_ip
+msgid "Device IP"
+msgstr "IP الجهاز"
+
+#. module: hr_suprema_attendance
+#: model:ir.ui.menu,name:hr_suprema_attendance.menu_biostar_devices
+msgid "Devices"
+msgstr "الاجهزه"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_attendance_log__direction
+msgid "Direction"
+msgstr "اتجاه"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_attendance_log__display_name
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__display_name
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_pull_wizard__display_name
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_user__display_name
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_classes_classe__display_name
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_classes_groups__display_name
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_student_attendance__display_name
+msgid "Display Name"
+msgstr "الاسم"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields.selection,name:hr_suprema_attendance.selection__biostar_attendance_log__state__draft
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.biostar_attendance_log_search
+msgid "Draft"
+msgstr "مسودة"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_attendance_log__employee_id
+#: model:ir.model.fields.selection,name:hr_suprema_attendance.selection__biostar_device__attendance_mode__employee
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.biostar_attendance_log_search
+msgid "Employee"
+msgstr "موظف"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields.selection,name:hr_suprema_attendance.selection__biostar_device__status__error
+msgid "Error"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_attendance_log__event_dt_utc
+msgid "Event Dt Utc"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_attendance_log__event_time
+msgid "Event Time"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_attendance_log__event_type
+msgid "Event Type"
+msgstr "نوع الحدث"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_attendance_log__external_key
+msgid "External Key"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#. odoo-python
+#: code:addons/hr_suprema_attendance/models/biostar_device copy.py:0
+#, python-format
+msgid "Failed to create user on BioStar: %s"
+msgstr "فشل انشاء مستخدم الجهاز: %s"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,help:hr_suprema_attendance.field_biostar_device__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.biostar_attendance_log_search
+msgid "Group By"
+msgstr "تجميع حسب"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_attendance_log__id
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__id
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_pull_wizard__id
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_user__id
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_classes_classe__id
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_classes_groups__id
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_student_attendance__id
+msgid "ID"
+msgstr "المعرف"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,help:hr_suprema_attendance.field_biostar_user__employee_barcode
+msgid "ID used for employee identification."
+msgstr "المعرف تم استخدامه لموظف"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,help:hr_suprema_attendance.field_biostar_device__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,help:hr_suprema_attendance.field_biostar_device__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,help:hr_suprema_attendance.field_biostar_device__message_has_error
+#: model:ir.model.fields,help:hr_suprema_attendance.field_biostar_device__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,help:hr_suprema_attendance.field_biostar_device__prefer_first_in
+msgid "If direction unknown, alternate starting with IN."
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,help:hr_suprema_attendance.field_biostar_device__default_partition_id
+msgid "If set, force this Partition/Site when creating users on BioStar."
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,help:hr_suprema_attendance.field_biostar_device__default_user_group_id
+msgid "If set, force this User Group when creating users on BioStar."
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,help:hr_suprema_attendance.field_biostar_user__student_id
+msgid "If set, logs can build student.attendance for this student."
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,help:hr_suprema_attendance.field_biostar_device__min_gap_seconds
+msgid "Ignore repeated punches within this gap."
+msgstr "تجاهل البصمات داخل هذه الفترة القليلة"
+
+#. module: hr_suprema_attendance
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.view_biostar_device_form
+msgid "Import Employees/Student Images"
+msgstr "سحب صور الموظفين/الطلاب"
+
+#. module: hr_suprema_attendance
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.view_biostar_device_form
+msgid "Import Users"
+msgstr "سحب المستخدمين"
+
+#. module: hr_suprema_attendance
+#. odoo-python
+#: code:addons/hr_suprema_attendance/models/biostar_device copy.py:0
+#: code:addons/hr_suprema_attendance/models/biostar_device.py:0
+#, python-format
+msgid "Invalid API Base URL: %s"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.biostar_attendance_log_search
+msgid "Last 7 Days"
+msgstr "اخر 7 ايام"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__last_event_sync
+msgid "Last Event Sync"
+msgstr "اخر بصمة تمت مزامنتها"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_attendance_log__write_uid
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__write_uid
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_pull_wizard__write_uid
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_user__write_uid
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_classes_classe__write_uid
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_classes_groups__write_uid
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_student_attendance__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_attendance_log__write_date
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__write_date
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_pull_wizard__write_date
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_user__write_date
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_classes_classe__write_date
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_classes_groups__write_date
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_student_attendance__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__last_user_sync
+msgid "Last User Sync"
+msgstr "اخر مستخدم تم مزامنته"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__time_to_present_late
+msgid "Late After (min)"
+msgstr "التاخير بعد (دقيقة)"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,help:hr_suprema_attendance.field_biostar_user__employee_id
+msgid ""
+"Link to employee (barcode should match BioStar user/card if you prefer auto)"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_user__employee_id
+msgid "Linked Employee"
+msgstr "الموظف "
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_user__student_id
+msgid "Linked Student"
+msgstr "الطالب "
+
+#. module: hr_suprema_attendance
+#. odoo-python
+#: code:addons/hr_suprema_attendance/models/biostar_device copy.py:0
+#: code:addons/hr_suprema_attendance/models/biostar_device.py:0
+#, python-format
+msgid "Login failed (%s): %s"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.biostar_device_form_inherit_logs_button
+msgid "Logs"
+msgstr "سجلات"
+
+#. module: hr_suprema_attendance
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.biostar_attendance_log_graph
+msgid "Logs by Day"
+msgstr "سجلات اليوم"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__max_shift_hours
+msgid "Max Shift Hours"
+msgstr "اكبر وقت ممكن للحضور"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__min_gap_seconds
+msgid "Min Gap Seconds"
+msgstr "اقل فترة (ثواني)"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,help:hr_suprema_attendance.field_biostar_device__time_to_calculate_absent
+msgid "Minutes after start to mark as Absent if no check-in."
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,help:hr_suprema_attendance.field_biostar_device__time_to_present_late
+msgid "Minutes after start to still be counted Present; beyond that -> Late."
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "الموعد النهائي لنشاطاتي"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__name
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_user__name
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_classes_classe__name
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_classes_groups__name
+msgid "Name"
+msgstr "الاسم"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#. odoo-python
+#: code:addons/hr_suprema_attendance/models/biostar_device.py:0
+#, python-format
+msgid "No image found for user code %s"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#. odoo-python
+#: code:addons/hr_suprema_attendance/models/biostar_device.py:0
+#, python-format
+msgid "No local biostar.user mapped to %s"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model_terms:ir.actions.act_window,help:hr_suprema_attendance.action_biostar_attendance_logs
+msgid "No logs yet"
+msgstr "لاتوجد سجلات بعد"
+
+#. module: hr_suprema_attendance
+#. odoo-python
+#: code:addons/hr_suprema_attendance/models/biostar_device.py:0
+#, python-format
+msgid ""
+"No valid User Group found. Set 'Default User Group ID' or ensure /"
+"user_groups returns 'All Users'."
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_attendance_log__note
+msgid "Note"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,help:hr_suprema_attendance.field_biostar_device__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,help:hr_suprema_attendance.field_biostar_device__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields.selection,name:hr_suprema_attendance.selection__biostar_device__status__ok
+msgid "OK"
+msgstr "تم"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,help:hr_suprema_attendance.field_biostar_device__base_url
+msgid "Origin only (no /api). Example: https://10.201.2.88:5002"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.view_biostar_device_form
+msgid "PREPARE STUDENTS"
+msgstr "تجهز الطلاب قبل الرفع"
+
+#. module: hr_suprema_attendance
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.view_biostar_device_form
+msgid "PUSH STUDENTS"
+msgstr "رفع الطلاب الي الاجهزة"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__password
+msgid "Password"
+msgstr "كلمة السر"
+
+#. module: hr_suprema_attendance
+#. odoo-python
+#: code:addons/hr_suprema_attendance/models/suprema_sync.py:0
+#, python-format
+msgid "Please configure BioStar 2 credentials in Settings."
+msgstr "يرجى تكوين بيانات اعتماد BioStar 2 في الإعدادات."
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__prefer_first_in
+msgid "Prefer First In"
+msgstr "يفضل الدخول أولاً"
+
+#. module: hr_suprema_attendance
+#. odoo-python
+#: code:addons/hr_suprema_attendance/models/biostar_device.py:0
+#, python-format
+msgid ""
+"Prepared students: created %(c)s, updated %(u)s, linked %(l)s, skipped %(s)s."
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields.selection,name:hr_suprema_attendance.selection__biostar_attendance_log__state__processed
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.biostar_attendance_log_search
+msgid "Processed"
+msgstr "تمت معالجتها"
+
+#. module: hr_suprema_attendance
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.view_biostar_pull_wizard
+msgid "Pull"
+msgstr "سحب"
+
+#. module: hr_suprema_attendance
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.view_biostar_pull_wizard
+msgid "Pull Events"
+msgstr "سحب البصمات"
+
+#. module: hr_suprema_attendance
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.view_biostar_device_form
+msgid "Pull Events (365 Day)"
+msgstr "سحب البصمات (365 يوم)"
+
+#. module: hr_suprema_attendance
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.view_biostar_device_form
+msgid "Pull Events (Last Day)"
+msgstr "سحب البصمات (يوم)"
+
+#. module: hr_suprema_attendance
+#: model:ir.model,name:hr_suprema_attendance.model_biostar_pull_wizard
+msgid "Pull Events Range"
+msgstr "سحب البصمات فترة"
+
+#. module: hr_suprema_attendance
+#. odoo-python
+#: code:addons/hr_suprema_attendance/models/biostar_device copy.py:0
+#: code:addons/hr_suprema_attendance/models/biostar_device.py:0
+#, python-format
+msgid "Pulled %s new raw events; processed to attendances."
+msgstr ""
+
+#. module: hr_suprema_attendance
+#. odoo-python
+#: code:addons/hr_suprema_attendance/models/biostar_device copy.py:0
+#, python-format
+msgid "Pushed students: %s total (created %s, updated %s, linked %s)."
+msgstr ""
+
+#. module: hr_suprema_attendance
+#. odoo-python
+#: code:addons/hr_suprema_attendance/models/biostar_device.py:0
+#, python-format
+msgid "Pushed users: %s total (created %s, updated %s, linked %s)."
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__rating_ids
+msgid "Ratings"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.biostar_attendance_log_form
+msgid "Raw"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_attendance_log__raw_payload
+msgid "Raw JSON"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_attendance_log__raw
+msgid "Raw Payload"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,help:hr_suprema_attendance.field_biostar_device__start_attendance_student
+msgid "School start time as a float hour, e.g., 8.0 means 08:00."
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__token
+msgid "Session Token"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_pull_wizard__since
+msgid "Since"
+msgstr "منذ"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields.selection,name:hr_suprema_attendance.selection__biostar_attendance_log__state__skipped
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.biostar_attendance_log_search
+msgid "Skipped"
+msgstr "تخطي"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_attendance_log__state
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.biostar_attendance_log_search
+msgid "State"
+msgstr "حالة"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__status
+msgid "Status"
+msgstr "حالة"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__status_message
+msgid "Status Message"
+msgstr "رسالة حالة"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,help:hr_suprema_attendance.field_biostar_device__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"الحالة بناءً على الأنشطة\n"
+"متأخر: تاريخ الاستحقاق قد انقضى\n"
+"اليوم: تاريخ النشاط هو اليوم\n"
+"المخطط له: أنشطة مستقبلية."
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields.selection,name:hr_suprema_attendance.selection__biostar_device__attendance_mode__student
+msgid "Student"
+msgstr "الطالب "
+
+#. module: hr_suprema_attendance
+#: model:ir.model,name:hr_suprema_attendance.model_student_attendance
+msgid "Student Attendance"
+msgstr "حضور الطلاب"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__start_attendance_student
+msgid "Student Start Hour"
+msgstr "بداية الطلب (ساعة)"
+
+#. module: hr_suprema_attendance
+#. odoo-python
+#: code:addons/hr_suprema_attendance/models/biostar_device copy.py:0
+#: code:addons/hr_suprema_attendance/models/biostar_device.py:0
+#, python-format
+msgid "Student number (user code) is required."
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model,name:hr_suprema_attendance.model_biostar_device
+msgid "Suprema BioStar Device"
+msgstr "اجهزة البصمة (سوبريما)"
+
+#. module: hr_suprema_attendance
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.view_biostar_device_form
+msgid "Test Connection"
+msgstr "اختبار الاتصال"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.constraint,message:hr_suprema_attendance.constraint_biostar_attendance_log_uniq_external_key
+msgid "This log entry already exists (duplicate external key)."
+msgstr "مكرر "
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__timezone
+msgid "Timezone"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.biostar_attendance_log_search
+msgid "Today"
+msgstr "اليوم"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__token_expires
+msgid "Token Expires"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,help:hr_suprema_attendance.field_biostar_device__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,help:hr_suprema_attendance.field_biostar_attendance_log__event_dt_utc
+msgid "UTC timestamp from BioStar"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,help:hr_suprema_attendance.field_biostar_attendance_log__external_key
+msgid ""
+"Uniqueness key from device+event (e.g., device-id/user/timestamp/event_id)"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields.selection,name:hr_suprema_attendance.selection__biostar_device__status__unknown
+msgid "Unknown"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_pull_wizard__until
+msgid "Until"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model_terms:ir.actions.act_window,help:hr_suprema_attendance.action_biostar_attendance_logs
+msgid "Use <b>Pull Events</b> on your BioStar Device to fetch raw punches."
+msgstr ""
+
+#. module: hr_suprema_attendance
+#. odoo-python
+#: code:addons/hr_suprema_attendance/models/biostar_device copy.py:0
+#: code:addons/hr_suprema_attendance/models/biostar_device.py:0
+#, python-format
+msgid "User import finished. Created: %s, Updated: %s"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#. odoo-python
+#: code:addons/hr_suprema_attendance/models/biostar_device copy.py:0
+#: code:addons/hr_suprema_attendance/models/biostar_device.py:0
+#, python-format
+msgid "User import: no users returned (check API user permissions/endpoint)."
+msgstr ""
+
+#. module: hr_suprema_attendance
+#. odoo-python
+#: code:addons/hr_suprema_attendance/models/biostar_device copy.py:0
+#: code:addons/hr_suprema_attendance/models/biostar_device.py:0
+#, python-format
+msgid "User photos: downloaded %s; set on %s employees, %s students."
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__username
+msgid "Username"
+msgstr "اسم المستخدم"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__user_ids
+#: model:ir.ui.menu,name:hr_suprema_attendance.menu_biostar_users
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.view_biostar_device_form
+msgid "Users"
+msgstr "المستخدمين"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__verify_ssl
+msgid "Verify Ssl"
+msgstr "التأكد من شهادة الامان"
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_device__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,help:hr_suprema_attendance.field_biostar_device__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_student_attendance__work_calendar_id
+msgid "Work Calendar"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model,name:hr_suprema_attendance.model_classes_classe
+msgid "classes.classe"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model,name:hr_suprema_attendance.model_classes_groups
+msgid "classes.groups"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_student_attendance__first_check_in
+msgid "أول دخول (جهاز)"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_res_partner__device_id
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_res_users__device_id
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_student_attendance__device_id
+msgid "الجهاز"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_classes_classe__group_id
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_student_attendance__group_id
+msgid "الشعبة/المجموعة"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_student_attendance__student_id
+msgid "الطالب"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_student_attendance__class_id
+msgid "الفصل"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_classes_groups__classe_ids
+msgid "الفصول"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_student_attendance__attachment
+msgid "المرفق"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_student_attendance__attendance_date
+msgid "تاريخ الحضور"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.constraint,message:hr_suprema_attendance.constraint_student_attendance_uniq_student_day
+msgid "تم تسجيل حضور هذا الطالب في هذا التاريخ مسبقاً."
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields.selection,name:hr_suprema_attendance.selection__student_attendance__state__حاضر
+msgid "حاضر"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_student_attendance__state
+#: model_terms:ir.ui.view,arch_db:hr_suprema_attendance.view_student_attendance_form
+msgid "حضور الطالب"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.actions.act_window,name:hr_suprema_attendance.action_student_attendance
+#: model:ir.ui.menu,name:hr_suprema_attendance.menu_student_attendance_root
+msgid "حضور الطلاب"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_biostar_user__student_number
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_res_partner__student_number
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_res_users__student_number
+msgid "رقم الطالب"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields.selection,name:hr_suprema_attendance.selection__student_attendance__state__غائب
+msgid "غائب"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields.selection,name:hr_suprema_attendance.selection__student_attendance__state__غائب_بعذر
+msgid "غائب بعذر"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields.selection,name:hr_suprema_attendance.selection__student_attendance__state__لم_يتم_تحضيرهم
+msgid "لم يتم تحضيرهم"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields.selection,name:hr_suprema_attendance.selection__student_attendance__state__متأخر
+msgid "متأخر"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields.selection,name:hr_suprema_attendance.selection__student_attendance__state__مستأذن
+msgid "مستأذن"
+msgstr ""
+
+#. module: hr_suprema_attendance
+#: model:ir.model.fields,field_description:hr_suprema_attendance.field_student_attendance__note
+msgid "ملاحظة"
+msgstr ""

@@ -12,4 +12,15 @@
   <menuitem id="menu_biostar_devices" name="Devices" parent="menu_biostar_root" action="action_biostar_devices"/>
   <menuitem id="menu_biostar_users" name="Users" parent="menu_biostar_root" action="action_biostar_users"/>
 
+
+  <menuitem id="menu_biostar_logs" name="Attendance Logs" parent="menu_biostar_root"
+            action="action_biostar_attendance_logs" sequence="10"/>
+
+
+  <menuitem id="menu_student_attendance_root"
+            name="حضور الطلاب"
+            parent="menu_biostar_root"
+            action="action_student_attendance"/><!--             parent="base.menu_custom"  
+ put your real parent menu here -->
+
 </odoo>

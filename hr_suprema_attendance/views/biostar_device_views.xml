@@ -24,11 +24,25 @@
         <header>
           <button name="action_test_connection" type="object" string="Test Connection" class="oe_highlight"/>
           <button name="action_import_users" type="object" string="Import Users"/>
-<<<<<<< HEAD
-          <button name="action_pull_events" type="object" string="Pull Events "/>
-=======
+            
+          <button name="action_prepare_students"
+                  type="object"
+                  class="oe_highlight"
+                  string="PREPARE STUDENTS"
+                  help="Create/Update user lines from students (name and card from student_number)."/>
+
+
+          <button name="action_pull_user_images" type="object" string="Import Employees/Student Images"/>
           <button name="action_pull_events" type="object" string="Pull Events (365 Day)"/>
->>>>>>> 850c232 (upload Suprema model)
+          <button name="action_pull_events_24" type="object" string="Pull Events (Last Day)"/>
+            
+          <button name="action_push_students"
+                  type="object"
+                  string="PUSH STUDENTS"
+                  class="oe_highlight"
+                  context="{}"
+                  help="Create/Update all students on this device and link them locally."/>
+                  
           <field name="status" widget="statusbar" statusbar_visible="unknown,ok,error"/>
         </header>
         <sheet>
@@ -39,6 +53,11 @@
               <field name="device_ip"/>
               <field name="timezone"/>
               <field name="active"/>
+              <field name="default_partition_id"/>
+              <field name="default_user_group_id"/>
+
+              
+
             </group>
             <group>
               <field name="username"/>
@@ -51,6 +70,17 @@
           <group>
             <field name="status_message" readonly="1"/>
           </group>
+          <group>
+            <field name="start_attendance_student" />
+            <field name="time_to_present_late" />
+            <field name="time_to_calculate_absent" />
+            <field name="min_gap_seconds" />
+            <field name="max_shift_hours" />
+            <field name="prefer_first_in" />
+            <field name="attendance_mode" />
+             
+ 
+          </group>
           <notebook>
             <page string="Users">
               <field name="user_ids">
@@ -58,6 +88,7 @@
                   <field name="name"/>
                   <field name="biostar_user_id"/>
                   <field name="card_no"/>
+                  <field name="student_id"/>
                   <field name="employee_id"/>
                 </tree>
               </field>

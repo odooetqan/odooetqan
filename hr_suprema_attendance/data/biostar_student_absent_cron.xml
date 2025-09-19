@@ -1,0 +1,25 @@
+<odoo>
+  <record id="ir_cron_student_absent_update" model="ir.cron">
+    <field name="name">Student Absent Cutoff</field>
+    <field name="model_id" ref="model_biostar_device"/>
+    <field name="state">code</field>
+    <field name="code">model._cron_update_student_absent()</field>
+    <field name="interval_number">5</field>
+    <field name="interval_type">minutes</field>
+    <field name="numbercall">-1</field>
+    <field name="active">True</field>
+  </record>
+
+  <record id="ir_cron_student_absent_cutoff" model="ir.cron">
+    <field name="name">Student Absent Cutoff</field>
+    <field name="model_id" ref="model_biostar_device"/>
+    <field name="state">code</field>
+    <field name="code">model._cron_student_absent_cutoff()</field>
+    <field name="interval_number">10</field>
+    <field name="interval_type">minutes</field>
+    <field name="active">True</field>
+  </record>
+
+
+
+</odoo>

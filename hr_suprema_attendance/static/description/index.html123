@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>BioStar Attendance Connector (Suprema) for Odoo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif;color:#374151;margin:0}
+    .container{max-width:1050px;margin:0 auto;padding:0 16px}
+    .hero{background:#F7F6F9;border:1px solid #eee;border-radius:14px;margin:28px 0;padding:28px}
+    h1,h2,h3{margin:0 0 10px}
+    .badge{display:inline-block;background:#09b4a8;color:#fff;padding:4px 10px;border-radius:999px;font-size:12px;margin-right:6px}
+    .grid{display:grid;gap:18px}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .card{background:#fff;border:1px solid #eee;border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+    .card .p{padding:16px}
+    .list{padding-left:18px}
+    .note{background:#eaf6ff;border:1px solid #cfe8ff;border-radius:10px;padding:12px}
+    .btn{display:inline-block;background:#00c4b4;color:#fff;padding:10px 16px;border-radius:6px;text-decoration:none}
+    .muted{color:#6b7280}
+    .mb-2{margin-bottom:8px}.mb-3{margin-bottom:12px}.mb-4{margin-bottom:16px}.mb-5{margin-bottom:22px}
+    .mt-2{margin-top:8px}.mt-3{margin-top:12px}.mt-4{margin-top:16px}.mt-5{margin-top:22px}
+    .rounded-top{border-top-left-radius:12px;border-top-right-radius:12px}
+    img{max-width:100%;height:auto;border-radius:10px}
+    .banner{width:100%;border-radius:12px}
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Compatibility / Last Updated -->
+    <div class="rounded-top mt-4 p card">
+      <div class="p">
+        <p class="mb-2"><strong>Compatibility</strong></p>
+        <ul class="list">
+          <li>Odoo 17 Community & Enterprise</li>
+          <li>BioStar 2 (Suprema) REST API</li>
+        </ul>
+        <p class="mb-2"><strong>Last Updated</strong></p>
+        <ul class="list">
+          <li>Friday, 19 September 2025 (KSA)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <h1>
+          <span style="color:#09b4a8;">BioStar 2</span>
+          <span style="color:#228aec;">Attendance</span>
+          <span style="color:#ea9b51;">Connector for Odoo</span>
+        </h1>
+        <p class="mt-3">
+          Seamlessly pull attendance logs from <strong>Suprema BioStar 2</strong> into Odoo HR Attendance.
+          Schedule automatic syncs, run on-demand via wizard, and keep data clean with smart de-duplication and
+          timezone handling.
+        </p>
+
+        <!-- Optional video -->
+        <div class="media_iframe_video rounded mt-4" data-oe-expression="//www.youtube.com/embed/demo">
+          <iframe src="//www.youtube.com/embed/demo?rel=0" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <img src="banner.png" alt="BioStar Connector Banner" class="banner mt-4"/>
+      </div>
+
+      <!-- Key Features -->
+      <div class="container mt-5">
+        <p class="mb-4" style="font-size:1.6rem;">
+          <span style="color:#09b4a8;">Key</span>
+          <span style="color:#228aec;">Features</span>
+        </p>
+        <div class="grid grid-3">
+          <div class="card"><div class="p">
+            <h3 class="mb-2">🔁 Sync Modes</h3>
+            <p class="muted">Manual wizard (date range) and scheduled cron. Safe retry with de-duplication.</p>
+          </div></div>
+          <div class="card"><div class="p">
+            <h3 class="mb-2">🌐 Multi-Device</h3>
+            <p class="muted">Connect multiple BioStar servers/sites. Separate credentials & timezones.</p>
+          </div></div>
+          <div class="card"><div class="p">
+            <h3 class="mb-2">👥 User Mapping</h3>
+            <p class="muted">Map BioStar user → Odoo employee. Flexible matching by device user ID.</p>
+          </div></div>
+          <div class="card"><div class="p">
+            <h3 class="mb-2">⏱ Timezones</h3>
+            <p class="muted">Consistent conversion to company timezone (e.g., KSA).</p>
+          </div></div>
+          <div class="card"><div class="p">
+            <h3 class="mb-2">📧 Alerts</h3>
+            <p class="muted">Optional mail notifications for sync failures & summaries.</p>
+          </div></div>
+          <div class="card"><div class="p">
+            <h3 class="mb-2">🔒 Robust</h3>
+            <p class="muted">Connectivity tests, graceful error handling, and activity logs.</p>
+          </div></div>
+        </div>
+
+        <!-- Screenshots -->
+        <div class="mt-5">
+          <p class="mb-3" style="font-size:1.4rem;"><strong>Screenshots</strong></p>
+          <div class="grid grid-2">
+            <div class="card"><div class="p">
+              <img src="screens/device_form.png" alt="Device Form"/>
+              <p class="muted mt-2">Device profile: URL, credentials, timezone, test connection.</p>
+            </div></div>
+            <div class="card"><div class="p">
+              <img src="screens/user_map.png" alt="User Mapping"/>
+              <p class="muted mt-2">Map BioStar users to Odoo employees.</p>
+            </div></div>
+            <div class="card"><div class="p">
+              <img src="screens/wizard_sync.png" alt="Sync Wizard"/>
+              <p class="muted mt-2">On-demand sync by date range with summary.</p>
+            </div></div>
+            <div class="card"><div class="p">
+              <img src="screens/logs_tree.png" alt="Attendance Logs"/>
+              <p class="muted mt-2">Raw log viewer before creating HR Attendance.</p>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Setup -->
+    <section class="mt-5">
+      <h2 class="mb-3">Setup (Quick Start)</h2>
+      <ol class="list">
+        <li>Install the module and grant access to the appropriate HR/IT users.</li>
+        <li>Open <strong>HR ▸ BioStar ▸ Devices</strong> and create a device:
+          <em>Base URL</em>, <em>credentials</em>, <em>timezone</em>, then click <em>Test Connection</em>.
+        </li>
+        <li>Open <strong>HR ▸ BioStar ▸ Users</strong> and map BioStar users to Odoo employees.</li>
+        <li>Use <strong>Sync Wizard</strong> for an initial import (pick a date range).</li>
+        <li>Enable the scheduled job <strong>BioStar Attendance Sync</strong> to keep data updated.</li>
+      </ol>
+      <div class="note mt-3">
+        Tip: If your BioStar server uses a self-signed certificate, configure SSL settings accordingly or use a trusted cert.
+      </div>
+    </section>
+
+    <!-- Arabic blurb -->
+    <section class="mt-5">
+      <h2 class="mb-3">نظرة عامة (بالعربية)</h2>
+      <p>
+        يوفّر هذا الموديول مزامنة تلقائية لِسجلات الحضور من منصة <strong>Suprema BioStar 2</strong> إلى نظام
+        الحضور في أودو. يمكنك إجراء مزامنة يدوية عبر معالج المزامنة، أو تشغيل مجدول تلقائي، مع التعامل مع المناطق
+        الزمنية ومنع التكرار وإرسال تنبيهات بالبريد عند حدوث أخطاء.
+      </p>
+    </section>
+
+    <!-- FAQ -->
+    <section class="mt-5">
+      <h2 class="mb-3">FAQ</h2>
+      <div class="card"><div class="p">
+        <p class="mb-2"><strong>Does it create HR Attendance records automatically?</strong></p>
+        <p class="muted">Yes—raw logs are normalized then translated into HR Attendance according to the mapping rules.</p>
+      </div></div>
+      <div class="card mt-3"><div class="p">
+        <p class="mb-2"><strong>What if the same log appears twice?</strong></p>
+        <p class="muted">The connector avoids duplicates using a composite key (device, user, timestamp).</p>
+      </div></div>
+      <div class="card mt-3"><div class="p">
+        <p class="mb-2"><strong>Can I connect multiple BioStar servers?</strong></p>
+        <p class="muted">Yes—create a device record per server/site, each with its own credentials.</p>
+      </div></div>
+    </section>
+
+    <!-- You May Also Like -->
+    <section class="mt-5">
+      <h2 class="mb-4">You May Also Like</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <a target="_blank" href="https://sirelkhatim.odoo.com/">
+            <img src="banner.png" alt="Related Module"/>
+          </a>
+          <div class="p">
+            <h3 class="mb-2"><a class="muted" target="_blank" href="https://sirelkhatim.odoo.com/">Freshchat & Social Sync</a></h3>
+            <p class="muted">Centralize WhatsApp/Telegram/Freshchat into Odoo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Support -->
+    <section class="mt-5 mb-5 card">
+      <div class="p">
+        <h2 class="mb-2">Need Help or Customization?</h2>
+        <p class="muted mb-4">Contact us for assistance, device-side tweaks, or advanced reporting.</p>
+        <a class="btn" href="mailto:support@sirelkhatim.uk">Email Support</a>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>
