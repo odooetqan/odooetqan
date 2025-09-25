@@ -1,28 +1,4 @@
 # Translation of Odoo Server.
-# This file contains the translation of the following modules:
-# 	* ohrms_salary_advance
-# 	* hr_multi_company
-# 	* ohrms_service_request
-# 	* oh_employee_creation_from_user
-# 	* hr_reward_warning
-# 	* ent_ohrms_loan
-# 	* hr_leave_request_aliasing
-# 	* oh_appraisal
-# 	* oh_employee_documents_expiry
-# 	* ohrms_loan_accounting
-# 	* hr_gratuity_settlement
-# 	* uae_wps_report
-# 	* ohrms_core
-# 	* oh_hr_lawsuit_management
-# 	* oh_employee_check_list
-# 	* hr_insurance
-# 	* hr_employee_transfer
-# 	* hr_employee_shift
-# 	* saudi_gosi
-# 	* oh_hr_zk_attendance
-# 	* ohrmspro_holidays_approval
-# 	* hr_vacation_mngmt
-# 	* hr_reminder
 #
 msgid ""
 msgstr ""
